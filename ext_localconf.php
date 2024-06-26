@@ -1,7 +1,7 @@
 <?php
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use WapplerSystems\Map\Controller\AddressController;
+use WapplerSystems\Map\Controller\MapController;
 
 defined('TYPO3') or die();
 
@@ -9,28 +9,14 @@ call_user_func(
     function () {
 
         ExtensionUtility::configurePlugin(
-            'Map Magic',
-            'Ajaxmap',
+            'map_magic',
+            'map',
             [
-                AddressController::class => 'ajaxSearch'
+                MapController::class => 'show'
             ],
-            // non-cacheable actions
             [
-                AddressController::class => 'ajaxSearch'
-            ]
-        );
-
-
-        ExtensionUtility::configurePlugin(
-            'Myleaflet',
-            'SingleView',
-            [
-                AddressController::class => 'show'
             ],
-            // non-cacheable actions
-            [
-                AddressController::class => 'show'
-            ]
+            ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
         );
 
 

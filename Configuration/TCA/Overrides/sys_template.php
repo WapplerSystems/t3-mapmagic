@@ -1,4 +1,7 @@
 <?php
+
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 defined('TYPO3') or die();
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('map_magic', 'Configuration/TypoScript', 'Map Magic');
+ExtensionManagementUtility::addStaticFile('map_magic', 'Configuration/TypoScript', 'Map Magic - General settings');

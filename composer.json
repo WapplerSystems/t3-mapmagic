@@ -27,7 +27,7 @@
   },
   "extra": {
     "typo3/cms": {
-      "extension-key": "ws_map"
+      "extension-key": "map_magic"
     }
   }
 }

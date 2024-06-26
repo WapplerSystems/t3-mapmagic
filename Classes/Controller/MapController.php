@@ -2,126 +2,51 @@
 
 namespace WapplerSystems\Map\Controller;
 
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 use Symfony\Component\Filesystem\Filesystem;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use WapplerSystems\Address\Domain\Repository\AddressRepository;
+use WapplerSystems\Map\Domain\Repository\CategoryRepository;
 
-/**
- * AddressController
- */
-class AddressController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class MapController extends ActionController
 {
+
+    public function __construct(readonly AddressRepository $addressRepository, readonly CategoryRepository $categoryRepository)
+    {
+    }
+
+
     public function initializeObject()
     {
 
-        //		$this->_GP = $this->request->getArguments();
-        $configuration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+        $configuration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
         $this->conf['storagePid'] = $configuration['persistence']['storagePid'];
     }
 
-    /**
-     * AddressRepository
-     *
-     * @var \WapplerSystems\Map\Domain\Repository\AddressRepository
-     */
-    protected $addressRepository;
 
-
-    /**
-     * Inject a addressRepository to enable DI
-     *
-     * @param \WapplerSystems\Map\Domain\Repository\AddressRepository $addressRepository
-     * @return void
-     */
-    public function injectAddressRepository(\WapplerSystems\Map\Domain\Repository\AddressRepository $addressRepository)
-    {
-        $this->addressRepository = $addressRepository;
-    }
-
-
-    /**
-     * categoryRepository
-     * not used anymore
-     *
-     * @var \WapplerSystems\Map\Domain\Repository\CategoryRepository
-     */
-    protected $categoryRepository;
-
-
-    /**
-     * Inject a categoryRepository to enable DI
-     * not used anymore
-     *
-     * @param \WapplerSystems\Map\Domain\Repository\CategoryRepository $categoryRepository
-     * @return void
-     */
-    public function injectCategoryRepository(\WapplerSystems\Map\Domain\Repository\CategoryRepository $categoryRepository)
-    {
-        $this->categoryRepository = $categoryRepository;
-    }
-
-
-    /**
-     * action show
-     *
-     * @return void
-     */
-    public function showAction()
-    {
-        $this->_GP = $this->request->getArguments();
-        if ($this->_GP['locationUid'] = $this->_GP['locationUid'] ?? 0) {// called from list link
-            $address = $this->addressRepository->findByUid(intval($this->_GP['locationUid']));
-//			$address = $this->ttaddressRepository->findAll();
-        } else {
-            $address = $this->addressRepository->findByUid(intval($this->settings['singleViewUid']));
-        }
-        $this->view->assign('address', $address);
-        return $this->responseFactory->createResponse()
-            ->withAddedHeader('Content-Type', 'text/html; charset=utf-8')
-            ->withBody($this->streamFactory->createStream($this->view->render()));
-    }
-
-    /**
-     * action list
-     *
-     * @return void
-     */
-    public function listAction()
+    public function showAction() : ResponseInterface
     {
         $addresses = $this->addressRepository->findAll();
-        $this->view->assign('addresses', $addresses);
+
+
+        $this->view->assignMultiple([
+            'addresses' => $addresses,
+        ]);
+
+        return $this->htmlResponse();
     }
 
-    /*
-     * build the category tree
-     *
-     * @var array $elements
-     * @var int $parentId
-     *
-     * @return array
-     */
-    function buildTree(array &$elements, $parentId = 0)
-    {
-        $branch = [];
-        foreach ($elements as &$element) {
-            if ($element['parent'] == $parentId) {
-                $children = $this->buildTree($elements, $element['uid']);
-                if ($children) {
-                    $element['children'] = $children;
-                }
-                $branch[$element['uid']] = $element;
-                unset($element);
-            }
-        }
-        return $branch;
-    }
 
 
     /**
      * action ajaxSearch
      *
-     * @return void
      */
     public function ajaxSearchAction()
     {
@@ -152,7 +77,7 @@ class AddressController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 $sourceDir = 'typo3conf/ext/map_magic/Resources/Public/';
             }
             $fileSystem->mirror($sourceDir, 'fileadmin/ext/map_magic/Resources/Public/');
-            $this->addFlashMessage('Directory ' . $iconPath . ' created for use with own mapIcons!', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO);
+            $this->addFlashMessage('Directory ' . $iconPath . ' created for use with own mapIcons!', '', AbstractMessage::INFO);
         }
 
         /*
@@ -179,10 +104,8 @@ class AddressController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $querySettings->setLanguageUid($this->settings['defaultLanguageUid']);
         }
 
-//		$this->typo3CategoryRepository->setDefaultQuerySettings($querySettings);
-//		$this->typo3CategoryRepository->setDefaultOrderings(array('sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
 
-        $context = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class);
+        $context = GeneralUtility::makeInstance(Context::class);
         $sys_language_uid = $context->getPropertyFromAspect('language', 'id');
 
         $categories = $this->categoryRepository->findAllOverride($this->conf['storagePid'], $sys_language_uid);
@@ -200,14 +123,14 @@ class AddressController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $arr = $arr ?? [];
         if (count($arr) == 0) {
-            $this->addFlashMessage('Please insert some sys_categories first!', 'Myleaflet', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+            $this->addFlashMessage('Please insert some sys_categories first!', 'Myleaflet', AbstractMessage::WARNING);
             return $this->responseFactory->createResponse()
                 ->withAddedHeader('Content-Type', 'text/html; charset=utf-8')
                 ->withBody($this->streamFactory->createStream($this->view->render()));
         }
         $categories = $this->buildTree($arr);
 
-        $languageAspect = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Context\Context::class)->getAspect('language');
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
         $sys_language_uid = $languageAspect->getId();
         $this->view->assign('L', $sys_language_uid);
 
