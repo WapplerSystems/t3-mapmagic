@@ -1,0 +1,59 @@
+plugin.tx_mapmagic {
+    view {
+        templateRootPaths.0 = EXT:map_magic/Resources/Private/Templates/
+        templateRootPaths.1 = {$plugin.tx_mapmagic.view.templateRootPath}
+        partialRootPaths.0 = EXT:map_magic/Resources/Private/Partials/
+        partialRootPaths.1 = {$plugin.tx_mapmagic.view.partialRootPath}
+        layoutRootPaths.0 = EXT:map_magic/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$plugin.tx_mapmagic.view.layoutRootPath}
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_mapmagic.persistence.storagePid}
+    }
+
+    features {
+        #skipDefaultArguments = 1
+    }
+
+    mvc {
+        #callDefaultActionIfActionCantBeResolved = 1
+    }
+
+
+    settings {
+        defaultIcon = {$plugin.tx_mapmagic.settings.defaultIcon}
+
+        resultPageId = {$plugin.tx_mapmagic.settings.resultPageId}
+        detailsPageId = {$plugin.tx_mapmagic.settings.detailsPageId}
+        singleViewUid = {$plugin.tx_mapmagic.settings.singleViewUid}
+
+        resultLimit = {$plugin.tx_mapmagic.settings.resultLimit}
+        initialMapCoordinates = {$plugin.tx_mapmagic.settings.initialMapCoordinates}
+
+        categorySelectMode = {$plugin.tx_mapmagic.settings.categorySelectMode}
+        enableMarkerClusterer = {$plugin.tx_mapmagic.settings.enableMarkerClusterer}
+
+        defaultLanguageUid = {$plugin.tx_mapmagic.settings.defaultLanguageUid}
+
+        markerIconWidth = {$plugin.tx_mapmagic.settings.markerIconWidth}
+        markerIconHeight = {$plugin.tx_mapmagic.settings.markerIconHeight}
+    }
+
+
+}
+
+page.includeCSS.tx_mapmagic = {$plugin.tx_mapmagic.view.cssFile}
+
+
+page.includeJS {
+    mapmagic10.forceOnTop = 1
+    mapmagic10.if.isTrue = {$plugin.tx_mapmagic.view.includejQueryCore}
+    mapmagic10 = {$plugin.tx_mapmagic.view.jQueryFile}
+    mapmagic10.insertData = 1
+}
+
+page.includeJSFooterlibs.mapmagic_js1 = {$plugin.tx_mapmagic.view.javascriptFile}
+
+plugin.tx_mapmagic.features.requireCHashArgumentForActionArguments = 0
+

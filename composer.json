@@ -1,0 +1,33 @@
+{
+  "name": "wapplersystems/t3-mapmagic",
+  "description": "Openstreetmap / leaflet maps",
+  "keywords": [
+    "TYPO3",
+    "Openstreetmap",
+    "extension"
+  ],
+  "homepage": "https://wappler.systems",
+  "authors": [
+    {
+      "name": "Sven Wappler",
+      "email": "typo3@wappler.systems"
+    }
+  ],
+  "license": "MIT",
+  "type": "typo3-cms-extension",
+  "require": {
+    "typo3/cms-core": "^12",
+    "typo3/cms-frontend": "^12",
+    "wapplersystems/address": "^12"
+  },
+  "autoload": {
+    "psr-4": {
+      "WapplerSystems\\Map\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "ws_map"
+    }
+  }
+}
