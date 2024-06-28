@@ -55,7 +55,7 @@ class MapYamlProvider implements ProviderInterface
     {
         $configuration = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS,
-            'form'
+            'map_magic'
         );
         ArrayUtility::naturalKeySortRecursive($configuration);
         return $configuration;

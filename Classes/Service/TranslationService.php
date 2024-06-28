@@ -31,7 +31,7 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 
 /**
  * Advanced translations
@@ -178,11 +178,11 @@ class TranslationService implements SingletonInterface
      * @throws \InvalidArgumentException
      */
     public function translateFinisherOption(
-        FormRuntime $formRuntime,
-        string $finisherIdentifier,
-        string $optionKey,
-        string $optionValue,
-        array $renderingOptions = []
+        MapRuntime $formRuntime,
+        string     $finisherIdentifier,
+        string     $optionKey,
+        string     $optionValue,
+        array      $renderingOptions = []
     ): string {
         if (empty($finisherIdentifier)) {
             throw new \InvalidArgumentException('The argument "finisherIdentifier" is empty', 1476216059);
@@ -252,7 +252,7 @@ class TranslationService implements SingletonInterface
     public function translateFormElementValue(
         RootRenderableInterface $element,
         array $propertyParts,
-        FormRuntime $formRuntime
+        MapRuntime $formRuntime
     ) {
         if (empty($propertyParts)) {
             throw new \InvalidArgumentException('The argument "propertyParts" is empty', 1476216007);
@@ -320,7 +320,7 @@ class TranslationService implements SingletonInterface
                 $translationKeyChain = [];
                 foreach ($translationFiles as $translationFile) {
                     if (!empty($originalFormIdentifier)) {
-                        if ($element instanceof FormRuntime) {
+                        if ($element instanceof MapRuntime) {
                             $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $propertyType, $property, $optionValue);
                             $translationKeyChain[] = sprintf('%s:element.%s.%s.%s.%s', $translationFile, $originalFormIdentifier, $propertyType, $property, $optionValue);
                         } else {
@@ -341,7 +341,7 @@ class TranslationService implements SingletonInterface
                 $translationKeyChain = [];
                 foreach ($translationFiles as $translationFile) {
                     if (!empty($originalFormIdentifier)) {
-                        if ($element instanceof FormRuntime) {
+                        if ($element instanceof MapRuntime) {
                             $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $propertyType, $propertyName);
                             $translationKeyChain[] = sprintf('%s:element.%s.%s.%s', $translationFile, $originalFormIdentifier, $propertyType, $propertyName);
                         } else {
@@ -361,7 +361,7 @@ class TranslationService implements SingletonInterface
             $translationKeyChain = [];
             foreach ($translationFiles as $translationFile) {
                 if (!empty($originalFormIdentifier)) {
-                    if ($element instanceof FormRuntime) {
+                    if ($element instanceof MapRuntime) {
                         $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $propertyType, $property);
                         $translationKeyChain[] = sprintf('%s:element.%s.%s.%s', $translationFile, $originalFormIdentifier, $propertyType, $property);
                     } else {
@@ -389,7 +389,7 @@ class TranslationService implements SingletonInterface
         int $code,
         array $arguments,
         string $defaultValue,
-        FormRuntime $formRuntime
+        MapRuntime $formRuntime
     ): string {
         if (empty($code)) {
             throw new \InvalidArgumentException('The argument "code" is empty', 1489272978);
@@ -425,7 +425,7 @@ class TranslationService implements SingletonInterface
         $translationKeyChain = [];
         foreach ($translationFiles as $translationFile) {
             if (!empty($originalFormIdentifier)) {
-                if ($element instanceof FormRuntime) {
+                if ($element instanceof MapRuntime) {
                     $translationKeyChain[] = sprintf('%s:%s.validation.error.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $code);
                     $translationKeyChain[] = sprintf('%s:validation.error.%s.%s', $translationFile, $originalFormIdentifier, $code);
                 } else {

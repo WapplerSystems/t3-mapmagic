@@ -24,7 +24,7 @@ use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherVariableProvider;
 use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\StringableFormElementInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class AbstractFinisherTest extends UnitTestCase
@@ -117,7 +117,7 @@ final class AbstractFinisherTest extends UnitTestCase
 
         $finisherContextMock = $this->createMock(FinisherContext::class);
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with(self::anything())->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with(self::anything())->willReturn(null);
 
@@ -161,7 +161,7 @@ final class AbstractFinisherTest extends UnitTestCase
 
         $finisherContextMock = $this->createMock(FinisherContext::class);
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with($elementIdentifier)->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with($elementIdentifier)->willReturn('');
 
@@ -204,7 +204,7 @@ final class AbstractFinisherTest extends UnitTestCase
 
         $finisherContextMock = $this->createMock(FinisherContext::class);
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with($elementIdentifier)->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with($elementIdentifier)->willReturn($elementValue);
 
@@ -225,7 +225,7 @@ final class AbstractFinisherTest extends UnitTestCase
             false
         );
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
 
         $input = ['bar', 'foobar', ['x', 'y']];
         $expected = ['bar', 'foobar', ['x', 'y']];
@@ -243,7 +243,7 @@ final class AbstractFinisherTest extends UnitTestCase
             false
         );
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
 
         $input = 'foobar';
         $expected = 'foobar';
@@ -265,7 +265,7 @@ final class AbstractFinisherTest extends UnitTestCase
         $input = '{' . $elementIdentifier . '}';
         $expected = 'element-value';
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with($elementIdentifier)->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with($elementIdentifier)->willReturn($expected);
 
@@ -290,7 +290,7 @@ final class AbstractFinisherTest extends UnitTestCase
         $input = '{' . $elementIdentifier1 . '},{' . $elementIdentifier2 . '}';
         $expected = $elementValue1 . ',' . $elementValue2;
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->willReturnMap([
             [$elementIdentifier1, true],
             [$elementIdentifier2, true],
@@ -317,7 +317,7 @@ final class AbstractFinisherTest extends UnitTestCase
         $input = '{' . $elementIdentifier . '}';
         $expected = ['bar', 'foobar'];
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with($elementIdentifier)->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with($elementIdentifier)->willReturn($expected);
 
@@ -358,7 +358,7 @@ final class AbstractFinisherTest extends UnitTestCase
             ],
         ];
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->willReturnMap([
             [$elementIdentifier1, true],
             [$elementIdentifier2, true],
@@ -385,7 +385,7 @@ final class AbstractFinisherTest extends UnitTestCase
         $input = '{' . $elementIdentifier . '}';
         $expected = '{' . $elementIdentifier . '}';
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with($elementIdentifier)->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with($elementIdentifier)->willReturn($expected);
 
@@ -409,7 +409,7 @@ final class AbstractFinisherTest extends UnitTestCase
         $input = '{__currentTimestamp}';
         $expected = '#^([0-9]{10})$#';
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
 
         self::assertMatchesRegularExpression(
             $expected,
@@ -445,7 +445,7 @@ final class AbstractFinisherTest extends UnitTestCase
             ],
         ];
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->willReturnMap([
             [$elementIdentifier1, true],
             [$elementIdentifier2, true],
@@ -462,7 +462,7 @@ final class AbstractFinisherTest extends UnitTestCase
     public function substituteRuntimeReferencesConvertsObjectsToString(): void
     {
         $date = new \DateTime('@1574415600');
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with('date-1')->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with('date-1')->willReturn($date);
 
@@ -497,7 +497,7 @@ final class AbstractFinisherTest extends UnitTestCase
     #[Test]
     public function substituteRuntimeReferencesThrowsExceptionOnObjectWithoutStringableElement(): void
     {
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with('date-1')->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with('date-1')->willReturn(new \DateTime());
 
@@ -534,7 +534,7 @@ final class AbstractFinisherTest extends UnitTestCase
         $elementIdentifier = 'element-identifier-1';
         $input = 'BEFORE {' . $elementIdentifier . '} AFTER';
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $formRuntimeMock->method('offsetExists')->with($elementIdentifier)->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with($elementIdentifier)->willReturn(['value-1', 'value-2']);
 

@@ -23,7 +23,7 @@ namespace WapplerSystems\MapMagic\ViewHelpers\Form;
 
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 
 /**
@@ -81,7 +81,7 @@ final class TimePickerViewHelper extends AbstractFormFieldViewHelper
 
     protected function getSelectedDate(): ?\DateTime
     {
-        /** @var FormRuntime $formRuntime */
+        /** @var MapRuntime $formRuntime */
         $formRuntime = $this->renderingContext
             ->getViewHelperVariableContainer()
             ->get(RenderRenderableViewHelper::class, 'formRuntime');

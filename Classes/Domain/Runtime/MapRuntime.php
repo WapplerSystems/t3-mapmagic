@@ -103,7 +103,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * @internal High cohesion to FormDefinition, may change any time
  * @todo: Declare final in v12
  */
-class FormRuntime implements RootRenderableInterface, \ArrayAccess
+class MapRuntime implements RootRenderableInterface, \ArrayAccess
 {
     public const HONEYPOT_NAME_SESSION_IDENTIFIER = 'tx_mapmagic_honeypot_name_';
 
@@ -112,7 +112,7 @@ class FormRuntime implements RootRenderableInterface, \ArrayAccess
     protected ResponseInterface $response;
 
     /**
-     * @var FormState
+     * @var MapState
      */
     protected $formState;
 
@@ -233,7 +233,7 @@ class FormRuntime implements RootRenderableInterface, \ArrayAccess
         $extbaseRequestParameters = $this->request->getAttribute('extbase');
         $serializedFormStateWithHmac = $extbaseRequestParameters->getInternalArgument('__state');
         if ($serializedFormStateWithHmac === null || !$this->canProcessFormSubmission()) {
-            $this->formState = GeneralUtility::makeInstance(FormState::class);
+            $this->formState = GeneralUtility::makeInstance(MapState::class);
         } else {
             try {
                 $serializedFormState = $this->hashService->validateAndStripHmac($serializedFormStateWithHmac);
@@ -947,7 +947,7 @@ class FormRuntime implements RootRenderableInterface, \ArrayAccess
     /**
      * @internal
      */
-    public function getFormState(): ?FormState
+    public function getFormState(): ?MapState
     {
         return $this->formState;
     }

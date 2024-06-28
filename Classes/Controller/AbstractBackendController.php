@@ -20,7 +20,7 @@ namespace WapplerSystems\MapMagic\Controller;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**
  * The abstract form backend controller
@@ -30,10 +30,10 @@ use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
  */
 abstract class AbstractBackendController extends ActionController
 {
-    protected array $formSettings;
-    protected FormPersistenceManagerInterface $formPersistenceManager;
+    protected array $mapSettings;
+    protected MapPersistenceManagerInterface $formPersistenceManager;
 
-    public function injectFormPersistenceManager(FormPersistenceManagerInterface $formPersistenceManager)
+    public function injectFormPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
     {
         $this->formPersistenceManager = $formPersistenceManager;
     }
@@ -41,9 +41,9 @@ abstract class AbstractBackendController extends ActionController
     public function initializeObject()
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        $this->formSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'form');
-        if (!isset($this->formSettings['formManager'])) {
-            // Config sub array formManager is crucial and should always exist. If it does
+        $this->mapSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'form');
+        if (!isset($this->mapSettings['mapManager'])) {
+            // Config sub array mapManager is crucial and should always exist. If it does
             // not, this indicates an issue in config loading logic. Except in this case.
             throw new \LogicException('Configuration could not be loaded', 1681549038);
         }

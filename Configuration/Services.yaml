@@ -73,7 +73,7 @@ services:
   WapplerSystems\MapMagic\EventListener\ProcessFileListActionsEventListener:
     tags:
       - name: event.listener
-        identifier: 'mapmagic/form-definition-files'
+        identifier: 'mapmagic/map-definition-files'
 
   WapplerSystems\MapMagic\EventListener\DataStructureIdentifierListener:
     tags:

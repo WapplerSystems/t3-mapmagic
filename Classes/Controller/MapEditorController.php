@@ -37,13 +37,13 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\View\JsonView;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionConversionService;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
 use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
 use WapplerSystems\MapMagic\Exception;
 use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
 use WapplerSystems\MapMagic\Service\TranslationService;
-use WapplerSystems\MapMagic\Type\FormDefinitionArray;
+use WapplerSystems\MapMagic\Type\MapDefinitionArray;
 
 /**
  * The form editor controller
@@ -51,17 +51,17 @@ use WapplerSystems\MapMagic\Type\FormDefinitionArray;
  * Scope: backend
  * @internal
  */
-class FormEditorController extends AbstractBackendController
+class MapEditorController extends AbstractBackendController
 {
     protected const JS_MODULE_NAMES = ['app', 'mediator', 'viewModel'];
 
     protected array $prototypeConfiguration;
 
     public function __construct(
-        protected readonly ModuleTemplateFactory $moduleTemplateFactory,
-        protected readonly PageRenderer $pageRenderer,
-        protected readonly IconFactory $iconFactory,
-        protected readonly FormDefinitionConversionService $formDefinitionConversionService,
+        protected readonly ModuleTemplateFactory          $moduleTemplateFactory,
+        protected readonly PageRenderer                   $pageRenderer,
+        protected readonly IconFactory                    $iconFactory,
+        protected readonly MapDefinitionConversionService $formDefinitionConversionService,
     ) {}
 
     /**
@@ -77,7 +77,7 @@ class FormEditorController extends AbstractBackendController
 
         if (
             PathUtility::isExtensionPath($formPersistenceIdentifier)
-            && !$this->formSettings['persistenceManager']['allowSaveToExtensionPaths']
+            && !$this->mapSettings['persistenceManager']['allowSaveToExtensionPaths']
         ) {
             throw new PersistenceManagerException('Edit an extension formDefinition is not allowed.', 1478265661);
         }
@@ -92,7 +92,7 @@ class FormEditorController extends AbstractBackendController
             // This safety check is a preventive measure.
             $selectablePrototypeNames = $configurationService->getSelectablePrototypeNamesDefinedInFormEditorSetup();
             if (!in_array($prototypeName, $selectablePrototypeNames, true)) {
-                throw new Exception(sprintf('The prototype name "%s" is not configured within "formManager.selectablePrototypesConfiguration" ', $prototypeName), 1528625039);
+                throw new Exception(sprintf('The prototype name "%s" is not configured within "mapManager.selectablePrototypesConfiguration" ', $prototypeName), 1528625039);
             }
         }
 
@@ -211,7 +211,7 @@ class FormEditorController extends AbstractBackendController
     /**
      * Save a formDefinition which was build by the form editor.
      */
-    public function saveFormAction(string $formPersistenceIdentifier, FormDefinitionArray $formDefinition): ResponseInterface
+    public function saveFormAction(string $formPersistenceIdentifier, MapDefinitionArray $formDefinition): ResponseInterface
     {
         $formDefinition = $formDefinition->getArrayCopy();
 
@@ -261,9 +261,9 @@ class FormEditorController extends AbstractBackendController
      * Use the frontend rendering and set the form framework to preview mode.
      */
     public function renderFormPageAction(
-        FormDefinitionArray $formDefinition,
-        int $pageIndex,
-        ?string $prototypeName = null
+        MapDefinitionArray $formDefinition,
+        int                $pageIndex,
+        ?string            $prototypeName = null
     ): ResponseInterface {
         $prototypeName = $prototypeName ?: $formDefinition['prototypeName'] ?? 'standard';
         $formDefinition = $formDefinition->getArrayCopy();

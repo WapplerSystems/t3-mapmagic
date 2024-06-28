@@ -19,14 +19,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
 
 /**
  * Scope: frontend
  * @internal
  */
-class FormElementHooks
+class MapElementHooks
 {
     /**
      * This hook is invoked by the FormRuntime for each form element
@@ -36,10 +36,10 @@ class FormElementHooks
      * @param mixed $elementValue submitted value of the element *before post processing*
      * @param array $requestArguments submitted raw request values
      * @return mixed
-     * @see FormRuntime::mapAndValidate()
+     * @see MapRuntime::mapAndValidate()
      * @internal
      */
-    public function afterSubmit(FormRuntime $formRuntime, RenderableInterface $renderable, $elementValue, array $requestArguments = [])
+    public function afterSubmit(MapRuntime $formRuntime, RenderableInterface $renderable, $elementValue, array $requestArguments = [])
     {
         if ($renderable->getType() === 'AdvancedPassword') {
             if ($elementValue['password'] !== $elementValue['confirmation']) {
@@ -62,7 +62,7 @@ class FormElementHooks
      * This is a hook that is invoked by the rendering system **before**
      * the corresponding element is rendered.
      */
-    public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable)
+    public function beforeRendering(MapRuntime $formRuntime, RootRenderableInterface $renderable)
     {
         if ($renderable->getType() === 'Date') {
             $date = $formRuntime[$renderable->getIdentifier()];

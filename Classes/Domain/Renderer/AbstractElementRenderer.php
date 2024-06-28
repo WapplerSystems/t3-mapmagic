@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain\Renderer;
 
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 
 /**
  * Abstract renderer which can be used as base class for custom renderers.
@@ -32,16 +32,16 @@ use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 abstract class AbstractElementRenderer implements RendererInterface
 {
     /**
-     * @var \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime
+     * @var \WapplerSystems\MapMagic\Domain\Runtime\MapRuntime
      */
     protected $formRuntime;
 
-    public function setFormRuntime(FormRuntime $formRuntime)
+    public function setFormRuntime(MapRuntime $formRuntime)
     {
         $this->formRuntime = $formRuntime;
     }
 
-    public function getFormRuntime(): FormRuntime
+    public function getFormRuntime(): MapRuntime
     {
         return $this->formRuntime;
     }

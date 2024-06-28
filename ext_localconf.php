@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use WapplerSystems\MapMagic\Controller\FormFrontendController;
-use WapplerSystems\MapMagic\Hooks\FormElementHooks;
+use WapplerSystems\MapMagic\Controller\MapFrontendController;
+use WapplerSystems\MapMagic\Hooks\MapElementHooks;
 use WapplerSystems\MapMagic\Hooks\ImportExportHook;
 use WapplerSystems\MapMagic\Mvc\Property\PropertyMappingConfiguration;
 
@@ -29,10 +29,10 @@ call_user_func(static function () {
     );
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterSubmit'][1489772699]
-        = FormElementHooks::class;
+        = MapElementHooks::class;
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeRendering'][1489772699]
-        = FormElementHooks::class;
+        = MapElementHooks::class;
 
     // FE file upload processing
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterBuildingFinished'][1489772699]
@@ -47,8 +47,8 @@ call_user_func(static function () {
     ExtensionUtility::configurePlugin(
         'MapMagic',
         'Map',
-        [FormFrontendController::class => 'render, perform'],
-        [FormFrontendController::class => 'perform'],
+        [MapFrontendController::class => 'render, perform'],
+        [MapFrontendController::class => 'perform'],
         ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 });

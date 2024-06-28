@@ -18,13 +18,13 @@ declare(strict_types=1);
 namespace WapplerSystems\MapMagic\Hooks;
 
 use TYPO3\CMS\Filelist\ContextMenu\ItemProviders\FileProvider;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManager;
 
 /**
  * Purges previously added form files from items for context menus.
  * @internal
  */
-class FormFileProvider extends FileProvider
+class MapFileProvider extends FileProvider
 {
     /**
      * @var array
@@ -42,7 +42,7 @@ class FormFileProvider extends FileProvider
     public function canHandle(): bool
     {
         return parent::canHandle()
-            && str_ends_with($this->identifier, FormPersistenceManager::FORM_DEFINITION_FILE_EXTENSION);
+            && str_ends_with($this->identifier, MapPersistenceManager::FORM_DEFINITION_FILE_EXTENSION);
     }
 
     public function addItems(array $items): array

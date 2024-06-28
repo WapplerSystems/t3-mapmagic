@@ -19,7 +19,7 @@ namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Configuration;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionConversionService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormDefinitionConversionServiceTest extends UnitTestCase
@@ -31,7 +31,7 @@ final class FormDefinitionConversionServiceTest extends UnitTestCase
     {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = '';
         $formDefinitionConversionService = $this->getAccessibleMock(
-            FormDefinitionConversionService::class,
+            MapDefinitionConversionService::class,
             [
                 'generateSessionToken',
                 'persistSessionToken',
@@ -50,7 +50,7 @@ final class FormDefinitionConversionServiceTest extends UnitTestCase
             'persistSessionToken'
         )->willReturn(null);
 
-        GeneralUtility::setSingletonInstance(FormDefinitionConversionService::class, $formDefinitionConversionService);
+        GeneralUtility::setSingletonInstance(MapDefinitionConversionService::class, $formDefinitionConversionService);
 
         $input = [
             'prototypeName' => 'standard',
@@ -132,8 +132,8 @@ final class FormDefinitionConversionServiceTest extends UnitTestCase
     #[Test]
     public function removeHmacDataRemoveHmacs(): void
     {
-        $formDefinitionConversionService = new FormDefinitionConversionService();
-        GeneralUtility::setSingletonInstance(FormDefinitionConversionService::class, $formDefinitionConversionService);
+        $formDefinitionConversionService = new MapDefinitionConversionService();
+        GeneralUtility::setSingletonInstance(MapDefinitionConversionService::class, $formDefinitionConversionService);
 
         $input = [
             'prototypeName' => 'standard',

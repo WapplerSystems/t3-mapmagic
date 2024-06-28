@@ -36,7 +36,7 @@ use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\VariableRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Exception as FormException;
 use WapplerSystems\MapMagic\Mvc\ProcessingRule;
 
@@ -200,7 +200,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  *
  * In order to trigger *rendering* on a FormDefinition,
  * the current {@link \TYPO3\CMS\Extbase\Mvc\Request} needs to be bound to the FormDefinition,
- * resulting in a {@link \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime} object which contains the *Runtime State* of the form
+ * resulting in a {@link \WapplerSystems\MapMagic\Domain\Runtime\MapRuntime} object which contains the *Runtime State* of the form
  * (such as the currently inserted values).
  *
  * /---code php
@@ -212,7 +212,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * # entered values into the form, etc.
  * \---
  *
- * Refer to the {@link \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime} API doc for further information.
+ * Refer to the {@link \WapplerSystems\MapMagic\Domain\Runtime\MapRuntime} API doc for further information.
  *
  * Scope: frontend
  * **This class is NOT meant to be sub classed by developers.**
@@ -628,9 +628,9 @@ class FormDefinition extends AbstractCompositeRenderable implements VariableRend
      * Bind the current request & response to this form instance, effectively creating
      * a new "instance" of the Form.
      */
-    public function bind(RequestInterface $request): FormRuntime
+    public function bind(RequestInterface $request): MapRuntime
     {
-        $formRuntime = GeneralUtility::makeInstance(FormRuntime::class);
+        $formRuntime = GeneralUtility::makeInstance(MapRuntime::class);
         $formRuntime->setFormDefinition($this);
         $formRuntime->setRequest($request);
         $formRuntime->initialize();

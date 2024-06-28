@@ -50,7 +50,7 @@ use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
  * Scope: frontend / backend
  * **This class is meant to be sub classed by developers.**
  */
-abstract class AbstractFormFactory implements FormFactoryInterface
+abstract class AbstractMapFactory implements MapFactoryInterface
 {
     /**
      * Helper to be called by every AbstractFormFactory after everything has been built to call the "afterBuildingFinished"

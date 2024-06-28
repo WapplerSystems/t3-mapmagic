@@ -31,7 +31,7 @@ use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\Remov
 /**
  * @internal
  */
-class FormDefinitionConversionService implements SingletonInterface
+class MapDefinitionConversionService implements SingletonInterface
 {
     /**
      * Add a new value "_orig_<propertyName>" for each scalar property value
@@ -39,7 +39,7 @@ class FormDefinitionConversionService implements SingletonInterface
      * "_orig_<propertyName>" is an array which contains the property value
      * and a hmac hash for the property value.
      * "_orig_<propertyName>" will be used to validate the form definition on saving.
-     * @see \WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService::validateFormDefinitionProperties()
+     * @see \WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService::validateFormDefinitionProperties()
      */
     public function addHmacData(array $formDefinition): array
     {

@@ -27,7 +27,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\StringableFormElementInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -203,13 +203,13 @@ abstract class AbstractFinisher implements FinisherInterface
      * finisher option configuration settings.
      *
      * @param string|array $subject
-     * @param FormRuntime $formRuntime
+     * @param MapRuntime $formRuntime
      * @param string|array $optionValue
      * @return array|string
      */
     protected function translateFinisherOption(
         $subject,
-        FormRuntime $formRuntime,
+        MapRuntime $formRuntime,
         string $optionName,
         $optionValue,
         array $translationOptions
@@ -249,10 +249,10 @@ abstract class AbstractFinisher implements FinisherInterface
      * This will be replaced with the current timestamp.
      *
      * @param string|array $needle
-     * @param FormRuntime $formRuntime
+     * @param MapRuntime $formRuntime
      * @return mixed
      */
-    protected function substituteRuntimeReferences($needle, FormRuntime $formRuntime)
+    protected function substituteRuntimeReferences($needle, MapRuntime $formRuntime)
     {
         // neither array nor string, directly return
         if (!is_array($needle) && !is_string($needle)) {
@@ -316,7 +316,7 @@ abstract class AbstractFinisher implements FinisherInterface
      *
      * @return int|string|array
      */
-    protected function resolveRuntimeReference(string $property, FormRuntime $formRuntime)
+    protected function resolveRuntimeReference(string $property, MapRuntime $formRuntime)
     {
         if ($property === '__currentTimestamp') {
             return time();

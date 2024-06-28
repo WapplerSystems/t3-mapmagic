@@ -26,7 +26,7 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Fluid\View\TemplatePaths;
 use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 
@@ -160,7 +160,7 @@ class EmailFinisher extends AbstractFinisher
         GeneralUtility::makeInstance(MailerInterface::class)->send($mail);
     }
 
-    protected function initializeFluidEmail(FormRuntime $formRuntime): FluidEmail
+    protected function initializeFluidEmail(MapRuntime $formRuntime): FluidEmail
     {
         $templateConfiguration = $GLOBALS['TYPO3_CONF_VARS']['MAIL'];
 

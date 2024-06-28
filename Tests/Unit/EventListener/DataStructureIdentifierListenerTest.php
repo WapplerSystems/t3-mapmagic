@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Configuration\Event\AfterFlexFormDataStructureParsedEvent;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\EventListener\DataStructureIdentifierListener;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class DataStructureIdentifierListenerTest extends UnitTestCase
@@ -177,9 +177,9 @@ final class DataStructureIdentifierListenerTest extends UnitTestCase
     #[Test]
     public function modifyDataStructureAddsExistingFormItems(array $formDefinition, array $expectedItem): void
     {
-        $formPersistenceManagerMock = $this->createMock(FormPersistenceManagerInterface::class);
+        $formPersistenceManagerMock = $this->createMock(MapPersistenceManagerInterface::class);
         $formPersistenceManagerMock->expects(self::atLeastOnce())->method('listForms')->willReturn([$formDefinition]);
-        GeneralUtility::addInstance(FormPersistenceManagerInterface::class, $formPersistenceManagerMock);
+        GeneralUtility::addInstance(MapPersistenceManagerInterface::class, $formPersistenceManagerMock);
 
         $incomingDataStructure = [
             'sheets' => [

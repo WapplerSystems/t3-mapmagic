@@ -29,7 +29,7 @@ use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\FinisherOptionsFlexFormOverridesConverter;
 use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\FlexFormFinisherOverridesConverterDto;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**
  * The frontend controller
@@ -37,17 +37,17 @@ use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
  * Scope: frontend
  * @internal
  */
-class FormFrontendController extends ActionController
+class MapFrontendController extends ActionController
 {
     /**
-     * @var \WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface
+     * @var \WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface
      */
     protected $formPersistenceManager;
 
     /**
      * @internal
      */
-    public function injectFormPersistenceManager(FormPersistenceManagerInterface $formPersistenceManager)
+    public function injectFormPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
     {
         $this->formPersistenceManager = $formPersistenceManager;
     }

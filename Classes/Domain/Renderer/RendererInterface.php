@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain\Renderer;
 
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 
 /**
  * Base interface for Renderers. A Renderer is used to render a form.
@@ -40,7 +40,7 @@ interface RendererInterface
      */
     public function render(): string;
 
-    public function setFormRuntime(FormRuntime $formRuntime);
+    public function setFormRuntime(MapRuntime $formRuntime);
 
-    public function getFormRuntime(): FormRuntime;
+    public function getFormRuntime(): MapRuntime;
 }

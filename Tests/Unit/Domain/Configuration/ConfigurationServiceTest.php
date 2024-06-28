@@ -76,7 +76,7 @@ final class ConfigurationServiceTest extends UnitTestCase
         $configurationManagerMock = $this->createMock(ConfigurationManagerInterface::class);
         $configurationManagerMock->method('getConfiguration')->with(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'form')
             ->willReturn([
-                'formManager' => [
+                'mapManager' => [
                     'selectablePrototypesConfiguration' => [
                         0 => [
                             'identifier' => 'standard',

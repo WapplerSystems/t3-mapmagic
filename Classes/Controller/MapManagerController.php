@@ -49,7 +49,7 @@ use WapplerSystems\MapMagic\Service\TranslationService;
  * Scope: backend
  * @internal
  */
-class FormManagerController extends AbstractBackendController
+class MapManagerController extends AbstractBackendController
 {
     protected const JS_MODULE_NAMES = ['app', 'viewModel'];
 
@@ -76,17 +76,17 @@ class FormManagerController extends AbstractBackendController
         $moduleTemplate->assignMultiple([
             'paginator' => $arrayPaginator,
             'pagination' => $pagination,
-            'stylesheets' => $this->formSettings['formManager']['stylesheets'],
-            'formManagerAppInitialData' => json_encode($this->getFormManagerAppInitialData()),
+            'stylesheets' => $this->mapSettings['mapManager']['stylesheets'],
+            'mapManagerAppInitialData' => json_encode($this->getFormManagerAppInitialData()),
         ]);
-        if (!empty($this->formSettings['formManager']['javaScriptTranslationFile'])) {
-            $this->pageRenderer->addInlineLanguageLabelFile($this->formSettings['formManager']['javaScriptTranslationFile']);
+        if (!empty($this->mapSettings['mapManager']['javaScriptTranslationFile'])) {
+            $this->pageRenderer->addInlineLanguageLabelFile($this->mapSettings['mapManager']['javaScriptTranslationFile']);
         }
 
         $javaScriptModules = array_map(
             static fn(string $name) => JavaScriptModuleInstruction::create($name),
             array_filter(
-                $this->formSettings['formManager']['dynamicJavaScriptModules'] ?? [],
+                $this->mapSettings['mapManager']['dynamicJavaScriptModules'] ?? [],
                 fn(string $name) => in_array($name, self::JS_MODULE_NAMES, true),
                 ARRAY_FILTER_USE_KEY
             )
@@ -94,7 +94,7 @@ class FormManagerController extends AbstractBackendController
         $requireJsModules = array_map(
             static fn(string $name) => JavaScriptModuleInstruction::forRequireJS($name),
             array_filter(
-                $this->formSettings['formManager']['dynamicRequireJsModules'] ?? [],
+                $this->mapSettings['mapManager']['dynamicRequireJsModules'] ?? [],
                 fn(string $name) => in_array($name, self::JS_MODULE_NAMES, true),
                 ARRAY_FILTER_USE_KEY
             )
@@ -103,8 +103,8 @@ class FormManagerController extends AbstractBackendController
         $jsModules = $requireJsModules + $javaScriptModules;
         if (count($requireJsModules)) {
             trigger_error(
-                'formManager.dynamicRequireJsModules has been deprecated in v12 and will be removed with v13. ' .
-                'Use formManager.dynamicJavaScriptModules instead.',
+                'mapManager.dynamicRequireJsModules has been deprecated in v12 and will be removed with v13. ' .
+                'Use mapManager.dynamicJavaScriptModules instead.',
                 E_USER_DEPRECATED
             );
             $this->pageRenderer->loadRequireJs();
@@ -315,8 +315,8 @@ class FormManagerController extends AbstractBackendController
             $this->formPersistenceManager->delete($formPersistenceIdentifier);
         } else {
             $controllerConfiguration = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
-                $this->formSettings['formManager']['controller'],
-                $this->formSettings['formManager']['translationFiles'] ?? []
+                $this->mapSettings['mapManager']['controller'],
+                $this->mapSettings['mapManager']['translationFiles'] ?? []
             );
 
             $this->addFlashMessage(
@@ -347,7 +347,7 @@ class FormManagerController extends AbstractBackendController
             ];
         }
 
-        if ($this->formSettings['persistenceManager']['allowSaveToExtensionPaths']) {
+        if ($this->mapSettings['persistenceManager']['allowSaveToExtensionPaths']) {
             foreach ($this->formPersistenceManager->getAccessibleExtensionFolders() as $relativePath => $fullPath) {
                 $preparedAccessibleFormStorageFolders[] = [
                     'label' => $relativePath,
@@ -365,8 +365,8 @@ class FormManagerController extends AbstractBackendController
      */
     protected function getFormManagerAppInitialData(): array
     {
-        $formManagerAppInitialData = [
-            'selectablePrototypesConfiguration' => $this->formSettings['formManager']['selectablePrototypesConfiguration'],
+        $mapManagerAppInitialData = [
+            'selectablePrototypesConfiguration' => $this->mapSettings['mapManager']['selectablePrototypesConfiguration'],
             'accessibleFormStorageFolders' => $this->getAccessibleFormStorageFolders(),
             'endpoints' => [
                 'create' => $this->uriBuilder->uriFor('create'),
@@ -376,12 +376,12 @@ class FormManagerController extends AbstractBackendController
             ],
         ];
 
-        $formManagerAppInitialData = ArrayUtility::reIndexNumericArrayKeysRecursive($formManagerAppInitialData);
-        $formManagerAppInitialData = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
-            $formManagerAppInitialData,
-            $this->formSettings['formManager']['translationFiles'] ?? []
+        $mapManagerAppInitialData = ArrayUtility::reIndexNumericArrayKeysRecursive($mapManagerAppInitialData);
+        $mapManagerAppInitialData = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
+            $mapManagerAppInitialData,
+            $this->mapSettings['mapManager']['translationFiles'] ?? []
         );
-        return $formManagerAppInitialData;
+        return $mapManagerAppInitialData;
     }
 
     /**
@@ -459,12 +459,12 @@ class FormManagerController extends AbstractBackendController
      * and accessible.
      *
      * Valid template paths has to be configured within
-     * formManager.selectablePrototypesConfiguration.[('identifier':  $prototypeName)].newFormTemplates.[('templatePath': $templatePath)]
+     * mapManager.selectablePrototypesConfiguration.[('identifier':  $prototypeName)].newFormTemplates.[('templatePath': $templatePath)]
      */
     protected function isValidTemplatePath(string $prototypeName, string $templatePath): bool
     {
         $isValid = false;
-        foreach ($this->formSettings['formManager']['selectablePrototypesConfiguration'] as $prototypesConfiguration) {
+        foreach ($this->mapSettings['mapManager']['selectablePrototypesConfiguration'] as $prototypesConfiguration) {
             if ($prototypesConfiguration['identifier'] !== $prototypeName) {
                 continue;
             }
@@ -498,7 +498,7 @@ class FormManagerController extends AbstractBackendController
         $addFormButton = $buttonBar->makeLinkButton()
             ->setDataAttributes(['identifier' => 'newForm'])
             ->setHref('#')
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formManager.create_new_form'))
+            ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapManager.create_new_form'))
             ->setShowLabelText(true)
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
         $buttonBar->addButton($addFormButton, ButtonBar::BUTTON_POSITION_LEFT);

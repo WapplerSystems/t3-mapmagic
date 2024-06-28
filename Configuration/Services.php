@@ -17,7 +17,7 @@ return static function (ContainerConfigurator $container, ContainerBuilder $cont
 
     if ($containerBuilder->hasDefinition(ProviderRegistry::class)) {
         $container->services()->defaults()->autowire()->autoconfigure()->public()
-            ->set('lowlevel.configuration.module.provider.formyamlconfiguration')
+            ->set('lowlevel.configuration.module.provider.mapyamlconfiguration')
             ->class(MapYamlProvider::class)
             ->tag(
                 'lowlevel.configuration.module.provider',

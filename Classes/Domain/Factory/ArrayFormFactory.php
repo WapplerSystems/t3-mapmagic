@@ -35,7 +35,7 @@ use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface
  *
  * Scope: frontend / backend
  */
-class ArrayFormFactory extends AbstractFormFactory
+class ArrayFormFactory extends AbstractMapFactory
 {
     /**
      * Build a form definition, depending on some configuration.

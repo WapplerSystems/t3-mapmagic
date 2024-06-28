@@ -29,7 +29,7 @@ use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 /**
  * A fluid RendererInterface implementation used to render a *FormDefinition*.
  *
- * This renderer is called from {@link \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime::render()}.
+ * This renderer is called from {@link \WapplerSystems\MapMagic\Domain\Runtime\MapRuntime::render()}.
  *
  * Options
  * =======

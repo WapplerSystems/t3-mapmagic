@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Resource\Event\BeforeFileReplacedEvent;
 use TYPO3\CMS\Core\Resource\FolderInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManager;
 
 /**
  * A PSR-14 event listener for various FAL related functionality.
@@ -285,7 +285,7 @@ final class FilePersistenceSlot implements SingletonInterface
     {
         return str_ends_with(
             $identifier,
-            FormPersistenceManager::FORM_DEFINITION_FILE_EXTENSION
+            MapPersistenceManager::FORM_DEFINITION_FILE_EXTENSION
         );
     }
 

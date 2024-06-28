@@ -19,7 +19,7 @@ namespace WapplerSystems\MapMagic\Tests\Unit\Controller;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use WapplerSystems\MapMagic\Controller\FormEditorController;
+use WapplerSystems\MapMagic\Controller\MapEditorController;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -43,7 +43,7 @@ final class FormEditorControllerTest extends UnitTestCase
             ->method('translate')
             ->willReturnArgument(4);
 
-        $subject = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $subject = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
         $subject->_set('prototypeConfiguration', [
             'formEditor' => [
                 'formElementGroups' => [
@@ -126,7 +126,7 @@ final class FormEditorControllerTest extends UnitTestCase
             ->method('translateValuesRecursive')
             ->willReturnArgument(0);
 
-        $subject = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $subject = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
         $subject->_set('prototypeConfiguration', [
             'formEditor' => [
                 'someOtherValues' => [
@@ -242,7 +242,7 @@ final class FormEditorControllerTest extends UnitTestCase
         $this->expectException(RenderingException::class);
         $this->expectExceptionCode(1480294721);
 
-        $mockController = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
 
         $mockController->_set('prototypeConfiguration', [
             'formEditor' => [
@@ -261,7 +261,7 @@ final class FormEditorControllerTest extends UnitTestCase
         $this->expectException(RenderingException::class);
         $this->expectExceptionCode(1480294721);
 
-        $mockController = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
 
         $mockController->_set('prototypeConfiguration', [
             'formEditor' => [
@@ -281,7 +281,7 @@ final class FormEditorControllerTest extends UnitTestCase
         $this->expectException(RenderingException::class);
         $this->expectExceptionCode(1480294722);
 
-        $mockController = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
 
         $mockController->_set('prototypeConfiguration', [
             'formEditor' => [
@@ -301,7 +301,7 @@ final class FormEditorControllerTest extends UnitTestCase
         $this->expectException(RenderingException::class);
         $this->expectExceptionCode(1480294722);
 
-        $mockController = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
 
         $mockController->_set('prototypeConfiguration', [
             'formEditor' => [
@@ -321,7 +321,7 @@ final class FormEditorControllerTest extends UnitTestCase
         $this->expectException(RenderingException::class);
         $this->expectExceptionCode(1485636499);
 
-        $mockController = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
 
         $mockController->_set('prototypeConfiguration', [
             'formEditor' => [
@@ -335,7 +335,7 @@ final class FormEditorControllerTest extends UnitTestCase
     #[Test]
     public function transformMultiValuePropertiesForFormEditorConvertMultiValueDataIntoMetaData(): void
     {
-        $mockController = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
 
         $input = [
             0 => [
@@ -413,7 +413,7 @@ final class FormEditorControllerTest extends UnitTestCase
     #[Test]
     public function filterEmptyArraysRemovesEmptyArrayKeys(): void
     {
-        $mockController = $this->getAccessibleMock(FormEditorController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapEditorController::class, null, [], '', false);
 
         $input = [
             'heinz' => 1,

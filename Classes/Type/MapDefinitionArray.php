@@ -21,4 +21,4 @@ namespace WapplerSystems\MapMagic\Type;
  * Wrapper for basic form definition arrays
  * @internal
  */
-class FormDefinitionArray extends \ArrayObject {}
+class MapDefinitionArray extends \ArrayObject {}

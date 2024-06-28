@@ -167,69 +167,69 @@
                 <source>Add fragment to the redirect link</source>
             </trans-unit>
 
-            <trans-unit id="formManagerController.deleteAction.error.title" resname="formManagerController.deleteAction.error.title" xml:space="preserve">
+            <trans-unit id="mapManagerController.deleteAction.error.title" resname="mapManagerController.deleteAction.error.title" xml:space="preserve">
                 <source>Delete error</source>
             </trans-unit>
-            <trans-unit id="formManagerController.deleteAction.error.body" resname="formManagerController.deleteAction.error.body" xml:space="preserve">
+            <trans-unit id="mapManagerController.deleteAction.error.body" resname="mapManagerController.deleteAction.error.body" xml:space="preserve">
                 <source>The form "%s" could not be deleted.</source>
             </trans-unit>
 
-            <trans-unit id="formManager.headline" resname="formManager.headline" xml:space="preserve">
+            <trans-unit id="mapManager.headline" resname="mapManager.headline" xml:space="preserve">
                 <source>Form Management</source>
             </trans-unit>
-            <trans-unit id="formManager.create_new_form" resname="formManager.create_new_form" xml:space="preserve">
+            <trans-unit id="mapManager.create_new_form" resname="mapManager.create_new_form" xml:space="preserve">
                 <source>Create new form</source>
             </trans-unit>
-            <trans-unit id="formManager.form_name" resname="formManager.form_name" xml:space="preserve">
+            <trans-unit id="mapManager.form_name" resname="mapManager.form_name" xml:space="preserve">
                 <source>Form name</source>
             </trans-unit>
-            <trans-unit id="formManager.location" resname="formManager.location" xml:space="preserve">
+            <trans-unit id="mapManager.location" resname="mapManager.location" xml:space="preserve">
                 <source>Location</source>
             </trans-unit>
-            <trans-unit id="formManager.references" resname="formManager.references" xml:space="preserve">
+            <trans-unit id="mapManager.references" resname="mapManager.references" xml:space="preserve">
                 <source>References</source>
             </trans-unit>
-            <trans-unit id="formManager.options" resname="formManager.options" xml:space="preserve">
+            <trans-unit id="mapManager.options" resname="mapManager.options" xml:space="preserve">
                 <source>Options</source>
             </trans-unit>
-            <trans-unit id="formManager.show_references" resname="formManager.show_references" xml:space="preserve">
+            <trans-unit id="mapManager.show_references" resname="mapManager.show_references" xml:space="preserve">
                 <source>Show references for this form</source>
             </trans-unit>
-            <trans-unit id="formManager.edit_form" resname="formManager.edit_form" xml:space="preserve">
+            <trans-unit id="mapManager.edit_form" resname="mapManager.edit_form" xml:space="preserve">
                 <source>Edit this form</source>
             </trans-unit>
-            <trans-unit id="formManager.duplicate_this_form" resname="formManager.duplicate_this_form" xml:space="preserve">
+            <trans-unit id="mapManager.duplicate_this_form" resname="mapManager.duplicate_this_form" xml:space="preserve">
                 <source>Duplicate this form</source>
             </trans-unit>
-            <trans-unit id="formManager.delete_form" resname="formManager.delete_form" xml:space="preserve">
+            <trans-unit id="mapManager.delete_form" resname="mapManager.delete_form" xml:space="preserve">
                 <source>Delete this form</source>
             </trans-unit>
-            <trans-unit id="formManager.forms_not_found.title" resname="formManager.forms_not_found.title" xml:space="preserve">
+            <trans-unit id="mapManager.forms_not_found.title" resname="mapManager.forms_not_found.title" xml:space="preserve">
                 <source>No forms found!</source>
             </trans-unit>
-            <trans-unit id="formManager.forms_not_found.message" resname="formManager.forms_not_found.message" xml:space="preserve">
+            <trans-unit id="mapManager.forms_not_found.message" resname="mapManager.forms_not_found.message" xml:space="preserve">
                 <source>There are currently no forms found in the system.</source>
             </trans-unit>
-            <trans-unit id="formManager.edit_form_not_allowed" resname="formManager.edit_form_not_allowed" xml:space="preserve">
+            <trans-unit id="mapManager.edit_form_not_allowed" resname="mapManager.edit_form_not_allowed" xml:space="preserve">
                 <source>Edit this form is not allowed.</source>
             </trans-unit>
-            <trans-unit id="formManager.duplicate_form_not_allowed" resname="formManager.duplicate_form_not_allowed" xml:space="preserve">
+            <trans-unit id="mapManager.duplicate_form_not_allowed" resname="mapManager.duplicate_form_not_allowed" xml:space="preserve">
                 <source>Duplicate this form is not allowed.</source>
             </trans-unit>
-            <trans-unit id="formManager.invalid" resname="formManager.invalid" xml:space="preserve">
+            <trans-unit id="mapManager.invalid" resname="mapManager.invalid" xml:space="preserve">
                 <source>Invalid YAML file!</source>
             </trans-unit>
-            <trans-unit id="formManager.duplicate_identifier" resname="formManager.duplicate_identifier" xml:space="preserve">
+            <trans-unit id="mapManager.duplicate_identifier" resname="mapManager.duplicate_identifier" xml:space="preserve">
                 <source>Duplicate identifier!</source>
             </trans-unit>
 
-            <trans-unit id="formManager.selectablePrototypesConfiguration.standard.label" resname="formManager.selectablePrototypesConfiguration.standard.label" xml:space="preserve">
+            <trans-unit id="mapManager.selectablePrototypesConfiguration.standard.label" resname="mapManager.selectablePrototypesConfiguration.standard.label" xml:space="preserve">
                 <source>Standard</source>
             </trans-unit>
-            <trans-unit id="formManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label" resname="formManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label" xml:space="preserve">
+            <trans-unit id="mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label" resname="mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label" xml:space="preserve">
                 <source>Blank form</source>
             </trans-unit>
-            <trans-unit id="formManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label" resname="formManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label" xml:space="preserve">
+            <trans-unit id="mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label" resname="mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label" xml:space="preserve">
                 <source>Simple contact form (ext:form example)</source>
             </trans-unit>
 

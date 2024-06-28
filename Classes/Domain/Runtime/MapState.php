@@ -25,14 +25,14 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 
 /**
- * The current state of the form which is attached to the {@link FormRuntime}
+ * The current state of the form which is attached to the {@link MapRuntime}
  * and saved in a session or the client.
  *
  * Scope: frontend
  * **This class is NOT meant to be sub classed by developers.**
  * @internal
  */
-class FormState
+class MapState
 {
     /**
      * Constant which means that we are currently not on any page; i.e. the form

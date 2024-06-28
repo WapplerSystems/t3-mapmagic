@@ -20,9 +20,9 @@ namespace WapplerSystems\MapMagic\Tests\Unit\Mvc\Property\TypeConverter;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService;
 use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\FormDefinitionArrayConverter;
-use WapplerSystems\MapMagic\Type\FormDefinitionArray;
+use WapplerSystems\MapMagic\Type\MapDefinitionArray;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormDefinitionArrayConverterTest extends UnitTestCase
@@ -64,7 +64,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
         ];
 
         $typeConverter = $this->getAccessibleMock(FormDefinitionArrayConverter::class, ['getFormDefinitionValidationService', 'retrieveSessionToken'], callOriginalConstructor: false);
-        $formDefinitionValidationServiceMock = $this->createMock(FormDefinitionValidationService::class);
+        $formDefinitionValidationServiceMock = $this->createMock(MapDefinitionValidationService::class);
         $formDefinitionValidationServiceMock->expects(self::atLeastOnce())->method('validateFormDefinitionProperties')->with(self::anything());
         $formDefinitionValidationServiceMock->method('isPropertyValueEqualToHistoricalValue')->with(self::anything())->willReturn(true);
 
@@ -88,9 +88,9 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
                 ],
             ],
         ];
-        $result = $typeConverter->convertFrom($input, FormDefinitionArray::class);
+        $result = $typeConverter->convertFrom($input, MapDefinitionArray::class);
 
-        self::assertInstanceOf(FormDefinitionArray::class, $result);
+        self::assertInstanceOf(MapDefinitionArray::class, $result);
         self::assertSame($expected, $result->getArrayCopy());
     }
 
@@ -103,7 +103,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
         $typeConverter = new FormDefinitionArrayConverter();
         $input = '{"francine":"stan",';
 
-        $typeConverter->convertFrom($input, FormDefinitionArray::class);
+        $typeConverter->convertFrom($input, MapDefinitionArray::class);
     }
 
     #[Test]
@@ -178,7 +178,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
             ],
         ];
 
-        $typeConverter->convertFrom(json_encode($input), FormDefinitionArray::class);
+        $typeConverter->convertFrom(json_encode($input), MapDefinitionArray::class);
     }
 
     #[Test]
@@ -207,6 +207,6 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
             ],
         ];
 
-        $typeConverter->convertFrom(json_encode($input), FormDefinitionArray::class);
+        $typeConverter->convertFrom(json_encode($input), MapDefinitionArray::class);
     }
 }

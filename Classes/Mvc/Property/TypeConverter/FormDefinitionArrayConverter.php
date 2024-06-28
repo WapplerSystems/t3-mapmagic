@@ -24,9 +24,9 @@ use TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService;
-use WapplerSystems\MapMagic\Type\FormDefinitionArray;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionConversionService;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService;
+use WapplerSystems\MapMagic\Type\MapDefinitionArray;
 
 /**
  * Converter for form definition arrays
@@ -43,7 +43,7 @@ class FormDefinitionArrayConverter extends AbstractTypeConverter
     /**
      * @var string
      */
-    protected $targetType = FormDefinitionArray::class;
+    protected $targetType = MapDefinitionArray::class;
 
     /**
      * @var int
@@ -61,7 +61,7 @@ class FormDefinitionArrayConverter extends AbstractTypeConverter
      *
      * @param string $source
      * @param string $targetType
-     * @return FormDefinitionArray
+     * @return MapDefinitionArray
      * @throws PropertyException
      */
     public function convertFrom($source, $targetType, array $convertedChildProperties = [], ?PropertyMappingConfigurationInterface $configuration = null)
@@ -105,7 +105,7 @@ class FormDefinitionArrayConverter extends AbstractTypeConverter
         $rawFormDefinitionArray = ArrayUtility::stripTagsFromValuesRecursive($rawFormDefinitionArray);
         $rawFormDefinitionArray = $formDefinitionConversionService->removeHmacData($rawFormDefinitionArray);
 
-        $formDefinitionArray = GeneralUtility::makeInstance(FormDefinitionArray::class, $rawFormDefinitionArray);
+        $formDefinitionArray = GeneralUtility::makeInstance(MapDefinitionArray::class, $rawFormDefinitionArray);
         return $formDefinitionArray;
     }
 
@@ -176,14 +176,14 @@ class FormDefinitionArrayConverter extends AbstractTypeConverter
         return $this->getBackendUser()->getSessionData('extFormProtectionSessionToken');
     }
 
-    protected function getFormDefinitionValidationService(): FormDefinitionValidationService
+    protected function getFormDefinitionValidationService(): MapDefinitionValidationService
     {
-        return GeneralUtility::makeInstance(FormDefinitionValidationService::class);
+        return GeneralUtility::makeInstance(MapDefinitionValidationService::class);
     }
 
-    protected function getFormDefinitionConversionService(): FormDefinitionConversionService
+    protected function getFormDefinitionConversionService(): MapDefinitionConversionService
     {
-        return GeneralUtility::makeInstance(FormDefinitionConversionService::class);
+        return GeneralUtility::makeInstance(MapDefinitionConversionService::class);
     }
 
     protected function getBackendUser(): BackendUserAuthentication

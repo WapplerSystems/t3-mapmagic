@@ -24,7 +24,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -218,7 +218,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -255,7 +255,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -292,7 +292,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -328,7 +328,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -364,7 +364,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -406,7 +406,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -447,7 +447,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -483,7 +483,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -531,7 +531,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -578,7 +578,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -606,7 +606,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'translatePropertyValueIfEmpty' => true,
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -635,7 +635,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'translatePropertyValueIfEmpty' => true,
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -664,7 +664,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => [],
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -677,7 +677,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     {
         $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
 
-        $formRuntime = $this->createMock(FormRuntime::class);
+        $formRuntime = $this->createMock(MapRuntime::class);
         $formRuntime->method('getIdentifier')->willReturn('my-form-runtime-identifier');
         $formRuntime->method('getRenderingOptions')->willReturn([
             'translation' => [
@@ -720,7 +720,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -737,7 +737,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->createMock(FormRuntime::class);
+        $mockFormRuntime = $this->createMock(MapRuntime::class);
 
         self::assertSame(
             'subject value',
@@ -750,7 +750,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     {
         $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
 
-        $formRuntime = $this->createMock(FormRuntime::class);
+        $formRuntime = $this->createMock(MapRuntime::class);
         $formRuntime->method('getIdentifier')->willReturn('my-form-runtime-identifier');
         $formRuntime->method('getRenderingOptions')->willReturn([
             'translation' => [
@@ -804,7 +804,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             'renderingOptions' => $formElementRenderingOptions,
         ]);
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions'], [], '', false);
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
 
@@ -827,7 +827,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -862,7 +862,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -896,7 +896,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -932,7 +932,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -965,7 +965,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -990,7 +990,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -1016,7 +1016,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -1049,7 +1049,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
@@ -1079,7 +1079,7 @@ final class TranslationServiceTest extends FunctionalTestCase
             ],
         ];
 
-        $mockFormRuntime = $this->getAccessibleMock(FormRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
+        $mockFormRuntime = $this->getAccessibleMock(MapRuntime::class, ['getIdentifier', 'getRenderingOptions', 'getType'], [], '', false);
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);

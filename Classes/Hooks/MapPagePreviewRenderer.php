@@ -30,13 +30,13 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 use WapplerSystems\MapMagic\Mvc\Configuration\Exception\NoSuchFileException;
 use WapplerSystems\MapMagic\Mvc\Configuration\Exception\ParseErrorException;
 use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**
  * Contains a preview rendering for the page module of CType="mapmagic_map"
  * @internal
  */
-class FormPagePreviewRenderer extends StandardContentPreviewRenderer
+class MapPagePreviewRenderer extends StandardContentPreviewRenderer
 {
     private const L10N_PREFIX = 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:';
 
@@ -51,7 +51,7 @@ class FormPagePreviewRenderer extends StandardContentPreviewRenderer
         $persistenceIdentifier = $flexFormData['settings']['persistenceIdentifier'] ?? '';
         if (!empty($persistenceIdentifier)) {
             try {
-                $formPersistenceManager = GeneralUtility::makeInstance(FormPersistenceManagerInterface::class);
+                $formPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
 
                 try {
                     if (
@@ -59,56 +59,56 @@ class FormPagePreviewRenderer extends StandardContentPreviewRenderer
                         || PathUtility::isExtensionPath($persistenceIdentifier)
                     ) {
                         $formDefinition = $formPersistenceManager->load($persistenceIdentifier);
-                        $formLabel = $formDefinition['label'];
+                        $mapLabel = $formDefinition['label'];
                     } else {
-                        $formLabel = sprintf(
+                        $mapLabel = sprintf(
                             $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.inaccessiblePersistenceIdentifier'),
                             $persistenceIdentifier
                         );
                     }
                 } catch (ParseErrorException $e) {
-                    $formLabel = sprintf(
+                    $mapLabel = sprintf(
                         $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.invalidPersistenceIdentifier'),
                         $persistenceIdentifier
                     );
                 } catch (PersistenceManagerException $e) {
-                    $formLabel = sprintf(
+                    $mapLabel = sprintf(
                         $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.inaccessiblePersistenceIdentifier'),
                         $persistenceIdentifier
                     );
                 } catch (Exception $e) {
-                    $formLabel = sprintf(
+                    $mapLabel = sprintf(
                         $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.notExistingdPersistenceIdentifier'),
                         $persistenceIdentifier
                     );
                 }
             } catch (NoSuchFileException $e) {
                 $this->addInvalidFrameworkConfigurationFlashMessage($persistenceIdentifier, $e);
-                $formLabel = sprintf(
+                $mapLabel = sprintf(
                     $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.notExistingdPersistenceIdentifier'),
                     $persistenceIdentifier
                 );
             } catch (ParseErrorException $e) {
                 $this->addInvalidFrameworkConfigurationFlashMessage($persistenceIdentifier, $e);
-                $formLabel = sprintf(
+                $mapLabel = sprintf(
                     $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.invalidFrameworkConfiguration'),
                     $persistenceIdentifier
                 );
             } catch (\Exception $e) {
                 // Top level catch - FAL throws top level exceptions on missing files, eg. in getFileInfoByIdentifier() of LocalDriver
                 $this->addInvalidFrameworkConfigurationFlashMessage($persistenceIdentifier, $e);
-                $formLabel = sprintf(
+                $mapLabel = sprintf(
                     $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.invalidFrameworkConfiguration.text'),
                     $persistenceIdentifier,
                     $e->getMessage()
                 );
             }
         } else {
-            $formLabel = $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.noPersistenceIdentifier');
+            $mapLabel = $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.noPersistenceIdentifier');
         }
 
         $itemContent .= $this->linkEditContent(
-            htmlspecialchars($formLabel),
+            htmlspecialchars($mapLabel),
             $row
         ) . '<br />';
 

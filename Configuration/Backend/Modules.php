@@ -1,7 +1,7 @@
 <?php
 
-use WapplerSystems\MapMagic\Controller\FormEditorController;
-use WapplerSystems\MapMagic\Controller\FormManagerController;
+use WapplerSystems\MapMagic\Controller\MapEditorController;
+use WapplerSystems\MapMagic\Controller\MapManagerController;
 
 /**
  * Definitions for modules provided by EXT:map_magic
@@ -15,10 +15,10 @@ return [
         'labels' => 'LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf',
         'extensionName' => 'MapMagic',
         'controllerActions' => [
-            FormManagerController::class => [
+            MapManagerController::class => [
                 'index', 'show', 'create', 'duplicate', 'references', 'delete',
             ],
-            FormEditorController::class => [
+            MapEditorController::class => [
                 'index', 'saveForm', 'renderFormPage', 'renderRenderableOptions',
             ],
         ],

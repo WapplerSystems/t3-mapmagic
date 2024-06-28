@@ -24,8 +24,8 @@ use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use WapplerSystems\MapMagic\Controller\FormManagerController;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager;
+use WapplerSystems\MapMagic\Controller\MapManagerController;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManager;
 use WapplerSystems\MapMagic\Service\DatabaseService;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -37,9 +37,9 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function getAccessibleFormStorageFoldersReturnsProcessedArray(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
-        $formPersistenceManagerMock = $this->createMock(FormPersistenceManager::class);
+        $formPersistenceManagerMock = $this->createMock(MapPersistenceManager::class);
 
         $mockController->_set('formPersistenceManager', $formPersistenceManagerMock);
         $mockController->_set('formSettings', [
@@ -102,13 +102,13 @@ final class FormManagerControllerTest extends UnitTestCase
             ->method('translateValuesRecursive')
             ->willReturnArgument(0);
 
-        $subject = $this->getAccessibleMock(FormManagerController::class, ['getAccessibleFormStorageFolders'], [], '', false);
+        $subject = $this->getAccessibleMock(MapManagerController::class, ['getAccessibleFormStorageFolders'], [], '', false);
 
         $mockUriBuilder = $this->createMock(UriBuilder::class);
 
         $subject->_set('uriBuilder', $mockUriBuilder);
         $subject->_set('formSettings', [
-            'formManager' => [
+            'mapManager' => [
                 'selectablePrototypesConfiguration' => [],
             ],
         ]);
@@ -148,9 +148,9 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function getAvailableFormDefinitionsReturnsProcessedArray(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
-        $formPersistenceManagerMock = $this->createMock(FormPersistenceManager::class);
+        $formPersistenceManagerMock = $this->createMock(MapPersistenceManager::class);
         $mockController->_set('formPersistenceManager', $formPersistenceManagerMock);
 
         $databaseService = $this->createMock(DatabaseService::class);
@@ -198,7 +198,7 @@ final class FormManagerControllerTest extends UnitTestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode(1477071939);
 
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $mockController->_call('getProcessedReferencesRows', '');
     }
@@ -212,7 +212,7 @@ final class FormManagerControllerTest extends UnitTestCase
         $iconFactoryMock->method('getIconForRecord')->withAnyParameters()->willReturn($iconMock);
         GeneralUtility::addInstance(IconFactory::class, $iconFactoryMock);
 
-        $mockController = $this->getAccessibleMock(FormManagerController::class, [
+        $mockController = $this->getAccessibleMock(MapManagerController::class, [
             'getModuleUrl',
             'getRecord',
             'getRecordTitle',
@@ -256,10 +256,10 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function isValidTemplatePathReturnsTrueIfTemplateIsDefinedAndExists(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $mockController->_set('formSettings', [
-            'formManager' => [
+            'mapManager' => [
                 'selectablePrototypesConfiguration' => [
                     0 => [
                         'identifier' => 'standard',
@@ -285,10 +285,10 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function isValidTemplatePathReturnsFalseIfTemplateIsDefinedButNotExists(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $mockController->_set('formSettings', [
-            'formManager' => [
+            'mapManager' => [
                 'selectablePrototypesConfiguration' => [
                     0 => [
                         'identifier' => 'standard',
@@ -314,10 +314,10 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function isValidTemplatePathReturnsFalseIfTemplateIsNotDefinedAndExists(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $mockController->_set('formSettings', [
-            'formManager' => [
+            'mapManager' => [
                 'selectablePrototypesConfiguration' => [
                     0 => [
                         'identifier' => 'standard',
@@ -353,7 +353,7 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function convertFormNameToIdentifierRemoveSpaces(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $input = 'test form';
         $expected = 'testform';
@@ -363,7 +363,7 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function convertFormNameToIdentifierConvertAccentedCharacters(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $input = 'téstform';
         $expected = 'testform';
@@ -373,7 +373,7 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function convertFormNameToIdentifierConvertAccentedCharactersNotInNFC(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $input = 'test form ' . hex2bin('667275cc88686e65757a6569746c696368656e');
         $expected = 'testformfruehneuzeitlichen';
@@ -383,7 +383,7 @@ final class FormManagerControllerTest extends UnitTestCase
     #[Test]
     public function convertFormNameToIdentifierRemoveSpecialChars(): void
     {
-        $mockController = $this->getAccessibleMock(FormManagerController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
         $input = 'test form ä#!_-01';
         $expected = 'testformae_-01';

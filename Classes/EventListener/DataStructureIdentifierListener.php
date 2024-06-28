@@ -32,7 +32,7 @@ use WapplerSystems\MapMagic\Domain\Configuration\FlexformConfiguration\Processor
 use WapplerSystems\MapMagic\Domain\Configuration\FlexformConfiguration\Processors\ProcessorDto;
 use WapplerSystems\MapMagic\Mvc\Configuration\Exception\NoSuchFileException;
 use WapplerSystems\MapMagic\Mvc\Configuration\Exception\ParseErrorException;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 use WapplerSystems\MapMagic\Service\TranslationService;
 
 /**
@@ -100,7 +100,7 @@ class DataStructureIdentifierListener
         $dataStructure = $event->getDataStructure();
         try {
             // Add list of existing forms to drop down if we find our key in the identifier
-            $formPersistenceManager = GeneralUtility::makeInstance(FormPersistenceManagerInterface::class);
+            $formPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
             $formIsAccessible = false;
             foreach ($formPersistenceManager->listForms() as $form) {
                 $invalidFormDefinition = $form['invalid'] ?? false;

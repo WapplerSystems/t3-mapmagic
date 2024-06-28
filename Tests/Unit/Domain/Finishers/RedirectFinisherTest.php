@@ -27,7 +27,7 @@ use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
 use WapplerSystems\MapMagic\Domain\Finishers\RedirectFinisher;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -59,7 +59,7 @@ final class RedirectFinisherTest extends UnitTestCase
             'pageUid' => $pageUid,
         ]);
 
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $serverRequest = (new ServerRequest())->withAttribute('extbase', new ExtbaseRequestParameters());
         $request = new Request($serverRequest);
         $formRuntimeMock->method('getRequest')->willReturn($request);

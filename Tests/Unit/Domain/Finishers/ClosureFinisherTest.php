@@ -20,7 +20,7 @@ namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Finishers;
 use PHPUnit\Framework\Attributes\Test;
 use WapplerSystems\MapMagic\Domain\Finishers\ClosureFinisher;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class ClosureFinisherTest extends UnitTestCase
@@ -38,7 +38,7 @@ final class ClosureFinisherTest extends UnitTestCase
         ]);
 
         $finisherContextMock = $this->createMock(FinisherContext::class);
-        $formRuntimeMock = $this->createMock(FormRuntime::class);
+        $formRuntimeMock = $this->createMock(MapRuntime::class);
         $finisherContextMock->method('getFormRuntime')->willReturn($formRuntimeMock);
 
         $revealedFinisherContext = $finisherContextMock;

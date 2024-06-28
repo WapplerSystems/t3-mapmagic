@@ -19,7 +19,7 @@ namespace WapplerSystems\MapMagic\ViewHelpers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -68,7 +68,7 @@ final class TranslateElementPropertyViewHelper extends AbstractViewHelper
             $propertyParts = [$property];
         }
 
-        /** @var FormRuntime $formRuntime */
+        /** @var MapRuntime $formRuntime */
         $formRuntime = $renderingContext
             ->getViewHelperVariableContainer()
             ->get(RenderRenderableViewHelper::class, 'formRuntime');

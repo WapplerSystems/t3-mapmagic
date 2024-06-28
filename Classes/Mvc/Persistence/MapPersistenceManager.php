@@ -54,15 +54,15 @@ use WapplerSystems\MapMagic\Slot\FilePersistenceSlot;
  *
  * Scope: frontend / backend
  */
-class FormPersistenceManager implements FormPersistenceManagerInterface
+class MapPersistenceManager implements MapPersistenceManagerInterface
 {
-    public const FORM_DEFINITION_FILE_EXTENSION = '.form.yaml';
+    public const FORM_DEFINITION_FILE_EXTENSION = '.map.yaml';
 
     protected YamlSource $yamlSource;
     protected StorageRepository $storageRepository;
     protected FilePersistenceSlot $filePersistenceSlot;
     protected ResourceFactory $resourceFactory;
-    protected array $formSettings;
+    protected array $mapSettings;
     protected array $typoScriptSettings;
     protected FrontendInterface $runtimeCache;
 
@@ -86,8 +86,8 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
             $GLOBALS['TYPO3_REQUEST'] = $request;
             $fakeRequest = true;
         }
-        $this->formSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'form');
-        $this->typoScriptSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'form');
+        $this->mapSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'map_magic');
+        $this->typoScriptSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'map_magic');
         if ($fakeRequest) {
             unset($GLOBALS['TYPO3_REQUEST']);
         }
@@ -151,7 +151,7 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
         }
 
         if ($this->pathIsIntendedAsExtensionPath($persistenceIdentifier)) {
-            if (!$this->formSettings['persistenceManager']['allowSaveToExtensionPaths']) {
+            if (!$this->mapSettings['persistenceManager']['allowSaveToExtensionPaths']) {
                 throw new PersistenceManagerException('Save to extension paths is not allowed.', 1477680881);
             }
             if (!$this->isFileWithinAccessibleExtensionFolders($persistenceIdentifier)) {
@@ -190,7 +190,7 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
             throw new PersistenceManagerException(sprintf('The file "%s" could not be removed.', $persistenceIdentifier), 1472239535);
         }
         if ($this->pathIsIntendedAsExtensionPath($persistenceIdentifier)) {
-            if (!$this->formSettings['persistenceManager']['allowDeleteFromExtensionPaths']) {
+            if (!$this->mapSettings['persistenceManager']['allowDeleteFromExtensionPaths']) {
                 throw new PersistenceManagerException(sprintf('The file "%s" could not be removed.', $persistenceIdentifier), 1472239536);
             }
             if (!$this->isFileWithinAccessibleExtensionFolders($persistenceIdentifier)) {
@@ -284,8 +284,8 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
                         'identifier' => $form['identifier'],
                         'name' => $form['label'] ?? $form['identifier'],
                         'persistenceIdentifier' => $fullPath,
-                        'readOnly' => $this->formSettings['persistenceManager']['allowSaveToExtensionPaths'] ? false : true,
-                        'removable' => $this->formSettings['persistenceManager']['allowDeleteFromExtensionPaths'] ? true : false,
+                        'readOnly' => $this->mapSettings['persistenceManager']['allowSaveToExtensionPaths'] ? false : true,
+                        'removable' => $this->mapSettings['persistenceManager']['allowDeleteFromExtensionPaths'] ? true : false,
                         'location' => 'extension',
                         'duplicateIdentifier' => false,
                         'invalid' => $form['invalid'] ?? false,
@@ -384,16 +384,16 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
         $storageFolders = [];
 
         if (
-            !isset($this->formSettings['persistenceManager']['allowedFileMounts'])
-            || !is_array($this->formSettings['persistenceManager']['allowedFileMounts'])
-            || empty($this->formSettings['persistenceManager']['allowedFileMounts'])
+            !isset($this->mapSettings['persistenceManager']['allowedFileMounts'])
+            || !is_array($this->mapSettings['persistenceManager']['allowedFileMounts'])
+            || empty($this->mapSettings['persistenceManager']['allowedFileMounts'])
         ) {
             return $storageFolders;
         }
 
-        foreach ($this->formSettings['persistenceManager']['allowedFileMounts'] as $allowedFileMount) {
+        foreach ($this->mapSettings['persistenceManager']['allowedFileMounts'] as $allowedFileMount) {
             $allowedFileMount = rtrim($allowedFileMount, '/') . '/';
-            // $fileMountPath is like "/form_definitions/" or "/group_homes/1/form_definitions/"
+            // $fileMountPath is like "/map_definitions/" or "/group_homes/1/map_definitions/"
             [$storageUid, $fileMountPath] = explode(':', $allowedFileMount, 2);
 
             try {
@@ -460,15 +460,15 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
 
         $extensionFolders = [];
         if (
-            !isset($this->formSettings['persistenceManager']['allowedExtensionPaths'])
-            || !is_array($this->formSettings['persistenceManager']['allowedExtensionPaths'])
-            || empty($this->formSettings['persistenceManager']['allowedExtensionPaths'])
+            !isset($this->mapSettings['persistenceManager']['allowedExtensionPaths'])
+            || !is_array($this->mapSettings['persistenceManager']['allowedExtensionPaths'])
+            || empty($this->mapSettings['persistenceManager']['allowedExtensionPaths'])
         ) {
             $this->runtimeCache->set('formAccessibleExtensionFolders', $extensionFolders);
             return $extensionFolders;
         }
 
-        foreach ($this->formSettings['persistenceManager']['allowedExtensionPaths'] as $allowedExtensionPath) {
+        foreach ($this->mapSettings['persistenceManager']['allowedExtensionPaths'] as $allowedExtensionPath) {
             if (!$this->pathIsIntendedAsExtensionPath($allowedExtensionPath)) {
                 continue;
             }
@@ -894,8 +894,8 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
 
     protected function sortForms(array $forms): array
     {
-        $keys = $this->formSettings['persistenceManager']['sortByKeys'] ?? ['name', 'fileUid'];
-        $ascending = $this->formSettings['persistenceManager']['sortAscending'] ?? true;
+        $keys = $this->mapSettings['persistenceManager']['sortByKeys'] ?? ['name', 'fileUid'];
+        $ascending = $this->mapSettings['persistenceManager']['sortAscending'] ?? true;
 
         usort($forms, static function (array $a, array $b) use ($keys) {
             foreach ($keys as $key) {

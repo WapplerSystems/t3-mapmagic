@@ -24,7 +24,7 @@ namespace WapplerSystems\MapMagic\ViewHelpers;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -53,7 +53,7 @@ final class RenderRenderableViewHelper extends AbstractViewHelper
 
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
-        /** @var FormRuntime $formRuntime */
+        /** @var MapRuntime $formRuntime */
         $formRuntime = $renderingContext
             ->getViewHelperVariableContainer()
             ->get(self::class, 'formRuntime');
@@ -72,7 +72,7 @@ final class RenderRenderableViewHelper extends AbstractViewHelper
 
         $content = '';
 
-        if ($renderable instanceof FormRuntime || $renderable instanceof RenderableInterface && $renderable->isEnabled()) {
+        if ($renderable instanceof MapRuntime || $renderable instanceof RenderableInterface && $renderable->isEnabled()) {
             $content = $renderChildrenClosure();
         }
 

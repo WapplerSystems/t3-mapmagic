@@ -31,7 +31,7 @@ use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\Valid
 /**
  * @internal
  */
-class FormDefinitionValidationService implements SingletonInterface
+class MapDefinitionValidationService implements SingletonInterface
 {
     /**
      * Validate the form definition properties using the form setup.

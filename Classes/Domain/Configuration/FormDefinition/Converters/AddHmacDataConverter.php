@@ -32,7 +32,7 @@ class AddHmacDataConverter extends AbstractConverter
      * "_orig_<propertyName>" is an array which contains the property value
      * and a hmac hash for the property value.
      * "_orig_<propertyName>" will be used to validate the form definition on saving.
-     * @see \WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService::validateFormDefinitionProperties()
+     * @see \WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService::validateFormDefinitionProperties()
      *
      * @param mixed $value
      */

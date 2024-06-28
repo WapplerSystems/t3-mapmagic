@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle;
 
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 
 /**
  * Event is triggered with current form state and form session, which is
@@ -28,7 +28,7 @@ use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 interface AfterFormStateInitializedInterface
 {
     /**
-     * @param FormRuntime $formRuntime holding current form state and static form definition
+     * @param MapRuntime $formRuntime holding current form state and static form definition
      */
-    public function afterFormStateInitialized(FormRuntime $formRuntime): void;
+    public function afterFormStateInitialized(MapRuntime $formRuntime): void;
 }

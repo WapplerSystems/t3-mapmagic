@@ -27,7 +27,7 @@ use TYPO3\CMS\Core\Tests\Unit\Fixtures\EventDispatcher\MockEventDispatcher;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use WapplerSystems\MapMagic\Controller\FormFrontendController;
+use WapplerSystems\MapMagic\Controller\MapFrontendController;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -51,7 +51,7 @@ final class FormFrontendControllerTest extends UnitTestCase
     #[Test]
     public function overrideByFlexFormSettingsReturnsNoOverriddenConfigurationIfFlexformOverridesDisabled(): void
     {
-        $mockController = $this->getAccessibleMock(FormFrontendController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapFrontendController::class, null, [], '', false);
 
         $configurationServiceMock = $this->createMock(ConfigurationService::class);
         GeneralUtility::setSingletonInstance(ConfigurationService::class, $configurationServiceMock);
@@ -178,7 +178,7 @@ final class FormFrontendControllerTest extends UnitTestCase
     #[Test]
     public function overrideByFlexFormSettingsReturnsOverriddenConfigurationIfFlexformOverridesEnabled(): void
     {
-        $mockController = $this->getAccessibleMock(FormFrontendController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapFrontendController::class, null, [], '', false);
 
         $configurationServiceMock = $this->createMock(ConfigurationService::class);
         GeneralUtility::setSingletonInstance(ConfigurationService::class, $configurationServiceMock);
@@ -328,7 +328,7 @@ final class FormFrontendControllerTest extends UnitTestCase
     #[Test]
     public function overrideByFlexFormSettingsReturnsNotOverriddenConfigurationKeyIfFlexformOverridesAreNotRepresentedInFormEngineConfiguration(): void
     {
-        $mockController = $this->getAccessibleMock(FormFrontendController::class, null, [], '', false);
+        $mockController = $this->getAccessibleMock(MapFrontendController::class, null, [], '', false);
 
         $configurationServiceMock = $this->createMock(ConfigurationService::class);
         GeneralUtility::setSingletonInstance(ConfigurationService::class, $configurationServiceMock);

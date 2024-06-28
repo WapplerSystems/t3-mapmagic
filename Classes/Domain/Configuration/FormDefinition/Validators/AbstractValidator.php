@@ -19,7 +19,7 @@ namespace WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService;
 
 /**
  * @internal
@@ -60,9 +60,9 @@ abstract class AbstractValidator implements ValidatorInterface
         return implode('.', $pathParts);
     }
 
-    protected function getFormDefinitionValidationService(): FormDefinitionValidationService
+    protected function getFormDefinitionValidationService(): MapDefinitionValidationService
     {
-        return GeneralUtility::makeInstance(FormDefinitionValidationService::class);
+        return GeneralUtility::makeInstance(MapDefinitionValidationService::class);
     }
 
     protected function getConfigurationService(): ConfigurationService

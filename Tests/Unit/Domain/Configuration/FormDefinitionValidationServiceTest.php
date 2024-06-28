@@ -23,7 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
 use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormDefinitionValidationServiceTest extends UnitTestCase
@@ -46,7 +46,7 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
         $this->expectException(PropertyException::class);
         $this->expectExceptionCode(1528588036);
 
-        $typeConverter = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
 
         $prototypeName = 'standard';
         $identifier = 'some-text';
@@ -72,7 +72,7 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
         $this->expectException(PropertyException::class);
         $this->expectExceptionCode(1528588037);
 
-        $typeConverter = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
 
         $prototypeName = 'standard';
         $identifier = 'some-text';
@@ -91,7 +91,7 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
     #[Test]
     public function validateAllFormElementPropertyValuesByHmacThrowsNoExceptionIfHmacIsValid(): void
     {
-        $typeConverter = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
 
         $prototypeName = 'standard';
         $identifier = 'some-text';
@@ -128,7 +128,7 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
         $this->expectException(PropertyException::class);
         $this->expectExceptionCode(1528591586);
 
-        $typeConverter = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
 
         $prototypeName = 'standard';
         $identifier = 'some-text';
@@ -166,7 +166,7 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
         $this->expectException(PropertyException::class);
         $this->expectExceptionCode(1528591585);
 
-        $typeConverter = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
 
         $prototypeName = 'standard';
         $identifier = 'some-text';
@@ -197,7 +197,7 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
     #[Test]
     public function validateAllPropertyCollectionElementValuesByHmacThrowsNoExceptionIfHmacIsValid(): void
     {
-        $typeConverter = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
 
         $prototypeName = 'standard';
         $identifier = 'some-text';
@@ -391,11 +391,11 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
         $configurationService
             ->method('getFormElementPredefinedDefaultValueFromFormEditorSetup')
             ->willReturn($mockConfiguration['getFormElementPredefinedDefaultValueFromFormEditorSetup']);
-        $formDefinitionValidationService = $this->getAccessibleMock(FormDefinitionValidationService::class, null);
-        GeneralUtility::setSingletonInstance(FormDefinitionValidationService::class, $formDefinitionValidationService);
+        $formDefinitionValidationService = $this->getAccessibleMock(MapDefinitionValidationService::class, null);
+        GeneralUtility::setSingletonInstance(MapDefinitionValidationService::class, $formDefinitionValidationService);
         GeneralUtility::setSingletonInstance(ConfigurationService::class, $configurationService);
 
-        $subject = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $subject = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
         $returnedExceptionCode = -1;
         try {
             $subject->_call(
@@ -567,11 +567,11 @@ final class FormDefinitionValidationServiceTest extends UnitTestCase
         $configurationService->method(
             'getPropertyCollectionPredefinedDefaultValueFromFormEditorSetup'
         )->willReturn($mockConfiguration['getPropertyCollectionPredefinedDefaultValueFromFormEditorSetup']);
-        $formDefinitionValidationService = $this->getAccessibleMock(FormDefinitionValidationService::class, null);
-        GeneralUtility::setSingletonInstance(FormDefinitionValidationService::class, $formDefinitionValidationService);
+        $formDefinitionValidationService = $this->getAccessibleMock(MapDefinitionValidationService::class, null);
+        GeneralUtility::setSingletonInstance(MapDefinitionValidationService::class, $formDefinitionValidationService);
         GeneralUtility::setSingletonInstance(ConfigurationService::class, $configurationService);
 
-        $subject = $this->getAccessibleMock(FormDefinitionValidationService::class, null, [], '', false);
+        $subject = $this->getAccessibleMock(MapDefinitionValidationService::class, null, [], '', false);
         $returnedExceptionCode = -1;
         try {
             $subject->_call(

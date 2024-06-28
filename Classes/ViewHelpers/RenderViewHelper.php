@@ -26,8 +26,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
-use WapplerSystems\MapMagic\Domain\Factory\FormFactoryInterface;
-use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Domain\Factory\MapFactoryInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -72,7 +72,7 @@ final class RenderViewHelper extends AbstractViewHelper
         $overrideConfiguration = $arguments['overrideConfiguration'];
 
         if (!empty($persistenceIdentifier)) {
-            $formPersistenceManager = GeneralUtility::makeInstance(FormPersistenceManagerInterface::class);
+            $formPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
             $formConfiguration = $formPersistenceManager->load($persistenceIdentifier);
             ArrayUtility::mergeRecursiveWithOverrule(
                 $formConfiguration,
@@ -87,7 +87,7 @@ final class RenderViewHelper extends AbstractViewHelper
         }
 
         // Even though getContainer() is internal, we can't get container injected here due to static scope
-        /** @var FormFactoryInterface $factory */
+        /** @var MapFactoryInterface $factory */
         $factory = GeneralUtility::getContainer()->get($factoryClass);
 
         $formDefinition = $factory->build($overrideConfiguration, $prototypeName);

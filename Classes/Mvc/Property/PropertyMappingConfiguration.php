@@ -25,7 +25,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterFormStateInitializedInterface;
 use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\UploadedFileReferenceConverter;
 use WapplerSystems\MapMagic\Mvc\Validation\MimeTypeValidator;
@@ -149,9 +149,9 @@ class PropertyMappingConfiguration implements AfterFormStateInitializedInterface
     }
 
     /**
-     * @param FormRuntime $formRuntime holding current form state and static form definition
+     * @param MapRuntime $formRuntime holding current form state and static form definition
      */
-    public function afterFormStateInitialized(FormRuntime $formRuntime): void
+    public function afterFormStateInitialized(MapRuntime $formRuntime): void
     {
         foreach ($formRuntime->getFormDefinition()->getRenderablesRecursively() as $renderable) {
             $this->adjustPropertyMappingForFileUploadsAtRuntime($formRuntime, $renderable);
@@ -168,7 +168,7 @@ class PropertyMappingConfiguration implements AfterFormStateInitializedInterface
      * type converter option.
      */
     protected function adjustPropertyMappingForFileUploadsAtRuntime(
-        FormRuntime $formRuntime,
+        MapRuntime          $formRuntime,
         RenderableInterface $renderable
     ): void {
         if (!$renderable instanceof FileUpload

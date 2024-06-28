@@ -84,7 +84,7 @@ class ConfigurationService implements SingletonInterface
     }
 
     /**
-     * Return all prototype names which are defined within "formManager.selectablePrototypesConfiguration.*.identifier"
+     * Return all prototype names which are defined within "mapManager.selectablePrototypesConfiguration.*.identifier"
      *
      * @internal
      */
@@ -92,7 +92,7 @@ class ConfigurationService implements SingletonInterface
     {
         $returnValue = GeneralUtility::makeInstance(
             ArrayProcessor::class,
-            $this->formSettings['formManager']['selectablePrototypesConfiguration'] ?? []
+            $this->formSettings['mapManager']['selectablePrototypesConfiguration'] ?? []
         )->forEach(
             GeneralUtility::makeInstance(
                 ArrayProcessing::class,

@@ -28,5 +28,5 @@ call_user_func(static function () {
         'after:palette:headers'
     );
 
-    $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['previewRenderer'] = \WapplerSystems\MapMagic\Hooks\FormPagePreviewRenderer::class;
+    $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['previewRenderer'] = \WapplerSystems\MapMagic\Hooks\MapPagePreviewRenderer::class;
 });

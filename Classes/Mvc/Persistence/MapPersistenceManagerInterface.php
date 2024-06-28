@@ -28,7 +28,7 @@ use TYPO3\CMS\Core\Resource\Folder;
  *
  * Scope: frontend / backend
  */
-interface FormPersistenceManagerInterface
+interface MapPersistenceManagerInterface
 {
     /**
      * Load the array form representation identified by $persistenceIdentifier, and return it

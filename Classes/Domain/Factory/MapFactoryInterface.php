@@ -25,7 +25,7 @@ use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
 
 /**
  * A Form Factory is responsible for building a {@link WapplerSystems\MapMagic\Domain\Model\FormDefinition}.
- * **Instead of implementing this interface, subclassing {@link AbstractFormFactory} is more appropriate
+ * **Instead of implementing this interface, subclassing {@link AbstractMapFactory} is more appropriate
  * in most cases**.
  *
  * A Form Factory can be called anytime a FormDefinition should be built; in most cases
@@ -33,7 +33,7 @@ use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
  *
  * Scope: frontend / backend
  */
-interface FormFactoryInterface
+interface MapFactoryInterface
 {
     /**
      * Build a form definition, depending on some configuration.

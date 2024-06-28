@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -123,7 +123,7 @@ class ConfirmationFinisher extends AbstractFinisher
     /**
      * @throws FinisherException
      */
-    protected function initializeStandaloneView(FormRuntime $formRuntime): StandaloneView
+    protected function initializeStandaloneView(MapRuntime $formRuntime): StandaloneView
     {
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setRequest($this->finisherContext->getRequest());

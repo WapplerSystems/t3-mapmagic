@@ -23,7 +23,7 @@ namespace WapplerSystems\MapMagic\Domain\Finishers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 
 /**
  * The context that is passed to each finisher when executed.
@@ -45,7 +45,7 @@ class FinisherContext
     /**
      * A reference to the Form Runtime the finisher belongs to
      */
-    protected FormRuntime $formRuntime;
+    protected MapRuntime $formRuntime;
 
     /**
      * The assigned controller context which might be needed by the finisher.
@@ -57,7 +57,7 @@ class FinisherContext
     /**
      * @internal
      */
-    public function __construct(FormRuntime $formRuntime, Request $request)
+    public function __construct(MapRuntime $formRuntime, Request $request)
     {
         $this->formRuntime = $formRuntime;
         $this->request = $request;
@@ -85,7 +85,7 @@ class FinisherContext
     /**
      * The Form Runtime that is associated with the current finisher
      */
-    public function getFormRuntime(): FormRuntime
+    public function getFormRuntime(): MapRuntime
     {
         return $this->formRuntime;
     }

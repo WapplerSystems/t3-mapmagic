@@ -20,7 +20,7 @@ namespace WapplerSystems\MapMagic\ViewHelpers;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Error\Error;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -46,7 +46,7 @@ final class TranslateElementErrorViewHelper extends AbstractViewHelper
         $element = $arguments['element'];
         $error = $arguments['error'];
 
-        /** @var FormRuntime $formRuntime */
+        /** @var MapRuntime $formRuntime */
         $formRuntime = $renderingContext
             ->getViewHelperVariableContainer()
             ->get(RenderRenderableViewHelper::class, 'formRuntime');

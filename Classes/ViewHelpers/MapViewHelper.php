@@ -23,7 +23,7 @@ namespace WapplerSystems\MapMagic\ViewHelpers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper as FluidFormViewHelper;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use TYPO3Fluid\Fluid\Core\ViewHelper\TagBuilder;
 
 /**
@@ -31,7 +31,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\TagBuilder;
  *
  * Scope: frontend
  */
-final class FormViewHelper extends FluidFormViewHelper
+final class MapViewHelper extends FluidFormViewHelper
 {
     /**
      * Renders hidden form fields for referrer information about
@@ -79,7 +79,7 @@ final class FormViewHelper extends FluidFormViewHelper
         return $this->getFormRuntime()->getFormDefinition()->getIdentifier();
     }
 
-    protected function getFormRuntime(): FormRuntime
+    protected function getFormRuntime(): MapRuntime
     {
         return $this->arguments['object'];
     }
