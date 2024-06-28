@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
 use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotValidException;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractSection;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\Section;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\UnknownFormElement;
@@ -54,7 +54,7 @@ final class AbstractSectionTest extends UnitTestCase
     #[Test]
     public function createElementThrowsExceptionIfTypeDefinitionNotFoundAndSkipUnknownElementsIsFalse(): void
     {
-        $rootForm = $this->getMockBuilder(FormDefinition::class)
+        $rootForm = $this->getMockBuilder(MapDefinition::class)
             ->onlyMethods(['getRenderingOptions', 'getTypeDefinitions'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -91,7 +91,7 @@ final class AbstractSectionTest extends UnitTestCase
     #[Test]
     public function createElementReturnsUnknownElementsIfTypeDefinitionIsNotFoundAndSkipUnknownElementsIsTrue(): void
     {
-        $rootForm = $this->getMockBuilder(FormDefinition::class)
+        $rootForm = $this->getMockBuilder(MapDefinition::class)
             ->onlyMethods(['getRenderingOptions', 'getTypeDefinitions'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -114,7 +114,7 @@ final class AbstractSectionTest extends UnitTestCase
     #[Test]
     public function createElementThrowsExceptionIfTypeDefinitionIsNotSet(): void
     {
-        $rootForm = $this->getMockBuilder(FormDefinition::class)
+        $rootForm = $this->getMockBuilder(MapDefinition::class)
             ->onlyMethods(['getRenderingOptions', 'getTypeDefinitions'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -136,7 +136,7 @@ final class AbstractSectionTest extends UnitTestCase
     public function createElementThrowsExceptionIfTypeDefinitionNotInstanceOfFormElementInterface(): void
     {
         $this->resetSingletonInstances = true;
-        $rootForm = $this->getMockBuilder(FormDefinition::class)
+        $rootForm = $this->getMockBuilder(MapDefinition::class)
             ->onlyMethods(['getRenderingOptions', 'getTypeDefinitions'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -184,7 +184,7 @@ final class AbstractSectionTest extends UnitTestCase
             ->method('setOptions')
             ->with($typeDefinitionWithoutImplementationClassName);
 
-        $rootForm = $this->getMockBuilder(FormDefinition::class)
+        $rootForm = $this->getMockBuilder(MapDefinition::class)
             ->onlyMethods(['getRenderingOptions', 'getTypeDefinitions'])
             ->disableOriginalConstructor()
             ->getMock();

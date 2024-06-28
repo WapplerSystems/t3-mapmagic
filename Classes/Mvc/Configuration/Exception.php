@@ -17,11 +17,11 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Mvc\Configuration;
 
-use WapplerSystems\MapMagic\Exception as FormException;
+use WapplerSystems\MapMagic\Exception as MapException;
 
 /**
  * A generic Form configuration Exception
  *
  * @internal
  */
-class Exception extends FormException {}
+class Exception extends MapException {}

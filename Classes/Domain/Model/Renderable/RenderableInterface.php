@@ -22,7 +22,7 @@ declare(strict_types=1);
 namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
 /**
- * Base interface which all Form Parts except the FormDefinition must adhere
+ * Base interface which all Form Parts except the MapDefinition must adhere
  * to (i.e. all elements which are NOT the root of a Form).
  *
  * Scope: frontend

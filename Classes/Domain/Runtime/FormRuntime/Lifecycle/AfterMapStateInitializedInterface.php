@@ -25,7 +25,7 @@ use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
  * enrich components with runtime state.
  * @internal
  */
-interface AfterFormStateInitializedInterface
+interface AfterMapStateInitializedInterface
 {
     /**
      * @param MapRuntime $formRuntime holding current form state and static form definition

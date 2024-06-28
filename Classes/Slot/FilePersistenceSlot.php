@@ -128,7 +128,7 @@ final class FilePersistenceSlot implements SingletonInterface
         // while assertFileName below also checks if it's a form definition
         // we want an early return here to get rid of the file_get_contents
         // below which would be triggered on every file add command otherwise
-        if (!$this->isFormDefinition($combinedFileIdentifier)) {
+        if (!$this->isMapDefinition($combinedFileIdentifier)) {
             return;
         }
         $this->assertFileName(
@@ -167,11 +167,11 @@ final class FilePersistenceSlot implements SingletonInterface
     public function onPreFileMove(BeforeFileMovedEvent $event): void
     {
         // Skip check, in case file extension would not change during this
-        // command. In case e.g. "file.txt" shall be renamed to "file.form.yaml"
+        // command. In case e.g. "file.txt" shall be renamed to "file.map.yaml"
         // the invocation still has to be granted.
         // Any file moved to a recycle folder is accepted as well.
-        if ($this->isFormDefinition($event->getFile()->getIdentifier())
-            && $this->isFormDefinition($event->getTargetFileName())
+        if ($this->isMapDefinition($event->getFile()->getIdentifier())
+            && $this->isMapDefinition($event->getTargetFileName())
             || $this->isRecycleFolder($event->getFolder())) {
             return;
         }
@@ -209,7 +209,7 @@ final class FilePersistenceSlot implements SingletonInterface
         string $combinedFileIdentifier,
         ?string $content = null
     ): void {
-        if (!$this->isFormDefinition($combinedFileIdentifier)) {
+        if (!$this->isMapDefinition($combinedFileIdentifier)) {
             return;
         }
 
@@ -281,11 +281,11 @@ final class FilePersistenceSlot implements SingletonInterface
         );
     }
 
-    protected function isFormDefinition(string $identifier): bool
+    protected function isMapDefinition(string $identifier): bool
     {
         return str_ends_with(
             $identifier,
-            MapPersistenceManager::FORM_DEFINITION_FILE_EXTENSION
+            MapPersistenceManager::MAP_DEFINITION_FILE_EXTENSION
         );
     }
 

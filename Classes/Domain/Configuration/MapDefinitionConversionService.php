@@ -23,10 +23,10 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\AddHmacDataConverter;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\ConverterDto;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\FinisherTranslationLanguageConverter;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\RemoveHmacDataConverter;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\AddHmacDataConverter;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\ConverterDto;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\FinisherTranslationLanguageConverter;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\RemoveHmacDataConverter;
 
 /**
  * @internal
@@ -39,7 +39,7 @@ class MapDefinitionConversionService implements SingletonInterface
      * "_orig_<propertyName>" is an array which contains the property value
      * and a hmac hash for the property value.
      * "_orig_<propertyName>" will be used to validate the form definition on saving.
-     * @see \WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService::validateFormDefinitionProperties()
+     * @see \WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService::validateMapDefinitionProperties()
      */
     public function addHmacData(array $formDefinition): array
     {
@@ -62,7 +62,7 @@ class MapDefinitionConversionService implements SingletonInterface
             )
         );
 
-        return $converterDto->getFormDefinition();
+        return $converterDto->getMapDefinition();
     }
 
     /**
@@ -84,7 +84,7 @@ class MapDefinitionConversionService implements SingletonInterface
             )
         );
 
-        return $converterDto->getFormDefinition();
+        return $converterDto->getMapDefinition();
     }
 
     /**
@@ -106,7 +106,7 @@ class MapDefinitionConversionService implements SingletonInterface
             )
         );
 
-        return $converterDto->getFormDefinition();
+        return $converterDto->getMapDefinition();
     }
 
     protected function persistSessionToken(string $sessionToken)

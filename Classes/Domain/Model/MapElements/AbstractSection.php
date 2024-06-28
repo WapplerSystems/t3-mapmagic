@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
 use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotValidException;
-use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 
 /**
@@ -34,7 +34,7 @@ use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
  *
  * This class contains multiple FormElements ({@link FormElementInterface}).
  *
- * Please see {@link FormDefinition} for an in-depth explanation.
+ * Please see {@link MapDefinition} for an in-depth explanation.
  *
  * **This class is NOT meant to be sub classed by developers.**
  * Scope: frontend

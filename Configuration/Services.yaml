@@ -89,9 +89,9 @@ services:
       - name: softreference.parser
         parserKey: mapmagicPersistenceIdentifier
 
-  WapplerSystems\MapMagic\Mvc\Property\TypeConverter\FormDefinitionArrayConverter:
+  WapplerSystems\MapMagic\Mvc\Property\TypeConverter\MapDefinitionArrayConverter:
     tags:
       - name: extbase.type_converter
         priority: 10
-        target: WapplerSystems\MapMagic\Type\FormDefinitionArray
+        target: WapplerSystems\MapMagic\Type\MapDefinitionArray
         sources: string

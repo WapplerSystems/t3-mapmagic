@@ -359,7 +359,7 @@ class SaveToDatabaseFinisher extends AbstractFinisher
         return $this
             ->finisherContext
             ->getFormRuntime()
-            ->getFormDefinition()
+            ->getMapDefinition()
             ->getElementByIdentifier($elementIdentifier);
     }
 }

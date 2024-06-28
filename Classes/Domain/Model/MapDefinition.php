@@ -30,7 +30,7 @@ use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
 use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\FinisherPresetNotFoundException;
-use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
@@ -50,22 +50,22 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * The Anatomy Of A Form
  * =====================
  *
- * A FormDefinition consists of multiple *Page* ({@link Page}) objects. When a
+ * A MapDefinition consists of multiple *Page* ({@link Page}) objects. When a
  * form is displayed to the user, only one *Page* is visible at any given time,
  * and there is a navigation to go back and forth between the pages.
  *
  * A *Page* consists of multiple *FormElements* ({@link FormElementInterface}, {@link AbstractFormElement}),
  * which represent the input fields, textareas, checkboxes shown inside the page.
  *
- * *FormDefinition*, *Page* and *FormElement* have *identifier* properties, which
- * must be unique for each given type (i.e. it is allowed that the FormDefinition and
+ * *MapDefinition*, *Page* and *FormElement* have *identifier* properties, which
+ * must be unique for each given type (i.e. it is allowed that the MapDefinition and
  * a FormElement have the *same* identifier, but two FormElements are not allowed to
  * have the same identifier.
  *
  * Simple Example
  * --------------
  *
- * Generally, you can create a FormDefinition manually by just calling the API
+ * Generally, you can create a MapDefinition manually by just calling the API
  * methods on it, or you use a *Form Definition Factory* to build the form from
  * another representation format such as YAML.
  *
@@ -82,9 +82,9 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * Creating a Form, Using Abstract Form Element Types
  * =====================================================
  *
- * While you can use the {@link FormDefinition::addPage} or {@link Page::addElement}
+ * While you can use the {@link MapDefinition::addPage} or {@link Page::addElement}
  * methods and create the Page and FormElement objects manually, it is often better
- * to use the corresponding create* methods ({@link FormDefinition::createPage}
+ * to use the corresponding create* methods ({@link MapDefinition::createPage}
  * and {@link Page::createElement}), as you pass them an abstract *Form Element Type*
  * such as *Text* or *Page*, and the system **automatically
  * resolves the implementation class name and sets default values**.
@@ -220,7 +220,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * @internal May change any time, use FormFactoryInterface to select a different FormDefinition if needed
  * @todo: Declare final in v12
  */
-class FormDefinition extends AbstractCompositeRenderable implements VariableRenderableInterface
+class MapDefinition extends AbstractCompositeRenderable implements VariableRenderableInterface
 {
     /**
      * The Form's pages
@@ -631,7 +631,7 @@ class FormDefinition extends AbstractCompositeRenderable implements VariableRend
     public function bind(RequestInterface $request): MapRuntime
     {
         $formRuntime = GeneralUtility::makeInstance(MapRuntime::class);
-        $formRuntime->setFormDefinition($this);
+        $formRuntime->setMapDefinition($this);
         $formRuntime->setRequest($request);
         $formRuntime->initialize();
         return $formRuntime;

@@ -22,22 +22,22 @@ call_user_func(static function () {
         'module.tx_mapmagic {
     settings {
         yamlConfigurations {
-            10 = EXT:map_magic/Configuration/Yaml/FormSetup.yaml
+            10 = EXT:map_magic/Configuration/Yaml/MapSetup.yaml
         }
     }
 }'
     );
 
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterSubmit'][1489772699]
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterSubmit'][1489772699]
         = MapElementHooks::class;
 
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeRendering'][1489772699]
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeRendering'][1489772699]
         = MapElementHooks::class;
 
     // FE file upload processing
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterBuildingFinished'][1489772699]
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterBuildingFinished'][1489772699]
         = PropertyMappingConfiguration::class;
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterFormStateInitialized'][1613296803]
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterFormStateInitialized'][1613296803]
         = PropertyMappingConfiguration::class;
 
     // Register "mapmagicvh:" namespace

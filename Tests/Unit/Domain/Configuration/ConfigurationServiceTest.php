@@ -22,7 +22,7 @@ use PHPUnit\Framework\Attributes\Test;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PrototypeNotFoundException;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\ValidationDto;
 use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
 use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;

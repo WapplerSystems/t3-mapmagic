@@ -22,11 +22,11 @@ declare(strict_types=1);
 namespace WapplerSystems\MapMagic\Domain\Factory;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 
 /**
  * Base class for custom *Form Factories*. A Form Factory is responsible for building
- * a {@link WapplerSystems\MapMagic\Domain\Model\FormDefinition}.
+ * a {@link WapplerSystems\MapMagic\Domain\Model\MapDefinition}.
  *
  * Example
  * =======
@@ -38,7 +38,7 @@ use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
  *   public function build(array $configuration, $prototypeName) {
  *     $configurationService = GeneralUtility::makeInstance(ConfigurationService::class);
  *     $prototypeConfiguration = $configurationService->getPrototypeConfiguration($prototypeName);
- *     $formDefinition = GeneralUtility::makeInstance(FormDefinition::class, 'nameOfMyForm', $prototypeConfiguration);
+ *     $formDefinition = GeneralUtility::makeInstance(MapDefinition::class, 'nameOfMyForm', $prototypeConfiguration);
  *
  *     // now, you should call methods on $formDefinition to add pages and form elements
  *
@@ -56,10 +56,10 @@ abstract class AbstractMapFactory implements MapFactoryInterface
      * Helper to be called by every AbstractFormFactory after everything has been built to call the "afterBuildingFinished"
      * hook on all form elements.
      */
-    protected function triggerFormBuildingFinished(FormDefinition $form)
+    protected function triggerFormBuildingFinished(MapDefinition $form)
     {
         foreach ($form->getRenderablesRecursively() as $renderable) {
-            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterBuildingFinished'] ?? [] as $className) {
+            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterBuildingFinished'] ?? [] as $className) {
                 $hookObj = GeneralUtility::makeInstance($className);
                 if (method_exists($hookObj, 'afterBuildingFinished')) {
                     $hookObj->afterBuildingFinished(

@@ -21,11 +21,11 @@ use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
 use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService;
-use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\FormDefinitionArrayConverter;
+use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\MapDefinitionArrayConverter;
 use WapplerSystems\MapMagic\Type\MapDefinitionArray;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-final class FormDefinitionArrayConverterTest extends UnitTestCase
+final class MapDefinitionArrayConverterTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
@@ -63,7 +63,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
             ],
         ];
 
-        $typeConverter = $this->getAccessibleMock(FormDefinitionArrayConverter::class, ['getFormDefinitionValidationService', 'retrieveSessionToken'], callOriginalConstructor: false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionArrayConverter::class, ['getFormDefinitionValidationService', 'retrieveSessionToken'], callOriginalConstructor: false);
         $formDefinitionValidationServiceMock = $this->createMock(MapDefinitionValidationService::class);
         $formDefinitionValidationServiceMock->expects(self::atLeastOnce())->method('validateFormDefinitionProperties')->with(self::anything());
         $formDefinitionValidationServiceMock->method('isPropertyValueEqualToHistoricalValue')->with(self::anything())->willReturn(true);
@@ -100,7 +100,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
         $this->expectException(PropertyException::class);
         $this->expectExceptionCode(1512578002);
 
-        $typeConverter = new FormDefinitionArrayConverter();
+        $typeConverter = new MapDefinitionArrayConverter();
         $input = '{"francine":"stan",';
 
         $typeConverter->convertFrom($input, MapDefinitionArray::class);
@@ -109,7 +109,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
     #[Test]
     public function transformMultiValueElementsForFormFrameworkTransformValues(): void
     {
-        $typeConverter = $this->getAccessibleMock(FormDefinitionArrayConverter::class, null, [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionArrayConverter::class, null, [], '', false);
 
         $input = [
             'foo1' => 'bar',
@@ -159,7 +159,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
         $this->expectExceptionCode(1528538322);
 
         $sessionToken = '123';
-        $typeConverter = $this->getAccessibleMock(FormDefinitionArrayConverter::class, ['retrieveSessionToken'], [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionArrayConverter::class, ['retrieveSessionToken'], [], '', false);
 
         $typeConverter->method(
             'retrieveSessionToken'
@@ -188,7 +188,7 @@ final class FormDefinitionArrayConverterTest extends UnitTestCase
         $this->expectExceptionCode(1528538322);
 
         $sessionToken = '123';
-        $typeConverter = $this->getAccessibleMock(FormDefinitionArrayConverter::class, ['retrieveSessionToken'], [], '', false);
+        $typeConverter = $this->getAccessibleMock(MapDefinitionArrayConverter::class, ['retrieveSessionToken'], [], '', false);
 
         $typeConverter->method(
             'retrieveSessionToken'

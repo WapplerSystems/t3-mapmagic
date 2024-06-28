@@ -21,7 +21,7 @@ use TYPO3\CMS\Filelist\Event\ProcessFileListActionsEvent;
 use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManager;
 
 /**
- * Event listener to disable certain actions when checking for form.yaml files.
+ * Event listener to disable certain actions when checking for map.yaml files.
  * @internal
  */
 class ProcessFileListActionsEventListener
@@ -34,7 +34,7 @@ class ProcessFileListActionsEventListener
             return;
         }
         $fullIdentifier = $event->getResource()->getCombinedIdentifier();
-        if (!str_ends_with($fullIdentifier, MapPersistenceManager::FORM_DEFINITION_FILE_EXTENSION)) {
+        if (!str_ends_with($fullIdentifier, MapPersistenceManager::MAP_DEFINITION_FILE_EXTENSION)) {
             return;
         }
 

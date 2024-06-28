@@ -69,18 +69,18 @@ class DataStructureIdentifierListener
         }
 
         // Add selected form value
-        $identifier['ext-form-persistenceIdentifier'] = '';
+        $identifier['ext-mapmagic-persistenceIdentifier'] = '';
         if (!empty($currentFlexData['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF'])) {
-            $identifier['ext-form-persistenceIdentifier'] = $currentFlexData['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF'];
+            $identifier['ext-mapmagic-persistenceIdentifier'] = $currentFlexData['data']['sDEF']['lDEF']['settings.persistenceIdentifier']['vDEF'];
         }
 
         // Add bool - finisher override active or not
-        $identifier['ext-form-overrideFinishers'] = '';
+        $identifier['ext-mapmagic-overrideFinishers'] = '';
         if (
             isset($currentFlexData['data']['sDEF']['lDEF']['settings.overrideFinishers']['vDEF'])
             && (int)$currentFlexData['data']['sDEF']['lDEF']['settings.overrideFinishers']['vDEF'] === 1
         ) {
-            $identifier['ext-form-overrideFinishers'] = 'enabled';
+            $identifier['ext-mapmagic-overrideFinishers'] = 'enabled';
         }
 
         $event->setIdentifier($identifier);
@@ -93,51 +93,51 @@ class DataStructureIdentifierListener
     public function modifyDataStructure(AfterFlexFormDataStructureParsedEvent $event): void
     {
         $identifier = $event->getIdentifier();
-        if (!isset($identifier['ext-form-persistenceIdentifier'])) {
+        if (!isset($identifier['ext-mapmagic-persistenceIdentifier'])) {
             return;
         }
 
         $dataStructure = $event->getDataStructure();
         try {
             // Add list of existing forms to drop down if we find our key in the identifier
-            $formPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
+            $mapPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
             $formIsAccessible = false;
-            foreach ($formPersistenceManager->listForms() as $form) {
-                $invalidFormDefinition = $form['invalid'] ?? false;
+            foreach ($mapPersistenceManager->listMaps() as $map) {
+                $invalidMapDefinition = $map['invalid'] ?? false;
 
-                if ($form['persistenceIdentifier'] === $identifier['ext-form-persistenceIdentifier']) {
+                if ($map['persistenceIdentifier'] === $identifier['ext-mapmagic-persistenceIdentifier']) {
                     $formIsAccessible = true;
                 }
 
-                if ($invalidFormDefinition) {
+                if ($invalidMapDefinition) {
                     $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.persistenceIdentifier']['config']['items'][] = [
-                        'label' => $form['name'] . ' (' . $form['persistenceIdentifier'] . ')',
-                        'value' => $form['persistenceIdentifier'],
+                        'label' => $map['name'] . ' (' . $map['persistenceIdentifier'] . ')',
+                        'value' => $map['persistenceIdentifier'],
                         'icon' => 'overlay-missing',
                     ];
                 } else {
                     $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.persistenceIdentifier']['config']['items'][] = [
-                        'label' => $form['name'] . ' (' . $form['persistenceIdentifier'] . ')',
-                        'value' => $form['persistenceIdentifier'],
-                        'icon' => 'content-form',
+                        'label' => $map['name'] . ' (' . $map['persistenceIdentifier'] . ')',
+                        'value' => $map['persistenceIdentifier'],
+                        'icon' => 'content-map',
                     ];
                 }
             }
 
-            if (!empty($identifier['ext-form-persistenceIdentifier']) && !$formIsAccessible) {
+            if (!empty($identifier['ext-mapmagic-persistenceIdentifier']) && !$formIsAccessible) {
                 $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.persistenceIdentifier']['config']['items'][] = [
                     'label' => sprintf(
                         $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.inaccessiblePersistenceIdentifier'),
-                        $identifier['ext-form-persistenceIdentifier']
+                        $identifier['ext-mapmagic-persistenceIdentifier']
                     ),
-                    'value' => $identifier['ext-form-persistenceIdentifier'],
+                    'value' => $identifier['ext-mapmagic-persistenceIdentifier'],
                 ];
             }
 
-            // If a specific form is selected and if finisher override is active, add finisher sheets
-            if (!empty($identifier['ext-form-persistenceIdentifier']) && $formIsAccessible) {
-                $persistenceIdentifier = $identifier['ext-form-persistenceIdentifier'];
-                $formDefinition = $formPersistenceManager->load($persistenceIdentifier);
+            // If a specific map is selected and if finisher override is active, add finisher sheets
+            if (!empty($identifier['ext-mapmagic-persistenceIdentifier']) && $formIsAccessible) {
+                $persistenceIdentifier = $identifier['ext-mapmagic-persistenceIdentifier'];
+                $formDefinition = $mapPersistenceManager->load($persistenceIdentifier);
 
                 $translationFile = 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf';
                 $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideFinishers'] = [
@@ -166,7 +166,7 @@ class DataStructureIdentifierListener
                     );
                 }
 
-                if ($identifier['ext-form-overrideFinishers'] === 'enabled') {
+                if ($identifier['ext-mapmagic-overrideFinishers'] === 'enabled') {
                     ArrayUtility::mergeRecursiveWithOverrule(
                         $dataStructure,
                         $newSheets
@@ -174,7 +174,7 @@ class DataStructureIdentifierListener
                 }
             }
         } catch (NoSuchFileException|ParseErrorException $e) {
-            $dataStructure = $this->addSelectedPersistenceIdentifier($identifier['ext-form-persistenceIdentifier'], $dataStructure);
+            $dataStructure = $this->addSelectedPersistenceIdentifier($identifier['ext-mapmagic-persistenceIdentifier'], $dataStructure);
             $this->addInvalidFrameworkConfigurationFlashMessage($e);
         }
 

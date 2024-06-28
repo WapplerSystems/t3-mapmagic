@@ -82,7 +82,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.map.yaml';
         $mockMapPersistenceManager->_call('load', $input);
     }
 
@@ -112,7 +112,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.map.yaml';
         $mockMapPersistenceManager->_call('save', $input, []);
     }
 
@@ -142,7 +142,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.map.yaml';
         $mockMapPersistenceManager->_call('save', $input, []);
     }
 
@@ -170,7 +170,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ->method('exists')
             ->willReturn(false);
 
-        $input = '-1:/user_uploads/_example.form.yaml';
+        $input = '-1:/user_uploads/_example.map.yaml';
         $mockMapPersistenceManager->_call('delete', $input);
     }
 
@@ -192,7 +192,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.map.yaml';
         $mockMapPersistenceManager->_call('delete', $input);
     }
 
@@ -226,7 +226,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.map.yaml';
         $mockMapPersistenceManager->_call('delete', $input);
     }
 
@@ -259,7 +259,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ->method('exists')
             ->willReturn(true);
 
-        $input = '-1:/user_uploads/_example.form.yaml';
+        $input = '-1:/user_uploads/_example.map.yaml';
         $mockMapPersistenceManager->_call('delete', $input);
     }
 
@@ -287,7 +287,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml';
+        $input = 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.map.yaml';
         self::assertTrue($mockMapPersistenceManager->_call('exists', $input));
     }
 
@@ -338,7 +338,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ->method('getStorageByUid')
             ->willReturn($mockStorage);
 
-        $input = '-1:/user_uploads/_example.form.yaml';
+        $input = '-1:/user_uploads/_example.map.yaml';
         self::assertTrue($mockMapPersistenceManager->_call('exists', $input));
     }
 
@@ -397,7 +397,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ));
 
         $input = 'example';
-        $expected = '-1:/user_uploads/example_2.form.yaml';
+        $expected = '-1:/user_uploads/example_2.map.yaml';
         $result = $mockMapPersistenceManager->_call('getUniquePersistenceIdentifier', $input, '-1:/user_uploads/');
         self::assertSame($expected, $result);
     }
@@ -415,7 +415,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
             ));
 
         $input = 'example';
-        $expected = '#^-1:/user_uploads/example_([0-9]{10}).form.yaml$#';
+        $expected = '#^-1:/user_uploads/example_([0-9]{10}).map.yaml$#';
 
         $returnValue = $mockMapPersistenceManager->_call('getUniquePersistenceIdentifier', $input, '-1:/user_uploads/');
         self::assertMatchesRegularExpression($expected, $returnValue);
@@ -506,7 +506,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
     public static function metaDataIsExtractedDataProvider(): \Generator
     {
         yield 'enclosed with single quotation marks and escaped single quotation marks within the label' => [
-            'maybeRawFormDefinition' => "label: 'Ouverture d''un compte'",
+            'maybeRawMapDefinition' => "label: 'Ouverture d''un compte'",
             'expectedMetaData' => ['label' => "Ouverture d'un compte"],
         ];
 
@@ -933,13 +933,13 @@ final class MapPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => '-1:/user_uploads/example.form.yaml',
+                'persistencePath' => '-1:/user_uploads/example.map.yaml',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => [],
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.map.yaml',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => [],
                 'expected' => false,
@@ -1002,7 +1002,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => '-1:/user_uploads/example.form.yaml',
+                'persistencePath' => '-1:/user_uploads/example.map.yaml',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => ['-1:/some_path/'],
                 'expected' => false,
@@ -1020,13 +1020,13 @@ final class MapPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => '-1:/user_uploads/example.form.yaml',
+                'persistencePath' => '-1:/user_uploads/example.map.yaml',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => ['-1:/user_uploads/'],
                 'expected' => true,
             ],
             [
-                'persistencePath' => '-1:/user_uploads/example.form.yaml',
+                'persistencePath' => '-1:/user_uploads/example.map.yaml',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => ['-1:/user_uploads'],
                 'expected' => true,
@@ -1039,7 +1039,7 @@ final class MapPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.map.yaml',
                 'allowedExtensionPaths' => ['EXT:some_extension/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => false,
@@ -1057,13 +1057,13 @@ final class MapPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.map.yaml',
                 'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => true,
             ],
             [
-                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.map.yaml',
                 'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures'],
                 'allowedFileMounts' => [],
                 'expected' => true,

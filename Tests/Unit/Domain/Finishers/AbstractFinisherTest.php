@@ -22,7 +22,7 @@ use WapplerSystems\MapMagic\Domain\Finishers\AbstractFinisher;
 use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherVariableProvider;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\StringableFormElementInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -475,9 +475,9 @@ final class AbstractFinisherTest extends UnitTestCase
                 return $value->format('Y-m-d');
             }
         };
-        $formDefinitionMock = $this->createMock(FormDefinition::class);
+        $formDefinitionMock = $this->createMock(MapDefinition::class);
         $formDefinitionMock->method('getElementByIdentifier')->with('date-1')->willReturn($stringableElement);
-        $formRuntimeMock->method('getFormDefinition')->willReturn($formDefinitionMock);
+        $formRuntimeMock->method('getMapDefinition')->willReturn($formDefinitionMock);
 
         $mockAbstractFinisher = $this->getAccessibleMockForAbstractClass(
             AbstractFinisher::class,
@@ -501,8 +501,8 @@ final class AbstractFinisherTest extends UnitTestCase
         $formRuntimeMock->method('offsetExists')->with('date-1')->willReturn(true);
         $formRuntimeMock->method('offsetGet')->with('date-1')->willReturn(new \DateTime());
 
-        $formDefinitionMock = $this->createMock(FormDefinition::class);
-        $formRuntimeMock->method('getFormDefinition')->willReturn($formDefinitionMock);
+        $formDefinitionMock = $this->createMock(MapDefinition::class);
+        $formRuntimeMock->method('getMapDefinition')->willReturn($formDefinitionMock);
 
         $mockAbstractFinisher = $this->getAccessibleMockForAbstractClass(
             AbstractFinisher::class,

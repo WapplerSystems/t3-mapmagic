@@ -60,7 +60,7 @@ final class RenderRenderableViewHelper extends AbstractViewHelper
 
         $renderable = $arguments['renderable'];
 
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeRendering'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeRendering'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'beforeRendering')) {
                 $hookObj->beforeRendering(

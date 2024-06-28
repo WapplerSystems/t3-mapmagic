@@ -22,11 +22,11 @@ use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\ValidationDto;
 use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionValidationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-final class FormDefinitionValidationServiceTest extends UnitTestCase
+final class MapDefinitionValidationServiceTest extends UnitTestCase
 {
     protected function setUp(): void
     {

@@ -61,7 +61,7 @@ interface MapPersistenceManagerInterface
      *
      * @return array in the format [['name' => 'Form 01', 'persistenceIdentifier' => 'path1'], [ .... ]]
      */
-    public function listForms(): array;
+    public function listMaps(): array;
 
     /**
      * Return a list of all accessible file mount points

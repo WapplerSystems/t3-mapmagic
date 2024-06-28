@@ -326,7 +326,7 @@ abstract class AbstractFinisher implements FinisherInterface
         $value = ObjectAccess::getPropertyPath($formRuntime, $property);
 
         if (is_object($value)) {
-            $element = $formRuntime->getFormDefinition()->getElementByIdentifier($property);
+            $element = $formRuntime->getMapDefinition()->getElementByIdentifier($property);
 
             if (!$element instanceof StringableFormElementInterface) {
                 throw new FinisherException(

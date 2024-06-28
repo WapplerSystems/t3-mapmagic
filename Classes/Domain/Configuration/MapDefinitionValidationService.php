@@ -22,11 +22,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\CreatableFormElementPropertiesValidator;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\CreatablePropertyCollectionElementPropertiesValidator;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\FormElementHmacDataValidator;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\PropertyCollectionElementHmacDataValidator;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\CreatableFormElementPropertiesValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\CreatablePropertyCollectionElementPropertiesValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\FormElementHmacDataValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\PropertyCollectionElementHmacDataValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\ValidationDto;
 
 /**
  * @internal
@@ -136,7 +136,7 @@ class MapDefinitionValidationService implements SingletonInterface
      *
      * @throws PropertyException
      */
-    public function validateFormDefinitionProperties(
+    public function validateMapDefinitionProperties(
         array $currentFormElement,
         string $prototypeName,
         string $sessionToken
@@ -195,7 +195,7 @@ class MapDefinitionValidationService implements SingletonInterface
         }
 
         foreach ($renderables as $renderable) {
-            $this->validateFormDefinitionProperties($renderable, $prototypeName, $sessionToken);
+            $this->validateMapDefinitionProperties($renderable, $prototypeName, $sessionToken);
         }
     }
 

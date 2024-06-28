@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionConversionService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-final class FormDefinitionConversionServiceTest extends UnitTestCase
+final class MapDefinitionConversionServiceTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 

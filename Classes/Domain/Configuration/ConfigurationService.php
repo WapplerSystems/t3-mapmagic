@@ -26,7 +26,7 @@ use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PrototypeNotFoundException;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\ValidationDto;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\AdditionalElementPropertyPathsExtractor;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\ExtractorDto;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\IsCreatableFormElementExtractor;
@@ -610,7 +610,7 @@ class ConfigurationService implements SingletonInterface
      * @see isFormElementPropertyDefinedInFormEditorSetup()
      * @see isPropertyCollectionPropertyDefinedInFormEditorSetup()
      * Connect to the hook:
-     * $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['buildFormDefinitionValidationConfiguration'][] = \Vendor\YourNamespace\YourClass::class;
+     * $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['buildFormDefinitionValidationConfiguration'][] = \Vendor\YourNamespace\YourClass::class;
      * Use the hook:
      * public function addAdditionalPropertyPaths(\WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto $validationDto): array
      * {
@@ -633,7 +633,7 @@ class ConfigurationService implements SingletonInterface
         string $prototypeName,
         array $configuration
     ): array {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['buildFormDefinitionValidationConfiguration'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['buildFormDefinitionValidationConfiguration'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'addAdditionalPropertyPaths')) {
                 $validationDto = GeneralUtility::makeInstance(ValidationDto::class, $prototypeName);

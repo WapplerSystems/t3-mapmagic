@@ -27,7 +27,7 @@ use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
 use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 
 /**
- * A fluid RendererInterface implementation used to render a *FormDefinition*.
+ * A fluid RendererInterface implementation used to render a *MapDefinition*.
  *
  * This renderer is called from {@link \WapplerSystems\MapMagic\Domain\Runtime\MapRuntime::render()}.
  *
@@ -38,8 +38,8 @@ use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
  * importance, as they determine how the form field is resolved to a path
  * in the file system.
  *
- * All rendering options are retrieved from the FormDefinition,
- * using the {@link \WapplerSystems\MapMagic\Domain\Model\FormDefinition::getRenderingOptions()}
+ * All rendering options are retrieved from the MapDefinition,
+ * using the {@link \WapplerSystems\MapMagic\Domain\Model\MapDefinition::getRenderingOptions()}
  * method.
  *
  * templateRootPaths
@@ -58,7 +58,7 @@ use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
  * There is a setting available to set a custom template name. Please read
  * the section 'templateName'.
  *
- * Only the root renderable (FormDefinition) has to be a template file.
+ * Only the root renderable (MapDefinition) has to be a template file.
  * All child renderables are partials. By default, the root renderable
  * is called 'MapMagic'.
  *
@@ -126,7 +126,7 @@ use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 class FluidFormRenderer extends AbstractElementRenderer
 {
     /**
-     * Renders the FormDefinition.
+     * Renders the MapDefinition.
      *
      * This method is expected to call the 'beforeRendering' hook
      * on each renderable.
@@ -175,12 +175,12 @@ class FluidFormRenderer extends AbstractElementRenderer
         // from the renderable
         $view->getTemplatePaths()->fillFromConfigurationArray($renderingOptions);
 
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeRendering'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeRendering'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'beforeRendering')) {
                 $hookObj->beforeRendering(
                     $this->formRuntime,
-                    $this->formRuntime->getFormDefinition()
+                    $this->formRuntime->getMapDefinition()
                 );
             }
         }

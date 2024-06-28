@@ -36,6 +36,7 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -56,7 +57,7 @@ use WapplerSystems\MapMagic\Slot\FilePersistenceSlot;
  */
 class MapPersistenceManager implements MapPersistenceManagerInterface
 {
-    public const FORM_DEFINITION_FILE_EXTENSION = '.map.yaml';
+    public const MAP_DEFINITION_FILE_EXTENSION = '.map.yaml';
 
     protected YamlSource $yamlSource;
     protected StorageRepository $storageRepository;
@@ -86,8 +87,8 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
             $GLOBALS['TYPO3_REQUEST'] = $request;
             $fakeRequest = true;
         }
-        $this->mapSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'map_magic');
-        $this->typoScriptSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'map_magic');
+        $this->mapSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'mapmagic');
+        $this->typoScriptSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS, 'mapmagic');
         if ($fakeRequest) {
             unset($GLOBALS['TYPO3_REQUEST']);
         }
@@ -97,13 +98,13 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
     /**
      * Load the array formDefinition identified by $persistenceIdentifier,
      * override it by TypoScript settings, and return it. Only files with
-     * the extension .yaml or .form.yaml are loaded.
+     * the extension .yaml or .map.yaml are loaded.
      *
      * @internal
      */
     public function load(string $persistenceIdentifier): array
     {
-        $cacheKey = 'formLoad' . md5($persistenceIdentifier);
+        $cacheKey = 'mapLoad' . md5($persistenceIdentifier);
 
         $yaml = $this->runtimeCache->get($cacheKey);
         if ($yaml !== false) {
@@ -119,7 +120,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
 
         try {
             $yaml = $this->yamlSource->load([$file]);
-            $this->generateErrorsIfFormDefinitionIsValidButHasInvalidFileExtension($yaml, $persistenceIdentifier);
+            $this->generateErrorsIfMapDefinitionIsValidButHasInvalidFileExtension($yaml, $persistenceIdentifier);
         } catch (\Exception $e) {
             $yaml = [
                 'type' => 'MapMagic',
@@ -135,7 +136,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
 
     /**
      * Save the array form representation identified by $persistenceIdentifier.
-     * Only files with the extension .form.yaml are saved.
+     * Only files with the extension .map.yaml are saved.
      * If the formDefinition is located within an EXT: resource, save is only
      * allowed if the configuration path
      * persistenceManager.allowSaveToExtensionPaths
@@ -176,7 +177,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
 
     /**
      * Delete the form representation identified by $persistenceIdentifier.
-     * Only files with the extension .form.yaml are removed.
+     * Only files with the extension .map.yaml are removed.
      *
      * @throws PersistenceManagerException
      * @internal
@@ -243,65 +244,65 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
      * @return array in the format [['name' => 'Form 01', 'persistenceIdentifier' => 'path1'], [ .... ]]
      * @internal
      */
-    public function listForms(): array
+    public function listMaps(): array
     {
         $identifiers = [];
-        $forms = [];
+        $maps = [];
 
         foreach ($this->retrieveYamlFilesFromStorageFolders() as $file) {
-            $form = $this->loadMetaData($file);
+            $map = $this->loadMetaData($file);
 
-            if (!$this->looksLikeAFormDefinition($form)) {
+            if (!$this->looksLikeAMapDefinition($map)) {
                 continue;
             }
 
             $persistenceIdentifier = $file->getCombinedIdentifier();
             if ($this->hasValidFileExtension($persistenceIdentifier)) {
-                $forms[] = [
-                    'identifier' => $form['identifier'],
-                    'name' => $form['label'] ?? $form['identifier'],
+                $maps[] = [
+                    'identifier' => $map['identifier'],
+                    'name' => $map['label'] ?? $map['identifier'],
                     'persistenceIdentifier' => $persistenceIdentifier,
                     'readOnly' => false,
                     'removable' => true,
                     'location' => 'storage',
                     'duplicateIdentifier' => false,
-                    'invalid' => $form['invalid'] ?? false,
-                    'fileUid' => $form['fileUid'] ?? 0,
+                    'invalid' => $map['invalid'] ?? false,
+                    'fileUid' => $map['fileUid'] ?? 0,
                 ];
-                if (!isset($identifiers[$form['identifier']])) {
-                    $identifiers[$form['identifier']] = 0;
+                if (!isset($identifiers[$map['identifier']])) {
+                    $identifiers[$map['identifier']] = 0;
                 }
-                $identifiers[$form['identifier']]++;
+                $identifiers[$map['identifier']]++;
             }
         }
 
         foreach ($this->retrieveYamlFilesFromExtensionFolders() as $fullPath => $fileName) {
-            $form = $this->loadMetaData($fullPath);
+            $map = $this->loadMetaData($fullPath);
 
-            if ($this->looksLikeAFormDefinition($form)) {
+            if ($this->looksLikeAMapDefinition($map)) {
                 if ($this->hasValidFileExtension($fileName)) {
-                    $forms[] = [
-                        'identifier' => $form['identifier'],
-                        'name' => $form['label'] ?? $form['identifier'],
+                    $maps[] = [
+                        'identifier' => $map['identifier'],
+                        'name' => $map['label'] ?? $map['identifier'],
                         'persistenceIdentifier' => $fullPath,
                         'readOnly' => $this->mapSettings['persistenceManager']['allowSaveToExtensionPaths'] ? false : true,
                         'removable' => $this->mapSettings['persistenceManager']['allowDeleteFromExtensionPaths'] ? true : false,
                         'location' => 'extension',
                         'duplicateIdentifier' => false,
-                        'invalid' => $form['invalid'] ?? false,
-                        'fileUid' => $form['fileUid'] ?? 0,
+                        'invalid' => $map['invalid'] ?? false,
+                        'fileUid' => $map['fileUid'] ?? 0,
                     ];
-                    if (!isset($identifiers[$form['identifier']])) {
-                        $identifiers[$form['identifier']] = 0;
+                    if (!isset($identifiers[$map['identifier']])) {
+                        $identifiers[$map['identifier']] = 0;
                     }
-                    $identifiers[$form['identifier']]++;
+                    $identifiers[$map['identifier']]++;
                 }
             }
         }
 
         foreach ($identifiers as $identifier => $count) {
             if ($count > 1) {
-                foreach ($forms as &$formDefinition) {
+                foreach ($maps as &$formDefinition) {
                     if ($formDefinition['identifier'] === $identifier) {
                         $formDefinition['duplicateIdentifier'] = true;
                     }
@@ -309,7 +310,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
             }
         }
 
-        return $this->sortForms($forms);
+        return $this->sortForms($maps);
     }
 
     /**
@@ -498,17 +499,17 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
     public function getUniquePersistenceIdentifier(string $formIdentifier, string $savePath): string
     {
         $savePath = rtrim($savePath, '/') . '/';
-        $formPersistenceIdentifier = $savePath . $formIdentifier . self::FORM_DEFINITION_FILE_EXTENSION;
+        $formPersistenceIdentifier = $savePath . $formIdentifier . self::MAP_DEFINITION_FILE_EXTENSION;
         if (!$this->exists($formPersistenceIdentifier)) {
             return $formPersistenceIdentifier;
         }
         for ($attempts = 1; $attempts < 100; $attempts++) {
-            $formPersistenceIdentifier = $savePath . sprintf('%s_%d', $formIdentifier, $attempts) . self::FORM_DEFINITION_FILE_EXTENSION;
+            $formPersistenceIdentifier = $savePath . sprintf('%s_%d', $formIdentifier, $attempts) . self::MAP_DEFINITION_FILE_EXTENSION;
             if (!$this->exists($formPersistenceIdentifier)) {
                 return $formPersistenceIdentifier;
             }
         }
-        $formPersistenceIdentifier = $savePath . sprintf('%s_%d', $formIdentifier, time()) . self::FORM_DEFINITION_FILE_EXTENSION;
+        $formPersistenceIdentifier = $savePath . sprintf('%s_%d', $formIdentifier, time()) . self::MAP_DEFINITION_FILE_EXTENSION;
         if (!$this->exists($formPersistenceIdentifier)) {
             return $formPersistenceIdentifier;
         }
@@ -557,7 +558,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
     public function checkForDuplicateIdentifier(string $identifier): bool
     {
         $identifierUsed = false;
-        foreach ($this->listForms() as $formDefinition) {
+        foreach ($this->listMaps() as $formDefinition) {
             if ($formDefinition['identifier'] === $identifier) {
                 $identifierUsed = true;
                 break;
@@ -738,8 +739,8 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
                 throw new NoSuchFileException(sprintf('YAML file "%s" could not be loaded', $persistenceIdentifier), 1524684462);
             }
 
-            $yaml = $this->extractMetaDataFromCouldBeFormDefinition($rawYamlContent);
-            $this->generateErrorsIfFormDefinitionIsValidButHasInvalidFileExtension($yaml, $persistenceIdentifier);
+            $yaml = $this->extractMetaDataFromCouldBeMapDefinition($rawYamlContent);
+            $this->generateErrorsIfMapDefinitionIsValidButHasInvalidFileExtension($yaml, $persistenceIdentifier);
             if ($file !== null) {
                 $yaml['fileUid'] = $file->getUid();
             }
@@ -850,7 +851,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
      */
     public function hasValidFileExtension(string $fileName): bool
     {
-        return str_ends_with($fileName, self::FORM_DEFINITION_FILE_EXTENSION);
+        return str_ends_with($fileName, self::MAP_DEFINITION_FILE_EXTENSION);
     }
 
     protected function isFileWithinAccessibleExtensionFolders(string $fileName): bool
@@ -889,7 +890,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
 
     protected function looksLikeAFormDefinition(array $data): bool
     {
-        return isset($data['identifier'], $data['type']) && !empty($data['identifier']) && trim($data['type']) === 'MapMagic';
+        return isset($data['identifier'], $data['type']) && !empty($data['identifier']) && trim($data['type']) === 'Map';
     }
 
     protected function sortForms(array $forms): array

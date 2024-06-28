@@ -30,7 +30,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
  *
  * This class contains multiple FormElements ({@link FormElementInterface}).
  *
- * Please see {@link FormDefinition} for an in-depth explanation.
+ * Please see {@link MapDefinition} for an in-depth explanation.
  *
  * Scope: frontend
  * **This class is NOT meant to be sub classed by developers.**
@@ -50,7 +50,7 @@ class Section extends AbstractSection implements FormElementInterface
      */
     public function initializeFormElement()
     {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['initializeFormElement'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeFormElement'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'initializeFormElement')) {
                 $hookObj->initializeFormElement(

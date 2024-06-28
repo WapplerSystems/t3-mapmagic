@@ -31,7 +31,7 @@ use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable;
  * A base form element, which is the starting point for creating custom (PHP-based)
  * Form Elements.
  *
- * A *FormElement* is a part of a *Page*, which in turn is part of a FormDefinition.
+ * A *FormElement* is a part of a *Page*, which in turn is part of a MapDefinition.
  * See {@link FormDefinition} for an in-depth explanation.
  *
  * Subclassing this class is a good starting-point for implementing custom PHP-based
@@ -74,7 +74,7 @@ abstract class AbstractFormElement extends AbstractRenderable implements FormEle
      */
     public function initializeFormElement()
     {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['initializeFormElement'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeFormElement'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'initializeFormElement')) {
                 $hookObj->initializeFormElement(

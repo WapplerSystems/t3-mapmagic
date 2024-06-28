@@ -158,7 +158,7 @@ class MapManagerController extends AbstractBackendController
 
         $formPersistenceIdentifier = $this->mapPersistenceManager->getUniquePersistenceIdentifier($form['identifier'], $savePath);
 
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeFormCreate'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeFormCreate'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'beforeFormCreate')) {
                 $form = $hookObj->beforeFormCreate(
@@ -223,7 +223,7 @@ class MapManagerController extends AbstractBackendController
 
         $formPersistenceIdentifier = $this->mapPersistenceManager->getUniquePersistenceIdentifier($formToDuplicate['identifier'], $savePath);
 
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeFormDuplicate'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeFormDuplicate'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'beforeFormDuplicate')) {
                 $formToDuplicate = $hookObj->beforeFormDuplicate(
@@ -303,7 +303,7 @@ class MapManagerController extends AbstractBackendController
         }
 
         if (empty($this->databaseService->getReferencesByPersistenceIdentifier($formPersistenceIdentifier))) {
-            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeFormDelete'] ?? [] as $className) {
+            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeFormDelete'] ?? [] as $className) {
                 $hookObj = GeneralUtility::makeInstance($className);
                 if (method_exists($hookObj, 'beforeFormDelete')) {
                     $hookObj->beforeFormDelete(
@@ -394,7 +394,7 @@ class MapManagerController extends AbstractBackendController
         $allReferencesForPersistenceIdentifier = $this->databaseService->getAllReferencesForPersistenceIdentifier();
 
         $availableFormDefinitions = [];
-        foreach ($this->mapPersistenceManager->listForms() as $formDefinition) {
+        foreach ($this->mapPersistenceManager->listMaps() as $formDefinition) {
             $referenceCount  = 0;
             if (
                 isset($formDefinition['fileUid'])

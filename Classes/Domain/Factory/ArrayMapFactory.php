@@ -26,16 +26,16 @@ use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
 use WapplerSystems\MapMagic\Domain\Exception\UnknownCompositRenderableException;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractSection;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
 
 /**
- * A factory that creates a FormDefinition from an array
+ * A factory that creates a MapDefinition from an array
  *
  * Scope: frontend / backend
  */
-class ArrayFormFactory extends AbstractMapFactory
+class ArrayMapFactory extends AbstractMapFactory
 {
     /**
      * Build a form definition, depending on some configuration.
@@ -43,7 +43,7 @@ class ArrayFormFactory extends AbstractMapFactory
      * @throws RenderingException
      * @internal
      */
-    public function build(array $configuration, ?string $prototypeName = null): FormDefinition
+    public function build(array $configuration, ?string $prototypeName = null): MapDefinition
     {
         if (empty($prototypeName)) {
             $prototypeName = $configuration['prototypeName'] ?? 'standard';
@@ -58,7 +58,7 @@ class ArrayFormFactory extends AbstractMapFactory
             ->getPrototypeConfiguration($prototypeName);
 
         $form = GeneralUtility::makeInstance(
-            FormDefinition::class,
+            MapDefinition::class,
             $configuration['identifier'],
             $prototypeConfiguration,
             'MapMagic',
@@ -94,7 +94,7 @@ class ArrayFormFactory extends AbstractMapFactory
         if (!isset($nestedRenderableConfiguration['identifier'])) {
             throw new IdentifierNotValidException('Identifier not set.', 1329289436);
         }
-        if ($parentRenderable instanceof FormDefinition) {
+        if ($parentRenderable instanceof MapDefinition) {
             $renderable = $parentRenderable->createPage($nestedRenderableConfiguration['identifier'], $nestedRenderableConfiguration['type']);
         } elseif ($parentRenderable instanceof AbstractSection) {
             $renderable = $parentRenderable->createElement($nestedRenderableConfiguration['identifier'], $nestedRenderableConfiguration['type']);

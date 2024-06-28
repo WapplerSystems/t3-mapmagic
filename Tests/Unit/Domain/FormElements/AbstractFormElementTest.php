@@ -20,7 +20,7 @@ namespace WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement;
 use WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements\Fixtures\TestingFormElement;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -148,7 +148,7 @@ final class AbstractFormElementTest extends UnitTestCase
         $secondFormElementMockClassName = \get_class($secondFormElementMock);
         GeneralUtility::addInstance($secondFormElementMockClassName, $secondFormElementMock);
 
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['initializeFormElement'] = [
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeFormElement'] = [
             $secondFormElementMockClassName,
         ];
 
@@ -158,7 +158,7 @@ final class AbstractFormElementTest extends UnitTestCase
     #[Test]
     public function getUniqueIdentifierExpectedUnique(): void
     {
-        $formDefinition1 = $this->createMock(FormDefinition::class);
+        $formDefinition1 = $this->createMock(MapDefinition::class);
         $formDefinition1
             ->method('getIdentifier')
             ->willReturn('c');
@@ -166,7 +166,7 @@ final class AbstractFormElementTest extends UnitTestCase
         $formElement1 = new TestingFormElement();
         $formElement1->setParentRenderable($formDefinition1);
 
-        $formDefinition2 = $this->createMock(FormDefinition::class);
+        $formDefinition2 = $this->createMock(MapDefinition::class);
         $formDefinition2
             ->method('getIdentifier')
             ->willReturn('d');
@@ -183,7 +183,7 @@ final class AbstractFormElementTest extends UnitTestCase
     #[Test]
     public function setDefaultValueSetStringValueIfKeyDoesNotExists(): void
     {
-        $formDefinitionMock = $this->getAccessibleMock(FormDefinition::class, null, [], '', false);
+        $formDefinitionMock = $this->getAccessibleMock(MapDefinition::class, null, [], '', false);
         $formElement = new TestingFormElement();
         $formElement->setParentRenderable($formDefinitionMock);
 
@@ -198,7 +198,7 @@ final class AbstractFormElementTest extends UnitTestCase
     #[Test]
     public function setDefaultValueSetArrayValueIfKeyDoesNotExists(): void
     {
-        $formDefinitionMock = $this->getAccessibleMock(FormDefinition::class, null, [], '', false);
+        $formDefinitionMock = $this->getAccessibleMock(MapDefinition::class, null, [], '', false);
         $formElement = new TestingFormElement();
         $formElement->setParentRenderable($formDefinitionMock);
 
@@ -213,7 +213,7 @@ final class AbstractFormElementTest extends UnitTestCase
     #[Test]
     public function setDefaultValueUnsetIfValueIsArrayWithSomeNullVales(): void
     {
-        $formDefinitionMock = $this->getAccessibleMock(FormDefinition::class, null, [], '', false);
+        $formDefinitionMock = $this->getAccessibleMock(MapDefinition::class, null, [], '', false);
         $formElement = new TestingFormElement();
         $formElement->setParentRenderable($formDefinitionMock);
 
@@ -251,7 +251,7 @@ final class AbstractFormElementTest extends UnitTestCase
     #[Test]
     public function setDefaultValueAddValueIfValueIsArray(): void
     {
-        $formDefinitionMock = $this->getAccessibleMock(FormDefinition::class, null, [], '', false);
+        $formDefinitionMock = $this->getAccessibleMock(MapDefinition::class, null, [], '', false);
         $formElement = new TestingFormElement();
         $formElement->setParentRenderable($formDefinitionMock);
 

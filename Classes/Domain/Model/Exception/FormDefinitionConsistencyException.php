@@ -23,4 +23,4 @@ use WapplerSystems\MapMagic\Domain\Model\Exception;
  * This exception is thrown if the form definition would get an inconsistent state, like
  * adding a page to two different forms
  */
-class FormDefinitionConsistencyException extends Exception {}
+class MapDefinitionConsistencyException extends Exception {}

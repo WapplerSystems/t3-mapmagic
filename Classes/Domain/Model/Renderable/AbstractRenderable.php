@@ -26,7 +26,7 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\ValidatorPresetNotFoundException;
 use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
 
@@ -325,7 +325,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      */
     public function onRemoveFromParentRenderable()
     {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeRemoveFromParentRenderable'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeRemoveFromParentRenderable'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'beforeRemoveFromParentRenderable')) {
                 $hookObj->beforeRemoveFromParentRenderable(

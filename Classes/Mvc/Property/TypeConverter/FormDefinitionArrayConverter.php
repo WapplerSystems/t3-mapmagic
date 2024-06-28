@@ -33,7 +33,7 @@ use WapplerSystems\MapMagic\Type\MapDefinitionArray;
  *
  * @internal
  */
-class FormDefinitionArrayConverter extends AbstractTypeConverter
+class MapDefinitionArrayConverter extends AbstractTypeConverter
 {
     /**
      * @var array<string>
@@ -66,20 +66,20 @@ class FormDefinitionArrayConverter extends AbstractTypeConverter
      */
     public function convertFrom($source, $targetType, array $convertedChildProperties = [], ?PropertyMappingConfigurationInterface $configuration = null)
     {
-        $rawFormDefinitionArray = json_decode($source, true);
+        $rawMapDefinitionArray = json_decode($source, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new PropertyException('Unable to decode JSON source: ' . json_last_error_msg(), 1512578002);
         }
 
-        $formDefinitionValidationService = $this->getFormDefinitionValidationService();
-        $formDefinitionConversionService = $this->getFormDefinitionConversionService();
+        $formDefinitionValidationService = $this->getMapDefinitionValidationService();
+        $formDefinitionConversionService = $this->getMapDefinitionConversionService();
 
         // Extend the hmac hashing key with the "per form editor session (load / save)" unique key.
-        // @see \WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService::addHmacData
+        // @see \WapplerSystems\MapMagic\Domain\Configuration\MapDefinitionConversionService::addHmacData
         $sessionToken = $this->retrieveSessionToken();
 
-        $prototypeName = $rawFormDefinitionArray['prototypeName'] ?? null;
+        $prototypeName = $rawMapDefinitionArray['prototypeName'] ?? null;
         $identifier = $rawFormDefinitionArray['identifier'] ?? null;
 
         // A modification of the properties "prototypeName" and "identifier" from the root form element

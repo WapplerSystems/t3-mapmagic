@@ -23,7 +23,7 @@ namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
 /**
  * Interface which all Form Parts must adhere to **when they have sub elements**.
- * This includes especially "FormDefinition" and "Page".
+ * This includes especially "MapDefinition" and "Page".
  *
  * Scope: frontend
  * **This class is NOT meant to be sub classed by developers.**

@@ -146,7 +146,7 @@ final class FormManagerControllerTest extends UnitTestCase
     }
 
     #[Test]
-    public function getAvailableFormDefinitionsReturnsProcessedArray(): void
+    public function getAvailableMapDefinitionsReturnsProcessedArray(): void
     {
         $mockController = $this->getAccessibleMock(MapManagerController::class, null, [], '', false);
 
@@ -189,7 +189,7 @@ final class FormManagerControllerTest extends UnitTestCase
             ],
         ];
 
-        self::assertSame($expected, $mockController->_call('getAvailableFormDefinitions'));
+        self::assertSame($expected, $mockController->_call('getAvailableMapDefinitions'));
     }
 
     #[Test]

@@ -53,7 +53,7 @@ class UnknownFormElement extends AbstractRenderable implements FormElementInterf
      */
     public function initializeFormElement()
     {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['initializeFormElement'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeFormElement'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'initializeFormElement')) {
                 $hookObj->initializeFormElement(

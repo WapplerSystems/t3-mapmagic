@@ -21,7 +21,7 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
-use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 
 /**
  * Convenience base class which implements common functionality for most
@@ -46,13 +46,13 @@ abstract class AbstractCompositeRenderable extends AbstractRenderable implements
      * or "addElement" method with the correct type hint.
      *
      * @param RenderableInterface $renderable
-     * @throws FormDefinitionConsistencyException
+     * @throws MapDefinitionConsistencyException
      * @internal
      */
     protected function addRenderable(RenderableInterface $renderable)
     {
         if ($renderable->getParentRenderable() !== null) {
-            throw new FormDefinitionConsistencyException(sprintf('The renderable with identifier "%s" is already added to another element (element identifier: "%s").', $renderable->getIdentifier(), $renderable->getParentRenderable()->getIdentifier()), 1325665144);
+            throw new MapDefinitionConsistencyException(sprintf('The renderable with identifier "%s" is already added to another element (element identifier: "%s").', $renderable->getIdentifier(), $renderable->getParentRenderable()->getIdentifier()), 1325665144);
         }
         $renderable->setIndex(count($this->renderables));
         $renderable->setParentRenderable($this);

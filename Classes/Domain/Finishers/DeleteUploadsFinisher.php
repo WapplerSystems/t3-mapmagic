@@ -39,7 +39,7 @@ class DeleteUploadsFinisher extends AbstractFinisher
         $formRuntime = $this->finisherContext->getFormRuntime();
 
         $uploadFolders = [];
-        $elements = $formRuntime->getFormDefinition()->getRenderablesRecursively();
+        $elements = $formRuntime->getMapDefinition()->getRenderablesRecursively();
         foreach ($elements as $element) {
             if (!$element instanceof FileUpload) {
                 continue;

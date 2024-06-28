@@ -19,7 +19,7 @@ namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Factory;
 
 use PHPUnit\Framework\Attributes\Test;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
-use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
+use WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\Section;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\UnknownFormElement;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -33,7 +33,7 @@ final class ArrayFormFactoryTest extends UnitTestCase
         $this->expectExceptionCode(1329289436);
 
         $section = new Section('test', 'page');
-        $arrayFormFactory = $this->getAccessibleMock(ArrayFormFactory::class, null);
+        $arrayFormFactory = $this->getAccessibleMock(ArrayMapFactory::class, null);
 
         $arrayFormFactory->_call('addNestedRenderable', [], $section);
     }
@@ -48,7 +48,7 @@ final class ArrayFormFactoryTest extends UnitTestCase
             'identifier' => 'test-3',
             'type' => 'Foo',
         ];
-        $arrayFormFactory = $this->getAccessibleMock(ArrayFormFactory::class, null);
+        $arrayFormFactory = $this->getAccessibleMock(ArrayMapFactory::class, null);
         $result = $arrayFormFactory->_call('addNestedRenderable', $configuration, $section);
         self::assertSame($unknownElement, $result);
     }

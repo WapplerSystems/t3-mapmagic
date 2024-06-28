@@ -61,7 +61,7 @@ class Page extends AbstractSection
      */
     public function setParentRenderable(CompositeRenderableInterface $parentRenderable)
     {
-        if (!($parentRenderable instanceof FormDefinition)) {
+        if (!($parentRenderable instanceof MapDefinition)) {
             throw new FormException(sprintf('The specified parentRenderable must be a FormDefinition, got "%s"', get_debug_type($parentRenderable)), 1329233747);
         }
         parent::setParentRenderable($parentRenderable);

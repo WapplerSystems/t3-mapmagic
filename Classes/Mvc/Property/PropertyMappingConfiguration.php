@@ -26,7 +26,7 @@ use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterFormStateInitializedInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterMapStateInitializedInterface;
 use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\UploadedFileReferenceConverter;
 use WapplerSystems\MapMagic\Mvc\Validation\MimeTypeValidator;
 
@@ -34,7 +34,7 @@ use WapplerSystems\MapMagic\Mvc\Validation\MimeTypeValidator;
  * Scope: frontend
  * @internal
  */
-class PropertyMappingConfiguration implements AfterFormStateInitializedInterface
+class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
 {
     public function __construct(protected readonly ValidatorResolver $validatorResolver) {}
 
@@ -100,7 +100,7 @@ class PropertyMappingConfiguration implements AfterFormStateInitializedInterface
             if ($this->checkSaveFileMountAccess($saveToFileMountIdentifier)) {
                 $uploadConfiguration[UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER] = $saveToFileMountIdentifier;
             } else {
-                // @todo Why should uploaded files be stored to the same directory as the *.form.yaml definitions?
+                // @todo Why should uploaded files be stored to the same directory as the *.map.yaml definitions?
                 $persistenceIdentifier = $renderable->getRootForm()->getPersistenceIdentifier();
                 if (!empty($persistenceIdentifier)) {
                     $pathinfo = PathUtility::pathinfo($persistenceIdentifier);
@@ -153,7 +153,7 @@ class PropertyMappingConfiguration implements AfterFormStateInitializedInterface
      */
     public function afterFormStateInitialized(MapRuntime $formRuntime): void
     {
-        foreach ($formRuntime->getFormDefinition()->getRenderablesRecursively() as $renderable) {
+        foreach ($formRuntime->getMapDefinition()->getRenderablesRecursively() as $renderable) {
             $this->adjustPropertyMappingForFileUploadsAtRuntime($formRuntime, $renderable);
         }
     }

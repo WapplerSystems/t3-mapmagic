@@ -28,7 +28,7 @@ use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
  * A base form element interface, which can be the starting point for creating
  * custom (PHP-based) Form Elements.
  *
- * A *FormElement* is a part of a *Page*, which in turn is part of a FormDefinition.
+ * A *FormElement* is a part of a *Page*, which in turn is part of a MapDefinition.
  * See {@link FormDefinition} for an in-depth explanation.
  *
  * **Often, you should rather subclass {@link AbstractFormElement} instead of

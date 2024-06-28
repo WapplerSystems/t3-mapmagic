@@ -27,8 +27,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\FinisherOptionsFlexFormOverridesConverter;
-use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\FlexFormFinisherOverridesConverterDto;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\FinisherOptionsFlexFormOverridesConverter;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\FlexFormFinisherOverridesConverterDto;
 use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**

@@ -142,7 +142,7 @@ class EmailFinisher extends AbstractFinisher
         }
 
         if ($attachUploads) {
-            foreach ($formRuntime->getFormDefinition()->getRenderablesRecursively() as $element) {
+            foreach ($formRuntime->getMapDefinition()->getRenderablesRecursively() as $element) {
                 if (!$element instanceof FileUpload) {
                     continue;
                 }

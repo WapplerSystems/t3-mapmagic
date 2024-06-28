@@ -25,7 +25,7 @@ use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration as ExtbasePropertyMa
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
 use WapplerSystems\MapMagic\Mvc\ProcessingRule;
 use WapplerSystems\MapMagic\Mvc\Property\PropertyMappingConfiguration;
@@ -40,7 +40,7 @@ final class PropertyMappingConfigurationTest extends UnitTestCase
     protected PropertyMappingConfiguration $propertyMappingConfiguration;
     protected ExtbasePropertyMappingConfiguration&MockObject $extbasePropertyMappingConfiguration;
     protected FileUpload&MockObject $fileUpload;
-    protected FormDefinition&MockObject $rootForm;
+    protected MapDefinition&MockObject $rootForm;
     protected ProcessingRule&MockObject $processingRule;
 
     public function setUp(): void
@@ -63,7 +63,7 @@ final class PropertyMappingConfigurationTest extends UnitTestCase
             ->willReturn($this->extbasePropertyMappingConfiguration);
 
         // Root Form
-        $this->rootForm = $this->getMockBuilder(FormDefinition::class)
+        $this->rootForm = $this->getMockBuilder(MapDefinition::class)
             ->onlyMethods(['getProcessingRule', 'getPersistenceIdentifier', 'getIdentifier'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -188,7 +188,7 @@ final class PropertyMappingConfigurationTest extends UnitTestCase
     }
 
     #[Test]
-    public function afterBuildingFinishedSetsUpStoragePathToToFormDefinitionPathIfSaveToFileMountIsNotDefinedAndFormWasNotAddedProgrammatically(): void
+    public function afterBuildingFinishedSetsUpStoragePathToToMapDefinitionPathIfSaveToFileMountIsNotDefinedAndFormWasNotAddedProgrammatically(): void
     {
         $resourceFactory = $this->createMock(ResourceFactory::class);
         GeneralUtility::setSingletonInstance(ResourceFactory::class, $resourceFactory);
@@ -224,7 +224,7 @@ final class PropertyMappingConfigurationTest extends UnitTestCase
     }
 
     #[Test]
-    public function afterBuildingFinishedSetsStoragePathToUserUploadIfNeitherSaveToFileMountIsSetNorThereIsAFormDefinitionPath(): void
+    public function afterBuildingFinishedSetsStoragePathToUserUploadIfNeitherSaveToFileMountIsSetNorThereIsAMapDefinitionPath(): void
     {
         // Don't add any validators for now
         $this->processingRule

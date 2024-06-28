@@ -18,7 +18,7 @@ plugin.tx_mapmagic {
 
     settings {
         yamlConfigurations {
-            10 = EXT:map_magic/Configuration/Yaml/FormSetup.yaml
+            10 = EXT:map_magic/Configuration/Yaml/MapSetup.yaml
         }
     }
 }

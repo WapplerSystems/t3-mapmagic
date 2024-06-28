@@ -67,8 +67,8 @@ class YamlSource
                 $loadedConfiguration = $this->loadFromFile($fileToLoad);
             } else {
                 $loadedConfiguration = $this->loadFromFilePath($fileToLoad);
-                if (isset($loadedConfiguration['TYPO3']['CMS']['MapMagic'])) {
-                    $namespacedConfiguration = $loadedConfiguration['TYPO3']['CMS']['MapMagic'];
+                if (isset($loadedConfiguration['WapplerSystems']['MapMagic'])) {
+                    $namespacedConfiguration = $loadedConfiguration['WapplerSystems']['MapMagic'];
                     unset($loadedConfiguration['TYPO3']);
                     $loadedConfiguration = array_replace_recursive($namespacedConfiguration, $loadedConfiguration);
                 }

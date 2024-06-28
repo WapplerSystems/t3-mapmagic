@@ -42,7 +42,7 @@ class MapFileProvider extends FileProvider
     public function canHandle(): bool
     {
         return parent::canHandle()
-            && str_ends_with($this->identifier, MapPersistenceManager::FORM_DEFINITION_FILE_EXTENSION);
+            && str_ends_with($this->identifier, MapPersistenceManager::MAP_DEFINITION_FILE_EXTENSION);
     }
 
     public function addItems(array $items): array

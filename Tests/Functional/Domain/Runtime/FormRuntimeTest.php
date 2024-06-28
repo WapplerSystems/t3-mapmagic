@@ -23,8 +23,8 @@ use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
-use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -36,7 +36,7 @@ final class FormRuntimeTest extends FunctionalTestCase
         'form',
     ];
 
-    protected ArrayFormFactory $formFactory;
+    protected ArrayMapFactory $formFactory;
     protected Request $request;
 
     protected function setUp(): void
@@ -46,14 +46,14 @@ final class FormRuntimeTest extends FunctionalTestCase
         $this->loadDefaultYamlConfigurations();
         $this->initializeTSFE();
 
-        $this->formFactory = $this->get(ArrayFormFactory::class);
+        $this->formFactory = $this->get(ArrayMapFactory::class);
         $this->request = $this->buildExtbaseRequest();
     }
 
     #[Test]
-    public function renderThrowsExceptionIfFormDefinitionReturnsNoRendererClassName(): void
+    public function renderThrowsExceptionIfMapDefinitionReturnsNoRendererClassName(): void
     {
-        $formDefinition = $this->buildFormDefinition();
+        $formDefinition = $this->buildMapDefinition();
         $formDefinition->setOptions(['rendererClassName' => '']);
         $formRuntime = $formDefinition->bind($this->request);
 
@@ -66,7 +66,7 @@ final class FormRuntimeTest extends FunctionalTestCase
     #[Test]
     public function renderThrowsExceptionIfRendererClassNameInstanceDoesNotImplementRendererInterface(): void
     {
-        $formDefinition = $this->buildFormDefinition();
+        $formDefinition = $this->buildMapDefinition();
         // This must be a class available in the container without implementing RendererInterface
         $formDefinition->setOptions(['rendererClassName' => ConfigurationManagerInterface::class]);
         $formRuntime = $formDefinition->bind($this->request);
@@ -88,7 +88,7 @@ final class FormRuntimeTest extends FunctionalTestCase
         return (new Request($serverRequest))->withPluginName('Map');
     }
 
-    private function buildFormDefinition(): FormDefinition
+    private function buildMapDefinition(): MapDefinition
     {
         return $this->formFactory->build([
             'type' => 'MapMagic',

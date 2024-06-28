@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
-use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
+use WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory;
 use WapplerSystems\MapMagic\Domain\Factory\MapFactoryInterface;
 use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -59,7 +59,7 @@ final class RenderViewHelper extends AbstractViewHelper
     public function initializeArguments(): void
     {
         $this->registerArgument('persistenceIdentifier', 'string', 'The persistence identifier for the form.', false);
-        $this->registerArgument('factoryClass', 'string', 'The fully qualified class name of the factory', false, ArrayFormFactory::class);
+        $this->registerArgument('factoryClass', 'string', 'The fully qualified class name of the factory', false, ArrayMapFactory::class);
         $this->registerArgument('prototypeName', 'string', 'Name of the prototype to use', false);
         $this->registerArgument('overrideConfiguration', 'array', 'factory specific configuration', false, []);
     }

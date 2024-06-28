@@ -95,7 +95,7 @@ class FinisherContext
      */
     public function getFormValues(): array
     {
-        return $this->formRuntime->getFormState()->getFormValues();
+        return $this->formRuntime->getMapState()->getFormValues();
     }
 
     public function getFinisherVariableProvider(): FinisherVariableProvider
