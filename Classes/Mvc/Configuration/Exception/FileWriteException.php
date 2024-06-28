@@ -13,9 +13,9 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Configuration\Exception;
+namespace WapplerSystems\MapMagic\Mvc\Configuration\Exception;
 
-use TYPO3\CMS\Form\Mvc\Configuration\Exception;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception;
 
 /**
  * Exception for file write errors

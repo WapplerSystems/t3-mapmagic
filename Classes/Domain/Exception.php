@@ -15,9 +15,9 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain;
+namespace WapplerSystems\MapMagic\Domain;
 
-use TYPO3\CMS\Form\Exception as FormException;
+use WapplerSystems\MapMagic\Exception as FormException;
 
 /**
  * A generic Form domain Exception

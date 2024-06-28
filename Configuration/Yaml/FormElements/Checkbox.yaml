@@ -70,7 +70,7 @@ prototypes:
           group: select
           groupSorting: 100
           iconIdentifier: form-checkbox
-        implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement
         properties:
           containerClassAttribute: 'input checkbox'
           elementClassAttribute: add-on

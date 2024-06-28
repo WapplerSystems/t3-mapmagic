@@ -15,9 +15,9 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\Exception;
+namespace WapplerSystems\MapMagic\Domain\Model\Exception;
 
-use TYPO3\CMS\Form\Domain\Model\Exception;
+use WapplerSystems\MapMagic\Domain\Model\Exception;
 
 /**
  * This exception is thrown if the form definition would get an inconsistent state, like

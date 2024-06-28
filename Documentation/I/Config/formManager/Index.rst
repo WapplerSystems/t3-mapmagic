@@ -96,7 +96,7 @@ stylesheets
          :linenos:
 
          stylesheets:
-           100: 'EXT:form/Resources/Public/Css/form.css'
+           100: 'EXT:map_magic/Resources/Public/Css/form.css'
 
 :aspect:`Description`
       Internal setting. Path for the form manager CSS file.
@@ -124,7 +124,7 @@ translationFiles
          :linenos:
 
          translationFiles:
-           10: 'EXT:form/Resources/Private/Language/Database.xlf'
+           10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
 
 :aspect:`Good to know`
       :ref:`Translate "Start template" options<concepts-formmanager-translation-starttemplate>`
@@ -154,7 +154,7 @@ javaScriptTranslationFile
       .. code-block:: yaml
          :linenos:
 
-         javaScriptTranslationFile: 'EXT:form/Resources/Private/Language/locallang_formManager_javascript.xlf'
+         javaScriptTranslationFile: 'EXT:map_magic/Resources/Private/Language/locallang_formManager_javascript.xlf'
 
 :aspect:`Description`
       Internal setting. Path for the inline language labels for the form manager app.
@@ -187,10 +187,10 @@ selectablePrototypesConfiguration
              label: formManager.selectablePrototypesConfiguration.standard.label
              newFormTemplates:
                100:
-                 templatePath: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/BlankForm.yaml'
+                 templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/BlankForm.yaml'
                  label: formManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label
                200:
-                 templatePath: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/SimpleContactForm.yaml'
+                 templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/SimpleContactForm.yaml'
                  label: formManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label
 
 :aspect:`Good to know`
@@ -281,10 +281,10 @@ selectablePrototypesConfiguration.*.newFormTemplates
              label: formManager.selectablePrototypesConfiguration.standard.label
              newFormTemplates:
                100:
-                 templatePath: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/BlankForm.yaml'
+                 templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/BlankForm.yaml'
                  label: formManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label
                200:
-                 templatePath: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/SimpleContactForm.yaml'
+                 templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/SimpleContactForm.yaml'
                  label: formManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label
 
 :aspect:`Good to know`

@@ -2,11 +2,11 @@ prototypes:
   standard:
     finishersDefinition:
       Confirmation:
-        implementationClassName: TYPO3\CMS\Form\Domain\Finishers\ConfirmationFinisher
+        implementationClassName: WapplerSystems\MapMagic\Domain\Finishers\ConfirmationFinisher
         options:
           templateName: Confirmation
           templateRootPaths:
-            10: 'EXT:form/Resources/Private/Frontend/Templates/Finishers/Confirmation/'
+            10: 'EXT:map_magic/Resources/Private/Frontend/Templates/Finishers/Confirmation/'
         formEditor:
           iconIdentifier: form-finisher
           label: formEditor.elements.Form.finisher.Confirmation.editor.header.label

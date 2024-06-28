@@ -43,7 +43,7 @@ allowedFileMounts
       :ref:`Form/ File storages<concepts-form-file-storages>`
 
 :aspect:`Description`
-      EXT:form stores the form definitions within the file system and thus needs
+      EXT:map_magic stores the form definitions within the file system and thus needs
       write access to this storage. By default, the folder ``form_definitions`` is
       created and used. It is possible to configure a different and/ or an additional
       filemount which is then utilized for storing and reading forms.

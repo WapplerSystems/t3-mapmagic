@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Controller;
+namespace WapplerSystems\MapMagic\Tests\Unit\Controller;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Imaging\Icon;
@@ -24,10 +24,10 @@ use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Form\Controller\FormManagerController;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManager;
-use TYPO3\CMS\Form\Service\DatabaseService;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Controller\FormManagerController;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager;
+use WapplerSystems\MapMagic\Service\DatabaseService;
+use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormManagerControllerTest extends UnitTestCase
@@ -67,8 +67,8 @@ final class FormManagerControllerTest extends UnitTestCase
         ]);
 
         $formPersistenceManagerMock->method('getAccessibleExtensionFolders')->willReturn([
-            'EXT:form/Resources/Forms/' => '/some/path/form/Resources/Forms/',
-            'EXT:form_additions/Resources/Forms/' => '/some/path/form_additions/Resources/Forms/',
+            'EXT:map_magic/Resources/Forms/' => '/some/path/form/Resources/Forms/',
+            'EXT:map_magic_additions/Resources/Forms/' => '/some/path/form_additions/Resources/Forms/',
         ]);
 
         $expected = [
@@ -81,12 +81,12 @@ final class FormManagerControllerTest extends UnitTestCase
                 'value' => '2:/forms/',
             ],
             2 => [
-                'label' => 'EXT:form/Resources/Forms/',
-                'value' => 'EXT:form/Resources/Forms/',
+                'label' => 'EXT:map_magic/Resources/Forms/',
+                'value' => 'EXT:map_magic/Resources/Forms/',
             ],
             3 => [
-                'label' => 'EXT:form_additions/Resources/Forms/',
-                'value' => 'EXT:form_additions/Resources/Forms/',
+                'label' => 'EXT:map_magic_additions/Resources/Forms/',
+                'value' => 'EXT:map_magic_additions/Resources/Forms/',
             ],
         ];
 
@@ -266,11 +266,11 @@ final class FormManagerControllerTest extends UnitTestCase
                         'label' => 'some label',
                         'newFormTemplates' => [
                             0 => [
-                                'templatePath' => 'EXT:form/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
+                                'templatePath' => 'EXT:map_magic/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
                                 'label' => 'some label',
                             ],
                             1 => [
-                                'templatePath' => 'EXT:form/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml',
+                                'templatePath' => 'EXT:map_magic/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml',
                                 'label' => 'some other label',
                             ],
                         ],
@@ -279,7 +279,7 @@ final class FormManagerControllerTest extends UnitTestCase
             ],
         ]);
 
-        self::assertTrue($mockController->_call('isValidTemplatePath', 'standard', 'EXT:form/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml'));
+        self::assertTrue($mockController->_call('isValidTemplatePath', 'standard', 'EXT:map_magic/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml'));
     }
 
     #[Test]
@@ -295,11 +295,11 @@ final class FormManagerControllerTest extends UnitTestCase
                         'label' => 'some label',
                         'newFormTemplates' => [
                             0 => [
-                                'templatePath' => 'EXT:form/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
+                                'templatePath' => 'EXT:map_magic/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
                                 'label' => 'some label',
                             ],
                             1 => [
-                                'templatePath' => 'EXT:form/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml',
+                                'templatePath' => 'EXT:map_magic/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml',
                                 'label' => 'some other label',
                             ],
                         ],
@@ -308,7 +308,7 @@ final class FormManagerControllerTest extends UnitTestCase
             ],
         ]);
 
-        self::assertFalse($mockController->_call('isValidTemplatePath', 'standard', 'EXT:form/Tests/Unit/Controller/Fixtures/NonExistingForm.yaml'));
+        self::assertFalse($mockController->_call('isValidTemplatePath', 'standard', 'EXT:map_magic/Tests/Unit/Controller/Fixtures/NonExistingForm.yaml'));
     }
 
     #[Test]
@@ -324,11 +324,11 @@ final class FormManagerControllerTest extends UnitTestCase
                         'label' => 'some label',
                         'newFormTemplates' => [
                             0 => [
-                                'templatePath' => 'EXT:form/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
+                                'templatePath' => 'EXT:map_magic/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
                                 'label' => 'some label',
                             ],
                             1 => [
-                                'templatePath' => 'EXT:form/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml',
+                                'templatePath' => 'EXT:map_magic/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml',
                                 'label' => 'some other label',
                             ],
                         ],
@@ -338,7 +338,7 @@ final class FormManagerControllerTest extends UnitTestCase
                         'label' => 'some label',
                         'newFormTemplates' => [
                             0 => [
-                                'templatePath' => 'EXT:form/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
+                                'templatePath' => 'EXT:map_magic/Tests/Unit/Controller/Fixtures/BlankForm.yaml',
                                 'label' => 'some label',
                             ],
                         ],
@@ -347,7 +347,7 @@ final class FormManagerControllerTest extends UnitTestCase
             ],
         ]);
 
-        self::assertFalse($mockController->_call('isValidTemplatePath', 'other', 'EXT:form/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml'));
+        self::assertFalse($mockController->_call('isValidTemplatePath', 'other', 'EXT:map_magic/Tests/Unit/Controller/Fixtures/SimpleContactForm.yaml'));
     }
 
     #[Test]

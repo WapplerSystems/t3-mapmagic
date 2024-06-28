@@ -126,7 +126,7 @@ prototypes:
                   9999:
                     identifier: removeButton
                     templateName: Inspector-RemoveElementEditor
-        implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\DatePicker
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\DatePicker
         properties:
           containerClassAttribute: input
           elementClassAttribute: 'small form-control'
@@ -136,7 +136,7 @@ prototypes:
           timeSelectorMinuteLabel: ''
           dateFormat: Y-m-d
           # consider using a different file if the backend is behind an http basic auth
-          datePickerInitializationJavaScriptFile: EXT:form/Resources/Public/JavaScript/frontend/date-picker.js
+          datePickerInitializationJavaScriptFile: EXT:map_magic/Resources/Public/JavaScript/frontend/date-picker.js
           enableDatePicker: true
           displayTimeSelector: false
         variants:

@@ -19,16 +19,16 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Factory;
+namespace WapplerSystems\MapMagic\Domain\Factory;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
-use TYPO3\CMS\Form\Domain\Exception\RenderingException;
-use TYPO3\CMS\Form\Domain\Exception\UnknownCompositRenderableException;
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
-use TYPO3\CMS\Form\Domain\Model\FormElements\AbstractSection;
-use TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
+use WapplerSystems\MapMagic\Domain\Exception\UnknownCompositRenderableException;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractSection;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
 
 /**
  * A factory that creates a FormDefinition from an array
@@ -61,7 +61,7 @@ class ArrayFormFactory extends AbstractFormFactory
             FormDefinition::class,
             $configuration['identifier'],
             $prototypeConfiguration,
-            'Form',
+            'MapMagic',
             $persistenceIdentifier
         );
         if (isset($configuration['renderables'])) {

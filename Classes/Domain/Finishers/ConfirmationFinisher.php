@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Domain\Finishers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
-use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
+use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -54,7 +54,7 @@ class ConfirmationFinisher extends AbstractFinisher
     protected $defaultOptions = [
         'message' => 'The form has been submitted.',
         'contentElementUid' => 0,
-        'typoscriptObjectPath' => 'lib.tx_form.contentElementRendering',
+        'typoscriptObjectPath' => 'lib.tx_mapmagic.contentElementRendering',
     ];
 
     protected array $typoScriptSetup = [];

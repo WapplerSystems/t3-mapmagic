@@ -15,12 +15,12 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Finishers;
 
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Domain\Finishers\ClosureFinisher;
-use TYPO3\CMS\Form\Domain\Finishers\FinisherContext;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Finishers\ClosureFinisher;
+use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class ClosureFinisherTest extends UnitTestCase

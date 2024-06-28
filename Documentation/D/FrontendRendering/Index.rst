@@ -9,7 +9,7 @@ Frontend rendering
 
 .. _apireference-frontendrendering-fluidformrenderer:
 
-TYPO3\\CMS\\Form\\Domain\\Renderer\\FluidFormRenderer
+WapplerSystems\\MapMagic\\Domain\\Renderer\\FluidFormRenderer
 -----------------------------------------------------
 
 
@@ -21,7 +21,7 @@ Options
 The ``FluidFormRenderer`` uses some rendering options which are of particular importance,
 as they determine how the form field is resolved to a path in the file system.
 
-All rendering options are retrieved from the ``FormDefinition``, using the ``TYPO3\CMS\Form\Domain\Model\FormDefinition::getRenderingOptions()`` method.
+All rendering options are retrieved from the ``FormDefinition``, using the ``WapplerSystems\MapMagic\Domain\Model\FormDefinition::getRenderingOptions()`` method.
 
 
 .. _apireference-frontendrendering-fluidformrenderer-options-templaterootpaths:
@@ -37,9 +37,9 @@ For example:
 
 .. code-block:: none
 
-   templateRootPaths.10 = EXT:form/Resources/Private/Frontend/Templates/
-   $renderable->getType() == 'Form'
-   Expected template file: EXT:form/Resources/Private/Frontend/Templates/Form.html
+   templateRootPaths.10 = EXT:map_magic/Resources/Private/Frontend/Templates/
+   $renderable->getType() == 'MapMagic'
+   Expected template file: EXT:map_magic/Resources/Private/Frontend/Templates/Form.html
 
 Only the root element (``FormDefinition``) has to be a template file. All child form elements are partials. By default, the root element is called ``Form``.
 
@@ -51,7 +51,7 @@ Only the root element (``FormDefinition``) has to be a template file. All child 
          Form:
            renderingOptions:
              templateRootPaths:
-               10: 'EXT:form/Resources/Private/Frontend/Templates/'
+               10: 'EXT:map_magic/Resources/Private/Frontend/Templates/'
 
 
 .. _apireference-frontendrendering-fluidformrenderer-options-layoutrootpaths:
@@ -70,7 +70,7 @@ The first folder where the desired layout is found, is used. If the array keys a
          Form:
            renderingOptions:
              layoutRootPaths:
-               10: 'EXT:form/Resources/Private/Frontend/Layouts/'
+               10: 'EXT:map_magic/Resources/Private/Frontend/Layouts/'
 
 
 .. _apireference-frontendrendering-fluidformrenderer-options-partialrootpaths:
@@ -87,9 +87,9 @@ For example:
 
 .. code-block:: none
 
-   templateRootPaths.10 = EXT:form/Resources/Private/Frontend/Partials/
+   templateRootPaths.10 = EXT:map_magic/Resources/Private/Frontend/Partials/
    $renderable->getType() == 'Text'
-   Expected template file: EXT:form/Resources/Private/Frontend/Partials/Text.html
+   Expected template file: EXT:map_magic/Resources/Private/Frontend/Partials/Text.html
 
 There is a setting available to set a custom partial name. Please read the section :ref:`templateName<apireference-frontendrendering-fluidformrenderer-options-templatename>`.
 
@@ -101,7 +101,7 @@ There is a setting available to set a custom partial name. Please read the secti
          Form:
            renderingOptions:
              partialRootPaths:
-               10: 'EXT:form/Resources/Private/Frontend/Partials/'
+               10: 'EXT:map_magic/Resources/Private/Frontend/Partials/'
 
 
 .. _apireference-frontendrendering-fluidformrenderer-options-templatename:
@@ -115,9 +115,9 @@ For example:
 
 .. code-block:: none
 
-   partialRootPaths.10 = EXT:form/Resources/Private/Frontend/Partials/
+   partialRootPaths.10 = EXT:map_magic/Resources/Private/Frontend/Partials/
    $renderable->getType() == 'Text'
-   Expected partial file: EXT:form/Resources/Private/Frontend/Partials/Text.html
+   Expected partial file: EXT:map_magic/Resources/Private/Frontend/Partials/Text.html
 
 Set ``templateName`` to define a custom name which should be used instead.
 
@@ -127,7 +127,7 @@ For example:
 
    $renderable->getTemplateName() == 'Text'
    $renderable->getType() = Foo
-   Expected partial file: EXT:form/Resources/Private/Frontend/Partials/Text.html
+   Expected partial file: EXT:map_magic/Resources/Private/Frontend/Partials/Text.html
 
 .. code-block:: yaml
 
@@ -155,15 +155,15 @@ factoryClass
 ++++++++++++
 
 A class name of a ``FormFactory``.
-This factory is used to create the ``TYPO3\CMS\Form\Domain\Model\FormDefinition`` which is the ``form definition`` Domain Model.
-If no ``factoryClass`` argument is passed, the factory supplied by EXT:form ``TYPO3\CMS\Form\ Domain\Factory\ArrayFormFactory`` is used.
+This factory is used to create the ``WapplerSystems\MapMagic\Domain\Model\FormDefinition`` which is the ``form definition`` Domain Model.
+If no ``factoryClass`` argument is passed, the factory supplied by EXT:map_magic ``WapplerSystems\MapMagic\ Domain\Factory\ArrayFormFactory`` is used.
 Another factory class is required if the form is to be generated programmatically.
 To do this you must implement your own ``FormFactory`` in which your own form is generated programmatically and passes this class name to the ViewHelper.
 This then renders the form.
 
 .. code-block:: html
 
-   <formvh:render factoryClass="VENDOR\MySitePackage\Domain\Factory\CustomFormFactory" />
+   <mapmagicvh:render factoryClass="VENDOR\MySitePackage\Domain\Factory\CustomFormFactory" />
 
 
 .. _apireference-frontendrendering-renderviewHelper-persistenceidentifier:
@@ -177,7 +177,7 @@ In this case, the ``factoryClass`` will be given an empty configuration array (i
 
 .. code-block:: html
 
-   <formvh:render persistenceIdentifier="EXT:my_site_package/Resources/Private/Forms/SimpleContactForm.yaml" />
+   <mapmagicvh:render persistenceIdentifier="EXT:my_site_package/Resources/Private/Forms/SimpleContactForm.yaml" />
 
 
 .. _apireference-frontendrendering-renderviewHelper-overrideconfiguration:
@@ -216,9 +216,9 @@ Implement a ``FormFactory`` and build the form::
    use TYPO3\CMS\Core\Utility\GeneralUtility;
    use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
    use TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator;
-   use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-   use TYPO3\CMS\Form\Domain\Factory\AbstractFormFactory;
-   use TYPO3\CMS\Form\Domain\Model\FormDefinition;
+   use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+   use WapplerSystems\MapMagic\Domain\Factory\AbstractFormFactory;
+   use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
 
    class CustomFormFactory extends AbstractFormFactory
    {
@@ -274,7 +274,7 @@ Use this form within your fluid template.
 
 .. code-block:: html
 
-   <formvh:render factoryClass="VENDOR\MySitePackage\Domain\Factory\CustomFormFactory" />
+   <mapmagicvh:render factoryClass="VENDOR\MySitePackage\Domain\Factory\CustomFormFactory" />
 
 
 .. _apireference-frontendrendering-programmatically-commonapimethods:
@@ -285,7 +285,7 @@ Common API Methods
 
 .. _apireference-frontendrendering-programmatically-commonapimethods-createpage:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormDefinition::createPage()
+WapplerSystems\\MapMagic\\Domain\\Model\\FormDefinition::createPage()
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create a page with the given $identifier and attach this page to the form.
@@ -302,7 +302,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-commonapimethods-createfinisher:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormDefinition::createFinisher()
+WapplerSystems\\MapMagic\\Domain\\Model\\FormDefinition::createFinisher()
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create a finisher with the given $identifier and given $options and attach this finisher to the form.
@@ -314,7 +314,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-commonapimethods-page-createelement:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\Page::createElement()
+WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\Page::createElement()
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create a form element with the given $identifier and attach it to the page.
@@ -331,7 +331,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-commonapimethods-section-createelement:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\Section::createElement()
+WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\Section::createElement()
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create a form element with the given $identifier and attach it to the section.
@@ -348,16 +348,16 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-commonapimethods-abstractrenderable-createvalidator:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\Renderable\\AbstractFormElement::createValidator()
+WapplerSystems\\MapMagic\\Domain\\Model\\Renderable\\AbstractFormElement::createValidator()
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Create a validator for the element.
 Mainly possible for
 
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\AdvancedPassword
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\GenericFormElement
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\DatePicker
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\FileUpload
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\AdvancedPassword
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\GenericFormElement
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\DatePicker
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\FileUpload
 
 Signature::
 
@@ -372,11 +372,11 @@ initializeFormElement()
 Will be called as soon as the element is added to a form.
 Possible for
 
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\Section
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\AdvancedPassword
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\GenericFormElement
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\DatePicker
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\FileUpload
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\Section
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\AdvancedPassword
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\GenericFormElement
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\DatePicker
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\FileUpload
 
 Signature::
 
@@ -384,7 +384,7 @@ Signature::
 
 
 You can use this method to prefill form element data for example from database tables.
-All the classes you can see above extends from the ``TYPO3\CMS\Form\Domain\Model\FormElement\AbstractFormElement``.
+All the classes you can see above extends from the ``WapplerSystems\MapMagic\Domain\Model\FormElement\AbstractFormElement``.
 ``AbstractFormElement`` implements this method like this::
 
    public function initializeFormElement()
@@ -421,7 +421,7 @@ Further API Methods
 
 .. _apireference-frontendrendering-programmatically-apimethods-formruntime:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormRuntime
+WapplerSystems\\MapMagic\\Domain\\Model\\FormRuntime
 ++++++++++++++++++++++++++++++++++++++++++++
 
 
@@ -575,7 +575,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-formdefinition:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormDefinition
+WapplerSystems\\MapMagic\\Domain\\Model\\FormDefinition
 +++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-formdefinition-addpage:
@@ -802,7 +802,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-page:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\Page
+WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\Page
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-page-getelements:
@@ -891,7 +891,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-section:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\Section
+WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\Section
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-section-initializeformelement:
@@ -995,15 +995,15 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-abstractformelement:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\AbstractFormElement
+WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\AbstractFormElement
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following classes extends from ``AbstractFormElement`` and therefore contain the following API methods.
 
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\AdvancedPassword
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\GenericFormElement
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\DatePicker
-- TYPO3\\CMS\\Form\\Domain\\Model\\FormElements\\FileUpload
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\AdvancedPassword
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\GenericFormElement
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\DatePicker
+- WapplerSystems\\MapMagic\\Domain\\Model\\FormElements\\FileUpload
 
 
 .. _apireference-frontendrendering-programmatically-apimethods-abstractformelement-initializeformelement:
@@ -1078,18 +1078,18 @@ The following classes extends from ``AbstractFormElement`` and therefore contain
 
 .. _apireference-frontendrendering-programmatically-apimethods-abstractfinisher:
 
-TYPO3\\CMS\\Form\\Domain\\Finishers\\AbstractFinisher
+WapplerSystems\\MapMagic\\Domain\\Finishers\\AbstractFinisher
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The following classes extends from ``AbstractFinisher`` and therefore contain the following API methods.
 
-- TYPO3\\CMS\\Form\\Domain\\Finishers\\ClosureFinisher
-- TYPO3\\CMS\\Form\\Domain\\Finishers\\ConfirmationFinisher
-- TYPO3\\CMS\\Form\\Domain\\Finishers\\DeleteUploadsFinisher
-- TYPO3\\CMS\\Form\\Domain\\Finishers\\EmailFinisher
-- TYPO3\\CMS\\Form\\Domain\\Finishers\\FlashMessageFinisher
-- TYPO3\\CMS\\Form\\Domain\\Finishers\\RedirectFinisher
-- TYPO3\\CMS\\Form\\Domain\\Finishers\\SaveToDatabaseFinisher
+- WapplerSystems\\MapMagic\\Domain\\Finishers\\ClosureFinisher
+- WapplerSystems\\MapMagic\\Domain\\Finishers\\ConfirmationFinisher
+- WapplerSystems\\MapMagic\\Domain\\Finishers\\DeleteUploadsFinisher
+- WapplerSystems\\MapMagic\\Domain\\Finishers\\EmailFinisher
+- WapplerSystems\\MapMagic\\Domain\\Finishers\\FlashMessageFinisher
+- WapplerSystems\\MapMagic\\Domain\\Finishers\\RedirectFinisher
+- WapplerSystems\\MapMagic\\Domain\\Finishers\\SaveToDatabaseFinisher
 
 
 .. _apireference-frontendrendering-programmatically-apimethods-abstractfinisher-execute:
@@ -1143,7 +1143,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-finishercontext:
 
-TYPO3\\CMS\\Form\\Domain\\Finishers\\FinisherContext
+WapplerSystems\\MapMagic\\Domain\\Finishers\\FinisherContext
 ++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-finishercontext-cancel:
@@ -1196,7 +1196,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-finishervariableprovider:
 
-TYPO3\\CMS\\Form\\Domain\\Finishers\\FinisherVariableProvider
+WapplerSystems\\MapMagic\\Domain\\Finishers\\FinisherVariableProvider
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Please read :ref:`Share data between finishers<concepts-finishers-customfinisherimplementations-finishercontext-sharedatabetweenfinishers>`
@@ -1252,7 +1252,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-configurationservice:
 
-TYPO3\\CMS\\Form\\Domain\\Configuration\\ConfigurationService
+WapplerSystems\\MapMagic\\Domain\\Configuration\\ConfigurationService
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-configurationservice-getprototypeconfiguration:
@@ -1269,7 +1269,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-abstractformfactory:
 
-TYPO3\\CMS\\Form\\Domain\\Factory\\AbstractFormFactory
+WapplerSystems\\MapMagic\\Domain\\Factory\\AbstractFormFactory
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-abstractformfactory-triggerformbuildingfinished:
@@ -1287,7 +1287,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-formfactoryinterface:
 
-TYPO3\\CMS\\Form\\Domain\\Factory\\FormFactoryInterface
+WapplerSystems\\MapMagic\\Domain\\Factory\\FormFactoryInterface
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-formfactoryinterface-build:
@@ -1304,7 +1304,7 @@ Signature::
 
 .. _apireference-frontendrendering-programmatically-apimethods-rendererinterface:
 
-TYPO3\\CMS\\Form\\Domain\\Renderer\\RendererInterface
+WapplerSystems\\MapMagic\\Domain\\Renderer\\RendererInterface
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. _apireference-frontendrendering-programmatically-apimethods-rendererinterface-render:
@@ -1364,8 +1364,8 @@ form element. If you want to prefill form element data after the complete
 form element is configured you should use the
 :ref:`afterBuildingFinished<apireference-frontendrendering-runtimemanipulation-hooks-afterbuildingfinished>` hook.
 
-The initializeFormElement hook is invoked by the methods ``TYPO3\CMS\Form\Domain\Model\FormElements\Page::createElement()``
-and ``TYPO3\CMS\Form\Domain\Model\FormElements\Section::createElement()``.
+The initializeFormElement hook is invoked by the methods ``WapplerSystems\MapMagic\Domain\Model\FormElements\Page::createElement()``
+and ``WapplerSystems\MapMagic\Domain\Model\FormElements\Section::createElement()``.
 That means the hook will **not** be triggered for ``Pages``. At this point
 you do not have access to submitted form element values.
 
@@ -1395,10 +1395,10 @@ Use the hook
 ::
 
    /**
-    * @param \TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable
+    * @param \WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable
     * @return void
     */
-   public function initializeFormElement(\TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable)
+   public function initializeFormElement(\WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable)
    {
        if ($renderable->getUniqueIdentifier() === 'contactForm-text-1') {
            $renderable->setDefaultValue('foo');
@@ -1441,8 +1441,8 @@ hooks were connected ensures that one hook does not override the other.
 beforeRemoveFromParentRenderable
 ++++++++++++++++++++++++++++++++
 
-This hook is invoked by the methods ``TYPO3\CMS\Form\Domain\Model\FormDefinition::removePage()``,  ``TYPO3\CMS\Form\Domain\Model\FormElements\Page::removeElement()``
-and ``TYPO3\CMS\Form\Domain\Model\FormElements\Section::removeElement()``
+This hook is invoked by the methods ``WapplerSystems\MapMagic\Domain\Model\FormDefinition::removePage()``,  ``WapplerSystems\MapMagic\Domain\Model\FormElements\Page::removeElement()``
+and ``WapplerSystems\MapMagic\Domain\Model\FormElements\Section::removeElement()``
 
 
 .. _apireference-frontendrendering-runtimemanipulation-hooks-beforeremovefromparentrenderable-connect:
@@ -1470,10 +1470,10 @@ Use the hook
 ::
 
    /**
-    * @param \TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable
+    * @param \WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable
     * @return void
     */
-   public function beforeRemoveFromParentRenderable(\TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable)
+   public function beforeRemoveFromParentRenderable(\WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable)
    {
    }
 
@@ -1483,14 +1483,14 @@ Use the hook
 afterBuildingFinished
 +++++++++++++++++++++
 
-This hook is called for each form element after the class ``TYPO3\CMS\Form\Domain\Factory\ArrayFormFactory``
+This hook is called for each form element after the class ``WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory``
 has built the entire form. This hook is triggered just before the
 ``FormRuntime`` object is generated. At this point, no run-time information
 (e.g. assigned form values) is yet available. It can, for example, be used to
 generate new form elements within complex forms. The ``ArrayFormFactory`` is
-used by EXT:form via the ``RenderViewHelper`` to render forms using a ``form
+used by EXT:map_magic via the ``RenderViewHelper`` to render forms using a ``form
 definition`` YAML file. Each form factory implementation must deal with the
-calling of this hook themselves. EXT:form itself uses this hook to initialize
+calling of this hook themselves. EXT:map_magic itself uses this hook to initialize
 the property-mapper configuration for ``FileUpload`` elements.
 
 .. _apireference-frontendrendering-runtimemanipulation-hooks-afterbuildingfinished-connect:
@@ -1518,10 +1518,10 @@ Use the hook
 ::
 
    /**
-    * @param \TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable
+    * @param \WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable
     * @return void
     */
-   public function afterBuildingFinished(\TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable)
+   public function afterBuildingFinished(\WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable)
    {
    }
 
@@ -1531,7 +1531,7 @@ Use the hook
 afterInitializeCurrentPage
 ++++++++++++++++++++++++++
 
-EXT:form automatically detects the page that should be shown and allow users
+EXT:map_magic automatically detects the page that should be shown and allow users
 only to jump to the directly following (or previous) pages. This hook enables
 you to implement a custom behavior, for example pages that are shown only when
 other form elements have specific values.
@@ -1562,13 +1562,13 @@ Use the hook
 ::
 
    /**
-    * @param \TYPO3\CMS\Form\Domain\Runtime\FormRuntime $formRuntime
-    * @param null|\TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface $currentPage
-    * @param null|\TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface $lastPage
+    * @param \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime $formRuntime
+    * @param null|\WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface $currentPage
+    * @param null|\WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface $lastPage
     * @param mixed $elementValue submitted value of the element *before post processing*
-    * @return null|\TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface
+    * @return null|\WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface
     */
-   public function afterInitializeCurrentPage(\TYPO3\CMS\Form\Domain\Runtime\FormRuntime $formRuntime, \TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface $currentPage = null, \TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface $lastPage = null, array $requestArguments = []): ?\TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface
+   public function afterInitializeCurrentPage(\WapplerSystems\MapMagic\Domain\Runtime\FormRuntime $formRuntime, \WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface $currentPage = null, \WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface $lastPage = null, array $requestArguments = []): ?\WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface
    {
        return $currentPage;
    }
@@ -1583,7 +1583,7 @@ You can use it for example for dynamic validations which depends on other submit
 This hook is invoked by the ``FormRuntime`` for each form element **before** values are property mapped, validated and pushed within the FormRuntime's ``FormState``.
 If the first page is submitted at the first time you cannot access the form element values from the first page by just calling ``$formRuntime['<someOtherFormElementIdentifier>']`` to access
 the submitted form element values from the first page. In this case you can access the submitted raw data through ``$requestArguments``.
-EXT:form itself uses this hook to dynamically add validation errors for ``AdvancedPassword`` form elements.
+EXT:map_magic itself uses this hook to dynamically add validation errors for ``AdvancedPassword`` form elements.
 
 
 .. _apireference-frontendrendering-runtimemanipulation-hooks-aftersubmit-connect:
@@ -1611,13 +1611,13 @@ Use the hook
 ::
 
    /**
-    * @param \TYPO3\CMS\Form\Domain\Runtime\FormRuntime $formRuntime
-    * @param \TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable
+    * @param \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime $formRuntime
+    * @param \WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable
     * @param mixed $elementValue submitted value of the element *before post processing*
     * @param array $requestArguments submitted raw request values
     * @return void
     */
-   public function afterSubmit(\TYPO3\CMS\Form\Domain\Runtime\FormRuntime $formRuntime, \TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface $renderable, $elementValue, array $requestArguments = [])
+   public function afterSubmit(\WapplerSystems\MapMagic\Domain\Runtime\FormRuntime $formRuntime, \WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface $renderable, $elementValue, array $requestArguments = [])
    {
        return $elementValue;
    }
@@ -1657,10 +1657,10 @@ Use the hook
 ::
 
    /**
-    * @param \TYPO3\CMS\Form\Domain\Runtime\FormRuntime $formRuntime
-    * @param \TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface $renderable
+    * @param \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime $formRuntime
+    * @param \WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface $renderable
     * @return void
     */
-   public function beforeRendering(\TYPO3\CMS\Form\Domain\Runtime\FormRuntime $formRuntime, \TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface $renderable)
+   public function beforeRendering(\WapplerSystems\MapMagic\Domain\Runtime\FormRuntime $formRuntime, \WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface $renderable)
    {
    }

@@ -173,7 +173,7 @@ Email finisher
 --------------
 
 This finisher sends an email to one recipient.
-EXT:form uses 2 EmailFinisher declarations with the identifiers ``EmailToReceiver`` and ``EmailToSender``.
+EXT:map_magic uses 2 EmailFinisher declarations with the identifiers ``EmailToReceiver`` and ``EmailToSender``.
 
 Usage within form definition.
 
@@ -446,7 +446,7 @@ translation.translationFiles
 
 :aspect:`Description`
       If set, this translation file(s) will be used for finisher option translations.
-      If not set, the translation file(s) from the 'Form' element will be used.
+      If not set, the translation file(s) from the 'MapMagic' element will be used.
       Read :ref:`Translate finisher options<concepts-frontendrendering-translation-finishers>` for more informations.
 
 

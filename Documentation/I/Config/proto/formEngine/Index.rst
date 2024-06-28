@@ -37,7 +37,7 @@ translationFiles
 
          formEngine:
            translationFiles:
-             10: 'EXT:form/Resources/Private/Language/Database.xlf'
+             10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
 
 :aspect:`Good to know`
       - :ref:`"Translate form plugin settings"<concepts-formplugin-translation-formengine>`

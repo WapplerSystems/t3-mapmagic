@@ -13,14 +13,14 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Hooks;
+namespace WapplerSystems\MapMagic\Hooks;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Service\TranslationService;
 
 /**
  * Scope: frontend
@@ -47,7 +47,7 @@ class FormElementHooks
                 $processingRule->getProcessingMessages()->addError(
                     GeneralUtility::makeInstance(
                         Error::class,
-                        GeneralUtility::makeInstance(TranslationService::class)->translate('validation.error.1556283177', null, 'EXT:form/Resources/Private/Language/locallang.xlf'),
+                        GeneralUtility::makeInstance(TranslationService::class)->translate('validation.error.1556283177', null, 'EXT:map_magic/Resources/Private/Language/locallang.xlf'),
                         1556283177
                     )
                 );

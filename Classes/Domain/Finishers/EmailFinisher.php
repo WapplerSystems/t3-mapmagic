@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Domain\Finishers;
 
 use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Mail\FluidEmail;
@@ -24,11 +24,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Fluid\View\TemplatePaths;
-use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FileUpload;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\Service\TranslationService;
-use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
+use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Service\TranslationService;
+use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 
 /**
  * This finisher sends an email to one recipient

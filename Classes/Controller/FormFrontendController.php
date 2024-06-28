@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Controller;
+namespace WapplerSystems\MapMagic\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
@@ -24,12 +24,12 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Http\ForwardResponse;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessing;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessor;
-use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Converters\FinisherOptionsFlexFormOverridesConverter;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Converters\FlexFormFinisherOverridesConverterDto;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
+use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\FinisherOptionsFlexFormOverridesConverter;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters\FlexFormFinisherOverridesConverterDto;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
 
 /**
  * The frontend controller
@@ -40,7 +40,7 @@ use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface;
 class FormFrontendController extends ActionController
 {
     /**
-     * @var \TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface
+     * @var \WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface
      */
     protected $formPersistenceManager;
 

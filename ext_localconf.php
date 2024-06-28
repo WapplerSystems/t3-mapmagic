@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use TYPO3\CMS\Form\Controller\FormFrontendController;
-use TYPO3\CMS\Form\Hooks\FormElementHooks;
-use TYPO3\CMS\Form\Hooks\ImportExportHook;
-use TYPO3\CMS\Form\Mvc\Property\PropertyMappingConfiguration;
+use WapplerSystems\MapMagic\Controller\FormFrontendController;
+use WapplerSystems\MapMagic\Hooks\FormElementHooks;
+use WapplerSystems\MapMagic\Hooks\ImportExportHook;
+use WapplerSystems\MapMagic\Mvc\Property\PropertyMappingConfiguration;
 
 defined('TYPO3') or die();
 
@@ -19,10 +19,10 @@ call_user_func(static function () {
 
     // Add module configuration
     ExtensionManagementUtility::addTypoScriptSetup(
-        'module.tx_form {
+        'module.tx_mapmagic {
     settings {
         yamlConfigurations {
-            10 = EXT:form/Configuration/Yaml/FormSetup.yaml
+            10 = EXT:map_magic/Configuration/Yaml/FormSetup.yaml
         }
     }
 }'
@@ -40,13 +40,13 @@ call_user_func(static function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['afterFormStateInitialized'][1613296803]
         = PropertyMappingConfiguration::class;
 
-    // Register "formvh:" namespace
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['formvh'][] = 'TYPO3\\CMS\\Form\\ViewHelpers';
+    // Register "mapmagicvh:" namespace
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['mapmagicvh'][] = 'WapplerSystems\\MapMagic\\ViewHelpers';
 
     // Register FE plugin
     ExtensionUtility::configurePlugin(
-        'Form',
-        'Formframework',
+        'MapMagic',
+        'Map',
         [FormFrontendController::class => 'render, perform'],
         [FormFrontendController::class => 'perform'],
         ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT

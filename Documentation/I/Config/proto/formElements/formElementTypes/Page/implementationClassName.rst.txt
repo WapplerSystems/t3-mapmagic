@@ -26,7 +26,7 @@ implementationClassName
          :emphasize-lines: 2
 
          Page:
-           implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\Page
+           implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\Page
 
 .. :aspect:`Good to know`
       ToDo

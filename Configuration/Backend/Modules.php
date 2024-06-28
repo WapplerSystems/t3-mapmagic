@@ -1,10 +1,10 @@
 <?php
 
-use TYPO3\CMS\Form\Controller\FormEditorController;
-use TYPO3\CMS\Form\Controller\FormManagerController;
+use WapplerSystems\MapMagic\Controller\FormEditorController;
+use WapplerSystems\MapMagic\Controller\FormManagerController;
 
 /**
- * Definitions for modules provided by EXT:form
+ * Definitions for modules provided by EXT:map_magic
  */
 return [
     'web_FormFormbuilder' => [
@@ -12,8 +12,8 @@ return [
         'access' => 'user',
         'iconIdentifier' => 'module-form',
         'inheritNavigationComponentFromMainModule' => false,
-        'labels' => 'LLL:EXT:form/Resources/Private/Language/locallang_module.xlf',
-        'extensionName' => 'Form',
+        'labels' => 'LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf',
+        'extensionName' => 'MapMagic',
         'controllerActions' => [
             FormManagerController::class => [
                 'index', 'show', 'create', 'duplicate', 'references', 'delete',

@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\FormElements;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
-use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
-use TYPO3\CMS\Form\Tests\Unit\Domain\FormElements\Fixtures\TestingFormElement;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement;
+use WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements\Fixtures\TestingFormElement;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class AbstractFormElementTest extends UnitTestCase

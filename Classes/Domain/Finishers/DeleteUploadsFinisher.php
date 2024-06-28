@@ -15,11 +15,11 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Domain\Finishers;
 
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FileUpload;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
 
 /**
  * This finisher remove the submitted files.
@@ -64,7 +64,7 @@ class DeleteUploadsFinisher extends AbstractFinisher
 
     /**
      * note:
-     * TYPO3\CMS\Form\Mvc\Property\TypeConverter\UploadedFileReferenceConverter::importUploadedResource()
+     * WapplerSystems\MapMagic\Mvc\Property\TypeConverter\UploadedFileReferenceConverter::importUploadedResource()
      * creates a sub-folder for file uploads (e.g. .../form_<40-chars-hash>/actual.file)
      * @param Folder[] $folders
      */

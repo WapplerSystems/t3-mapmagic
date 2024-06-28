@@ -15,12 +15,12 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Controller;
+namespace WapplerSystems\MapMagic\Controller;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
 
 /**
  * The abstract form backend controller

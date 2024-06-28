@@ -19,13 +19,13 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
-use TYPO3\CMS\Form\Domain\Model\Renderable\AbstractRenderable;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable;
 
 /**
  * A base form element, which is the starting point for creating custom (PHP-based)
@@ -37,11 +37,11 @@ use TYPO3\CMS\Form\Domain\Model\Renderable\AbstractRenderable;
  * Subclassing this class is a good starting-point for implementing custom PHP-based
  * Form Elements.
  *
- * Most of the functionality and API is implemented in {@link \TYPO3\CMS\Form\Domain\Model\Renderable\AbstractRenderable}, so
+ * Most of the functionality and API is implemented in {@link \WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable}, so
  * make sure to check out this class as well.
  *
  * Still, it is quite rare that you need to subclass this class; often
- * you can just use the {@link \TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement} and replace some templates.
+ * you can just use the {@link \WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement} and replace some templates.
  *
  * Scope: frontend
  * **This class is meant to be sub classed by developers.**

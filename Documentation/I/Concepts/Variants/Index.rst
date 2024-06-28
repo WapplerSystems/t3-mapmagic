@@ -147,7 +147,7 @@ form values and environment settings.
 ``formRuntime`` (object)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can access every public method from the :php:`\TYPO3\CMS\Form\Domain\Runtime\FormRuntime`,
+You can access every public method from the :php:`\WapplerSystems\MapMagic\Domain\Runtime\FormRuntime`,
 learn more :ref:`here<apireference-frontendrendering-programmatically-apimethods-formruntime>`.
 
 For example:
@@ -280,7 +280,7 @@ Working with variants programmatically
 
 Create a variant with conditions through the PHP API::
 
-   /** @var TYPO3\CMS\Form\Domain\Model\Renderable\RenderableVariantInterface $variant */
+   /** @var WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableVariantInterface $variant */
    $variant = $formElement->createVariant([
        'identifier' => 'variant-1',
        'condition' => 'traverse(formValues, "checkbox-1") == 1',
@@ -290,7 +290,7 @@ Create a variant with conditions through the PHP API::
 
 Get all variants of a form element::
 
-   /** @var TYPO3\CMS\Form\Domain\Model\Renderable\RenderableVariantInterface[] $variants */
+   /** @var WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableVariantInterface[] $variants */
    $variants = $formElement->getVariants();
 
 

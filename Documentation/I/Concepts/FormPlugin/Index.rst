@@ -97,6 +97,6 @@ Imagine, the following is defined for an option value:
 First of all, the process searches for the translation key
 ``tt_content.finishersDefinition.EmailToReceiver.label`` within the file
 ``20: 'EXT:my_site_package/Resources/Private/Language/Database.xlf'`` and
-afterwards inside the file 10: 'EXT:form/Resources/Private/Language/Database.xlf'
+afterwards inside the file 10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
 (loaded by default). If nothing is found, the option value will be
 displayed unmodified.

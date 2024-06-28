@@ -11,7 +11,7 @@ seen as a framework which allows editors, integrators, and developers to
 create and manage all kind of forms. For this task, different interfaces
 and techniques are available.
 
-Conceptually, EXT:form always tries to consider the ``form editor`` first.
+Conceptually, EXT:map_magic always tries to consider the ``form editor`` first.
 The requirements for the ``form editor`` differ between the defined target
 groups. On the one hand, as an integrator, you may want to manage HTML
 class attributes. On the other hand, as a developer you may want to use the
@@ -20,11 +20,11 @@ may want to edit all possible (technical) properties you can think of.
 
 The form extension tries to find a compromise for such cases. Since the
 ``form editor`` is mainly used by backend editors, only simple,
-nontechnical properties are displayed and editable. However, EXT:form
+nontechnical properties are displayed and editable. However, EXT:map_magic
 allows you to easily extend the ``form editor`` by writing some YAML
 configurations.
 
-If this is not enough for your specific project, EXT:form provides a way to
+If this is not enough for your specific project, EXT:map_magic provides a way to
 integrate your own JavaScript code by utilizing the JavaScript API. Thus,
 it should be possible to meet all your requirements.
 

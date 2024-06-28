@@ -15,9 +15,9 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Renderable\Fixtures;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Renderable\Fixtures;
 
-use TYPO3\CMS\Form\Domain\Model\Renderable\AbstractRenderable;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable;
 
 /**
  * Testing subclass of the abstract class.

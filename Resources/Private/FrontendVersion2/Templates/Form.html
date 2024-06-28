@@ -1,6 +1,6 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
-<formvh:renderRenderable renderable="{form}">
-    <formvh:form
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
+<mapmagicvh:renderRenderable renderable="{form}">
+    <mapmagicvh:form
         object="{form}"
         action="{form.renderingOptions.controllerAction}"
         method="{form.renderingOptions.httpMethod}"
@@ -10,12 +10,12 @@
         addQueryString="{form.renderingOptions.addQueryString}"
         argumentsToBeExcludedFromQueryString="{form.renderingOptions.argumentsToBeExcludedFromQueryString}"
         additionalParams="{form.renderingOptions.additionalParams}"
-        additionalAttributes="{formvh:translateElementProperty(element: form, property: 'fluidAdditionalAttributes')}"
+        additionalAttributes="{mapmagicvh:translateElementProperty(element: form, property: 'fluidAdditionalAttributes')}"
     >
         <f:render partial="{form.currentPage.templateName}" arguments="{page: form.currentPage}" />
         <div class="{form.renderingOptions.formNavigation.navigationWrapperClassAttribute}">
             <f:render partial="Form/Navigation" arguments="{form: form}" />
         </div>
-    </formvh:form>
-</formvh:renderRenderable>
+    </mapmagicvh:form>
+</mapmagicvh:renderRenderable>
 </html>

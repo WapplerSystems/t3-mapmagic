@@ -53,7 +53,7 @@ implementationClassName
          :emphasize-lines: 2
 
              FileSize:
-               implementationClassName: TYPO3\CMS\Form\Mvc\Validation\FileSizeValidator
+               implementationClassName: WapplerSystems\MapMagic\Mvc\Validation\FileSizeValidator
 
 :aspect:`Good to know`
       - :ref:`"Custom validator implementations"<concepts-validators-customvalidatorimplementations>`

@@ -15,12 +15,12 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Renderable;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Renderable;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\ExpressionLanguage\Resolver;
-use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableVariant;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableVariant;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class RenderableVariantTest extends UnitTestCase

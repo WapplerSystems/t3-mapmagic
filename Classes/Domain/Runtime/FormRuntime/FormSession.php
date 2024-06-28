@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
+namespace WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Error\Http\BadRequestException;
@@ -55,7 +55,7 @@ class FormSession
     }
 
     /**
-     * Consumed by TYPO3\CMS\Form\ViewHelpers\FormViewHelper
+     * Consumed by WapplerSystems\MapMagic\ViewHelpers\FormViewHelper
      *
      * @internal
      */

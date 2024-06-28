@@ -19,11 +19,11 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
 
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
-use TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface;
-use TYPO3\CMS\Form\Exception as FormException;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
+use WapplerSystems\MapMagic\Exception as FormException;
 
 /**
  * A Page, being part of a bigger FormDefinition. It contains numerous FormElements
@@ -47,7 +47,7 @@ class Page extends AbstractSection
      *
      * @param string $identifier The Page's identifier
      * @param string $type The Page's type
-     * @throws \TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException if the identifier was no non-empty string
+     * @throws \WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException if the identifier was no non-empty string
      */
     public function __construct(string $identifier, string $type = 'Page')
     {

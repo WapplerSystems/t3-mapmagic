@@ -19,12 +19,12 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\ViewHelpers;
+namespace WapplerSystems\MapMagic\ViewHelpers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -32,7 +32,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 /**
  * Render a renderable.
  *
- * Set the renderable into the \TYPO3\CMS\Form\Mvc\View\FormView
+ * Set the renderable into the \WapplerSystems\MapMagic\Mvc\View\FormView
  * and return the rendered content.
  *
  * Scope: frontend

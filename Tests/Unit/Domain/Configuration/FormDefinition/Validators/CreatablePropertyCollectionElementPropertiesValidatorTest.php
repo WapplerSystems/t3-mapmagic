@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Configuration\FormDefinition\Validators;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Configuration\FormDefinition\Validators;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PropertyException;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\CreatablePropertyCollectionElementPropertiesValidator;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\CreatablePropertyCollectionElementPropertiesValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class CreatablePropertyCollectionElementPropertiesValidatorTest extends UnitTestCase

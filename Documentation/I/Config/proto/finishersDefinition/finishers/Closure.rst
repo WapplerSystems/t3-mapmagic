@@ -37,7 +37,7 @@ implementationClassName
          :emphasize-lines: 2
 
          Closure:
-           implementationClassName: TYPO3\CMS\Form\Domain\Finishers\ClosureFinisher
+           implementationClassName: WapplerSystems\MapMagic\Domain\Finishers\ClosureFinisher
 
 :aspect:`Good to know`
       - :ref:`"Custom finisher implementations"<concepts-finishers-customfinisherimplementations>`

@@ -1,4 +1,4 @@
-type: 'Form'
+type: 'MapMagic'
 identifier: 'blankForm'
 label: '[Blank Form]'
 renderables:

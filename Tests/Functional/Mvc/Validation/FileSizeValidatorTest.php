@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\Mvc\Validation;
+namespace WapplerSystems\MapMagic\Tests\Functional\Mvc\Validation;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
@@ -24,8 +24,8 @@ use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Mvc\Validation\Exception\InvalidValidationOptionsException;
-use TYPO3\CMS\Form\Mvc\Validation\FileSizeValidator;
+use WapplerSystems\MapMagic\Mvc\Validation\Exception\InvalidValidationOptionsException;
+use WapplerSystems\MapMagic\Mvc\Validation\FileSizeValidator;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class FileSizeValidatorTest extends FunctionalTestCase

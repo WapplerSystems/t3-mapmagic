@@ -19,14 +19,14 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
-use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotFoundException;
-use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotValidException;
-use TYPO3\CMS\Form\Domain\Model\Exception\FormDefinitionConsistencyException;
-use TYPO3\CMS\Form\Domain\Model\Renderable\AbstractCompositeRenderable;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
+use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotValidException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 
 /**
  * A base class for "section-like" form parts like "Page" or "Section" (which

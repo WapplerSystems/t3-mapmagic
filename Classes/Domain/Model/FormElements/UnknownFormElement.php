@@ -19,11 +19,11 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
-use TYPO3\CMS\Form\Domain\Model\Renderable\AbstractRenderable;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable;
 
 /**
  * A Form Element that has no definition.

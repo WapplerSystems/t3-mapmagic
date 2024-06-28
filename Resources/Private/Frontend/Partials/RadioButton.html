@@ -1,7 +1,7 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
-<formvh:renderRenderable renderable="{element}">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
+<mapmagicvh:renderRenderable renderable="{element}">
     <f:render partial="Field/Field" arguments="{element: element, doNotShowLabel: 1}" contentAs="elementContent">
-        <label class="form-label">{formvh:translateElementProperty(element: element, property: 'label')}<f:if condition="{element.required}"><f:render partial="Field/Required" /></f:if></label>
+        <label class="form-label">{mapmagicvh:translateElementProperty(element: element, property: 'label')}<f:if condition="{element.required}"><f:render partial="Field/Required" /></f:if></label>
         <div class="{element.properties.containerClassAttribute}">
             <div id="{element.uniqueIdentifier}" class="inputs-list">
                 <div class="form-group">
@@ -13,10 +13,10 @@
                                 class="{element.properties.elementClassAttribute} form-check-input"
                                 value="{value}"
                                 errorClass="{element.properties.elementErrorClassAttribute}"
-                                additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
+                                additionalAttributes="{mapmagicvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
                             />
                             <label class="form-check-label" for="{element.uniqueIdentifier}-{idIterator.index}">
-                                <span>{formvh:translateElementProperty(element: element, property: '{0: \'options\', 1: value}')}</span>
+                                <span>{mapmagicvh:translateElementProperty(element: element, property: '{0: \'options\', 1: value}')}</span>
                             </label>
                         </div>
                     </f:for>
@@ -24,5 +24,5 @@
             </div>
         </div>
     </f:render>
-</formvh:renderRenderable>
+</mapmagicvh:renderRenderable>
 </html>

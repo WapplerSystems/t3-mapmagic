@@ -60,7 +60,7 @@ within your TYPO3 installation.
 Email finisher
 --------------
 
-The :php:`EmailFinisher` sends an email to one recipient. EXT:form uses two
+The :php:`EmailFinisher` sends an email to one recipient. EXT:map_magic uses two
 :php:`EmailFinisher` declarations with the identifiers ``EmailToReceiver`` and
 ``EmailToSender``.
 
@@ -310,8 +310,8 @@ Override the option using the ``form definition``:
    renderables:
      ...
 
-Each finisher has to be programmed to the interface ``TYPO3\CMS\Form\Domain\Finishers\FinisherInterface``
-and should extend the class ``TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher``.
+Each finisher has to be programmed to the interface ``WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface``
+and should extend the class ``WapplerSystems\MapMagic\Domain\Finishers\AbstractFinisher``.
 In doing so, the logic of the finisher should start with the method
 ``executeInternal()``.
 
@@ -321,7 +321,7 @@ In doing so, the logic of the finisher should start with the method
 Accessing finisher options
 """"""""""""""""""""""""""
 
-If your finisher extends ``TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher``,
+If your finisher extends ``WapplerSystems\MapMagic\Domain\Finishers\AbstractFinisher``,
 you can access your finisher options with the help of the ``parseOption()``
 method::
 
@@ -338,7 +338,7 @@ method::
       declare(strict_types = 1);
       namespace VENDOR\MySitePackage\Domain\Finishers;
 
-      class CustomFinisher extends \TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher
+      class CustomFinisher extends \WapplerSystems\MapMagic\Domain\Finishers\AbstractFinisher
       {
 
           protected $defaultOptions = [
@@ -405,9 +405,9 @@ It will return the current UNIX timestamp.
 Finisher Context
 """"""""""""""""
 
-The class ``TYPO3\CMS\Form\Domain\Finishers\FinisherContext`` takes care of
+The class ``WapplerSystems\MapMagic\Domain\Finishers\FinisherContext`` takes care of
 transferring a finisher context to each finisher. Given the finisher is
-derived from ``TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher`` the
+derived from ``WapplerSystems\MapMagic\Domain\Finishers\AbstractFinisher`` the
 finisher context will be available via::
 
    $this->finisherContext
@@ -432,7 +432,7 @@ The method ``getFormRuntime`` returns the ``FormRuntime``::
 Share data between finishers
 ''''''''''''''''''''''''''''
 
-The method ``getFinisherVariableProvider`` returns an object (``TYPO3\CMS\Form\Domain\Finishers\FinisherVariableProvider``)
+The method ``getFinisherVariableProvider`` returns an object (``WapplerSystems\MapMagic\Domain\Finishers\FinisherVariableProvider``)
 which allows you to store data and transfer it to other finishers. The data
 can be easily accessed programmatically or within your configuration::
 
@@ -442,7 +442,7 @@ The data is stored within the ``FinisherVariableProvider`` and is addressed
 by a user-defined 'finisher identifier' and a custom option value path. The
 name of the 'finisher identifier' should consist of the name of the finisher
 without the potential 'Finisher' appendix. If your finisher is derived from
-the class ``TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher``, the name of
+the class ``WapplerSystems\MapMagic\Domain\Finishers\AbstractFinisher``, the name of
 this construct is stored in the following variable::
 
    $this->shortFinisherIdentifier
@@ -594,6 +594,6 @@ Make sure the setup file is registered in the backend:
 
 .. code-block:: typoscript
 
-   module.tx_form.settings.yamlConfigurations {
+   module.tx_mapmagic.settings.yamlConfigurations {
       123456789 = EXT:yourExtension/Configuration/Form/Backend.yaml
    }

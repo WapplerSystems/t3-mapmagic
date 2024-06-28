@@ -19,7 +19,7 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Mvc\Configuration;
+namespace WapplerSystems\MapMagic\Mvc\Configuration;
 
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
@@ -29,10 +29,10 @@ use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\FolderInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\FileWriteException;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\NoSuchFileException;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\ParseErrorException;
-use TYPO3\CMS\Form\Slot\FilePersistenceSlot;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\FileWriteException;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\NoSuchFileException;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\ParseErrorException;
+use WapplerSystems\MapMagic\Slot\FilePersistenceSlot;
 
 /**
  * Configuration source based on YAML files
@@ -67,8 +67,8 @@ class YamlSource
                 $loadedConfiguration = $this->loadFromFile($fileToLoad);
             } else {
                 $loadedConfiguration = $this->loadFromFilePath($fileToLoad);
-                if (isset($loadedConfiguration['TYPO3']['CMS']['Form'])) {
-                    $namespacedConfiguration = $loadedConfiguration['TYPO3']['CMS']['Form'];
+                if (isset($loadedConfiguration['TYPO3']['CMS']['MapMagic'])) {
+                    $namespacedConfiguration = $loadedConfiguration['TYPO3']['CMS']['MapMagic'];
                     unset($loadedConfiguration['TYPO3']);
                     $loadedConfiguration = array_replace_recursive($namespacedConfiguration, $loadedConfiguration);
                 }

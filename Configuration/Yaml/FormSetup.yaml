@@ -65,7 +65,7 @@ prototypes:
   standard:
     formEditor:
       translationFiles:
-        10: 'EXT:form/Resources/Private/Language/Database.xlf'
+        10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
       dynamicJavaScriptModules:
         app: '@typo3/form/backend/form-editor.js'
         mediator: '@typo3/form/backend/form-editor/mediator.js'
@@ -73,13 +73,13 @@ prototypes:
       addInlineSettings: {  }
       maximumUndoSteps: 10
       stylesheets:
-        200: 'EXT:form/Resources/Public/Css/form.css'
+        200: 'EXT:map_magic/Resources/Public/Css/form.css'
       formEditorFluidConfiguration:
-        templatePathAndFilename: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
+        templatePathAndFilename: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
         partialRootPaths:
-          10: 'EXT:form/Resources/Private/Backend/Partials/FormEditor/'
+          10: 'EXT:map_magic/Resources/Private/Backend/Partials/FormEditor/'
         layoutRootPaths:
-          10: 'EXT:form/Resources/Private/Backend/Layouts/FormEditor/'
+          10: 'EXT:map_magic/Resources/Private/Backend/Layouts/FormEditor/'
 
       formEditorPartials:
         FormElement-_ElementToolbar: Stage/_ElementToolbar
@@ -141,27 +141,27 @@ prototypes:
 
     formEngine:
       translationFiles:
-        10: 'EXT:form/Resources/Private/Language/Database.xlf'
+        10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
 
 formManager:
   dynamicJavaScriptModules:
     app: '@typo3/form/backend/form-manager.js'
     viewModel: '@typo3/form/backend/form-manager/view-model.js'
   stylesheets:
-    100: 'EXT:form/Resources/Public/Css/form.css'
+    100: 'EXT:map_magic/Resources/Public/Css/form.css'
   translationFiles:
-    10: 'EXT:form/Resources/Private/Language/Database.xlf'
-  javaScriptTranslationFile: 'EXT:form/Resources/Private/Language/locallang_formManager_javascript.xlf'
+    10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
+  javaScriptTranslationFile: 'EXT:map_magic/Resources/Private/Language/locallang_formManager_javascript.xlf'
   selectablePrototypesConfiguration:
     100:
       identifier: standard
       label: formManager.selectablePrototypesConfiguration.standard.label
       newFormTemplates:
         100:
-          templatePath: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/BlankForm.yaml'
+          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/BlankForm.yaml'
           label: formManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label
         200:
-          templatePath: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/SimpleContactForm.yaml'
+          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/SimpleContactForm.yaml'
           label: formManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label
   controller:
     deleteAction:

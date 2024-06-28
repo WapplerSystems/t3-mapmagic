@@ -15,12 +15,12 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Configuration;
+namespace WapplerSystems\MapMagic\Mvc\Configuration;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\CycleInheritancesException;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\CycleInheritancesException;
 
 /**
  * Resolve declared inheritances within a configuration array

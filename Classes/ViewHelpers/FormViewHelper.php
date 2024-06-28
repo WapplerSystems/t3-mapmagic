@@ -19,11 +19,11 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\ViewHelpers;
+namespace WapplerSystems\MapMagic\ViewHelpers;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\ViewHelpers\FormViewHelper as FluidFormViewHelper;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 use TYPO3Fluid\Fluid\Core\ViewHelper\TagBuilder;
 
 /**

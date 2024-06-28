@@ -2,7 +2,7 @@ prototypes:
   standard:
     validatorsDefinition:
       Count:
-        implementationClassName: TYPO3\CMS\Form\Mvc\Validation\CountValidator
+        implementationClassName: WapplerSystems\MapMagic\Mvc\Validation\CountValidator
         #options:
           # minimum count to accept
           #minimum:

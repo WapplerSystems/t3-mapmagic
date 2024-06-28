@@ -26,7 +26,7 @@ implementationClassName
          :emphasize-lines: 2
 
          DatePicker:
-           implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\DatePicker
+           implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\DatePicker
 
 .. :aspect:`Good to know`
       ToDo

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Configuration;
+namespace WapplerSystems\MapMagic\Mvc\Configuration;
 
 use TYPO3\CMS\Core\TypoScript\TypoScriptService as CoreTypoScriptService;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;

@@ -19,12 +19,12 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Factory;
+namespace WapplerSystems\MapMagic\Domain\Factory;
 
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
 
 /**
- * A Form Factory is responsible for building a {@link TYPO3\CMS\Form\Domain\Model\FormDefinition}.
+ * A Form Factory is responsible for building a {@link WapplerSystems\MapMagic\Domain\Model\FormDefinition}.
  * **Instead of implementing this interface, subclassing {@link AbstractFormFactory} is more appropriate
  * in most cases**.
  *

@@ -15,16 +15,16 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Configuration;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Configuration;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PropertyException;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PrototypeNotFoundException;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\ValidationDto;
-use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PrototypeNotFoundException;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
+use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class ConfigurationServiceTest extends UnitTestCase
@@ -1067,7 +1067,7 @@ final class ConfigurationServiceTest extends UnitTestCase
         return [
             [
                 [],
-                new ValidationDto('standard', 'Form'),
+                new ValidationDto('standard', 'MapMagic'),
                 true,
             ],
             [

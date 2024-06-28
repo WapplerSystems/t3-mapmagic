@@ -13,7 +13,7 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Property\Exception;
+namespace WapplerSystems\MapMagic\Mvc\Property\Exception;
 
 use TYPO3\CMS\Extbase\Error\Error;
 

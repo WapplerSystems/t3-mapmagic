@@ -19,10 +19,10 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\ViewHelpers;
+namespace WapplerSystems\MapMagic\ViewHelpers;
 
-use TYPO3\CMS\Form\Domain\Model\Renderable\CompositeRenderableInterface;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;

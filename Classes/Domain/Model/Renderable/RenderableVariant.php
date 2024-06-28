@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\Renderable;
+namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
 use TYPO3\CMS\Core\ExpressionLanguage\Resolver;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 
 /**
  * Scope: frontend

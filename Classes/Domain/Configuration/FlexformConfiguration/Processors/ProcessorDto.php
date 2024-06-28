@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Configuration\FlexformConfiguration\Processors;
+namespace WapplerSystems\MapMagic\Domain\Configuration\FlexformConfiguration\Processors;
 
 /**
  * Data container for finisher FlexForm processing

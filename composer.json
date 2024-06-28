@@ -1,19 +1,15 @@
 {
-	"name": "typo3/cms-form",
+	"name": "wapplersystems/mapmagic",
 	"type": "typo3-cms-framework",
-	"description": "TYPO3 CMS Form - Flexible TYPO3 frontend form framework that comes with a backend editor interface.",
-	"homepage": "https://typo3.org",
+	"description": "TYPO3 Map Magic - Flexible TYPO3 map framework.",
+	"homepage": "https://wappler.systems",
 	"license": ["GPL-2.0-or-later"],
 	"authors": [{
-		"name": "TYPO3 Core Team",
-		"email": "typo3cms@typo3.org",
+		"name": "WapplerSystems",
+		"email": "typo3@wappler.systems",
 		"role": "Developer"
 	}],
 	"support": {
-		"chat": "https://typo3.org/help",
-		"docs": "https://docs.typo3.org/c/typo3/cms-form/main/en-us",
-		"issues": "https://forge.typo3.org",
-		"source": "https://github.com/typo3/typo3"
 	},
 	"config": {
 		"sort-packages": true
@@ -40,12 +36,12 @@
 			"Package": {
 				"partOfFactoryDefault": true
 			},
-			"extension-key": "form"
+			"extension-key": "map_magic"
 		}
 	},
 	"autoload": {
 		"psr-4": {
-			"TYPO3\\CMS\\Form\\": "Classes/"
+			"WapplerSystems\\MapMagic\\": "Classes/"
 		}
 	}
 }

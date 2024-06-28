@@ -19,16 +19,16 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Domain\Finishers;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
-use TYPO3\CMS\Form\Domain\Model\FormElements\StringableFormElementInterface;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\StringableFormElementInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -67,7 +67,7 @@ abstract class AbstractFinisher implements FinisherInterface
     protected $defaultOptions = [];
 
     /**
-     * @var \TYPO3\CMS\Form\Domain\Finishers\FinisherContext
+     * @var \WapplerSystems\MapMagic\Domain\Finishers\FinisherContext
      */
     protected $finisherContext;
 
@@ -239,7 +239,7 @@ abstract class AbstractFinisher implements FinisherInterface
     /**
      * You can encapsulate an option value with {}.
      * This enables you to access every gettable property from the
-     * TYPO3\CMS\Form\Domain\Runtime\FormRuntime.
+     * WapplerSystems\MapMagic\Domain\Runtime\FormRuntime.
      *
      * For example: {formState.formValues.<elementIdentifier>}
      * or {<elementIdentifier>}

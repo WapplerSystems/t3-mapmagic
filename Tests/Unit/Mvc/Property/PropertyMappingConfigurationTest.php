@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Mvc\Property;
+namespace WapplerSystems\MapMagic\Tests\Unit\Mvc\Property;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -25,12 +25,12 @@ use TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration as ExtbasePropertyMa
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FileUpload;
-use TYPO3\CMS\Form\Mvc\ProcessingRule;
-use TYPO3\CMS\Form\Mvc\Property\PropertyMappingConfiguration;
-use TYPO3\CMS\Form\Mvc\Property\TypeConverter\UploadedFileReferenceConverter;
-use TYPO3\CMS\Form\Mvc\Validation\MimeTypeValidator;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
+use WapplerSystems\MapMagic\Mvc\ProcessingRule;
+use WapplerSystems\MapMagic\Mvc\Property\PropertyMappingConfiguration;
+use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\UploadedFileReferenceConverter;
+use WapplerSystems\MapMagic\Mvc\Validation\MimeTypeValidator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class PropertyMappingConfigurationTest extends UnitTestCase

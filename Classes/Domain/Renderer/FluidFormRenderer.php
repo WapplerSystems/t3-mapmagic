@@ -19,17 +19,17 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Renderer;
+namespace WapplerSystems\MapMagic\Domain\Renderer;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\TemplateView;
-use TYPO3\CMS\Form\Domain\Exception\RenderingException;
-use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
+use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
+use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 
 /**
  * A fluid RendererInterface implementation used to render a *FormDefinition*.
  *
- * This renderer is called from {@link \TYPO3\CMS\Form\Domain\Runtime\FormRuntime::render()}.
+ * This renderer is called from {@link \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime::render()}.
  *
  * Options
  * =======
@@ -39,7 +39,7 @@ use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
  * in the file system.
  *
  * All rendering options are retrieved from the FormDefinition,
- * using the {@link \TYPO3\CMS\Form\Domain\Model\FormDefinition::getRenderingOptions()}
+ * using the {@link \WapplerSystems\MapMagic\Domain\Model\FormDefinition::getRenderingOptions()}
  * method.
  *
  * templateRootPaths
@@ -52,15 +52,15 @@ use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
  * Within this paths, fluid will search for a file which is named like the
  * renderable *type*.
  * For example:
- *   templateRootPaths.10 = EXT:form/Resources/Private/Frontend/Templates/
+ *   templateRootPaths.10 = EXT:map_magic/Resources/Private/Frontend/Templates/
  *   $renderable->getType() = Form
- *   Expected template file: EXT:form/Resources/Private/Frontend/Templates/Form.html
+ *   Expected template file: EXT:map_magic/Resources/Private/Frontend/Templates/Form.html
  * There is a setting available to set a custom template name. Please read
  * the section 'templateName'.
  *
  * Only the root renderable (FormDefinition) has to be a template file.
  * All child renderables are partials. By default, the root renderable
- * is called 'Form'.
+ * is called 'MapMagic'.
  *
  * layoutRootPaths
  * ---------------
@@ -80,9 +80,9 @@ use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
  * Within this paths, fluid will search for a file which is named like the
  * renderable *type*.
  * For example:
- *   templateRootPaths.10 = EXT:form/Resources/Private/Frontend/Partials/
+ *   templateRootPaths.10 = EXT:map_magic/Resources/Private/Frontend/Partials/
  *   $renderable->getType() = Text
- *   Expected template file: EXT:form/Resources/Private/Frontend/Partials/Text.html
+ *   Expected template file: EXT:map_magic/Resources/Private/Frontend/Partials/Text.html
  * There is a setting available to set a custom partial name. Please read
  * the section 'templateName'.
  *
@@ -91,32 +91,32 @@ use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
  * By default, the renderable type will be taken as the name for the
  * template / partial.
  * For example:
- *   partialRootPaths.10 = EXT:form/Resources/Private/Frontend/Partials/
+ *   partialRootPaths.10 = EXT:map_magic/Resources/Private/Frontend/Partials/
  *   $renderable->getType() = Text
- *   Expected partial file: EXT:form/Resources/Private/Frontend/Partials/Text.html
+ *   Expected partial file: EXT:map_magic/Resources/Private/Frontend/Partials/Text.html
  *
  * Set 'templateName' to define a custom name which should be used instead.
  * For example:
  *   templateName = Foo
  *   $renderable->getType() = Text
- *   Expected partial file: EXT:form/Resources/Private/Frontend/Partials/Foo.html
+ *   Expected partial file: EXT:map_magic/Resources/Private/Frontend/Partials/Foo.html
  *
  * Rendering Child Renderables
  * ===========================
  *
  * If a renderable wants to render child renderables, inside its template / partial,
- * it can do that using the <code><formvh:renderRenderable></code> ViewHelper.
+ * it can do that using the <code><mapmagicvh:renderRenderable></code> ViewHelper.
  *
  * A template example from Page shall demonstrate this:
  *
  * <pre>
- *   <formvh:renderRenderable renderable="{page}">
+ *   <mapmagicvh:renderRenderable renderable="{page}">
  *       <f:for each="{page.elements}" as="element">
- *           <formvh:renderRenderable renderable="{element}">
+ *           <mapmagicvh:renderRenderable renderable="{element}">
  *               <f:render partial="{element.templateName}" arguments="{element: element}" />
- *           </formvh:renderRenderable>
+ *           </mapmagicvh:renderRenderable>
  *       </f:for>
- *   </formvh:renderRenderable>
+ *   </mapmagicvh:renderRenderable>
  * </pre>
  *
  * Scope: frontend
@@ -133,7 +133,7 @@ class FluidFormRenderer extends AbstractElementRenderer
      * This method call the 'beforeRendering' hook initially.
      * Each other hooks will be called from the
      * renderRenderable viewHelper.
-     * {@link \TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper::renderStatic()}
+     * {@link \WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper::renderStatic()}
      *
      * @return string the rendered $formRuntime
      * @internal

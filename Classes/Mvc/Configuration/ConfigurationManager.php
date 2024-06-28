@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Configuration;
+namespace WapplerSystems\MapMagic\Mvc\Configuration;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager as ExtbaseConfigurationManager;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\ExtensionNameRequiredException;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\ExtensionNameRequiredException;
 
 /**
  * Extend the ExtbaseConfigurationManager to read YAML configurations.
@@ -40,7 +40,7 @@ class ConfigurationManager extends ExtbaseConfigurationManager implements Config
     protected $cache;
 
     /**
-     * @var \TYPO3\CMS\Form\Mvc\Configuration\YamlSource
+     * @var \WapplerSystems\MapMagic\Mvc\Configuration\YamlSource
      */
     protected $yamlSource;
 

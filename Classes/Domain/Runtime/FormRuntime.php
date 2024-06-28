@@ -19,7 +19,7 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Runtime;
+namespace WapplerSystems\MapMagic\Domain\Runtime;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -43,21 +43,21 @@ use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use TYPO3\CMS\Form\Domain\Exception\RenderingException;
-use TYPO3\CMS\Form\Domain\Finishers\FinisherContext;
-use TYPO3\CMS\Form\Domain\Finishers\FinisherInterface;
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
-use TYPO3\CMS\Form\Domain\Model\FormElements\Page;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
-use TYPO3\CMS\Form\Domain\Model\Renderable\VariableRenderableInterface;
-use TYPO3\CMS\Form\Domain\Renderer\RendererInterface;
-use TYPO3\CMS\Form\Domain\Runtime\Exception\PropertyMappingException;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime\FormSession;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime\Lifecycle\AfterFormStateInitializedInterface;
-use TYPO3\CMS\Form\Exception as FormException;
-use TYPO3\CMS\Form\Mvc\Validation\EmptyValidator;
+use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
+use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
+use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\VariableRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Renderer\RendererInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\Exception\PropertyMappingException;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\FormSession;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterFormStateInitializedInterface;
+use WapplerSystems\MapMagic\Exception as FormException;
+use WapplerSystems\MapMagic\Mvc\Validation\EmptyValidator;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -67,7 +67,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * page is shown currently, what the current values of the form are, trigger
  * validation and property mapping.
  *
- * You generally receive an instance of this class by calling {@link \TYPO3\CMS\Form\Domain\Model\FormDefinition::bind}.
+ * You generally receive an instance of this class by calling {@link \WapplerSystems\MapMagic\Domain\Model\FormDefinition::bind}.
  *
  * Rendering a Form
  * ================
@@ -92,7 +92,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * ===================
  *
  * The FormRuntime asks the FormDefinition about the configured Renderer
- * which should be used ({@link \TYPO3\CMS\Form\Domain\Model\FormDefinition::getRendererClassName}),
+ * which should be used ({@link \WapplerSystems\MapMagic\Domain\Model\FormDefinition::getRendererClassName}),
  * and then trigger render() on this Renderer.
  *
  * This makes it possible to declaratively define how a form should be rendered.
@@ -105,7 +105,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class FormRuntime implements RootRenderableInterface, \ArrayAccess
 {
-    public const HONEYPOT_NAME_SESSION_IDENTIFIER = 'tx_form_honeypot_name_';
+    public const HONEYPOT_NAME_SESSION_IDENTIFIER = 'tx_mapmagic_honeypot_name_';
 
     protected FormDefinition $formDefinition;
     protected RequestInterface $request;

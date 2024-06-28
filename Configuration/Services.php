@@ -7,8 +7,8 @@ namespace TYPO3\CMS\Form;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use TYPO3\CMS\Core\DependencyInjection\PublicServicePass;
-use TYPO3\CMS\Form\ConfigurationModuleProvider\FormYamlProvider;
-use TYPO3\CMS\Form\Domain\Finishers\FinisherInterface;
+use WapplerSystems\MapMagic\ConfigurationModuleProvider\FormYamlProvider;
+use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
 use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderRegistry;
 
 return static function (ContainerConfigurator $container, ContainerBuilder $containerBuilder) {

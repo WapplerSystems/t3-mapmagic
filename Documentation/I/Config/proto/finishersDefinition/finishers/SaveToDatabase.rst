@@ -36,7 +36,7 @@ implementationClassName
          :emphasize-lines: 2
 
          SaveToDatabase:
-           implementationClassName: TYPO3\CMS\Form\Domain\Finishers\SaveToDatabaseFinisher
+           implementationClassName: WapplerSystems\MapMagic\Domain\Finishers\SaveToDatabaseFinisher
 
 :aspect:`Good to know`
       - :ref:`"Custom finisher implementations"<concepts-finishers-customfinisherimplementations>`
@@ -411,7 +411,7 @@ options.translation.translationFiles
 
 :aspect:`Description`
       If set, this translation file(s) will be used for finisher option translations.
-      If not set, the translation file(s) from the 'Form' element will be used.
+      If not set, the translation file(s) from the 'MapMagic' element will be used.
       Read :ref:`Translate finisher options<concepts-frontendrendering-translation-finishers>` for more informations.
 
 

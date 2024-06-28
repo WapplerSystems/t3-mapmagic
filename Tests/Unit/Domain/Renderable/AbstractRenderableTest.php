@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Renderable;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Renderable;
 
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Tests\Unit\Domain\Renderable\Fixtures\TestingRenderable;
+use WapplerSystems\MapMagic\Tests\Unit\Domain\Renderable\Fixtures\TestingRenderable;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class AbstractRenderableTest extends UnitTestCase

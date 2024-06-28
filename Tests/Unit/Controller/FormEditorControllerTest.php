@@ -15,13 +15,13 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Controller;
+namespace WapplerSystems\MapMagic\Tests\Unit\Controller;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Controller\FormEditorController;
-use TYPO3\CMS\Form\Domain\Exception\RenderingException;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Controller\FormEditorController;
+use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
+use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormEditorControllerTest extends UnitTestCase
@@ -144,7 +144,7 @@ final class FormEditorControllerTest extends UnitTestCase
                 ],
             ],
             'formElementsDefinition' => [
-                'Form' => [
+                'MapMagic' => [
                     'formEditor' => [
                         'key' => 'value',
                     ],
@@ -211,7 +211,7 @@ final class FormEditorControllerTest extends UnitTestCase
 
         $expected = [
             'formElements' => [
-                'Form' => [
+                'MapMagic' => [
                     'key' => 'value',
                 ],
                 'Text' => [

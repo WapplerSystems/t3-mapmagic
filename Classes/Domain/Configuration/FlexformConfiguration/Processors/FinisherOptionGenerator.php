@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Configuration\FlexformConfiguration\Processors;
+namespace WapplerSystems\MapMagic\Domain\Configuration\FlexformConfiguration\Processors;
 
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -79,11 +79,11 @@ class FinisherOptionGenerator extends AbstractProcessor
         $languageService = $this->getLanguageService();
         $elementConfiguration['label'] = (string)($elementConfiguration['label'] ?? '');
         if (empty($optionValue)) {
-            $optionValue = $languageService->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:empty');
+            $optionValue = $languageService->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:empty');
         } elseif (is_array($optionValue)) {
             $optionValue = implode(',', $optionValue);
         }
-        $elementConfiguration['label'] .= sprintf(' (%s: "%s")', $languageService->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:default'), $optionValue);
+        $elementConfiguration['label'] .= sprintf(' (%s: "%s")', $languageService->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:default'), $optionValue);
 
         $sheetElements = $this->converterDto->getResult();
         $sheetElements['settings.finishers.' . $finisherIdentifier . '.' . $optionKey] = $elementConfiguration;

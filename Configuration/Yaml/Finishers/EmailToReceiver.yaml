@@ -2,11 +2,11 @@ prototypes:
   standard:
     finishersDefinition:
       EmailToReceiver:
-        implementationClassName: TYPO3\CMS\Form\Domain\Finishers\EmailFinisher
+        implementationClassName: WapplerSystems\MapMagic\Domain\Finishers\EmailFinisher
         options:
           templateName: 'Default'
           templateRootPaths:
-            10: 'EXT:form/Resources/Private/Frontend/Templates/Finishers/Email/'
+            10: 'EXT:map_magic/Resources/Private/Frontend/Templates/Finishers/Email/'
         formEditor:
           iconIdentifier: form-finisher
           label: formEditor.elements.Form.finisher.EmailToReceiver.editor.header.label

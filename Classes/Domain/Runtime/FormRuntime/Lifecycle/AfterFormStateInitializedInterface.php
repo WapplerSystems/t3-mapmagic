@@ -15,9 +15,9 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Runtime\FormRuntime\Lifecycle;
+namespace WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle;
 
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 
 /**
  * Event is triggered with current form state and form session, which is

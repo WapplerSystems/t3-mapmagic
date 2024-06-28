@@ -19,26 +19,26 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model;
+namespace WapplerSystems\MapMagic\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
-use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotFoundException;
-use TYPO3\CMS\Form\Domain\Finishers\FinisherInterface;
-use TYPO3\CMS\Form\Domain\Model\Exception\DuplicateFormElementException;
-use TYPO3\CMS\Form\Domain\Model\Exception\FinisherPresetNotFoundException;
-use TYPO3\CMS\Form\Domain\Model\Exception\FormDefinitionConsistencyException;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
-use TYPO3\CMS\Form\Domain\Model\FormElements\Page;
-use TYPO3\CMS\Form\Domain\Model\Renderable\AbstractCompositeRenderable;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
-use TYPO3\CMS\Form\Domain\Model\Renderable\VariableRenderableInterface;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\Exception as FormException;
-use TYPO3\CMS\Form\Mvc\ProcessingRule;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
+use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
+use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\FinisherPresetNotFoundException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\VariableRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Exception as FormException;
+use WapplerSystems\MapMagic\Mvc\ProcessingRule;
 
 /**
  * This class encapsulates a complete *Form Definition*, with all of its pages,
@@ -109,10 +109,10 @@ use TYPO3\CMS\Form\Mvc\ProcessingRule;
  * $prototypeConfiguration = [
  *   'formElementsDefinition' => [
  *     'Page' => [
- *       'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\Page'
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page'
  *     ],
  *     'Textfield' => [
- *       'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement'
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement'
  *     ]
  *   ]
  * ]
@@ -127,11 +127,11 @@ use TYPO3\CMS\Form\Mvc\ProcessingRule;
  * $prototypeConfiguration = [
  *   'formElementsDefinition' => [
  *     'Page' => [
- *       'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\Page',
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page',
  *       'label' => 'this is the label of the page if nothing is specified'
  *     ],
  *     'Textfield' => [
- *       'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement',
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement',
  *       'label' = >'Default Label',
  *       'defaultValue' => 'Default form element value',
  *       'properties' => [
@@ -148,7 +148,7 @@ use TYPO3\CMS\Form\Mvc\ProcessingRule;
  * Often, it is not really useful to manually create the $prototypeConfiguration array.
  *
  * Most of it comes pre-configured inside the YAML settings of the extensions,
- * and the {@link \TYPO3\CMS\Form\Domain\Configuration\ConfigurationService} contains helper methods
+ * and the {@link \WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService} contains helper methods
  * which return the ready-to-use *$prototypeConfiguration*.
  *
  * Property Mapping and Validation Rules
@@ -200,7 +200,7 @@ use TYPO3\CMS\Form\Mvc\ProcessingRule;
  *
  * In order to trigger *rendering* on a FormDefinition,
  * the current {@link \TYPO3\CMS\Extbase\Mvc\Request} needs to be bound to the FormDefinition,
- * resulting in a {@link \TYPO3\CMS\Form\Domain\Runtime\FormRuntime} object which contains the *Runtime State* of the form
+ * resulting in a {@link \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime} object which contains the *Runtime State* of the form
  * (such as the currently inserted values).
  *
  * /---code php
@@ -212,7 +212,7 @@ use TYPO3\CMS\Form\Mvc\ProcessingRule;
  * # entered values into the form, etc.
  * \---
  *
- * Refer to the {@link \TYPO3\CMS\Form\Domain\Runtime\FormRuntime} API doc for further information.
+ * Refer to the {@link \WapplerSystems\MapMagic\Domain\Runtime\FormRuntime} API doc for further information.
  *
  * Scope: frontend
  * **This class is NOT meant to be sub classed by developers.**
@@ -299,7 +299,7 @@ class FormDefinition extends AbstractCompositeRenderable implements VariableRend
     public function __construct(
         string $identifier,
         array $prototypeConfiguration = [],
-        string $type = 'Form',
+        string $type = 'MapMagic',
         ?string $persistenceIdentifier = null
     ) {
         $this->typeDefinitions = $prototypeConfiguration['formElementsDefinition'] ?? [];

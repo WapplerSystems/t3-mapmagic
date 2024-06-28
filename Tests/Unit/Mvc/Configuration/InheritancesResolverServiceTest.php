@@ -15,11 +15,11 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Mvc\Configuration;
+namespace WapplerSystems\MapMagic\Tests\Unit\Mvc\Configuration;
 
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\CycleInheritancesException;
-use TYPO3\CMS\Form\Mvc\Configuration\InheritancesResolverService;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\CycleInheritancesException;
+use WapplerSystems\MapMagic\Mvc\Configuration\InheritancesResolverService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class InheritancesResolverServiceTest extends UnitTestCase
@@ -39,7 +39,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
     public function getDocExampleInheritance(): void
     {
         $input = [
-            'Form' => [
+            'MapMagic' => [
                 'part1' => [
                     'key1' => 'value1',
                     'key2' => 'value2',
@@ -55,7 +55,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
         ];
 
         $expected = [
-            'Form' => [
+            'MapMagic' => [
                 'part1' => [
                     'key1' => 'value1',
                     'key2' => 'value2',
@@ -76,7 +76,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
     public function getMergedConfigurationSimpleInheritance(): void
     {
         $input = [
-            'Form' => [
+            'MapMagic' => [
                 'klaus01' => [
                     'key01' => 'value',
                     'key02' => [
@@ -92,7 +92,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
         ];
 
         $expected = [
-            'Form' => [
+            'MapMagic' => [
                 'klaus01' => [
                     'key01' => 'value',
                     'key02' => [
@@ -115,7 +115,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
     public function getMergedConfigurationSimpleInheritanceOverrideValue(): void
     {
         $input = [
-            'Form' => [
+            'MapMagic' => [
                 'klaus01' => [
                     'key' => 'value',
                 ],
@@ -129,7 +129,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
         ];
 
         $expected = [
-            'Form' => [
+            'MapMagic' => [
                 'klaus01' => [
                     'key' => 'value',
                 ],
@@ -146,7 +146,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
     public function getMergedConfigurationSimpleInheritanceRemoveValue(): void
     {
         $input = [
-            'Form' => [
+            'MapMagic' => [
                 'klaus01' => [
                     'key01' => [
                         'key02' => 'value',
@@ -176,7 +176,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
         ];
 
         $expected = [
-            'Form' => [
+            'MapMagic' => [
                 'klaus01' => [
                     'key01' => [
                         'key02' => 'value',
@@ -209,7 +209,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
     public function getMergedConfigurationSimpleMixin(): void
     {
         $input = [
-            'Form' => [
+            'MapMagic' => [
                 'mixin01' => [
                     'key' => 'value',
                 ],
@@ -229,7 +229,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
         ];
 
         $expected = [
-            'Form' => [
+            'MapMagic' => [
                 'mixin01' => [
                     'key' => 'value',
                 ],
@@ -251,7 +251,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
     public function getMergedConfigurationAdvancedMixin(): void
     {
         $input = [
-            'Form' => [
+            'MapMagic' => [
                 'mixin01' => [
                     'key01' => 'value01',
                     'key02' => 'value02',
@@ -296,7 +296,7 @@ final class InheritancesResolverServiceTest extends UnitTestCase
         ];
 
         $expected = [
-            'Form' => [
+            'MapMagic' => [
                 'mixin01' => [
                     'key01' => 'value01',
                     'key02' => 'value02',

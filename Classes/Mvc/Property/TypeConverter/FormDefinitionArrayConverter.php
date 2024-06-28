@@ -15,18 +15,18 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Property\TypeConverter;
+namespace WapplerSystems\MapMagic\Mvc\Property\TypeConverter;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Property\PropertyMappingConfigurationInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\AbstractTypeConverter;
-use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PropertyException;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinitionConversionService;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinitionValidationService;
-use TYPO3\CMS\Form\Type\FormDefinitionArray;
+use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService;
+use WapplerSystems\MapMagic\Type\FormDefinitionArray;
 
 /**
  * Converter for form definition arrays
@@ -76,7 +76,7 @@ class FormDefinitionArrayConverter extends AbstractTypeConverter
         $formDefinitionConversionService = $this->getFormDefinitionConversionService();
 
         // Extend the hmac hashing key with the "per form editor session (load / save)" unique key.
-        // @see \TYPO3\CMS\Form\Domain\Configuration\FormDefinitionConversionService::addHmacData
+        // @see \WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService::addHmacData
         $sessionToken = $this->retrieveSessionToken();
 
         $prototypeName = $rawFormDefinitionArray['prototypeName'] ?? null;

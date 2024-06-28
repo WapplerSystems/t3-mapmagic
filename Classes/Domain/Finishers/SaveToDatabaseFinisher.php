@@ -15,13 +15,13 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Domain\Finishers;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
 
 /**
  * This finisher saves the data from a submitted form into
@@ -95,9 +95,9 @@ use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
  * ---------------------------------------------------------
  *   The value which will be written to the database column.
  *   You can use the FormRuntime accessor feature to access every
- *   getable property from the TYPO3\CMS\Form\Domain\Runtime\FormRuntime
+ *   getable property from the WapplerSystems\MapMagic\Domain\Runtime\FormRuntime
  *   Read the description within
- *   TYPO3\CMS\Form\Domain\Finishers\AbstractFinisher::parseOption
+ *   WapplerSystems\MapMagic\Domain\Finishers\AbstractFinisher::parseOption
  *   In short: use something like {<elementIdentifier>} to get the value
  *   from the submitted form element with the identifier
  *   <elementIdentifier>

@@ -19,10 +19,10 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
 
 use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 
 /**
  * A base form element interface, which can be the starting point for creating

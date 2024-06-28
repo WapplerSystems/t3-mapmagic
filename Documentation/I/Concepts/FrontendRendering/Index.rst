@@ -45,7 +45,7 @@ via YAML. The settings are part of the ``prototypes`` configuration.
 For each ``form definition`` - which references the prototype ``standard`` -
 the form framework will additionally look for Fluid templates within the
 path 'EXT:my_site_package/Resources/Private/Frontend/[*]' as set above.
-Apart from the 'Form' element, the process will search for templates within
+Apart from the 'MapMagic' element, the process will search for templates within
 the ``partialRootPaths`` folder. The name of the partial is derived from the
 property ``formElementTypeIdentifier``. For example, the template of the
 form element ``Text`` must be stored within the ``partialRootPaths`` folder
@@ -68,9 +68,9 @@ value which can be manipulated with Fluid or styled etc.
 
 .. code-block:: html
 
-   <formvh:renderFormValue renderable="{page.rootForm.elements.message}" as="formValue">
+   <mapmagicvh:renderFormValue renderable="{page.rootForm.elements.message}" as="formValue">
        {formValue.processedValue}
-   </formvh:renderFormValue>
+   </mapmagicvh:renderFormValue>
 
 If you don't know the names of your form elements, you could look them up in your
 form definition. In addition, you can use the following snippet to lists all of
@@ -236,7 +236,7 @@ Translation of validation messages
 The translation of validation messages is similar to the translation of
 ``form definitions``. The same translation files can be used. If the look-up
 process does not find a key within the provided files, the appropriate
-message of the Extbase framework will be displayed. EXT:form already
+message of the Extbase framework will be displayed. EXT:map_magic already
 translates all of those validators by default.
 
 As mentioned above, the translation keys are put together based on a
@@ -436,7 +436,7 @@ to the field and adds a page URL as translation argument:
 
 .. code-block:: typoscript
 
-   plugin.tx_form {
+   plugin.tx_mapmagic {
       settings {
          formDefinitionOverrides {
             <form-id> {
@@ -519,10 +519,10 @@ Basic code components
 
 .. _concepts-frontendrendering-basiccodecomponents-formdefinition:
 
-TYPO3\\CMS\\Form\\Domain\\Model\\FormDefinition
+WapplerSystems\\MapMagic\\Domain\\Model\\FormDefinition
 -----------------------------------------------
 
-The class ``TYPO3\CMS\Form\Domain\Model\FormDefinition`` encapsulates
+The class ``WapplerSystems\MapMagic\Domain\Model\FormDefinition`` encapsulates
 a complete ``form definition``, with all of its
 
 - pages,
@@ -574,13 +574,13 @@ the form from a different representation format such as YAML::
 Creating a form using abstract form element types
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-While you can use the ``TYPO3\CMS\Form\Domain\Model\FormDefinition::addPage()``
-or ``TYPO3\CMS\Form\Domain\Model\FormElements\Page::addElement()`` methods
+While you can use the ``WapplerSystems\MapMagic\Domain\Model\FormDefinition::addPage()``
+or ``WapplerSystems\MapMagic\Domain\Model\FormElements\Page::addElement()`` methods
 and create the ``Page`` and ``FormElement`` objects manually, it is often
-better to use the corresponding create* methods (``TYPO3\CMS\Form\Domain\Model\FormDefinition::createPage()``
-and ``TYPO3\CMS\Form\Domain\Model\FormElements\Page::createElement()``), as
+better to use the corresponding create* methods (``WapplerSystems\MapMagic\Domain\Model\FormDefinition::createPage()``
+and ``WapplerSystems\MapMagic\Domain\Model\FormElements\Page::createElement()``), as
 you pass them an abstract ``<formElementTypeIdentifier>`` such as ``Text``
-or ``Page``. EXT:form will automatically resolve the implementation class
+or ``Page``. EXT:map_magic will automatically resolve the implementation class
 name and set default values.
 
 The :ref:`simple example <concepts-frontendrendering-basiccodecomponents-formdefinition-anatomy-example>`
@@ -601,10 +601,10 @@ we need to add some meaningful values to ``$prototypeConfiguration``::
    $prototypeConfiguration = [
        'formElementsDefinition' => [
            'Page' => [
-               'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\Page'
+               'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page'
            ],
            'Text' => [
-               'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement'
+               'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement'
            ],
        ],
    ];
@@ -618,11 +618,11 @@ shows::
    $prototypeConfiguration = [
        'formElementsDefinition' => [
            'Page' => [
-               'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\Page',
+               'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page',
                'label' => 'This is the label of the page if nothing else is specified'
            ],
            'Text' => [
-               'implementationClassName' => 'TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement',
+               'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement',
                'label' = >'Default Label',
                'defaultValue' => 'Default form element value',
                'properties' => [
@@ -640,7 +640,7 @@ Using pre-configured $prototypeConfiguration
 
 Often, it does not make sense to manually create the $prototypeConfiguration
 array. Bigger parts of this array are pre-configured in the extensions's
-YAML settings. The ``TYPO3\CMS\Form\Domain\Configuration\ConfigurationService``
+YAML settings. The ``WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService``
 contains helper methods which return the ready-to-use ``$prototypeConfiguration``.
 
 
@@ -651,7 +651,7 @@ Rendering a FormDefinition
 
 To trigger the rendering of a ``FormDefinition`` domain model, the current
 ``TYPO3\CMS\Extbase\Mvc\Web\Request`` needs to be bound to the
-``FormDefinition``. This binding results in a ``TYPO3\CMS\Form\Domain\Runtime\FormRuntime``
+``FormDefinition``. This binding results in a ``WapplerSystems\MapMagic\Domain\Runtime\FormRuntime``
 object which contains the ``Runtime State`` of the form. Among other things,
 this object includes the currently inserted values::
 
@@ -663,7 +663,7 @@ this object includes the currently inserted values::
 
 .. _concepts-frontendrendering-basiccodecomponents-formruntime:
 
-TYPO3\\CMS\\Form\\Domain\\Runtime\\FormRuntime
+WapplerSystems\\MapMagic\\Domain\\Runtime\\FormRuntime
 ----------------------------------------------
 
 This class implements the runtime logic of a form, i.e. the class
@@ -672,7 +672,7 @@ This class implements the runtime logic of a form, i.e. the class
 - determines the current values of the form
 - triggers validation and property mappings.
 
-You generally receive an instance of this class by calling ``TYPO3\CMS\Form\Domain\Model\FormDefinition::bind()``.
+You generally receive an instance of this class by calling ``WapplerSystems\MapMagic\Domain\Model\FormDefinition::bind()``.
 
 
 .. _concepts-frontendrendering-basiccodecomponents-formruntime-render:
@@ -703,7 +703,7 @@ Rendering internals
 """""""""""""""""""
 
 The ``FormRuntime`` inquires the ``FormDefinition`` domain model regarding
-the configured renderer (``TYPO3\CMS\Form\Domain\Model\FormDefinition::getRendererClassName()``)
+the configured renderer (``WapplerSystems\MapMagic\Domain\Model\FormDefinition::getRendererClassName()``)
 and then triggers render() on this Renderer.
 
 This allows you to declaratively define how a form should be rendered.
@@ -714,17 +714,17 @@ This allows you to declaratively define how a form should be rendered.
      standard:
        formElementsDefinition:
          Form:
-           rendererClassName: 'TYPO3\CMS\Form\Domain\Renderer\FluidFormRenderer'
+           rendererClassName: 'WapplerSystems\MapMagic\Domain\Renderer\FluidFormRenderer'
 
 
 .. _concepts-frontendrendering-basiccodecomponents-fluidformrenderer:
 
-TYPO3\\CMS\\Form\\Domain\\Renderer\\FluidFormRenderer
+WapplerSystems\\MapMagic\\Domain\\Renderer\\FluidFormRenderer
 -----------------------------------------------------
 
-This class is a  ``TYPO3\CMS\Form\Domain\Renderer\RendererInterface``
+This class is a  ``WapplerSystems\MapMagic\Domain\Renderer\RendererInterface``
 implementation which used to render a ``FormDefinition`` domain model. It
-is the default EXT:form renderer.
+is the default EXT:map_magic renderer.
 
 Learn more about the :ref:`FluidFormRenderer Options<apireference-frontendrendering-fluidformrenderer-options>`.
 
@@ -734,13 +734,13 @@ Learn more about the :ref:`FluidFormRenderer Options<apireference-frontendrender
 Custom form element implementations
 -----------------------------------
 
-EXT:form ships a decent amount of hooks which are available at crucial
+EXT:map_magic ships a decent amount of hooks which are available at crucial
 points of the life cycle of a ``FormElement``. Most of the time, own
 implementations are therefore unnecessary. An own form element can be
 defined by:
 
 - writing some configuration, and
-- utilizing the standard implementation of ``TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement``.
+- utilizing the standard implementation of ``WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement``.
 
 .. code-block:: yaml
 
@@ -748,18 +748,18 @@ defined by:
      standard:
        formElementsDefinition:
          CustomFormElementIdentifier:
-           implementationClassName: 'TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement'
+           implementationClassName: 'WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement'
 
 With the provided hooks, this ``FormElement`` can now be manipulated.
 
 ..  seealso::
     *   :ref:`Hooks for runtime manipulation <apireference-frontendrendering-runtimemanipulation-hooks>`
 
-If you insist on your own implementation, the abstract class ``TYPO3\CMS\Form\Domain\Model\FormElements\AbstractFormElement``
-offers a perfect entry point. In addition, we recommend checking-out ``TYPO3\CMS\Form\Domain\Model\Renderable\AbstractRenderable``.
+If you insist on your own implementation, the abstract class ``WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractFormElement``
+offers a perfect entry point. In addition, we recommend checking-out ``WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable``.
 All of your own form element implementations must be programmed to the
-interface ``TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface``.
-It is a good idea to derive your implementation from ``TYPO3\CMS\Form\Domain\Model\FormElements\AbstractFormElement``.
+interface ``WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface``.
+It is a good idea to derive your implementation from ``WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractFormElement``.
 
 
 .. _concepts-frontendrendering-renderviewHelper:
@@ -788,7 +788,7 @@ Render through FLUIDTEMPLATE (without controller)
            settings {
                persistenceIdentifier = EXT:my_site_package/Resources/Private/Forms/MyForm.yaml
            }
-           extbase.pluginName = Formframework
+           extbase.pluginName = Map
            extbase.controllerExtensionName = Form
            extbase.controllerName = FormFrontend
            extbase.controllerActionName = perform
@@ -799,7 +799,7 @@ Render through FLUIDTEMPLATE (without controller)
 
 .. code-block:: html
 
-   <formvh:render persistenceIdentifier="{settings.persistenceIdentifier}" />
+   <mapmagicvh:render persistenceIdentifier="{settings.persistenceIdentifier}" />
 
 
 .. _concepts-frontendrendering-extbase:
@@ -812,7 +812,7 @@ done:
 
 .. code-block:: html
 
-   <formvh:render persistenceIdentifier="EXT:my_site_package/Resources/Private/Forms/MyForm.yaml"/>
+   <mapmagicvh:render persistenceIdentifier="EXT:my_site_package/Resources/Private/Forms/MyForm.yaml"/>
 
 Point the property ``controllerAction`` to the desired action name and
 provide values for the other parameters displayed below (you might need
@@ -846,7 +846,7 @@ those).
 
    .. code-block:: html
 
-      <formvh:render persistenceIdentifier="EXT:my_site_package/Resources/Private/Forms/MyForm.yaml" overrideConfiguration="{renderables: {0: {renderables: {0: {label: 'My shiny new label'}}}}}"/>
+      <mapmagicvh:render persistenceIdentifier="EXT:my_site_package/Resources/Private/Forms/MyForm.yaml" overrideConfiguration="{renderables: {0: {renderables: {0: {label: 'My shiny new label'}}}}}"/>
 
 
 .. _concepts-frontendrendering-programmatically:
@@ -869,7 +869,7 @@ Runtime manipulation
 Hooks
 -----
 
-EXT:form implements a decent amount of hooks that allow the manipulation of
+EXT:map_magic implements a decent amount of hooks that allow the manipulation of
 your forms during runtime. In this way, it is possible to, for example,
 
 - ... prefill form elements with values from your database,
@@ -887,7 +887,7 @@ TypoScript overrides
 --------------------
 
 Each and every ``form definition`` can be overridden via TypoScript if the
-``FormFrontendController`` of EXT:form is used to render the form. Normally,
+``FormFrontendController`` of EXT:map_magic is used to render the form. Normally,
 this is the case if the form has been added to the page using the form
 plugin or when rendering the form via :ref:`FLUIDTEMPLATE <concepts-frontendrendering-fluidtemplate>`.
 
@@ -900,7 +900,7 @@ form elements using the above-mentioned concept of :ref:`hooks<concepts-frontend
 
 .. code-block:: typoscript
 
-   plugin.tx_form {
+   plugin.tx_mapmagic {
        settings {
            formDefinitionOverrides {
                <formDefinitionIdentifier> {

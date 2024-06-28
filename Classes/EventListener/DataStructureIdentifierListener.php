@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\EventListener;
+namespace WapplerSystems\MapMagic\EventListener;
 
 use TYPO3\CMS\Core\Configuration\Event\AfterFlexFormDataStructureIdentifierInitializedEvent;
 use TYPO3\CMS\Core\Configuration\Event\AfterFlexFormDataStructureParsedEvent;
@@ -25,18 +25,18 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessing;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessor;
-use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-use TYPO3\CMS\Form\Domain\Configuration\FlexformConfiguration\Processors\FinisherOptionGenerator;
-use TYPO3\CMS\Form\Domain\Configuration\FlexformConfiguration\Processors\ProcessorDto;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\NoSuchFileException;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\ParseErrorException;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
+use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use WapplerSystems\MapMagic\Domain\Configuration\FlexformConfiguration\Processors\FinisherOptionGenerator;
+use WapplerSystems\MapMagic\Domain\Configuration\FlexformConfiguration\Processors\ProcessorDto;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\NoSuchFileException;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\ParseErrorException;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Service\TranslationService;
 
 /**
- * Event listener extending the flex form handling for tt_content form elements (CType: form_formframework):
+ * Event listener extending the flex form handling for tt_content form elements (CType: mapmagic_map):
  *
  * * Adds existing forms to flex form drop down list
  * * Adds finisher settings if Option "Override finisher settings" is active
@@ -54,7 +54,7 @@ class DataStructureIdentifierListener
     public function modifyDataStructureIdentifier(AfterFlexFormDataStructureIdentifierInitializedEvent $event): void
     {
         $row = $event->getRow();
-        if (($row['CType'] ?? '') !== 'form_formframework'
+        if (($row['CType'] ?? '') !== 'mapmagic_map'
             || $event->getTableName() !== 'tt_content'
             || $event->getFieldName() !== 'pi_flexform'
         ) {
@@ -127,7 +127,7 @@ class DataStructureIdentifierListener
             if (!empty($identifier['ext-form-persistenceIdentifier']) && !$formIsAccessible) {
                 $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.persistenceIdentifier']['config']['items'][] = [
                     'label' => sprintf(
-                        $this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:tt_content.preview.inaccessiblePersistenceIdentifier'),
+                        $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.inaccessiblePersistenceIdentifier'),
                         $identifier['ext-form-persistenceIdentifier']
                     ),
                     'value' => $identifier['ext-form-persistenceIdentifier'],
@@ -139,7 +139,7 @@ class DataStructureIdentifierListener
                 $persistenceIdentifier = $identifier['ext-form-persistenceIdentifier'];
                 $formDefinition = $formPersistenceManager->load($persistenceIdentifier);
 
-                $translationFile = 'LLL:EXT:form/Resources/Private/Language/Database.xlf';
+                $translationFile = 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf';
                 $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideFinishers'] = [
                     'label' => $translationFile . ':tt_content.pi_flexform.formframework.overrideFinishers',
                     'onChange' => 'reload',
@@ -293,7 +293,7 @@ class DataStructureIdentifierListener
         if (!empty($persistenceIdentifier)) {
             $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.persistenceIdentifier']['config']['items'][] = [
                 'label' => sprintf(
-                    $this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:tt_content.preview.inaccessiblePersistenceIdentifier'),
+                    $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.inaccessiblePersistenceIdentifier'),
                     $persistenceIdentifier
                 ),
                 'value' => $persistenceIdentifier,
@@ -306,7 +306,7 @@ class DataStructureIdentifierListener
     protected function addInvalidFrameworkConfigurationFlashMessage(\Exception $e): void
     {
         $messageText = sprintf(
-            $this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:tt_content.preview.invalidFrameworkConfiguration.text'),
+            $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.invalidFrameworkConfiguration.text'),
             $e->getMessage()
         );
 
@@ -316,7 +316,7 @@ class DataStructureIdentifierListener
                 GeneralUtility::makeInstance(
                     FlashMessage::class,
                     $messageText,
-                    $this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:tt_content.preview.invalidFrameworkConfiguration.title'),
+                    $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.invalidFrameworkConfiguration.title'),
                     ContextualFeedbackSeverity::ERROR,
                     true
                 )

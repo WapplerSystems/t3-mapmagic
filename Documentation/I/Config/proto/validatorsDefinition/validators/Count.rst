@@ -49,7 +49,7 @@ implementationClassName
          :emphasize-lines: 2
 
          Count:
-           implementationClassName: TYPO3\CMS\Form\Mvc\Validation\CountValidator
+           implementationClassName: WapplerSystems\MapMagic\Mvc\Validation\CountValidator
 
 :aspect:`Good to know`
       - :ref:`"Custom validator implementations"<concepts-validators-customvalidatorimplementations>`

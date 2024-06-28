@@ -19,15 +19,15 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\ViewHelpers\Form;
+namespace WapplerSystems\MapMagic\ViewHelpers\Form;
 
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 
 /**
  * Display a jQuery date picker.
@@ -64,7 +64,7 @@ final class DatePickerViewHelper extends AbstractFormFieldViewHelper
         $this->registerArgument('previewMode', 'bool', 'Preview mde flag', true, false);
         $this->registerArgument('dateFormat', 'string', 'The date format', false, 'Y-m-d');
         // use the default value if custom templates have not yet adapted this property
-        $this->registerArgument('datePickerInitializationJavaScriptFile', 'string', 'The JavaScript file to initialize the date picker', false, 'EXT:form/Resources/Public/JavaScript/frontend/date-picker.js');
+        $this->registerArgument('datePickerInitializationJavaScriptFile', 'string', 'The JavaScript file to initialize the date picker', false, 'EXT:map_magic/Resources/Public/JavaScript/frontend/date-picker.js');
         $this->registerUniversalTagAttributes();
     }
 

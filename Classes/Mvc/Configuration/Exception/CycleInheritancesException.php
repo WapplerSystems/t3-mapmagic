@@ -15,9 +15,9 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Configuration\Exception;
+namespace WapplerSystems\MapMagic\Mvc\Configuration\Exception;
 
-use TYPO3\CMS\Form\Mvc\Configuration\Exception;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception;
 
 /**
  * This exception is thrown if the InheritancesResolverService wants to

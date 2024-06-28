@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing;
+namespace WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\ArrayProcessorException;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\ArrayProcessorException;
 
 /**
  * Helper for array processing

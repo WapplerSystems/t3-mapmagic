@@ -18,7 +18,7 @@ kept as generic as possible to handle the dynamics of forms, but a generic
 program code means a lot of configurative overhead.
 
 Initially, the configuration may overwhelm you, but it also has some great
-advantages. Many aspects of EXT:form can be manipulated in a purely
+advantages. Many aspects of EXT:map_magic can be manipulated in a purely
 configurative manner without involving a developer.
 
 Furthermore, we wanted to avoid the configuration being done at places
@@ -34,14 +34,14 @@ happens magically. It is all about configuration.
 Why YAML?
 ---------
 
-Former versions of EXT:form used a subset of TypoScript to describe the
+Former versions of EXT:map_magic used a subset of TypoScript to describe the
 definition of a specific form and the behaviour of the included form
 elements. This led to a lot of confusion from integrators because the
 implemented definition language looked like TypoScript but did not behave
 like TypoScript.
 
 Since the definition of forms and form elements must be declarative, the
-EXT:form team decided to use YAML. Just through the visual appearance of
+EXT:map_magic team decided to use YAML. Just through the visual appearance of
 YAML, it should be clear to everyone that neither magic nor TypoScript
 stdWrap functionality are possible.
 
@@ -60,7 +60,7 @@ module.
 .. hint::
 
    We recommend using a `site package <https://de.slideshare.net/benjaminkott/typo3-the-anatomy-of-sitepackages>`_.
-   This will make your life easier if you want to customize EXT:form
+   This will make your life easier if you want to customize EXT:map_magic
    heavily in order to suit the customer's needs.
 
 .. tip::
@@ -78,14 +78,14 @@ YAML registration for the frontend
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For the frontend the whole YAML configuration is loaded via the following
-TypoScript (see ``EXT:form/Configuration/TypoScript/setup.typoscript``):
+TypoScript (see ``EXT:map_magic/Configuration/TypoScript/setup.typoscript``):
 
 .. code-block:: typoscript
 
-   plugin.tx_form {
+   plugin.tx_mapmagic {
        settings {
            yamlConfigurations {
-               10 = EXT:form/Configuration/Yaml/FormSetup.yaml
+               10 = EXT:map_magic/Configuration/Yaml/FormSetup.yaml
            }
        }
    }
@@ -95,7 +95,7 @@ beginning with the key ``100``.
 
 .. code-block:: typoscript
 
-   plugin.tx_form {
+   plugin.tx_mapmagic {
        settings {
            yamlConfigurations {
                100 = EXT:my_site_package/Configuration/Form/CustomFormSetup.yaml
@@ -110,14 +110,14 @@ YAML registration for the backend
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For the backend the whole YAML configuration is loaded via the following
-TypoScript (see ``EXT:form/ext_localconf.php``):
+TypoScript (see ``EXT:map_magic/ext_localconf.php``):
 
 .. code-block:: typoscript
 
-   module.tx_form {
+   module.tx_mapmagic {
        settings {
            yamlConfigurations {
-               10 = EXT:form/Configuration/Yaml/FormSetup.yaml
+               10 = EXT:map_magic/Configuration/Yaml/FormSetup.yaml
            }
        }
    }
@@ -127,7 +127,7 @@ your own configuration beginning with the key ``100``.
 
 .. code-block:: typoscript
 
-   module.tx_form {
+   module.tx_mapmagic {
        settings {
            yamlConfigurations {
                100 = EXT:my_site_package/Configuration/Form/CustomFormSetup.yaml
@@ -138,7 +138,7 @@ your own configuration beginning with the key ``100``.
 .. important::
    Consider the following methods to register TypoScript for the backend.
 
-The backend module of EXT:form is based on Extbase. Such backend modules
+The backend module of EXT:map_magic is based on Extbase. Such backend modules
 can, like frontend plugins, be configured via TypoScript. The frontend
 plugins are configured below ``plugin.tx_[pluginkey]``. For the
 configuration of the backend ``module.tx_[pluginkey]`` is used.
@@ -171,7 +171,7 @@ package::
    call_user_func(function () {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
             trim('
-                module.tx_form {
+                module.tx_mapmagic {
                     settings {
                         yamlConfigurations {
                             100 = EXT:my_site_package/Configuration/Form/CustomFormSetup.yaml
@@ -190,11 +190,11 @@ YAML loading
 
 TYPO3 is using a custom ':ref:`YAML loader<t3coreapi:yamlFileLoader>`' for handling
 YAML in TYPO3 based on the Symfony YAML package. This YAML loader is able to resolve
-environment variables. In addition, EXT:form comes with an own YAML loader which
+environment variables. In addition, EXT:map_magic comes with an own YAML loader which
 has some limitations/ restrictions, especially when it comes to resolve environment
 variables. Those limitations are necessary security-wise.
 
-EXT:form differentiates between :ref:`form configuration and form definition<concepts-formdefinition-vs-formconfiguration>`.
+EXT:map_magic differentiates between :ref:`form configuration and form definition<concepts-formdefinition-vs-formconfiguration>`.
 In addition, a form definition can be :ref:`stored<concepts-form-file-storages>`
 in the file system (FAL) or can be shipped with a custom extension. Depending on those
 parameters different YAML loaders are used and thus, different features are available.
@@ -220,7 +220,7 @@ parameters different YAML loaders are used and thus, different features are avai
 Configuration aspects
 ---------------------
 
-In EXT:form, four aspects can be configured:
+In EXT:map_magic, four aspects can be configured:
 
 - the behaviour of the frontend rendering,
 - the behaviour of the ``form editor``,
@@ -265,7 +265,7 @@ TypoScript:
 
 .. code-block:: typoscript
 
-   plugin.tx_form {
+   plugin.tx_mapmagic {
        settings {
            yamlSettingsOverrides {
                ...
@@ -290,7 +290,7 @@ register an additional configuration file via
 
 .. code-block:: typoscript
 
-   plugin.tx_form {
+   plugin.tx_mapmagic {
        settings {
            yamlConfigurations {
                # register your own additional configuration
@@ -317,7 +317,7 @@ register an additional configuration file via
                20: 'EXT:my_site_package/Resources/Private/Layouts/Form/Frontend/'
 
 The values of your own configuration file will overrule the corresponding
-values of the basic configuration file (:file:`EXT:form/Configuration/Yaml/FormSetup.yaml`).
+values of the basic configuration file (:file:`EXT:map_magic/Configuration/Yaml/FormSetup.yaml`).
 
 
 .. _concepts-configuration-inheritances-operator:
@@ -380,7 +380,7 @@ The configuration above results in:
      part02:
        key: 'value override'
 
-EXT:form heavily uses the ``__inheritances`` operator, in particular, for
+EXT:map_magic heavily uses the ``__inheritances`` operator, in particular, for
 the definition of form elements. The following example shows you how to use
 the operator to define a new form element which behaves like the parent
 element but also has its own properties.
@@ -409,7 +409,7 @@ element can be used and overridden within the ``form definition``.
 
 It will probably take some time to fully understand the awesomeness of
 this operator. If you are eager to learn more about this great instrument,
-check out the unit tests defined in ``EXT:form/Tests/Unit/Mvc/Configuration/InheritancesResolverServiceTest.php``.
+check out the unit tests defined in ``EXT:map_magic/Tests/Unit/Mvc/Configuration/InheritancesResolverServiceTest.php``.
 
 
 .. _concepts-configuration-prototypes:
@@ -418,7 +418,7 @@ Prototypes
 ----------
 
 Most of the configurational aspects of the form framework are defined
-in so-called ``prototypes``. By default, EXT:form defines a prototype
+in so-called ``prototypes``. By default, EXT:map_magic defines a prototype
 named ``standard``. The definition of form elements - including their
 rendering in the frontend, ``form editor`` and ``form plugin`` - reside
 within those prototypes. As soon as you create a new form, the specific

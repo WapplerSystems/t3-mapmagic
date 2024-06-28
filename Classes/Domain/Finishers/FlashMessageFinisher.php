@@ -19,7 +19,7 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Domain\Finishers;
 
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
@@ -30,7 +30,7 @@ use TYPO3\CMS\Extbase\Error\Message;
 use TYPO3\CMS\Extbase\Error\Notice;
 use TYPO3\CMS\Extbase\Error\Warning;
 use TYPO3\CMS\Extbase\Service\ExtensionService;
-use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
+use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
 
 /**
  * A simple finisher that adds a message to the FlashMessageContainer

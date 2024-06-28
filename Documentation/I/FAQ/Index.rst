@@ -19,7 +19,7 @@ There are 2 possible ways to override the frontend templates.
 Globally extend the fluid search paths
 --------------------------------------
 
-Since EXT:form mainly uses YAML as configuration language you need to
+Since EXT:map_magic mainly uses YAML as configuration language you need to
 register your own additional YAML files. Let us assume you are using a
 sitepackage ``EXT:my_site_package`` which contains your whole frontend
 integration.
@@ -28,12 +28,12 @@ integration.
 EXT:my_site_package/Configuration/TypoScript/setup.typoscript
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First of all, register a new EXT:form configuration for the frontend via
+First of all, register a new EXT:map_magic configuration for the frontend via
 TypoScript.
 
 .. code-block:: typoscript
 
-   plugin.tx_form {
+   plugin.tx_mapmagic {
        settings {
            yamlConfigurations {
                # register your own additional configuration
@@ -73,13 +73,13 @@ Next, define the additional fluid template search paths via YAML.
 EXT:my_site_package/ext_typoscript_setup.typoscript
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Register your EXT:form configuration for the backend via TypoScript. Read
+Register your EXT:map_magic configuration for the backend via TypoScript. Read
 the :ref:`chapter about configuration concepts <concepts-configuration-yamlregistration-backend>`
 to learn about the recommended ways.
 
 .. code-block:: typoscript
 
-   module.tx_form {
+   module.tx_mapmagic {
        settings {
            yamlConfigurations {
                100 = EXT:my_site_package/Configuration/Form/CustomFormSetup.yaml
@@ -121,7 +121,7 @@ corresponding form.
 
 .. _faq-migrate-from-v7:
 
-How do I migrate from EXT:form v7?
+How do I migrate from EXT:map_magic v7?
 ==================================
 
 The old form extension (used in TYPO3 v7, which is compatible to TYPO3 v6)
@@ -136,14 +136,14 @@ still needed.
 How does the date picker (jQuery) work?
 =======================================
 
-EXT:form ships a datepicker form element. To unfold its full potential you
+EXT:map_magic ships a datepicker form element. To unfold its full potential you
 should add jquery JavaScript files and jqueryUi JavaScript and CSS files to
 your frontend.
 
 
 .. _faq-user-registration:
 
-Is it possible to build a frontend user registration with EXT:form?
+Is it possible to build a frontend user registration with EXT:map_magic?
 ===================================================================
 
 Possible, yes. But we are not aware of an integration.

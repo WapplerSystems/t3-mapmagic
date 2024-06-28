@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\FormElements;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements;
 
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Domain\Model\FormElements\Section;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\Section;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
- * Test TYPO3\CMS\Form\Domain\Model\FormElements\Section class
+ * Test WapplerSystems\MapMagic\Domain\Model\FormElements\Section class
  *
  * Class AbstractFormElementTest
  */

@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Mvc\Property\TypeConverter;
+namespace WapplerSystems\MapMagic\Tests\Unit\Mvc\Property\TypeConverter;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PropertyException;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinitionValidationService;
-use TYPO3\CMS\Form\Mvc\Property\TypeConverter\FormDefinitionArrayConverter;
-use TYPO3\CMS\Form\Type\FormDefinitionArray;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService;
+use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\FormDefinitionArrayConverter;
+use WapplerSystems\MapMagic\Type\FormDefinitionArray;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormDefinitionArrayConverterTest extends UnitTestCase

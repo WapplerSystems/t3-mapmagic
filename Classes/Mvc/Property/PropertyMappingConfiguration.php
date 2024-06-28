@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Property;
+namespace WapplerSystems\MapMagic\Mvc\Property;
 
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -23,12 +23,12 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FileUpload;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime\Lifecycle\AfterFormStateInitializedInterface;
-use TYPO3\CMS\Form\Mvc\Property\TypeConverter\UploadedFileReferenceConverter;
-use TYPO3\CMS\Form\Mvc\Validation\MimeTypeValidator;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterFormStateInitializedInterface;
+use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\UploadedFileReferenceConverter;
+use WapplerSystems\MapMagic\Mvc\Validation\MimeTypeValidator;
 
 /**
  * Scope: frontend
@@ -40,7 +40,7 @@ class PropertyMappingConfiguration implements AfterFormStateInitializedInterface
 
     /**
      * This hook is called for each form element after the class
-     * TYPO3\CMS\Form\Domain\Factory\ArrayFormFactory has built the entire form.
+     * WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory has built the entire form.
      *
      * It is invoked after the static form definition is ready, but without knowing
      * about the individual state organized in `FormRuntime` and `FormState`.

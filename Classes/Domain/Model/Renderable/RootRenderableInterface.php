@@ -19,7 +19,7 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\Renderable;
+namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
 /**
  * Base interface which all parts of a form must adhere to.

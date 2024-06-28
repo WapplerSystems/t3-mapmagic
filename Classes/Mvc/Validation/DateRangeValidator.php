@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Validation;
+namespace WapplerSystems\MapMagic\Mvc\Validation;
 
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
-use TYPO3\CMS\Form\Mvc\Validation\Exception\InvalidValidationOptionsException;
+use WapplerSystems\MapMagic\Mvc\Validation\Exception\InvalidValidationOptionsException;
 
 /**
  * Validator for date ranges

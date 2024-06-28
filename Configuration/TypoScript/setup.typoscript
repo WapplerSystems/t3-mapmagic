@@ -1,4 +1,4 @@
-plugin.tx_form {
+plugin.tx_mapmagic {
     view {
         # Note that this configuration only affects the EXT:Form plugin
         # template (form/Resources/Private/Frontend/Templates/Render.html)
@@ -7,9 +7,9 @@ plugin.tx_form {
         #
         # That means: If you want to override the formelement templates
         # then change them within the YAML settings, not here.
-        templateRootPaths.0 = EXT:form/Resources/Private/Frontend/Templates/
-        partialRootPaths.0 = EXT:form/Resources/Private/Frontend/Partials/
-        layoutRootPaths.0 = EXT:form/Resources/Private/Frontend/Layouts/
+        templateRootPaths.0 = EXT:map_magic/Resources/Private/Frontend/Templates/
+        partialRootPaths.0 = EXT:map_magic/Resources/Private/Frontend/Partials/
+        layoutRootPaths.0 = EXT:map_magic/Resources/Private/Frontend/Layouts/
     }
 
     mvc {
@@ -18,14 +18,14 @@ plugin.tx_form {
 
     settings {
         yamlConfigurations {
-            10 = EXT:form/Configuration/Yaml/FormSetup.yaml
+            10 = EXT:map_magic/Configuration/Yaml/FormSetup.yaml
         }
     }
 }
 
 # Rendering of content elements
-lib.tx_form.contentElementRendering = RECORDS
-lib.tx_form.contentElementRendering {
+lib.tx_mapmagic.contentElementRendering = RECORDS
+lib.tx_mapmagic.contentElementRendering {
     tables = tt_content
     source.current = 1
     dontCheckPid = 1

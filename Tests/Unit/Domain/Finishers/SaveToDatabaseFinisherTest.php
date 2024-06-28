@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Finishers;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
-use TYPO3\CMS\Form\Domain\Finishers\FinisherContext;
-use TYPO3\CMS\Form\Domain\Finishers\SaveToDatabaseFinisher;
-use TYPO3\CMS\Form\Domain\Model\FormElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
+use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
+use WapplerSystems\MapMagic\Domain\Finishers\SaveToDatabaseFinisher;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class SaveToDatabaseFinisherTest extends UnitTestCase

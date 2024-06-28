@@ -19,15 +19,15 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\ViewHelpers;
+namespace WapplerSystems\MapMagic\ViewHelpers;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
-use TYPO3\CMS\Form\Domain\Factory\ArrayFormFactory;
-use TYPO3\CMS\Form\Domain\Factory\FormFactoryInterface;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
+use WapplerSystems\MapMagic\Domain\Factory\FormFactoryInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -40,10 +40,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  *
  * Default::
  *
- *    {namespace formvh=TYPO3\CMS\Form\ViewHelpers}
- *    <formvh:render factoryClass="NameOfYourCustomFactoryClass" />
+ *    {namespace mapmagicvh=WapplerSystems\MapMagic\ViewHelpers}
+ *    <mapmagicvh:render factoryClass="NameOfYourCustomFactoryClass" />
  *
- * The factory class must implement :php:`TYPO3\CMS\Form\Domain\Factory\FormFactoryInterface`.
+ * The factory class must implement :php:`WapplerSystems\MapMagic\Domain\Factory\FormFactoryInterface`.
  *
  * Scope: frontend
  */

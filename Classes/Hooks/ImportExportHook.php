@@ -13,10 +13,10 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Hooks;
+namespace WapplerSystems\MapMagic\Hooks;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Slot\FilePersistenceSlot;
+use WapplerSystems\MapMagic\Slot\FilePersistenceSlot;
 
 /**
  * @internal

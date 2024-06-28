@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Condition;
+namespace WapplerSystems\MapMagic\Domain\Condition;
 
 use TYPO3\CMS\Core\ExpressionLanguage\AbstractProvider;
-use TYPO3\CMS\Form\Domain\Condition\Functions\FormConditionFunctionsProvider;
+use WapplerSystems\MapMagic\Domain\Condition\Functions\FormConditionFunctionsProvider;
 
 /**
  * Scope: frontend

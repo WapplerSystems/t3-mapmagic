@@ -15,11 +15,11 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\Framework\FormHandling;
+namespace WapplerSystems\MapMagic\Tests\Functional\Framework\FormHandling;
 
 /**
  * Used to extract data from retrieved html markup for form testing purpose.
- * @see \TYPO3\CMS\Form\Tests\Functional\RequestHandling\RequestHandlingTest
+ * @see \WapplerSystems\MapMagic\Tests\Functional\RequestHandling\RequestHandlingTest
  */
 final class FormDataFactory
 {

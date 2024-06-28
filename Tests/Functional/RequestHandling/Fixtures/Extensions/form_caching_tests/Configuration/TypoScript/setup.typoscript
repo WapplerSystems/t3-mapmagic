@@ -1,15 +1,15 @@
-plugin.tx_formcachingtests {
+plugin.tx_mapmagiccachingtests {
     view {
         layoutRootPaths {
-            0 = EXT:form_caching_tests/Resources/Private/Layouts/
+            0 = EXT:map_magic_caching_tests/Resources/Private/Layouts/
         }
 
         templateRootPaths {
-            0 = EXT:form_caching_tests/Resources/Private/Templates/
+            0 = EXT:map_magic_caching_tests/Resources/Private/Templates/
         }
 
         partialRootPaths {
-            0 = EXT:form_caching_tests/Resources/Private/Partials/
+            0 = EXT:map_magic_caching_tests/Resources/Private/Partials/
         }
     }
 }
@@ -18,14 +18,14 @@ page = PAGE
 page {
     1628755200 = FLUIDTEMPLATE
     1628755200 {
-        file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+        file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
         settings {
-            persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+            persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
             formIdentifier = FormFromSimpleFluidtemplate
             title = form from simple FLUIDTEMPLATE
             controllerAction = perform
         }
-        extbase.pluginName = Formframework
+        extbase.pluginName = Map
         extbase.controllerExtensionName = Form
         extbase.controllerName = FormFrontend
         extbase.controllerActionName = render
@@ -35,9 +35,9 @@ page {
     1628755210 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaFluidtemplateThroughCustomExtbaseControllerAllActionsCached
                 title = form from COA FLUIDTEMPLATE through custom extbase controller / AllActionsCached
                 controllerAction = somePerform
@@ -53,9 +53,9 @@ page {
     1628755220 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaIntFluidtemplateThroughCustomExtbaseControllerAllActionsCached
                 title = form from COA_INT FLUIDTEMPLATE through custom extbase controller / AllActionsCached
                 controllerAction = somePerform
@@ -71,9 +71,9 @@ page {
     1628755230 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaFluidtemplateThroughCustomExtbaseControllerRenderActionIsCached
                 title = form from COA FLUIDTEMPLATE through custom extbase controller / RenderActionIsCached
                 controllerAction = somePerform
@@ -89,9 +89,9 @@ page {
     1628755240 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaIntFluidtemplateThroughCustomExtbaseControllerRenderActionIsCached
                 title = form from COA_INT FLUIDTEMPLATE through custom extbase controller / RenderActionIsCached
                 controllerAction = somePerform
@@ -107,9 +107,9 @@ page {
     1628755250 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaFluidtemplateThroughCustomExtbaseControllerAllActionsUncached
                 title = form from COA FLUIDTEMPLATE through custom extbase controller / AllActionsUncached
                 controllerAction = somePerform
@@ -125,9 +125,9 @@ page {
     1628755260 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaIntFluidtemplateThroughCustomExtbaseControllerAllActionsUncached
                 title = form from COA_INT FLUIDTEMPLATE through custom extbase controller / AllActionsUncached
                 controllerAction = somePerform
@@ -143,14 +143,14 @@ page {
     1628755270 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaFluidtemplateThroughExtFormController
                 title = form from COA FLUIDTEMPLATE through ext:form controller
                 controllerAction = perform
             }
-            extbase.pluginName = Formframework
+            extbase.pluginName = Map
             extbase.controllerExtensionName = Form
             extbase.controllerName = FormFrontend
             extbase.controllerActionName = render
@@ -161,14 +161,14 @@ page {
     1628755280 {
         10 = FLUIDTEMPLATE
         10 {
-            file = EXT:form_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
+            file = EXT:map_magic_caching_tests/Resources/Private/Templates/FormFluidtemplate.html
             settings {
-                persistenceIdentifier = EXT:form_caching_tests/Resources/Private/Form/Form2.form.yaml
+                persistenceIdentifier = EXT:map_magic_caching_tests/Resources/Private/Form/Form2.form.yaml
                 formIdentifier = FormFromCoaIntFluidtemplateThroughExtFormController
                 title = form from COA_INT FLUIDTEMPLATE through ext:form controller
                 controllerAction = perform
             }
-            extbase.pluginName = Formframework
+            extbase.pluginName = Map
             extbase.controllerExtensionName = Form
             extbase.controllerName = FormFrontend
             extbase.controllerActionName = render

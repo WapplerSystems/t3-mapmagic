@@ -2,7 +2,7 @@ prototypes:
   standard:
     finishersDefinition:
       Redirect:
-        implementationClassName: TYPO3\CMS\Form\Domain\Finishers\RedirectFinisher
+        implementationClassName: WapplerSystems\MapMagic\Domain\Finishers\RedirectFinisher
         formEditor:
           iconIdentifier: form-finisher
           label: formEditor.elements.Form.finisher.Redirect.editor.header.label

@@ -26,7 +26,7 @@ implementationClassName
          :emphasize-lines: 2
 
          Fieldset:
-           implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\Section
+           implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\Section
 
 .. :aspect:`Good to know`
       ToDo

@@ -15,17 +15,17 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\Domain\Runtime;
+namespace WapplerSystems\MapMagic\Tests\Functional\Domain\Runtime;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use TYPO3\CMS\Form\Domain\Exception\RenderingException;
-use TYPO3\CMS\Form\Domain\Factory\ArrayFormFactory;
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
-use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManagerInterface;
+use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
+use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -85,13 +85,13 @@ final class FormRuntimeTest extends FunctionalTestCase
 
         $GLOBALS['TYPO3_REQUEST'] = $serverRequest;
 
-        return (new Request($serverRequest))->withPluginName('Formframework');
+        return (new Request($serverRequest))->withPluginName('Map');
     }
 
     private function buildFormDefinition(): FormDefinition
     {
         return $this->formFactory->build([
-            'type' => 'Form',
+            'type' => 'MapMagic',
             'identifier' => 'test',
             'label' => 'test',
             'prototypeName' => 'standard',
@@ -117,10 +117,10 @@ final class FormRuntimeTest extends FunctionalTestCase
         $configurationManager = $this->get(ConfigurationManagerInterface::class);
         $configurationManager->setConfiguration([
             'plugin.' => [
-                'tx_form.' => [
+                'tx_mapmagic.' => [
                     'settings.' => [
                         'yamlConfigurations.' => [
-                            '10' => 'EXT:form/Configuration/Yaml/FormSetup.yaml',
+                            '10' => 'EXT:map_magic/Configuration/Yaml/FormSetup.yaml',
                         ],
                     ],
                 ],

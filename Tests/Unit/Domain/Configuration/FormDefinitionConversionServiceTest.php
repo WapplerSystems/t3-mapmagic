@@ -15,11 +15,11 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\Configuration;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\Configuration;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinitionConversionService;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormDefinitionConversionServiceTest extends UnitTestCase
@@ -55,7 +55,7 @@ final class FormDefinitionConversionServiceTest extends UnitTestCase
         $input = [
             'prototypeName' => 'standard',
             'identifier' => 'test',
-            'type' => 'Form',
+            'type' => 'MapMagic',
             'heinz' => 1,
             'klaus' => [],
             'klaus1' => [
@@ -77,7 +77,7 @@ final class FormDefinitionConversionServiceTest extends UnitTestCase
         $expected = [
             'prototypeName' => 'standard',
             'identifier' => 'test',
-            'type' => 'Form',
+            'type' => 'MapMagic',
             'heinz' => 1,
             'klaus' => [],
             'klaus1' => [
@@ -117,7 +117,7 @@ final class FormDefinitionConversionServiceTest extends UnitTestCase
                 'hmac' => $data['_orig_identifier']['hmac'],
             ],
             '_orig_type' => [
-                'value' => 'Form',
+                'value' => 'MapMagic',
                 'hmac' => $data['_orig_type']['hmac'],
             ],
             '_orig_heinz' => [

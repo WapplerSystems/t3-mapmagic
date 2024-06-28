@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Mvc\Persistence;
+namespace WapplerSystems\MapMagic\Tests\Unit\Mvc\Persistence;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -26,10 +26,10 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Mvc\Configuration\TypoScriptService;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\NoUniqueIdentifierException;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\PersistenceManagerException;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManager;
+use WapplerSystems\MapMagic\Mvc\Configuration\TypoScriptService;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\NoUniqueIdentifierException;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class FormPersistenceManagerTest extends UnitTestCase
@@ -82,7 +82,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:form/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
         $mockFormPersistenceManager->_call('load', $input);
     }
 
@@ -112,7 +112,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:form/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
         $mockFormPersistenceManager->_call('save', $input, []);
     }
 
@@ -142,7 +142,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:form/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
         $mockFormPersistenceManager->_call('save', $input, []);
     }
 
@@ -192,7 +192,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:form/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
         $mockFormPersistenceManager->_call('delete', $input);
     }
 
@@ -226,7 +226,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:form/Resources/Forms/_example.form.yaml';
+        $input = 'EXT:map_magic/Resources/Forms/_example.form.yaml';
         $mockFormPersistenceManager->_call('delete', $input);
     }
 
@@ -282,12 +282,12 @@ final class FormPersistenceManagerTest extends UnitTestCase
         $mockFormPersistenceManager->_set('formSettings', [
             'persistenceManager' => [
                 'allowedExtensionPaths' => [
-                    'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/',
+                    'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/',
                 ],
             ],
         ]);
 
-        $input = 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml';
+        $input = 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml';
         self::assertTrue($mockFormPersistenceManager->_call('exists', $input));
     }
 
@@ -295,7 +295,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
     public function existsReturnsFalseIfPersistenceIdentifierIsExtensionLocationAndFileExistsAndFileHasNoYamlExtension(): void
     {
         $mockFormPersistenceManager = $this->getAccessibleMock(FormPersistenceManager::class, null, [], '', false);
-        $input = 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt';
+        $input = 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt';
         self::assertFalse($mockFormPersistenceManager->_call('exists', $input));
     }
 
@@ -310,7 +310,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
         ]);
 
-        $input = 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.yaml';
+        $input = 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.yaml';
         self::assertFalse($mockFormPersistenceManager->_call('exists', $input));
     }
 
@@ -318,7 +318,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
     public function existsReturnsFalseIfPersistenceIdentifierIsExtensionLocationAndFileNotExistsAndFileHasYamlExtension(): void
     {
         $mockFormPersistenceManager = $this->getAccessibleMock(FormPersistenceManager::class, null, [], '', false);
-        $input = 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/_BlankForm.yaml';
+        $input = 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/_BlankForm.yaml';
         self::assertFalse($mockFormPersistenceManager->_call('exists', $input));
     }
 
@@ -915,7 +915,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => [],
                 'expected' => false,
@@ -927,7 +927,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => [],
                 'expected' => false,
@@ -939,7 +939,7 @@ final class FormPersistenceManagerTest extends UnitTestCase
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
                 'allowedExtensionPaths' => [],
                 'allowedFileMounts' => [],
                 'expected' => false,
@@ -971,26 +971,26 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
 
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/',
                 'allowedExtensionPaths' => ['EXT:some_extension/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/',
-                'allowedExtensionPaths' => ['EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/'],
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/',
+                'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => true,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures',
-                'allowedExtensionPaths' => ['EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/'],
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures',
+                'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => true,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/',
-                'allowedExtensionPaths' => ['EXT:form/Tests/Unit/Mvc/Persistence/Fixtures'],
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/',
+                'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures'],
                 'allowedFileMounts' => [],
                 'expected' => true,
             ],
@@ -1033,38 +1033,38 @@ final class FormPersistenceManagerTest extends UnitTestCase
             ],
 
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt',
                 'allowedExtensionPaths' => ['EXT:some_extension/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
                 'allowedExtensionPaths' => ['EXT:some_extension/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt',
-                'allowedExtensionPaths' => ['EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/'],
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt',
+                'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt',
-                'allowedExtensionPaths' => ['EXT:form/Tests/Unit/Mvc/Persistence/Fixtures'],
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.txt',
+                'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures'],
                 'allowedFileMounts' => [],
                 'expected' => false,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
-                'allowedExtensionPaths' => ['EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/'],
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/'],
                 'allowedFileMounts' => [],
                 'expected' => true,
             ],
             [
-                'persistencePath' => 'EXT:form/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
-                'allowedExtensionPaths' => ['EXT:form/Tests/Unit/Mvc/Persistence/Fixtures'],
+                'persistencePath' => 'EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures/BlankForm.form.yaml',
+                'allowedExtensionPaths' => ['EXT:map_magic/Tests/Unit/Mvc/Persistence/Fixtures'],
                 'allowedFileMounts' => [],
                 'expected' => true,
             ],

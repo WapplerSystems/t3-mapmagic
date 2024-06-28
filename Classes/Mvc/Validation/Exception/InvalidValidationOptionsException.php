@@ -15,8 +15,8 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Mvc\Validation\Exception;
+namespace WapplerSystems\MapMagic\Mvc\Validation\Exception;
 
-use TYPO3\CMS\Form\Exception;
+use WapplerSystems\MapMagic\Exception;
 
 class InvalidValidationOptionsException extends Exception {}

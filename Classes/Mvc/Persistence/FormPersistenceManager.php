@@ -19,7 +19,7 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Mvc\Persistence;
+namespace WapplerSystems\MapMagic\Mvc\Persistence;
 
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
@@ -39,15 +39,15 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
-use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\FileWriteException;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\NoSuchFileException;
-use TYPO3\CMS\Form\Mvc\Configuration\TypoScriptService;
-use TYPO3\CMS\Form\Mvc\Configuration\YamlSource;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\NoUniqueIdentifierException;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\NoUniquePersistenceIdentifierException;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\PersistenceManagerException;
-use TYPO3\CMS\Form\Slot\FilePersistenceSlot;
+use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\FileWriteException;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\NoSuchFileException;
+use WapplerSystems\MapMagic\Mvc\Configuration\TypoScriptService;
+use WapplerSystems\MapMagic\Mvc\Configuration\YamlSource;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\NoUniqueIdentifierException;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\NoUniquePersistenceIdentifierException;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
+use WapplerSystems\MapMagic\Slot\FilePersistenceSlot;
 
 /**
  * Concrete implementation of the FormPersistenceManagerInterface
@@ -122,7 +122,7 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
             $this->generateErrorsIfFormDefinitionIsValidButHasInvalidFileExtension($yaml, $persistenceIdentifier);
         } catch (\Exception $e) {
             $yaml = [
-                'type' => 'Form',
+                'type' => 'MapMagic',
                 'identifier' => $persistenceIdentifier,
                 'label' => $e->getMessage(),
                 'invalid' => true,
@@ -617,7 +617,7 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
     /**
      * Every formDefinition setting is overridable by TypoScript.
      * If the TypoScript configuration path
-     * plugin.tx_form.settings.formDefinitionOverrides.<identifier>
+     * plugin.tx_mapmagic.settings.formDefinitionOverrides.<identifier>
      * exists, these settings are merged into the formDefinition.
      *
      * @param array<string, mixed> $formDefinition
@@ -745,7 +745,7 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
             }
         } catch (\Exception $e) {
             $yaml = [
-                'type' => 'Form',
+                'type' => 'MapMagic',
                 'identifier' => $persistenceIdentifier,
                 'label' => $e->getMessage(),
                 'invalid' => true,
@@ -889,7 +889,7 @@ class FormPersistenceManager implements FormPersistenceManagerInterface
 
     protected function looksLikeAFormDefinition(array $data): bool
     {
-        return isset($data['identifier'], $data['type']) && !empty($data['identifier']) && trim($data['type']) === 'Form';
+        return isset($data['identifier'], $data['type']) && !empty($data['identifier']) && trim($data['type']) === 'MapMagic';
     }
 
     protected function sortForms(array $forms): array

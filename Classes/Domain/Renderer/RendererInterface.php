@@ -19,9 +19,9 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Renderer;
+namespace WapplerSystems\MapMagic\Domain\Renderer;
 
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
 
 /**
  * Base interface for Renderers. A Renderer is used to render a form.

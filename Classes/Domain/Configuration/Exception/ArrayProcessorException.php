@@ -15,9 +15,9 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Configuration\Exception;
+namespace WapplerSystems\MapMagic\Domain\Configuration\Exception;
 
-use TYPO3\CMS\Form\Domain\Exception;
+use WapplerSystems\MapMagic\Domain\Exception;
 
 /**
  * @internal

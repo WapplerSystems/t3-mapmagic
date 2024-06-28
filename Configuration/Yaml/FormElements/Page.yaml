@@ -35,7 +35,7 @@ prototypes:
           _isTopLevelFormElement: true
           _isCompositeFormElement: true
           iconIdentifier: form-page
-        implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\Page
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\Page
         renderingOptions:
           _isTopLevelFormElement: true
           _isCompositeFormElement: true

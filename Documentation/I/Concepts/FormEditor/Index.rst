@@ -93,7 +93,7 @@ displays the form elements in two different modes:
   the frontend ('nearly' since you have to make sure that your frontend CSS
   is also loaded in the backend in order to get the exact preview).
 
-Per default, the frontend templates of EXT:form are based on `Bootstrap`_.
+Per default, the frontend templates of EXT:map_magic are based on `Bootstrap`_.
 Since the backend of TYPO3 CMS also depends on this CSS framework,
 the corresponding CSS files are already loaded in the backend context.
 Nevertheless, certain parts of the CSS were overridden and extended in order
@@ -194,7 +194,7 @@ Imagine, the following is defined for an option value:
 
 First of all, the process searches for the translation key ``formEditor.elements.Form.editor.finishers.label``
 within the file ``20: 'EXT:my_site_package/Resources/Private/Language/Database.xlf'``
-and after it inside the file ``10: 'EXT:form/Resources/Private/Language/Database.xlf'``
+and after it inside the file ``10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'``
 (loaded by default). If nothing is found, the option value will be
 displayed unmodified.
 
@@ -207,8 +207,8 @@ Customization of the form editor
 As mentioned earlier, the interface can be customized by writing YAML
 configuration. The configuration is not stored within one central configuration
 file. Instead, the configuration is defined for each element the form framework
-provides (see `EXT:form/form/Configuration/Yaml/FormElements/`). In addition,
-the :yaml:`Form` element itself (see `EXT:form/Configuration/Yaml/FormElements/Form.yaml`)
+provides (see `EXT:map_magic/form/Configuration/Yaml/FormElements/`). In addition,
+the :yaml:`Form` element itself (see `EXT:map_magic/Configuration/Yaml/FormElements/Form.yaml`)
 ships some basic configuration of the form editor.
 
 A common use case for customization is to remove form elements from the form
@@ -432,7 +432,7 @@ for setting up your own module.
 Events
 ^^^^^^
 
-The event handling of EXT:form is based on the ``Publish/Subscribe Pattern``.
+The event handling of EXT:map_magic is based on the ``Publish/Subscribe Pattern``.
 To learn more about this terrific pattern, check out this website: https://addyosmani.com/resources/essentialjsdesignpatterns/book/.
 Please not that the processing sequence of the subscribers cannot be
 influenced. Furthermore, there is no information flow between the

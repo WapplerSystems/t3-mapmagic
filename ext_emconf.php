@@ -1,14 +1,14 @@
 <?php
 
-$EM_CONF[$_EXTKEY] = [
-    'title' => 'TYPO3 CMS Form',
-    'description' => 'Flexible TYPO3 frontend form framework that comes with a backend editor interface.',
+$EM_CONF['map_magic'] = [
+    'title' => 'Map Magic',
+    'description' => 'TYPO3 Map Magic - Flexible TYPO3 map framework.',
     'category' => 'misc',
     'state' => 'stable',
-    'author' => 'TYPO3 Core Team',
-    'author_email' => 'typo3cms@typo3.org',
+    'author' => 'WapplerSystems',
+    'author_email' => 'typo3@wappler.systems',
     'author_company' => '',
-    'version' => '12.4.17',
+    'version' => '12.0.0',
     'constraints' => [
         'depends' => [
             'typo3' => '12.4.17',

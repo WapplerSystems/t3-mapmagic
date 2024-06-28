@@ -15,18 +15,18 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Configuration;
+namespace WapplerSystems\MapMagic\Domain\Configuration;
 
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessing;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessor;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PropertyException;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\CreatableFormElementPropertiesValidator;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\CreatablePropertyCollectionElementPropertiesValidator;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\FormElementHmacDataValidator;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\PropertyCollectionElementHmacDataValidator;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\CreatableFormElementPropertiesValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\CreatablePropertyCollectionElementPropertiesValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\FormElementHmacDataValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\PropertyCollectionElementHmacDataValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
 
 /**
  * @internal
@@ -143,7 +143,7 @@ class FormDefinitionValidationService implements SingletonInterface
     ): void {
         $renderables = $currentFormElement['renderables'] ?? [];
         $propertyCollectionElements = $currentFormElement['finishers'] ?? $currentFormElement['validators'] ?? [];
-        $propertyCollectionName = $currentFormElement['type'] === 'Form' ? 'finishers' : 'validators';
+        $propertyCollectionName = $currentFormElement['type'] === 'MapMagic' ? 'finishers' : 'validators';
         unset($currentFormElement['renderables'], $currentFormElement['finishers'], $currentFormElement['validators']);
 
         $validationDto = GeneralUtility::makeInstance(

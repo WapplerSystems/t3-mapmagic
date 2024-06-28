@@ -15,11 +15,11 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\ViewHelpers\Form;
+namespace WapplerSystems\MapMagic\Tests\Unit\ViewHelpers\Form;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\ViewHelpers\Form\DatePickerViewHelper;
+use WapplerSystems\MapMagic\ViewHelpers\Form\DatePickerViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class DatePickerViewHelperTest extends UnitTestCase

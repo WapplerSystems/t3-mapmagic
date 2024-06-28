@@ -50,7 +50,7 @@ prototypes:
           _isCompositeFormElement: true
           _isGridRowFormElement: true
           iconIdentifier: form-gridrow
-        implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\GridRow
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\GridRow
         properties:
           containerClassAttribute: input
           elementClassAttribute: row

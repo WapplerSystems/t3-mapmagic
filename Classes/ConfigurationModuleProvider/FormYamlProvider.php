@@ -15,12 +15,12 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\ConfigurationModuleProvider;
+namespace WapplerSystems\MapMagic\ConfigurationModuleProvider;
 
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManager;
-use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManager;
+use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderInterface;
 
 class FormYamlProvider implements ProviderInterface
@@ -47,7 +47,7 @@ class FormYamlProvider implements ProviderInterface
     public function getLabel(): string
     {
         return $this->getLanguageService()->sL(
-            'LLL:EXT:form/Resources/Private/Language/locallang.xlf:form.configuration.module.provider'
+            'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:form.configuration.module.provider'
         );
     }
 

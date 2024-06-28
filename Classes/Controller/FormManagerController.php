@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Controller;
+namespace WapplerSystems\MapMagic\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -38,10 +38,10 @@ use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\JsonView;
-use TYPO3\CMS\Form\Exception as FormException;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\PersistenceManagerException;
-use TYPO3\CMS\Form\Service\DatabaseService;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Exception as FormException;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
+use WapplerSystems\MapMagic\Service\DatabaseService;
+use WapplerSystems\MapMagic\Service\TranslationService;
 
 /**
  * The form manager controller
@@ -117,7 +117,7 @@ class FormManagerController extends AbstractBackendController
         $moduleTemplate->setModuleClass($this->request->getPluginName() . '_' . $this->request->getControllerName());
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
         $moduleTemplate->setTitle(
-            $this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab')
+            $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab')
         );
         return $moduleTemplate->renderResponse('Backend/FormManager/Index');
     }
@@ -498,7 +498,7 @@ class FormManagerController extends AbstractBackendController
         $addFormButton = $buttonBar->makeLinkButton()
             ->setDataAttributes(['identifier' => 'newForm'])
             ->setHref('#')
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:formManager.create_new_form'))
+            ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formManager.create_new_form'))
             ->setShowLabelText(true)
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
         $buttonBar->addButton($addFormButton, ButtonBar::BUTTON_POSITION_LEFT);
@@ -513,7 +513,7 @@ class FormManagerController extends AbstractBackendController
         // Shortcut
         $shortcutButton = $buttonBar->makeShortcutButton()
             ->setRouteIdentifier('web_FormFormbuilder')
-            ->setDisplayName($this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:module.shortcut_name'));
+            ->setDisplayName($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:module.shortcut_name'));
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
 
         return $moduleTemplate;

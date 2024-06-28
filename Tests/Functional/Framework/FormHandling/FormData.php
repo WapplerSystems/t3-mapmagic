@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\Framework\FormHandling;
+namespace WapplerSystems\MapMagic\Tests\Functional\Framework\FormHandling;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 
 /**
  * Used to hold and prepare data for form testing purpose.
- * @see \TYPO3\CMS\Form\Tests\Functional\RequestHandling\RequestHandlingTest
+ * @see \WapplerSystems\MapMagic\Tests\Functional\RequestHandling\RequestHandlingTest
  */
 final class FormData
 {

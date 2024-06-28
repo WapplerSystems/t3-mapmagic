@@ -36,7 +36,7 @@ implementationClassName
          :emphasize-lines: 2
 
          DeleteUploads:
-           implementationClassName: TYPO3\CMS\Form\Domain\Finishers\DeleteUploadsFinisher
+           implementationClassName: WapplerSystems\MapMagic\Domain\Finishers\DeleteUploadsFinisher
 
 :aspect:`Good to know`
       - :ref:`"Custom finisher implementations"<concepts-finishers-customfinisherimplementations>`

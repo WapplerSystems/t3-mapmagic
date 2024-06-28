@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\EventListener;
+namespace WapplerSystems\MapMagic\EventListener;
 
 use TYPO3\CMS\Filelist\Event\ProcessFileListActionsEvent;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManager;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager;
 
 /**
  * Event listener to disable certain actions when checking for form.yaml files.

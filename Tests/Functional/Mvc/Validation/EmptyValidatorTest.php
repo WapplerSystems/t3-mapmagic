@@ -15,14 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\Mvc\Validation;
+namespace WapplerSystems\MapMagic\Tests\Functional\Mvc\Validation;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Mvc\Validation\EmptyValidator;
+use WapplerSystems\MapMagic\Mvc\Validation\EmptyValidator;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class EmptyValidatorTest extends FunctionalTestCase

@@ -68,11 +68,11 @@ adds this custom form element to another ``prototype``, the process would
 crash. The custom form element is only known by the ``prototype`` 'routing'.
 
 The following code block shows the minimal configuration of a ``Start
-template``. You need at least the root form element ('Form') and a 'Page'.
+template``. You need at least the root form element ('MapMagic') and a 'Page'.
 
 .. code-block:: yaml
 
-   type: 'Form'
+   type: 'MapMagic'
    identifier: 'blankForm'
    label: '[Blank Form]'
    renderables:
@@ -87,9 +87,9 @@ a list of all existing, :ref:`pre-configured<formmanager.selectableprototypescon
 help of such a template, a new ``form definition`` is generated based on the
 one of the selected ``Start template``. The ``form definition`` will be
 enriched by the property ``propertyName`` defining the chosen ``prototype``.
-The ``identifier`` of the root form element ('Form') is automatically set
+The ``identifier`` of the root form element ('MapMagic') is automatically set
 based on the entered "Form name". Additionally, this name is used for the
-property `` label`` of the 'Form' element. Finally, the ``form editor`` is
+property `` label`` of the 'MapMagic' element. Finally, the ``form editor`` is
 loaded and displays the newly created form.
 
 
@@ -128,6 +128,6 @@ Imagine, the following is defined for an option value:
 
 First of all, the process searches for the translation key ``formManager.selectablePrototypesConfiguration.standard.label``
 within the file ``20: 'EXT:my_site_package/Resources/Private/Language/Form/Database.xlf'``
-and after it inside the file ``10: 'EXT:form/Resources/Private/Language/Database.xlf'``
+and after it inside the file ``10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'``
 (loaded by default). If nothing is found, the option value will be
 displayed unmodified.

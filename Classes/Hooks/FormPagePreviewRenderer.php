@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Hooks;
+namespace WapplerSystems\MapMagic\Hooks;
 
 use TYPO3\CMS\Backend\Preview\StandardContentPreviewRenderer;
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
@@ -27,23 +27,23 @@ use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\NoSuchFileException;
-use TYPO3\CMS\Form\Mvc\Configuration\Exception\ParseErrorException;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\PersistenceManagerException;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\NoSuchFileException;
+use WapplerSystems\MapMagic\Mvc\Configuration\Exception\ParseErrorException;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
 
 /**
- * Contains a preview rendering for the page module of CType="form_formframework"
+ * Contains a preview rendering for the page module of CType="mapmagic_map"
  * @internal
  */
 class FormPagePreviewRenderer extends StandardContentPreviewRenderer
 {
-    private const L10N_PREFIX = 'LLL:EXT:form/Resources/Private/Language/Database.xlf:';
+    private const L10N_PREFIX = 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:';
 
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
         $row = $item->getRecord();
-        $itemContent = $this->linkEditContent('<strong>' . htmlspecialchars($item->getContext()->getContentTypeLabels()['form_formframework']) . '</strong>', $row) . '<br />';
+        $itemContent = $this->linkEditContent('<strong>' . htmlspecialchars($item->getContext()->getContentTypeLabels()['mapmagic_map']) . '</strong>', $row) . '<br />';
 
         $flexFormData = GeneralUtility::makeInstance(FlexFormService::class)
             ->convertFlexFormContentToArray($row['pi_flexform']);

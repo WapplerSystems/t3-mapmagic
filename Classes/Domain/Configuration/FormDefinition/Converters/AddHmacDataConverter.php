@@ -15,12 +15,12 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Converters;
+namespace WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Converters;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessing;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessor;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 
 /**
  * @internal
@@ -32,7 +32,7 @@ class AddHmacDataConverter extends AbstractConverter
      * "_orig_<propertyName>" is an array which contains the property value
      * and a hmac hash for the property value.
      * "_orig_<propertyName>" will be used to validate the form definition on saving.
-     * @see \TYPO3\CMS\Form\Domain\Configuration\FormDefinitionValidationService::validateFormDefinitionProperties()
+     * @see \WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionValidationService::validateFormDefinitionProperties()
      *
      * @param mixed $value
      */
@@ -51,7 +51,7 @@ class AddHmacDataConverter extends AbstractConverter
         }
 
         $propertyCollectionElements = $currentFormElement['finishers'] ?? $currentFormElement['validators'] ?? [];
-        $propertyCollectionName = $currentFormElement['type'] === 'Form' ? 'finishers' : 'validators';
+        $propertyCollectionName = $currentFormElement['type'] === 'MapMagic' ? 'finishers' : 'validators';
         unset($currentFormElement['renderables'], $currentFormElement['finishers'], $currentFormElement['validators']);
 
         $this->converterDto

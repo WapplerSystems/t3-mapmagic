@@ -32,8 +32,8 @@ renderingOptions.templateVariant
 
     ..  deprecated:: 12.0
         Using the legacy form template / partial variants residing in
-        :file:`EXT:form/Resources/Private/Frontend/Templates` and
-        :file:`EXT:form/Resources/Private/Frontend/Partials` ("version1") is
+        :file:`EXT:map_magic/Resources/Private/Frontend/Templates` and
+        :file:`EXT:map_magic/Resources/Private/Frontend/Partials` ("version1") is
         deprecated. The legacy templates will be removed in v13.
 
         **Migration**: Set your form rendering option :yaml:`templateVariant`
@@ -50,4 +50,4 @@ renderingOptions.templateVariant
                       templateVariant: version2
 
         Adjust your templates / partials to make them compatible with the ones
-        stored in :file:`EXT:form/Resources/Private/FrontendVersion2`.
+        stored in :file:`EXT:map_magic/Resources/Private/FrontendVersion2`.

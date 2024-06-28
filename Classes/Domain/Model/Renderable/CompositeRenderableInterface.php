@@ -19,7 +19,7 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\Renderable;
+namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
 /**
  * Interface which all Form Parts must adhere to **when they have sub elements**.
@@ -33,7 +33,7 @@ interface CompositeRenderableInterface extends RenderableInterface
     /**
      * Returns all RenderableInterface instances of this composite renderable recursively
      *
-     * @return \TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface[]
+     * @return \WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface[]
      * @internal
      */
     public function getRenderablesRecursively(): array;

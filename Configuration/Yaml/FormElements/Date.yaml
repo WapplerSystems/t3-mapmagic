@@ -334,7 +334,7 @@ prototypes:
           group: html5
           groupSorting: 500
           iconIdentifier: form-date-picker
-        implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\Date
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\Date
         properties:
           containerClassAttribute: input
           elementClassAttribute: ''

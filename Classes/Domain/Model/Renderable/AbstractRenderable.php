@@ -19,16 +19,16 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\Renderable;
+namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use TYPO3\CMS\Form\Domain\Model\Exception\FormDefinitionConsistencyException;
-use TYPO3\CMS\Form\Domain\Model\Exception\ValidatorPresetNotFoundException;
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\ValidatorPresetNotFoundException;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
 
 /**
  * Convenience base class which implements common functionality for most

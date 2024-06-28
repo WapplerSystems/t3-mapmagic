@@ -1,5 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
-<formvh:renderRenderable renderable="{element}">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
+<mapmagicvh:renderRenderable renderable="{element}">
     <f:render partial="Field/Field" arguments="{element: element}" contentAs="elementContent">
         <f:if condition="{element.properties.prependOptionLabel}">
             <f:then>
@@ -8,9 +8,9 @@
                         id="{element.uniqueIdentifier}"
                         class="{element.properties.elementClassAttribute} form-control"
                         errorClass="{element.properties.elementErrorClassAttribute}"
-                        additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
-                        prependOptionLabel="{formvh:translateElementProperty(element: element, property: 'prependOptionLabel')}"
-                        prependOptionValue="{formvh:translateElementProperty(element: element, property: 'prependOptionValue')}"
+                        additionalAttributes="{mapmagicvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
+                        prependOptionLabel="{mapmagicvh:translateElementProperty(element: element, property: 'prependOptionLabel')}"
+                        prependOptionValue="{mapmagicvh:translateElementProperty(element: element, property: 'prependOptionValue')}"
                         sortByOptionLabel="true"
                         prioritizedCountries="{element.properties.prioritizedCountries}"
                         onlyCountries="{element.properties.onlyCountries}"
@@ -23,7 +23,7 @@
                         id="{element.uniqueIdentifier}"
                         class="{element.properties.elementClassAttribute} form-control"
                         errorClass="{element.properties.elementErrorClassAttribute}"
-                        additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
+                        additionalAttributes="{mapmagicvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
                         sortByOptionLabel="true"
                         prioritizedCountries="{element.properties.prioritizedCountries}"
                         onlyCountries="{element.properties.onlyCountries}"
@@ -32,5 +32,5 @@
             </f:else>
         </f:if>
     </f:render>
-</formvh:renderRenderable>
+</mapmagicvh:renderRenderable>
 </html>

@@ -1,5 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
-<formvh:renderRenderable renderable="{element}">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
+<mapmagicvh:renderRenderable renderable="{element}">
     <f:form.validationResults for="{element.rootForm.identifier}.{element.identifier}">
         <f:if condition="{element.properties.elementDescription}">
             <f:variable name="aria" value="{describedby: '{element.uniqueIdentifier}-desc'}"/>
@@ -10,7 +10,7 @@
 
         <div class="{element.properties.containerClassAttribute}">
             <f:render partial="Field/Field" arguments="{element: element}" contentAs="elementContent">
-                <formvh:form.datePicker
+                <mapmagicvh:form.datePicker
                     id="{element.uniqueIdentifier}"
                     property="{element.identifier}"
                     dateFormat="{element.properties.dateFormat}"
@@ -18,16 +18,16 @@
                     enableDatePicker="{element.properties.enableDatePicker}"
                     class="{element.properties.elementClassAttribute}"
                     errorClass="{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}"
-                    additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
+                    additionalAttributes="{mapmagicvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
                     previewMode="{element.rootForm.renderingOptions.previewMode}"
                     aria="{aria}"
                 />
             </f:render>
             <f:if condition="{element.properties.displayTimeSelector}">
                 <div class="{f:if(condition: '{validationResults.errors.0}', then: ' {element.properties.errorClassAttribute}')}">
-                    <label class="{element.properties.labelClassAttribute}" for="{element.uniqueIdentifier}-time">{formvh:translateElementProperty(element: element, property: 'timeSelectorHourLabel')}</label>
+                    <label class="{element.properties.labelClassAttribute}" for="{element.uniqueIdentifier}-time">{mapmagicvh:translateElementProperty(element: element, property: 'timeSelectorHourLabel')}</label>
                     <div class="{element.properties.containerClassAttribute}">
-                        <formvh:form.timePicker
+                        <mapmagicvh:form.timePicker
                             id="{element.uniqueIdentifier}-time"
                             property="{element.identifier}"
                             initialDate="{element.properties.initialDate}"
@@ -38,9 +38,9 @@
                     </div>
                 </div>
                 <div class="{f:if(condition: '{validationResults.errors.0}', then: ' {element.properties.errorClassAttribute}')}">
-                    <label class="{element.properties.labelClassAttribute} for=" {element.uniqueIdentifier}-time-minute">{formvh:translateElementProperty(element: element, property: 'timeSelectorMinuteLabel')}</label>
+                    <label class="{element.properties.labelClassAttribute} for=" {element.uniqueIdentifier}-time-minute">{mapmagicvh:translateElementProperty(element: element, property: 'timeSelectorMinuteLabel')}</label>
 
-                    <formvh:form.timePicker
+                    <mapmagicvh:form.timePicker
                         id="{element.uniqueIdentifier}-time-minute"
                         property="{element.identifier}"
                         initialDate="{element.properties.initialDate}"
@@ -52,5 +52,5 @@
             </f:if>
         </div>
     </f:form.validationResults>
-</formvh:renderRenderable>
+</mapmagicvh:renderRenderable>
 </html>

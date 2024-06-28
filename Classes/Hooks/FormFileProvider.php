@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Hooks;
+namespace WapplerSystems\MapMagic\Hooks;
 
 use TYPO3\CMS\Filelist\ContextMenu\ItemProviders\FileProvider;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManager;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager;
 
 /**
  * Purges previously added form files from items for context menus.

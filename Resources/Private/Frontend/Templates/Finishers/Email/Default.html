@@ -2,14 +2,14 @@
 <f:section name="Title">{title}</f:section>
 <f:section name="Main">
     <table>
-        <formvh:renderAllFormValues renderable="{form.formDefinition}" as="formValue">
+        <mapmagicvh:renderAllFormValues renderable="{form.formDefinition}" as="formValue">
             <tr>
                 <f:if condition="{formValue.isSection}">
                     <f:then>
-                        <td colspan="2"><b>{formvh:translateElementProperty(element: formValue.element, property: 'label')}</b></td>
+                        <td colspan="2"><b>{mapmagicvh:translateElementProperty(element: formValue.element, property: 'label')}</b></td>
                     </f:then>
                     <f:else>
-                        <td valign="top" align="left">{formvh:translateElementProperty(element: formValue.element, property: 'label')}</td>
+                        <td valign="top" align="left">{mapmagicvh:translateElementProperty(element: formValue.element, property: 'label')}</td>
                         <td valign="top" align="left">
                             <f:if condition="{formValue.value}">
                                 <f:then>
@@ -40,6 +40,6 @@
                     </f:else>
                 </f:if>
             </tr>
-        </formvh:renderAllFormValues>
+        </mapmagicvh:renderAllFormValues>
     </table>
 </f:section>

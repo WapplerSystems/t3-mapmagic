@@ -1,5 +1,5 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:formvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
-<formvh:renderRenderable renderable="{element}">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/TYPO3/CMS/Form/ViewHelpers" data-namespace-typo3-fluid="true">
+<mapmagicvh:renderRenderable renderable="{element}">
     <f:form.validationResults for="{element.rootForm.identifier}.{element.identifier}">
         <f:if condition="{element.properties.elementDescription}">
             <f:variable name="aria" value="{describedby: '{element.uniqueIdentifier}-desc'}" />
@@ -15,12 +15,12 @@
                         property="{element.identifier}"
                         id="{element.uniqueIdentifier}"
                         class="{element.properties.elementClassAttribute}"
-                        options="{formvh:translateElementProperty(element: element, property: 'options')}"
+                        options="{mapmagicvh:translateElementProperty(element: element, property: 'options')}"
                         multiple="multiple"
                         errorClass="{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}"
-                        additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
-                        prependOptionLabel="{formvh:translateElementProperty(element: element, property: 'prependOptionLabel')}"
-                        prependOptionValue="{formvh:translateElementProperty(element: element, property: 'prependOptionValue')}"
+                        additionalAttributes="{mapmagicvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
+                        prependOptionLabel="{mapmagicvh:translateElementProperty(element: element, property: 'prependOptionLabel')}"
+                        prependOptionValue="{mapmagicvh:translateElementProperty(element: element, property: 'prependOptionValue')}"
                         aria="{aria}"
                     />
                 </f:then>
@@ -29,10 +29,10 @@
                         property="{element.identifier}"
                         id="{element.uniqueIdentifier}"
                         class="{element.properties.elementClassAttribute}"
-                        options="{formvh:translateElementProperty(element: element, property: 'options')}"
+                        options="{mapmagicvh:translateElementProperty(element: element, property: 'options')}"
                         multiple="multiple"
                         errorClass="{element.rootForm.renderingOptions.fieldProperties.errorClassAttribute}"
-                        additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
+                        additionalAttributes="{mapmagicvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"
                         aria="{aria}"
                     />
                 </f:else>
@@ -40,5 +40,5 @@
 
         </f:render>
     </f:form.validationResults>
-</formvh:renderRenderable>
+</mapmagicvh:renderRenderable>
 </html>

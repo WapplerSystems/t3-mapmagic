@@ -15,32 +15,32 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Configuration;
+namespace WapplerSystems\MapMagic\Domain\Configuration;
 
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessing;
-use TYPO3\CMS\Form\Domain\Configuration\ArrayProcessing\ArrayProcessor;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PropertyException;
-use TYPO3\CMS\Form\Domain\Configuration\Exception\PrototypeNotFoundException;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\ValidationDto;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\AdditionalElementPropertyPathsExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\ExtractorDto;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\IsCreatableFormElementExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\MultiValuePropertiesExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\PredefinedDefaultsExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\PropertyPathsExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\SelectOptionsExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\IsCreatablePropertyCollectionElementExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\MultiValuePropertiesExtractor as CollectionMultiValuePropertiesExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\PredefinedDefaultsExtractor as CollectionPredefinedDefaultsExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\PropertyPathsExtractor as CollectionPropertyPathsExtractor;
-use TYPO3\CMS\Form\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\SelectOptionsExtractor as CollectionSelectOptionsExtractor;
-use TYPO3\CMS\Form\Mvc\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
+use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
+use WapplerSystems\MapMagic\Domain\Configuration\Exception\PrototypeNotFoundException;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\AdditionalElementPropertyPathsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\ExtractorDto;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\IsCreatableFormElementExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\MultiValuePropertiesExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\PredefinedDefaultsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\PropertyPathsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\SelectOptionsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\IsCreatablePropertyCollectionElementExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\MultiValuePropertiesExtractor as CollectionMultiValuePropertiesExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\PredefinedDefaultsExtractor as CollectionPredefinedDefaultsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\PropertyPathsExtractor as CollectionPropertyPathsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\SelectOptionsExtractor as CollectionSelectOptionsExtractor;
+use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
+use WapplerSystems\MapMagic\Service\TranslationService;
 
 /**
  * Helper for configuration settings
@@ -429,7 +429,7 @@ class ConfigurationService implements SingletonInterface
      */
     public function isFormElementTypeCreatableByFormEditor(ValidationDto $dto): bool
     {
-        if ($dto->getFormElementType() === 'Form') {
+        if ($dto->getFormElementType() === 'MapMagic') {
             return true;
         }
         $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
@@ -612,7 +612,7 @@ class ConfigurationService implements SingletonInterface
      * Connect to the hook:
      * $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['buildFormDefinitionValidationConfiguration'][] = \Vendor\YourNamespace\YourClass::class;
      * Use the hook:
-     * public function addAdditionalPropertyPaths(\TYPO3\CMS\Form\Domain\Configuration\FormDefinition\Validators\ValidationDto $validationDto): array
+     * public function addAdditionalPropertyPaths(\WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto $validationDto): array
      * {
      *     $textValidationDto = $validationDto->withFormElementType('Text');
      *     $textValidatorsValidationDto = $textValidationDto->withPropertyCollectionName('validators');

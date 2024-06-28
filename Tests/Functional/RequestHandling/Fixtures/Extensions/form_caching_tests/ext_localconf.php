@@ -31,10 +31,10 @@ call_user_func(static function () {
     );
 
     ExtensionManagementUtility::addTypoScriptSetup('
-        plugin.tx_form {
+        plugin.tx_mapmagic {
             settings {
                 yamlConfigurations {
-                    1628755200 = EXT:form_caching_tests/Configuration/Yaml/FormSetup.yaml
+                    1628755200 = EXT:map_magic_caching_tests/Configuration/Yaml/FormSetup.yaml
                 }
             }
         }

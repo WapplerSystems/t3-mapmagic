@@ -151,7 +151,7 @@ prototypes:
           group: custom
           groupSorting: 100
           iconIdentifier: form-file-upload
-        implementationClassName: TYPO3\CMS\Form\Domain\Model\FormElements\FileUpload
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload
         properties:
           containerClassAttribute: input
           elementClassAttribute: ''

@@ -5,18 +5,18 @@ defined('TYPO3') or die();
 call_user_func(static function () {
     // Register the plugin
     $contentTypeName = \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        'Form',
-        'Formframework',
-        'LLL:EXT:form/Resources/Private/Language/locallang.xlf:form_new_wizard_title',
+        'MapMagic',
+        'Map',
+        'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:form_new_wizard_title',
         'content-form',
         'forms',
-        'LLL:EXT:form/Resources/Private/Language/locallang.xlf:form_new_wizard_description',
+        'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:form_new_wizard_description',
     );
 
     // Add the FlexForm
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
         '*',
-        'FILE:EXT:form/Configuration/FlexForms/FormFramework.xml',
+        'FILE:EXT:map_magic/Configuration/FlexForms/FormFramework.xml',
         $contentTypeName
     );
 
@@ -28,5 +28,5 @@ call_user_func(static function () {
         'after:palette:headers'
     );
 
-    $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['previewRenderer'] = \TYPO3\CMS\Form\Hooks\FormPagePreviewRenderer::class;
+    $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['previewRenderer'] = \WapplerSystems\MapMagic\Hooks\FormPagePreviewRenderer::class;
 });

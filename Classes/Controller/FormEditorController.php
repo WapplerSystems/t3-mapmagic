@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Controller;
+namespace WapplerSystems\MapMagic\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -36,14 +36,14 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\View\JsonView;
 use TYPO3\CMS\Fluid\View\TemplateView;
-use TYPO3\CMS\Form\Domain\Configuration\ConfigurationService;
-use TYPO3\CMS\Form\Domain\Configuration\FormDefinitionConversionService;
-use TYPO3\CMS\Form\Domain\Exception\RenderingException;
-use TYPO3\CMS\Form\Domain\Factory\ArrayFormFactory;
-use TYPO3\CMS\Form\Exception;
-use TYPO3\CMS\Form\Mvc\Persistence\Exception\PersistenceManagerException;
-use TYPO3\CMS\Form\Service\TranslationService;
-use TYPO3\CMS\Form\Type\FormDefinitionArray;
+use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use WapplerSystems\MapMagic\Domain\Configuration\FormDefinitionConversionService;
+use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
+use WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory;
+use WapplerSystems\MapMagic\Exception;
+use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
+use WapplerSystems\MapMagic\Service\TranslationService;
+use WapplerSystems\MapMagic\Type\FormDefinitionArray;
 
 /**
  * The form editor controller
@@ -184,7 +184,7 @@ class FormEditorController extends AbstractBackendController
         );
         array_map($pageRenderer->getJavaScriptRenderer()->addJavaScriptModuleInstruction(...), $javaScriptModules);
         $pageRenderer->addInlineSettingArray(null, $addInlineSettings);
-        $pageRenderer->addInlineLanguageLabelFile('EXT:form/Resources/Private/Language/locallang_formEditor_failSafeErrorHandling_javascript.xlf');
+        $pageRenderer->addInlineLanguageLabelFile('EXT:map_magic/Resources/Private/Language/locallang_formEditor_failSafeErrorHandling_javascript.xlf');
         $stylesheets = $this->prototypeConfiguration['formEditor']['stylesheets'];
         foreach ($stylesheets as $stylesheet) {
             $pageRenderer->addCssFile($stylesheet);
@@ -193,7 +193,7 @@ class FormEditorController extends AbstractBackendController
         $moduleTemplate->setModuleClass($this->request->getPluginName() . '_' . $this->request->getControllerName());
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
         $moduleTemplate->setTitle(
-            $this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab'),
+            $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab'),
             $formDefinition['label']
         );
         return $moduleTemplate->renderResponse('Backend/FormEditor/Index');
@@ -400,7 +400,7 @@ class FormEditorController extends AbstractBackendController
         if (isset($getVars['action']) && $getVars['action'] === 'index') {
             $newPageButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['action' => 'formeditor-new-page', 'identifier' => 'headerNewPage'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:formEditor.new_page_button'))
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button'))
                 ->setName('formeditor-new-page')
                 ->setValue('new-page')
                 ->setClasses('t3-form-element-new-page-button hidden')
@@ -418,7 +418,7 @@ class FormEditorController extends AbstractBackendController
 
             $saveButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'saveButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:formEditor.save_button'))
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.save_button'))
                 ->setName('formeditor-save-form')
                 ->setValue('save')
                 ->setClasses('t3-form-element-save-form-button hidden')
@@ -427,7 +427,7 @@ class FormEditorController extends AbstractBackendController
 
             $formSettingsButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'formSettingsButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:formEditor.form_settings_button'))
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.form_settings_button'))
                 ->setName('formeditor-form-settings')
                 ->setValue('settings')
                 ->setClasses('t3-form-element-form-settings-button hidden')
@@ -436,7 +436,7 @@ class FormEditorController extends AbstractBackendController
 
             $undoButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'undoButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:formEditor.undo_button'))
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.undo_button'))
                 ->setName('formeditor-undo-form')
                 ->setValue('undo')
                 ->setClasses('t3-form-element-undo-form-button hidden disabled')
@@ -444,7 +444,7 @@ class FormEditorController extends AbstractBackendController
 
             $redoButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'redoButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:form/Resources/Private/Language/Database.xlf:formEditor.redo_button'))
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.redo_button'))
                 ->setName('formeditor-redo-form')
                 ->setValue('redo')
                 ->setClasses('t3-form-element-redo-form-button hidden disabled')
@@ -529,7 +529,7 @@ class FormEditorController extends AbstractBackendController
             }
         }
 
-        foreach ($this->prototypeConfiguration['formElementsDefinition']['Form']['formEditor']['propertyCollections']['finishers'] ?? [] as $configuration) {
+        foreach ($this->prototypeConfiguration['formElementsDefinition']['MapMagic']['formEditor']['propertyCollections']['finishers'] ?? [] as $configuration) {
             if (!isset($configuration['editors'])) {
                 continue;
             }

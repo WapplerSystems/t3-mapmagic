@@ -19,9 +19,9 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers;
+namespace WapplerSystems\MapMagic\Domain\Finishers;
 
-use TYPO3\CMS\Form\Domain\Finishers\Exception\FinisherException;
+use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
 
 /**
  * A simple finisher that invokes a closure when executed

@@ -15,9 +15,9 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Domain\Finishers\Exception;
+namespace WapplerSystems\MapMagic\Domain\Finishers\Exception;
 
-use TYPO3\CMS\Form\Domain\Exception;
+use WapplerSystems\MapMagic\Domain\Exception;
 
 /**
  * This exception is thrown in Form Finishers

@@ -15,10 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Mvc\Configuration;
+namespace WapplerSystems\MapMagic\Tests\Unit\Mvc\Configuration;
 
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Form\Mvc\Configuration\TypoScriptService;
+use WapplerSystems\MapMagic\Mvc\Configuration\TypoScriptService;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 

@@ -19,12 +19,12 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\ViewHelpers\Form;
+namespace WapplerSystems\MapMagic\ViewHelpers\Form;
 
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\ViewHelpers\RenderRenderableViewHelper;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
 
 /**
  * Displays two select-boxes for hour and minute selection.

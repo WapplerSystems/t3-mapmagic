@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\RequestHandling;
+namespace WapplerSystems\MapMagic\Tests\Functional\RequestHandling;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Cache\Frontend\VariableFrontend;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Mail\FluidEmail;
 use TYPO3\CMS\Core\Tests\Functional\SiteHandling\SiteBasedTestTrait;
-use TYPO3\CMS\Form\Tests\Functional\Framework\FormHandling\FormDataFactory;
+use WapplerSystems\MapMagic\Tests\Functional\Framework\FormHandling\FormDataFactory;
 use TYPO3\TestingFramework\Core\Functional\Framework\DataHandling\Scenario\DataHandlerFactory;
 use TYPO3\TestingFramework\Core\Functional\Framework\DataHandling\Scenario\DataHandlerWriter;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
@@ -163,73 +163,73 @@ final class RequestHandlingTest extends FunctionalTestCase
     {
         yield 'Multistep form / ext:form content element' => [
             'formIdentifier' => 'multistep-test-form-1001',
-            'formNamePrefix' => 'tx_form_formframework',
+            'formNamePrefix' => 'tx_mapmagic_formframework',
         ];
 
         yield 'Multistep form / custom extbase controller => RenderActionIsCached' => [
             'formIdentifier' => 'RenderActionIsCached-1002',
-            'formNamePrefix' => 'tx_formcachingtests_renderactioniscached',
+            'formNamePrefix' => 'tx_mapmagiccachingtests_renderactioniscached',
         ];
 
         yield 'Multistep form / custom extbase controller => AllActionsUncached' => [
             'formIdentifier' => 'AllActionsUncached-1003',
-            'formNamePrefix' => 'tx_formcachingtests_allactionsuncached',
+            'formNamePrefix' => 'tx_mapmagiccachingtests_allactionsuncached',
         ];
 
         // disabled until https://review.typo3.org/c/Packages/TYPO3.CMS/+/70460 is fixed
         // yield 'Multistep form / custom extbase controller => AllActionsCached' => [
         //     'formIdentifier' => 'AllActionsCached-1004',
-        //     'formNamePrefix' => 'tx_formcachingtests_allactionscached',
+        //     'formNamePrefix' => 'tx_mapmagiccachingtests_allactionscached',
         // ];
 
         // disabled until https://review.typo3.org/c/Packages/TYPO3.CMS/+/70460 is fixed
         // yield 'Multistep form / simple FLUIDTEMPLATE' => [
         //     'formIdentifier' => 'FormFromSimpleFluidtemplate',
-        //     'formNamePrefix' => 'tx_form_formframework',
+        //     'formNamePrefix' => 'tx_mapmagic_formframework',
         // ];
 
         // disabled until https://review.typo3.org/c/Packages/TYPO3.CMS/+/70460 is fixed
         // yield 'Multistep form / COA FLUIDTEMPLATE through custom extbase controller => AllActionsCached' => [
         //     'formIdentifier' => 'FormFromCoaFluidtemplateThroughCustomExtbaseControllerAllActionsCached',
-        //     'formNamePrefix' => 'tx_formcachingtests_allactionscached',
+        //     'formNamePrefix' => 'tx_mapmagiccachingtests_allactionscached',
         // ];
 
         yield 'Multistep form / COA_INT FLUIDTEMPLATE through custom extbase controller => AllActionsCached' => [
             'formIdentifier' => 'FormFromCoaIntFluidtemplateThroughCustomExtbaseControllerAllActionsCached',
-            'formNamePrefix' => 'tx_formcachingtests_allactionscached',
+            'formNamePrefix' => 'tx_mapmagiccachingtests_allactionscached',
         ];
 
         // disabled until https://review.typo3.org/c/Packages/TYPO3.CMS/+/70460 is fixed
         // yield 'Multistep form / COA FLUIDTEMPLATE through custom extbase controller => RenderActionIsCached' => [
         //     'formIdentifier' => 'FormFromCoaFluidtemplateThroughCustomExtbaseControllerRenderActionIsCached',
-        //     'formNamePrefix' => 'tx_formcachingtests_renderactioniscached',
+        //     'formNamePrefix' => 'tx_mapmagiccachingtests_renderactioniscached',
         // ];
 
         yield 'Multistep form / COA_INT FLUIDTEMPLATE through custom extbase controller => RenderActionIsCached' => [
             'formIdentifier' => 'FormFromCoaIntFluidtemplateThroughCustomExtbaseControllerRenderActionIsCached',
-            'formNamePrefix' => 'tx_formcachingtests_renderactioniscached',
+            'formNamePrefix' => 'tx_mapmagiccachingtests_renderactioniscached',
         ];
 
         // disabled until https://review.typo3.org/c/Packages/TYPO3.CMS/+/70460 is fixed
         // yield 'Multistep form / COA FLUIDTEMPLATE through custom extbase controller => AllActionsUncached' => [
         //     'formIdentifier' => 'FormFromCoaFluidtemplateThroughCustomExtbaseControllerAllActionsUncached',
-        //     'formNamePrefix' => 'tx_formcachingtests_allactionsuncached',
+        //     'formNamePrefix' => 'tx_mapmagiccachingtests_allactionsuncached',
         // ];
 
         yield 'Multistep form / COA_INT FLUIDTEMPLATE through custom extbase controller => AllActionsUncached' => [
             'formIdentifier' => 'FormFromCoaIntFluidtemplateThroughCustomExtbaseControllerAllActionsUncached',
-            'formNamePrefix' => 'tx_formcachingtests_allactionsuncached',
+            'formNamePrefix' => 'tx_mapmagiccachingtests_allactionsuncached',
         ];
 
         // disabled until https://review.typo3.org/c/Packages/TYPO3.CMS/+/70460 is fixed
         // yield 'Multistep form / COA FLUIDTEMPLATE through ext:form controller' => [
         //     'formIdentifier' => 'FormFromCoaFluidtemplateThroughExtFormController',
-        //     'formNamePrefix' => 'tx_form_formframework',
+        //     'formNamePrefix' => 'tx_mapmagic_formframework',
         // ];
 
         yield 'Multistep form / COA_INT FLUIDTEMPLATE through ext:form controller' => [
             'formIdentifier' => 'FormFromCoaIntFluidtemplateThroughExtFormController',
-            'formNamePrefix' => 'tx_form_formframework',
+            'formNamePrefix' => 'tx_mapmagic_formframework',
         ];
     }
 

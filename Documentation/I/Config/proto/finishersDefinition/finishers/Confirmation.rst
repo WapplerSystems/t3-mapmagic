@@ -36,7 +36,7 @@ implementationClassName
          :emphasize-lines: 2
 
          Confirmation:
-           implementationClassName: TYPO3\CMS\Form\Domain\Finishers\ConfirmationFinisher
+           implementationClassName: WapplerSystems\MapMagic\Domain\Finishers\ConfirmationFinisher
 
 :aspect:`Good to know`
       - :ref:`"Custom finisher implementations"<concepts-finishers-customfinisherimplementations>`
@@ -117,7 +117,7 @@ options.typoscriptObjectPath
       No
 
 :aspect:`Default value`
-      'lib.tx_form.contentElementRendering'
+      'lib.tx_mapmagic.contentElementRendering'
 
 :aspect:`Description`
       The option "typoscriptObjectPath" can be used to render the content element (options.contentElementUid) through a typoscript lib.
@@ -195,7 +195,7 @@ options.templateRootPaths
          Confirmation:
            options:
              templateRootPaths:
-               10: 'EXT:form/Resources/Private/Frontend/Templates/Finishers/Confirmation/'
+               10: 'EXT:map_magic/Resources/Private/Frontend/Templates/Finishers/Confirmation/'
 
 :aspect:`Description`
       Used to define several paths for templates, which will be tried in reversed order (the paths are searched from bottom to top).
@@ -228,7 +228,7 @@ options.translation.translationFiles
 
 :aspect:`Description`
       If set, this translation file(s) will be used for finisher option translations.
-      If not set, the translation file(s) from the 'Form' element will be used.
+      If not set, the translation file(s) from the 'MapMagic' element will be used.
       Read :ref:`Translate finisher options<concepts-frontendrendering-translation-finishers>` for more informations.
 
 

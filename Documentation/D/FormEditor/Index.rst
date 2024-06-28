@@ -12,7 +12,7 @@ Form editor
 Hooks
 -----
 
-EXT:form implements various hooks so that forms can be manipulated while being
+EXT:map_magic implements various hooks so that forms can be manipulated while being
 created or saved.
 
 
@@ -215,9 +215,9 @@ templates and how the corresponding JavaScript code are executed :ref:`here <api
 
 The form element inline HTML templates and the corresponding JavaScript code
 are configured for reuse. In this way, most form elements you create should be
-able to access the components delivered in EXT:form, without requiring separate
+able to access the components delivered in EXT:map_magic, without requiring separate
 implementations (at least we hope so). For your own implementations, study
-EXT:form stage templates, which is found under ``Resources/Private/Backend/Partials/FormEditor/Stage/*``.
+EXT:map_magic stage templates, which is found under ``Resources/Private/Backend/Partials/FormEditor/Stage/*``.
 The corresponding JavaScript code is found under ``Resources/Public/JavaScript/Backend/FormEditor/StageComponent.js``.
 The method ``_renderTemplateDispatcher()`` shows, which methods will be used to
 render the respective form elements.
@@ -317,7 +317,7 @@ Basic JavaScript Concepts
 Events
 ^^^^^^
 
-EXT:form implements the ``publish/subscribe pattern`` to put the event handling
+EXT:map_magic implements the ``publish/subscribe pattern`` to put the event handling
 into effect. To learn more about this pattern, you should read
 https://addyosmani.com/resources/essentialjsdesignpatterns/book/.
 Note that the order of the subscriber is not manipulable and that information
@@ -346,7 +346,7 @@ Unsubscribe an event subscriber:
 
    getPublisherSubscriber().unsubscribe(subscriberToken);
 
-EXT:form itself publishes and subscribes to the following events:
+EXT:map_magic itself publishes and subscribes to the following events:
 
 
 .. _apireference-formeditor-basicjavascriptconcepts-events-ajax-beforesend:
@@ -354,7 +354,7 @@ EXT:form itself publishes and subscribes to the following events:
 ajax/beforeSend
 +++++++++++++++
 
-Each Ajax request is called before this event is sent. EXT:form uses this event
+Each Ajax request is called before this event is sent. EXT:map_magic uses this event
 to display the spinner icon on the save button.
 
 Subscribe to the event:
@@ -377,7 +377,7 @@ Subscribe to the event:
 ajax/complete
 +++++++++++++
 
-Each Ajax request is called after the end of this event. EXT:form uses this
+Each Ajax request is called after the end of this event. EXT:map_magic uses this
 event to remove the spinner icon on the save button.
 
 Subscribe to the event:
@@ -401,7 +401,7 @@ core/ajax/error
 +++++++++++++++
 
 This event is called if the Ajax request, which is used to save the form or to
-render the current page of the form in the ``preview view``, fails. EXT:form
+render the current page of the form in the ``preview view``, fails. EXT:map_magic
 uses this event to show an error message as a flash message and to show the
 received error text in the ``preview view``.
 
@@ -429,7 +429,7 @@ core/ajax/renderFormDefinitionPage/success
 ++++++++++++++++++++++++++++++++++++++++++
 
 This event is called if the Ajax request that is used to render the current
-page of the form in the ``preview view`` was successful. EXT:form uses this
+page of the form in the ``preview view`` was successful. EXT:map_magic uses this
 event to display the rendered form in the ``preview view``.
 
 Subscribe to the event:
@@ -455,7 +455,7 @@ core/ajax/saveFormDefinition/success
 ++++++++++++++++++++++++++++++++++++
 
 This event is called if the Ajax request that is used to save the form was
-successful. EXT:form uses this event to display a success message as a flash
+successful. EXT:map_magic uses this event to display a success message as a flash
 message. The ``form editor`` is also informed that no unsaved content currently
 exists.
 
@@ -483,7 +483,7 @@ core/applicationState/add
 The addition/ deletion and movement of form elements und property collection
 elements (validators/ finishers) is saved in an internal stack so that the
 undo/ redo function can be implemented. This event is called whenever the
-current state is added to the stack. EXT:form uses this event to reset the
+current state is added to the stack. EXT:map_magic uses this event to reset the
 enabled/ disabled state of the undo/ redo buttons.
 
 Subscribe to the event:
@@ -539,10 +539,10 @@ can write properties into the ``FormElement model`` through the methods ``get``
 and ``set``. Each property path can register an event name for the publisher
 through the method ``on``. This event is then always called when a property
 path is written via ``set``. Read :ref:`FormElement model<concepts-formeditor-basicjavascriptconcepts-formelementmodel>`
-for more information. EXT:form automatically registers for all known property
+for more information. EXT:map_magic automatically registers for all known property
 paths of a form element the event ``core/formElement/somePropertyChanged``.
 This means that every property written via ``set`` calls this event. Among
-other things, EXT:form uses this event for, for example, updating the label of
+other things, EXT:map_magic uses this event for, for example, updating the label of
 a form element in other components (e.g. ``Tree`` component ) when this label
 is changed. Furthermore, any validation errors from form element properties
 are indicated by this event in the ``Tree`` component.
@@ -572,7 +572,7 @@ view/collectionElement/moved
 ++++++++++++++++++++++++++++
 
 The method ``getFormEditorApp().getViewModel().movePropertyCollectionElement()``
-calls this event at the end. EXT:form uses this event to re-render the
+calls this event at the end. EXT:map_magic uses this event to re-render the
 ``Inspector`` component as soon as a property collection element (validator/
 finisher) is moved.
 
@@ -601,7 +601,7 @@ view/collectionElement/new/added
 ++++++++++++++++++++++++++++++++
 
 The method ``getFormEditorApp().getViewModel().createAndAddPropertyCollectionElement()``
-calls this event at the end. EXT:form uses this event to re-render the
+calls this event at the end. EXT:map_magic uses this event to re-render the
 ``Inspector`` component as soon as a property collection element (validator/
 finisher) is created and added.
 
@@ -631,7 +631,7 @@ view/collectionElement/removed
 ++++++++++++++++++++++++++++++
 
 The method ``getFormEditorApp().getViewModel().removePropertyCollectionElement()``
-calls this event at the end. EXT:form uses this event to re-render the
+calls this event at the end. EXT:map_magic uses this event to re-render the
 ``Inspector`` component as soon as a property collection element (validator/
 finisher) is removed.
 
@@ -660,7 +660,7 @@ view/formElement/inserted
 
 The method ``getFormEditorApp().getViewModel().createAndAddFormElement()`` and
 the event :ref:`view/insertElements/perform/after<apireference-formeditor-basicjavascriptconcepts-events-view-insertelements-perform-after>`
-call this event at the end. EXT:form uses this event to set the current
+call this event at the end. EXT:map_magic uses this event to set the current
 to-be-processed form element (``getFormEditorApp().setCurrentlySelectedFormElement()``)
 and to re-render the ``Tree``, ``Stage`` and ``Inspector`` components.
 
@@ -710,7 +710,7 @@ view/formElement/removed
 ++++++++++++++++++++++++
 
 The method ``getFormEditorApp().getViewModel().removeFormElement()`` calls this
-event at the end. EXT:form uses this event to set the current to-be-processed
+event at the end. EXT:map_magic uses this event to set the current to-be-processed
 form element (``getFormEditorApp().setCurrentlySelectedFormElement()``) and to
 re-render the ``Tree``, ``Stage`` and ``Inspector`` components.
 
@@ -736,7 +736,7 @@ view/header/button/close/clicked
 ++++++++++++++++++++++++++++++++
 
 The onClick event of the "Close" button in the ``form editor's`` header section
-calls this event. EXT:form uses this event to display a warning message in case
+calls this event. EXT:map_magic uses this event to display a warning message in case
 there are unsaved changes.
 
 Subscribe to the event:
@@ -760,7 +760,7 @@ view/header/button/newPage/clicked
 ++++++++++++++++++++++++++++++++++
 
 The onClick event of the "new page" button in the ``form editor's`` header
-section calls this event. EXT:form uses this event to display the "new page"
+section calls this event. EXT:map_magic uses this event to display the "new page"
 dialog box.
 
 Subscribe to the event:
@@ -785,7 +785,7 @@ view/header/button/save/clicked
 +++++++++++++++++++++++++++++++
 
 The onClick event of the "save" button in the ``form editor's`` header section
-calls this event. EXT:form uses this event either to display a dialog box with
+calls this event. EXT:map_magic uses this event either to display a dialog box with
 the element in question (if there are validation errors) or to save the ``form
 definition`` (if there are no validation errors).
 
@@ -810,7 +810,7 @@ view/header/formSettings/clicked
 ++++++++++++++++++++++++++++++++
 
 The onClick event of the "settings"  button in the ``form editor's`` header
-section calls this event. EXT:form uses this event to select the root form
+section calls this event. EXT:map_magic uses this event to select the root form
 element.
 
 Subscribe to the event:
@@ -839,7 +839,7 @@ element:
 - if "After" in the "Create new element" split button in the form-element toolbar for composite elements (e.g. fieldset) is clicked.
 - if the "Create new element" button in the form-element toolbar for non-composite elements is clicked.
 
-EXT:form uses this event to create a new form element (``getFormEditorApp().getViewModel().createAndAddFormElement()``)
+EXT:map_magic uses this event to create a new form element (``getFormEditorApp().getViewModel().createAndAddFormElement()``)
 and then move (``getFormEditorApp().getViewModel().moveFormElement()``) it
 below the currently selected element (sibling). At the end of this event, the
 event :ref:`view/formElement/inserted<apireference-formeditor-basicjavascriptconcepts-events-view-formelement-inserted>`
@@ -872,7 +872,7 @@ element:
 
 - if, in the ``abstract view`` mode, the "Create new element" button at the end of the ``Stage`` component is clicked.
 
-EXT:form uses this event to create a new form element (``getFormEditorApp().getViewModel().createAndAddFormElement()``).
+EXT:map_magic uses this event to create a new form element (``getFormEditorApp().getViewModel().createAndAddFormElement()``).
 This element is always created as the last element of the currently selected
 page.
 
@@ -902,7 +902,7 @@ element:
 
 - if "Inside" in the "Create new element" split button in the form-element toolbar for composite elements (e.g. fieldset) is clicked.
 
-EXT:form uses this event to create a new form element as a child element of the
+EXT:map_magic uses this event to create a new form element as a child element of the
 currently selected element (``getFormEditorApp().getViewModel().createAndAddFormElement()``).
 
 Subscribe to the event:
@@ -932,7 +932,7 @@ element:
 - if the "Create new page" icon in the header section is clicked.
 - if the "Create new page" button in the ``Tree`` component is clicked.
 
-EXT:form uses this event to create a new page after the currently selected page
+EXT:map_magic uses this event to create a new page after the currently selected page
 (``getFormEditorApp().getViewModel().createAndAddFormElement()``).
 
 Subscribe to the event:
@@ -962,7 +962,7 @@ are used to display the available validators/ finishers for a form element as a
 select box. Furthermore, these ``inspector editors`` indicate that in the
 ``form definition``, validators/ finishers for the currently selected element
 already exist. This occurs through the event ``view/inspector/collectionElement/existing/selected``.
-EXT:form uses this event to render these validators/ finishers and their
+EXT:map_magic uses this event to render these validators/ finishers and their
 tentatively configured ``inspector editors`` (``getFormEditorApp().getViewModel().renderInspectorCollectionElementEditors()``).
 
 Subscribe to the event:
@@ -992,7 +992,7 @@ and :ref:`FinishersEditor <prototypes.prototypeIdentifier.formelementsdefinition
 are used to display the available validators/ finishers for a form element as a
 select box. The onChange event of the select box then calls this event. In
 addition, the ``inspector editor`` :ref:`RequiredValidatorEditor <prototypes.prototypeIdentifier.formelementsdefinition.formelementtypeidentifier.formeditor.editors.*.requiredvalidatoreditor>`
-calls this event when a checkbox is chosen. EXT:form uses this event to add and
+calls this event when a checkbox is chosen. EXT:map_magic uses this event to add and
 render the validator/ finisher of the ``form definition`` via ``getFormEditorApp().getViewModel().createAndAddPropertyCollectionElement()``.
 
 Subscribe to the event:
@@ -1017,10 +1017,10 @@ Subscribe to the event:
 view/inspector/collectionElements/dnd/update
 ++++++++++++++++++++++++++++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'end' event from 'SortableJS' calls
 the ``view/inspector/collectionElements/dnd/update`` event if a property
-collection element in the ``Inspector`` component is sorted. EXT:form uses this
+collection element in the ``Inspector`` component is sorted. EXT:map_magic uses this
 event to move the validator/ finisher in the ``form definition`` via the method
 ``getFormEditorApp().getViewModel().movePropertyCollectionElement()``.
 
@@ -1059,7 +1059,7 @@ which gives the ``form editor`` two pieces of information. On the one hand the
 The ``form editor`` can consequently load a corresponding inline HTML template
 for the ``inspector editor``. On the other hand, the ``Inspector`` component
 must be told which JavaScript code should be executed for the
-``inspector editor``. For the ``inspector editors`` delivered with EXT:form,
+``inspector editor``. For the ``inspector editors`` delivered with EXT:map_magic,
 this occurs within the method ``_renderEditorDispatcher()``.
 An existing hard-coded list of known ``inspector editors`` determines, by means
 of the property ``templateName``, which corresponding JavaScript method should
@@ -1274,7 +1274,7 @@ view/inspector/removeCollectionElement/perform
 ++++++++++++++++++++++++++++++++++++++++++++++
 
 The ``inspector editor`` :ref:`RequiredValidatorEditor <prototypes.prototypeIdentifier.formelementsdefinition.formelementtypeidentifier.formeditor.editors.*.requiredvalidatoreditor>`
-calls this event, if the checkbox is deselected. EXT:form uses this event to
+calls this event, if the checkbox is deselected. EXT:map_magic uses this event to
 remove the configured required validator ('NotEmpty') from the ``form
 definition`` through the method ``getFormEditorApp().getViewModel().removePropertyCollectionElement()``.
 
@@ -1303,7 +1303,7 @@ view/modal/close/perform
 
 If you try to close the ``form editor`` with unsaved content, a dialog box
 appears, asking whether you really wish to close it. If you confirm it, this
-event is called in the ``check box`` component. EXT:form uses this event to
+event is called in the ``check box`` component. EXT:map_magic uses this event to
 close the ``form editor`` and return to the ``form manager``.
 
 Subscribe to the event:
@@ -1328,7 +1328,7 @@ view/modal/removeCollectionElement/perform
 
 If you try to remove a validator/ finisher by clicking the remove icon, a
 dialog box appears, asking you to confirm this action. If confirmed, this event
-is called in the ``check box`` component. EXT:form uses this event to remove
+is called in the ``check box`` component. EXT:map_magic uses this event to remove
 the validator/ finisher from the ``form definition`` through the method
 ``getFormEditorApp().getViewModel().removePropertyCollectionElement()``.
 
@@ -1357,7 +1357,7 @@ view/modal/removeFormElement/perform
 
 If you try to remove a form element by clicking the remove icon, a dialog box
 appears, asking you to confirm this action. If confirmed, this event is called
-in the ``check box`` component. EXT:form uses this event to remove the form
+in the ``check box`` component. EXT:map_magic uses this event to remove the form
 element from the ``form definition`` via the method ``getFormEditorApp().getViewModel().removeFormElement()``.
 
 Subscribe to the event:
@@ -1384,7 +1384,7 @@ view/modal/validationErrors/element/clicked
 If a form element contains a validation error and you try to save the form, a
 dialog box appears, listing all form elements with validation errors. One such
 form element can be clicked in this dialog box. This event is called by
-clicking a form element in the dialog box. EXT:form uses this event to select
+clicking a form element in the dialog box. EXT:map_magic uses this event to select
 and show this form element.
 
 Subscribe to the event:
@@ -1409,7 +1409,7 @@ view/paginationNext/clicked
 +++++++++++++++++++++++++++
 
 This event is called if the 'pagination next' button in the ``Stage``
-component's header section is clicked. EXT:form uses this event to render the
+component's header section is clicked. EXT:map_magic uses this event to render the
 next page of the form.
 
 Subscribe to the event:
@@ -1433,7 +1433,7 @@ view/paginationPrevious/clicked
 +++++++++++++++++++++++++++++++
 
 This event is called, if the 'pagination previous' button in the ``Stage``
-component's header section is clicked. EXT:form uses this event to render the
+component's header section is clicked. EXT:map_magic uses this event to render the
 previous page of the form.
 
 Subscribe to the event:
@@ -1456,9 +1456,9 @@ Subscribe to the event:
 view/ready
 ++++++++++
 
-EXT:form makes it possible to load :ref:`your own JavaScript module <concepts-formeditor-basicjavascriptconcepts-registercustomjavascriptmodules>`.
+EXT:map_magic makes it possible to load :ref:`your own JavaScript module <concepts-formeditor-basicjavascriptconcepts-registercustomjavascriptmodules>`.
 If all modules are loaded, the view-model method ``_loadAdditionalModules``
-calls this event. EXT:form uses this event to remove the preloader icon and
+calls this event. EXT:map_magic uses this event to remove the preloader icon and
 finally initialize the ``form editor``.
 
 Subscribe to the event:
@@ -1484,7 +1484,7 @@ view/redoButton/clicked
 This event is called if the redo button in the ``form editor`` header is
 clicked. The addition/ deletion and movement of form elements and property
 collection elements (validators/ finishers) is saved in an internal stack in
-order to reset the undo/ redo functionality. EXT:form uses this event to reset
+order to reset the undo/ redo functionality. EXT:map_magic uses this event to reset
 this stack to the previous state.
 
 Subscribe to the event:
@@ -1508,7 +1508,7 @@ view/stage/abstract/button/newElement/clicked
 +++++++++++++++++++++++++++++++++++++++++++++
 
 This event is called if the "Create new element" button at the end of the
-``Stage`` component in the ``abstract view`` mode is clicked. EXT:form uses
+``Stage`` component in the ``abstract view`` mode is clicked. EXT:map_magic uses
 this event to display the "new element" dialog box.
 
 Subscribe to the event:
@@ -1533,10 +1533,10 @@ Subscribe to the event:
 view/stage/abstract/dnd/change
 ++++++++++++++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'change' event from 'SortableJS' calls
 the ``view/stage/abstract/dnd/change`` event in the ``Stage`` component in the
-``abstract view`` mode if form elements are sorted. EXT:form uses this event to
+``abstract view`` mode if form elements are sorted. EXT:map_magic uses this event to
 set various CSS classes during the drag-and-drop process.
 
 Subscribe to the event:
@@ -1562,10 +1562,10 @@ Subscribe to the event:
 view/stage/abstract/dnd/start
 +++++++++++++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'start' event from 'SortableJS' calls
 the ``view/stage/abstract/dnd/start`` event in the ``Stage`` component in the
-``abstract view`` mode if form elements are sorted. EXT:form uses this event to
+``abstract view`` mode if form elements are sorted. EXT:map_magic uses this event to
 set various CSS classes at the start of the drag-and-drop process.
 
 Subscribe to the event:
@@ -1590,10 +1590,10 @@ Subscribe to the event:
 view/stage/abstract/dnd/stop
 ++++++++++++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'end' event from 'SortableJS' calls the
 ``view/stage/abstract/dnd/stop`` event in the ``Stage`` component in the
-``abstract view`` mode if form elements are sorted. EXT:form uses this event to
+``abstract view`` mode if form elements are sorted. EXT:map_magic uses this event to
 to re-render the ``Tree``, ``Stage`` and ``Inspector`` components at the end of
 the drag-and-drop process and to select the moved form element.
 
@@ -1618,10 +1618,10 @@ Subscribe to the event:
 view/stage/abstract/dnd/update
 ++++++++++++++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'end' event from 'SortableJS' calls
 the ``view/stage/abstract/dnd/update`` event in the ``Stage`` component in the
-``abstract view`` mode if form elements are sorted. EXT:form uses this event
+``abstract view`` mode if form elements are sorted. EXT:map_magic uses this event
 to move the form element in the ``form definition`` accordingly at the end of
 the drag-and-drop process.
 
@@ -1650,7 +1650,7 @@ view/stage/abstract/elementToolbar/button/newElement/clicked
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This event is called if the "Create new element" button in the form-element
-toolbar or "Inside" or "After" in the split button is clicked. EXT:form uses
+toolbar or "Inside" or "After" in the split button is clicked. EXT:map_magic uses
 this event to display the "New element" dialog box.
 
 Subscribe to the event:
@@ -1676,7 +1676,7 @@ view/stage/abstract/render/postProcess
 ++++++++++++++++++++++++++++++++++++++
 
 This event is called after the ``abstract view`` of the ``Stage`` component has
-been rendered. EXT:form uses this event to render the undo/ redo buttons.
+been rendered. EXT:map_magic uses this event to render the undo/ redo buttons.
 
 Subscribe to the event:
 
@@ -1734,7 +1734,7 @@ form element. The ``_renderTemplateDispatcher()`` method then identifies, by
 means of the form element's ``<formElementTypeIdentifier>``, the corresponding
 JavaScript code to fill the inline HTML template with life.
 ``_renderTemplateDispatcher()`` contains a hard-coded list with the
-``<formElementTypeIdentifier>`` that is brought in with the EXT:form, and it
+``<formElementTypeIdentifier>`` that is brought in with the EXT:map_magic, and it
 renders the inline HTML templates accordingly. At the end, the
 ``view/stage/abstract/render/template/perform`` event is called. If you wish to
 implement your own form element and show it in the ``form editor``, this event
@@ -1744,7 +1744,7 @@ This is generally enough to allow the ``Stage/SimpleTemplate`` and/ or
 ``Stage/SelectTemplate`` inline HTML template to be rendered for your own form
 element and, in the JavaScript code, to access the ``getFormEditorApp().getViewModel().getStage().renderSimpleTemplateWithValidators()``
 and/ or ``getFormEditorApp().getViewModel().getStage().renderSelectTemplates()``
-method delivered with EXT:form. An overview over the functionality of the
+method delivered with EXT:map_magic. An overview over the functionality of the
 formEditorPartials for the ``<formElementTypeIdentifier>`` and its JavaScript
 code is found :ref:`here <apireference-formeditor-stage-commonabstractformelementtemplates>`.
 
@@ -1764,7 +1764,7 @@ Subscribe to the event:
    getPublisherSubscriber().subscribe('view/stage/abstract/render/template/perform', function(topic, args) {
    });
 
-A simple example reusing the EXT:form inline HTML template ``Stage/SelectTemplate`` and the EXT:form JavaScript code ``renderSelectTemplates()``
+A simple example reusing the EXT:map_magic inline HTML template ``Stage/SelectTemplate`` and the EXT:map_magic JavaScript code ``renderSelectTemplates()``
 for a custom form element with ``<formElementTypeIdentifier>`` = 'GenderSelect'.
 In this example, 'GenderSelect' is basically a radio button form element with some predefined options.
 
@@ -1948,7 +1948,7 @@ view/stage/element/clicked
 ++++++++++++++++++++++++++
 
 This event is called from the ``Stage`` component when a form element is
-clicked. EXT:form uses this event to select this element and to display the
+clicked. EXT:map_magic uses this event to select this element and to display the
 form-element toolbar. In addition, the ``Tree`` and ``Inspector`` components
 are re-rendered.
 
@@ -1997,7 +1997,7 @@ view/stage/preview/render/postProcess
 +++++++++++++++++++++++++++++++++++++
 
 This event is called after the ``preview view`` of the ``Stage`` component has
-been rendered. EXT:form uses this event to render the undo/ redo buttons.
+been rendered. EXT:map_magic uses this event to render the undo/ redo buttons.
 
 Subscribe to the event:
 
@@ -2020,7 +2020,7 @@ view/structure/button/newPage/clicked
 +++++++++++++++++++++++++++++++++++++
 
 This event is called from the onClick event of the ``Tree`` component's "Create
-new page" button. EXT:form uses this event to display the "new page" dialog
+new page" button. EXT:map_magic uses this event to display the "new page" dialog
 box.
 
 Subscribe to the event:
@@ -2045,7 +2045,7 @@ view/structure/renew/postProcess
 ++++++++++++++++++++++++++++++++
 
 This event is called from the view-model after the ``Tree`` component has been
-re-rendered. EXT:form uses this event to display potential validation errors
+re-rendered. EXT:map_magic uses this event to display potential validation errors
 from form elements in the ``Tree`` component.
 
 Subscribe to the event:
@@ -2069,7 +2069,7 @@ view/structure/root/selected
 ++++++++++++++++++++++++++++
 
 This event is called if the root form element in the ``Tree`` component is
-clicked. EXT:form uses this event to re-render the ``Stage``, ``Inspector`` and
+clicked. EXT:map_magic uses this event to re-render the ``Stage``, ``Inspector`` and
 ``Tree`` components.
 
 Subscribe to the event:
@@ -2092,10 +2092,10 @@ Subscribe to the event:
 view/tree/dnd/change
 ++++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'change' event from 'SortableJS' calls
 the ``view/tree/dnd/change`` event in der ``Tree`` component if form elements
-are sorted. EXT:form uses this event to set various CSS classes during the drag
+are sorted. EXT:map_magic uses this event to set various CSS classes during the drag
 -and-drop process.
 
 Subscribe to the event:
@@ -2121,10 +2121,10 @@ Subscribe to the event:
 view/tree/dnd/stop
 ++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'end' event from 'SortableJS' calls the
 ``view/tree/dnd/stop`` event in the ``Tree`` component if form elements are
-sorted. EXT:form uses this event to re-render ``Tree``, ``Stage`` and
+sorted. EXT:map_magic uses this event to re-render ``Tree``, ``Stage`` and
 ``Inspector`` components at the end of the drag-and-drop process and to select
 the moved form element.
 
@@ -2149,10 +2149,10 @@ Subscribe to the event:
 view/tree/dnd/update
 ++++++++++++++++++++
 
-EXT:form uses the library 'SortableJS' for the drag-and-drop functionality.
+EXT:map_magic uses the library 'SortableJS' for the drag-and-drop functionality.
 The 'end' event from 'SortableJS' calls
 the ``view/tree/dnd/update`` event in der ``Tree`` component if form elements
-are sorted. EXT:form uses this event to move the form element in the ``form
+are sorted. EXT:map_magic uses this event to move the form element in the ``form
 definition`` accordingly at the end of the drag-and-drop process.
 
 Subscribe to the event:
@@ -2180,7 +2180,7 @@ view/tree/node/clicked
 ++++++++++++++++++++++
 
 This event is called from the ``Tree`` component if a form element is clicked.
-EXT:form uses this event to re-render the ``Stage`` and ``Inspector``
+EXT:map_magic uses this event to re-render the ``Stage`` and ``Inspector``
 components and select the form element.
 
 Subscribe to the event:
@@ -2232,7 +2232,7 @@ view/undoButton/clicked
 This event is called when the undo button is clicked in the ``form editor``
 header. The history of adding / deleting and moving form elements and property
 collection elements (validators/ finishers) is stored in an internal stack to
-implement the undo / redo functionality. EXT:form uses this event to set this
+implement the undo / redo functionality. EXT:map_magic uses this event to set this
 stack to the next state.
 
 Subscribe to the event:
@@ -2256,7 +2256,7 @@ view/viewModeButton/abstract/clicked
 ++++++++++++++++++++++++++++++++++++
 
 This event is called when the abstract view button is clicked in the header
-area of the ``Stage`` component. EXT:form uses this event to render the
+area of the ``Stage`` component. EXT:map_magic uses this event to render the
 ``abstract view`` in the ``Stage`` component.
 
 Subscribe to the event:
@@ -2280,7 +2280,7 @@ view/viewModeButton/preview/clicked
 +++++++++++++++++++++++++++++++++++
 
 This event is called when the preview button is clicked in the header area of
-the ``Stage`` component. EXT:form uses this event to render the ``preview
+the ``Stage`` component. EXT:map_magic uses this event to render the ``preview
 view`` in the ``Stage`` component.
 
 Subscribe to the event:
@@ -2617,7 +2617,7 @@ Method: on()
 Any number of :ref:`Publisher/Subscriber<concepts-formeditor-basicjavascriptconcepts-events>`
 events can be assigned to any property path of a ``FormElement model``. Each
 ``set()`` operation on this property path will then call these events. By
-default, EXT:form registers the event :ref:`core/formElement/somePropertyChanged<apireference-formeditor-basicjavascriptconcepts-events-core-formelement-somepropertychanged>`
+default, EXT:map_magic registers the event :ref:`core/formElement/somePropertyChanged<apireference-formeditor-basicjavascriptconcepts-events-core-formelement-somepropertychanged>`
 for each property path.
 
 Example:

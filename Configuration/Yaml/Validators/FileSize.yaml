@@ -2,7 +2,7 @@ prototypes:
   standard:
     validatorsDefinition:
       FileSize:
-        implementationClassName: TYPO3\CMS\Form\Mvc\Validation\FileSizeValidator
+        implementationClassName: WapplerSystems\MapMagic\Mvc\Validation\FileSizeValidator
         #options:
           # minimum file size to accept
           #minimum:

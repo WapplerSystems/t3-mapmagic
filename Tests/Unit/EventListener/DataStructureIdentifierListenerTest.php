@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\EventListener;
+namespace WapplerSystems\MapMagic\Tests\Unit\EventListener;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -25,8 +25,8 @@ use TYPO3\CMS\Core\Configuration\Event\AfterFlexFormDataStructureIdentifierIniti
 use TYPO3\CMS\Core\Configuration\Event\AfterFlexFormDataStructureParsedEvent;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\EventListener\DataStructureIdentifierListener;
-use TYPO3\CMS\Form\Mvc\Persistence\FormPersistenceManagerInterface;
+use WapplerSystems\MapMagic\EventListener\DataStructureIdentifierListener;
+use WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class DataStructureIdentifierListenerTest extends UnitTestCase
@@ -67,7 +67,7 @@ final class DataStructureIdentifierListenerTest extends UnitTestCase
             [],
             'tt_content',
             'pi_flexform',
-            ['CType' => 'form_formframework'],
+            ['CType' => 'mapmagic_map'],
             [],
         );
 
@@ -83,7 +83,7 @@ final class DataStructureIdentifierListenerTest extends UnitTestCase
     public function modifyIdentifiersAddsGivenPersistenceIdentifier(): void
     {
         $row = [
-            'CType' => 'form_formframework',
+            'CType' => 'mapmagic_map',
             'pi_flexform' => '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
                 <T3FlexForms>
                     <data>
@@ -124,7 +124,7 @@ final class DataStructureIdentifierListenerTest extends UnitTestCase
     public function modifyIdentifiersAddsOverrideFinisherValue(): void
     {
         $row = [
-            'CType' => 'form_formframework',
+            'CType' => 'mapmagic_map',
             'pi_flexform' => '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
                 <T3FlexForms>
                     <data>

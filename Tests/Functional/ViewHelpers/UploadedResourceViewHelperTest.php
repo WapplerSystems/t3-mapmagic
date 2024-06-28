@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\ViewHelpers;
+namespace WapplerSystems\MapMagic\Tests\Functional\ViewHelpers;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
@@ -32,7 +32,7 @@ final class UploadedResourceViewHelperTest extends FunctionalTestCase
     public function accpetAttributeIsAdded(): void
     {
         $context = $this->get(RenderingContextFactory::class)->create();
-        $context->getTemplatePaths()->setTemplateSource('<formvh:form.uploadedResource accept="{0: \'image/jpeg\', 1: \'image/png\'}"/>');
+        $context->getTemplatePaths()->setTemplateSource('<mapmagicvh:form.uploadedResource accept="{0: \'image/jpeg\', 1: \'image/png\'}"/>');
         self::assertSame('<input accept="image/jpeg,image/png" type="file" name="" />', (new TemplateView($context))->render());
     }
 }

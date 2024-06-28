@@ -19,9 +19,9 @@ declare(strict_types=1);
  * Inspired by and partially taken from the Neos.Form package (www.neos.io)
  */
 
-namespace TYPO3\CMS\Form\Domain\Model\Renderable;
+namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
-use TYPO3\CMS\Form\Domain\Model\Exception\FormDefinitionConsistencyException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\FormDefinitionConsistencyException;
 
 /**
  * Convenience base class which implements common functionality for most
@@ -35,7 +35,7 @@ abstract class AbstractCompositeRenderable extends AbstractRenderable implements
     /**
      * array of child renderables
      *
-     * @var \TYPO3\CMS\Form\Domain\Model\Renderable\RenderableInterface[]
+     * @var \WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface[]
      */
     protected $renderables = [];
 

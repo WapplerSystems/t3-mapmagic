@@ -15,17 +15,17 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Functional\Service;
+namespace WapplerSystems\MapMagic\Tests\Functional\Service;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Core\Localization\Locales;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Form\Domain\Model\FormElements\GenericFormElement;
-use TYPO3\CMS\Form\Domain\Model\FormElements\Page;
-use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
-use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
-use TYPO3\CMS\Form\Service\TranslationService;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime;
+use WapplerSystems\MapMagic\Service\TranslationService;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class TranslationServiceTest extends FunctionalTestCase
@@ -48,7 +48,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsExistingDefaultLanguageKeyIfFullExtDefaultLanguageKeyIsRequested(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('FORM EN', $this->subject->translate(
             $xlfPath . ':element.Page.renderingOptions.nextButtonLabel'
         ));
@@ -57,7 +57,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsExistingDefaultLanguageKeyIfFullLLLExtDefaultLanguageKeyIsRequested(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('FORM EN', $this->subject->translate(
             'LLL:' . $xlfPath . ':element.Page.renderingOptions.nextButtonLabel'
         ));
@@ -66,7 +66,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsExistingDefaultLanguageKeyIfDefaultLanguageKeyIsRequestedAndDefaultValueIsGiven(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('FORM EN', $this->subject->translate(
             $xlfPath . ':element.Page.renderingOptions.nextButtonLabel',
             null,
@@ -79,7 +79,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsEmptyStringIfNonExistingDefaultLanguageKeyIsRequested(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('', $this->subject->translate(
             $xlfPath . ':element.Page.renderingOptions.nonExisting'
         ));
@@ -88,7 +88,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsDefaultValueIfNonExistingDefaultLanguageKeyIsRequestedAndDefaultValueIsGiven(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('defaultValue', $this->subject->translate(
             $xlfPath . ':element.Page.renderingOptions.nonExisting',
             null,
@@ -101,7 +101,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsExistingLanguageKeyForLanguageIfExtPathLanguageKeyIsRequested(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('FORM DE', $this->subject->translate(
             $xlfPath . ':element.Page.renderingOptions.nextButtonLabel',
             null,
@@ -113,7 +113,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsDefaultValueIfNonExistingLanguageKeyForLanguageIsRequestedAndDefaultValueIsGiven(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('defaultValue', $this->subject->translate(
             $xlfPath . ':element.Page.renderingOptions.nonExisting',
             null,
@@ -126,7 +126,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsEmptyStringIfNonExistingLanguageKeyForLanguageIsRequested(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('', $this->subject->translate(
             $xlfPath . ':element.Page.renderingOptions.nonExisting',
             null,
@@ -138,7 +138,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsExistingDefaultLanguageKeyIfDefaultLanguageKeyIsRequestedAndExtFilePathIsGiven(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('FORM EN', $this->subject->translate(
             'element.Page.renderingOptions.nextButtonLabel',
             null,
@@ -149,7 +149,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateReturnsExistingDefaultLanguageKeyIfDefaultLanguageKeyIsRequestedAndLLLExtFilePathIsGiven(): void
     {
-        $xlfPath = 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf';
+        $xlfPath = 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf';
         self::assertEquals('FORM EN', $this->subject->translate(
             'element.Page.renderingOptions.nextButtonLabel',
             null,
@@ -161,8 +161,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     public function translateValuesRecursiveTranslateRecursive(): void
     {
         $xlfPaths = [
-            10 => 'EXT:form_labels/Resources/Private/Language/locallang_form.xlf',
-            100 => 'EXT:form_labels/Resources/Private/Language/locallang_form_overrides.xlf',
+            10 => 'EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf',
+            100 => 'EXT:map_magic_labels/Resources/Private/Language/locallang_form_overrides.xlf',
         ];
         $input = [
             'Stan' => [
@@ -192,8 +192,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateLabelForConcreteFormAndConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementLabelIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
         $formElementIdentifier = 'form-element-identifier';
@@ -229,8 +229,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateLabelForConcreteFormAndConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementLabelIsEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
         $formElementIdentifier = 'form-element-identifier';
@@ -266,8 +266,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueNotTranslateLabelForConcreteFormAndConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementLabelIsEmptyAndPropertyShouldNotBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
         $formElementIdentifier = 'form-element-identifier';
@@ -302,8 +302,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateLabelForConcreteFormElementIfElementRenderingOptionsContainsATranslationFilesAndElementLabelIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'another-form-runtime-identifier';
         $formElementIdentifier = 'form-element-identifier';
@@ -338,8 +338,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateLabelForFormElementTypeIfElementRenderingOptionsContainsATranslationFilesAndElementLabelIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'another-form-runtime-identifier';
         $formElementIdentifier = 'another-form-element-identifier';
@@ -375,8 +375,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslatePropertyForConcreteFormAndConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementPropertyIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
         $formElementIdentifier = 'form-element-identifier';
@@ -416,8 +416,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueNotTranslatePropertyForConcreteFormAndConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementPropertyIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationNotExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'another-form-runtime-identifier';
         $formElementIdentifier = 'another-form-element-identifier';
@@ -457,8 +457,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateRenderingOptionForConcreteFormAndConcreteSectionElementIfElementRenderingOptionsContainsATranslationFilesAndElementRenderingOptionIsNotEmptyAndRenderingOptionShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
         $formElementIdentifier = 'form-element-identifier-page';
@@ -494,8 +494,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateOptionsPropertyForConcreteFormAndConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementOptionsPropertyIsAnArrayAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
         $formElementIdentifier = 'options-form-element-identifier';
@@ -541,8 +541,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateOptionsPropertyForConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementOptionsPropertyIsAnArrayAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'another-form-runtime-identifier';
         $formElementIdentifier = 'options-form-element-identifier';
@@ -588,8 +588,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFinisherOptionTranslateOptionForConcreteFormIfFinisherTranslationOptionsContainsATranslationFilesAndFinisherOptionIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
         $finisherIdentifier = 'SaveToDatabaseFinisher';
@@ -617,8 +617,8 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFinisherOptionTranslateOptionIfFinisherTranslationOptionsContainsATranslationFilesAndFinisherOptionIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
-        $textElementXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_text.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
+        $textElementXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf'];
 
         $formRuntimeIdentifier = 'another-form-runtime-identifier';
         $finisherIdentifier = 'SaveToDatabaseFinisher';
@@ -646,7 +646,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateLabelForConcreteFormAndConcreteElementFromFormRuntimeTranslationFilesIfElementRenderingOptionsContainsNoTranslationFilesAndElementLabelIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
 
         $formRuntimeIdentifier = 'my-form-runtime-identifier';
         $formElementIdentifier = 'my-form-element-identifier';
@@ -675,7 +675,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function supportsArgumentsForFormElementValueTranslations(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
 
         $formRuntime = $this->createMock(FormRuntime::class);
         $formRuntime->method('getIdentifier')->willReturn('my-form-runtime-identifier');
@@ -708,7 +708,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFinisherOptionTranslateOptionForConcreteFormFromFormRuntimeIfFinisherTranslationOptionsContainsNoTranslationFilesAndFinisherOptionIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
 
         $formRuntimeIdentifier = 'my-form-runtime-identifier';
         $finisherIdentifier = 'SaveToDatabaseFinisher';
@@ -748,7 +748,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function supportsArgumentsForFinisherOptionTranslations(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
 
         $formRuntime = $this->createMock(FormRuntime::class);
         $formRuntime->method('getIdentifier')->willReturn('my-form-runtime-identifier');
@@ -773,10 +773,10 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementValueTranslateLabelFromAdditionalTranslationForConcreteFormAndConcreteElementIfElementRenderingOptionsContainsATranslationFilesAndElementLabelIsNotEmptyAndPropertyShouldBeTranslatedAndTranslationExists(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_form.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_form.xlf'];
         $textElementXlfPaths = [
-            10 => 'EXT:form_labels/Resources/Private/Language/locallang_text.xlf',
-            20 => 'EXT:form_labels/Resources/Private/Language/locallang_additional_text.xlf',
+            10 => 'EXT:map_magic_labels/Resources/Private/Language/locallang_text.xlf',
+            20 => 'EXT:map_magic_labels/Resources/Private/Language/locallang_additional_text.xlf',
         ];
 
         $formRuntimeIdentifier = 'form-runtime-identifier';
@@ -814,7 +814,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementTranslateFormWithContentElementUidIfFormContainsNoOriginalIdentifier(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_ceuid_suffix_01.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_ceuid_suffix_01.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
         $formElementIdentifier = 'form-element-identifier';
@@ -831,7 +831,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $formElement = new GenericFormElement($formElementIdentifier, 'Text');
         $formElement->setOptions([
@@ -848,7 +848,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementTranslateFormWithContentElementUidIfFormContainsOriginalIdentifier(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_ceuid_suffix_02.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_ceuid_suffix_02.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
         $formElementIdentifier = 'form-element-identifier';
@@ -866,7 +866,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $formElement = new GenericFormElement($formElementIdentifier, 'Text');
         $formElement->setOptions([
@@ -884,7 +884,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     public function translateFormElementErrorTranslateErrorFromFormWithContentElementUidIfFormContainsNoOriginalIdentifier(): void
     {
         self::markTestSkipped('translateFormElementError() calls getProperties() on RootRenderableInterface, which fails. See #100477');
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_ceuid_suffix_01.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_ceuid_suffix_01.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
         $formElementIdentifier = 'form-element-identifier';
@@ -900,7 +900,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $formElement = new GenericFormElement($formElementIdentifier, 'Text');
         $formElement->setOptions([
@@ -919,7 +919,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     public function translateFormElementErrorTranslateErrorFromFormWithContentElementUidIfFormContainsOriginalIdentifier(): void
     {
         self::markTestSkipped('translateFormElementError() calls getProperties() on RootRenderableInterface, which fails. See #100477');
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_ceuid_suffix_02.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_ceuid_suffix_02.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
         $formElementIdentifier = 'form-element-identifier';
@@ -936,7 +936,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $formElement = new GenericFormElement($formElementIdentifier, 'Text');
         $formElement->setOptions([
@@ -954,7 +954,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFinisherOptionTranslateOptionFromFormWithContentElementUidIfFormContainsNoOriginalIdentifier(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_ceuid_suffix_01.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_ceuid_suffix_01.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
 
@@ -969,7 +969,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $expected = 'form-runtime-identifier-42 FooFinisher test EN';
         self::assertEquals($expected, $this->subject->translateFinisherOption($mockFormRuntime, 'Foo', 'test', 'value', []));
@@ -978,7 +978,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFinisherOptionTranslateOptionFromFormWithContentElementUidIfFormContainsOriginalIdentifier(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_ceuid_suffix_02.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_ceuid_suffix_02.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
 
@@ -994,7 +994,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $expected = 'form-runtime-identifier FooFinisher test EN';
         self::assertEquals($expected, $this->subject->translateFinisherOption($mockFormRuntime, 'Foo', 'test', 'value', []));
@@ -1003,7 +1003,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementErrorTranslatesErrorsWithEmptyTranslatedValues(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_empty_values.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_empty_values.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
         $formElementIdentifier = 'form-element-identifier';
@@ -1020,7 +1020,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $formElement = new GenericFormElement($formElementIdentifier, 'Text');
         $formElement->setOptions([
@@ -1035,7 +1035,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFormElementTranslatesFormElementsWithEmptyTranslatedValues(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_empty_values.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_empty_values.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
         $formElementIdentifier = 'form-element-identifier';
@@ -1053,7 +1053,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         $formElement = new GenericFormElement($formElementIdentifier, 'Text');
         $formElement->setOptions([
@@ -1067,7 +1067,7 @@ final class TranslationServiceTest extends FunctionalTestCase
     #[Test]
     public function translateFinisherOptionTranslatesFinisherOptionsWithEmptyTranslatedValues(): void
     {
-        $formRuntimeXlfPaths = ['EXT:form_labels/Resources/Private/Language/locallang_empty_values.xlf'];
+        $formRuntimeXlfPaths = ['EXT:map_magic_labels/Resources/Private/Language/locallang_empty_values.xlf'];
 
         $formRuntimeIdentifier = 'form-runtime-identifier-42';
 
@@ -1083,7 +1083,7 @@ final class TranslationServiceTest extends FunctionalTestCase
 
         $mockFormRuntime->method('getIdentifier')->willReturn($formRuntimeIdentifier);
         $mockFormRuntime->method('getRenderingOptions')->willReturn($formRuntimeRenderingOptions);
-        $mockFormRuntime->method('getType')->willReturn('Form');
+        $mockFormRuntime->method('getType')->willReturn('MapMagic');
 
         self::assertEquals('0', $this->subject->translateFinisherOption($mockFormRuntime, 'Foo', 'test1', 'value', []));
         self::assertEquals('value', $this->subject->translateFinisherOption($mockFormRuntime, 'Foo', 'test2', 'value', []));

@@ -37,7 +37,7 @@ translationFiles
 
          formEditor:
            translationFiles:
-             10: 'EXT:form/Resources/Private/Language/Database.xlf'
+             10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
 
 :aspect:`Good to know`
       - :ref:`"Translate form editor settings"<concepts-formeditor-translation-formeditor>`
@@ -264,7 +264,7 @@ stylesheets
 
          formEditor:
            stylesheets:
-             200: 'EXT:form/Resources/Public/Css/form.css'
+             200: 'EXT:map_magic/Resources/Public/Css/form.css'
 
 :aspect:`Good to know`
       - :ref:`"Form editor"<concepts-formeditor>`
@@ -297,11 +297,11 @@ formEditorFluidConfiguration
 
          formEditor:
            formEditorFluidConfiguration:
-             templatePathAndFilename: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
+             templatePathAndFilename: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
              partialRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Partials/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Partials/FormEditor/'
              layoutRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Layouts/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Layouts/FormEditor/'
 
 :aspect:`Good to know`
       - :ref:`"Form editor"<concepts-formeditor>`
@@ -335,11 +335,11 @@ formEditorFluidConfiguration.templatePathAndFilename
 
          formEditor:
            formEditorFluidConfiguration:
-             templatePathAndFilename: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
+             templatePathAndFilename: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
              partialRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Partials/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Partials/FormEditor/'
              layoutRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Layouts/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Layouts/FormEditor/'
 
 :aspect:`Good to know`
       - :ref:`"Form editor"<concepts-formeditor>`
@@ -372,11 +372,11 @@ formEditorFluidConfiguration.partialRootPaths
 
          formEditor:
            formEditorFluidConfiguration:
-             templatePathAndFilename: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
+             templatePathAndFilename: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
              partialRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Partials/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Partials/FormEditor/'
              layoutRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Layouts/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Layouts/FormEditor/'
 
 :aspect:`Good to know`
       - :ref:`"Form editor"<concepts-formeditor>`
@@ -410,11 +410,11 @@ formEditorFluidConfiguration.layoutRootPaths
 
          formEditor:
            formEditorFluidConfiguration:
-             templatePathAndFilename: 'EXT:form/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
+             templatePathAndFilename: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
              partialRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Partials/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Partials/FormEditor/'
              layoutRootPaths:
-               10: 'EXT:form/Resources/Private/Backend/Layouts/FormEditor/'
+               10: 'EXT:map_magic/Resources/Private/Backend/Layouts/FormEditor/'
 
 :aspect:`Good to know`
       - :ref:`"Form editor"<concepts-formeditor>`

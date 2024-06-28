@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\ViewHelpers\Be;
+namespace WapplerSystems\MapMagic\ViewHelpers\Be;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -37,7 +37,7 @@ final class MaximumFileSizeViewHelper extends AbstractViewHelper
         $maxUploadFileSize = GeneralUtility::getMaxUploadFileSize();
         // format according to PHP formatting rules (K = kilobytes instead of kibibytes)
         $formattedSize = GeneralUtility::formatSize($maxUploadFileSize * 1024, '|k|M|G|T|P|E|Z|Y');
-        // remove decimals from result to match EXT:form validator integer format
+        // remove decimals from result to match EXT:map_magic validator integer format
         return preg_replace('/(\d+)(.+\d{2})?([kMGTPEZY]{0,1})/', '$1$3', $formattedSize);
     }
 }

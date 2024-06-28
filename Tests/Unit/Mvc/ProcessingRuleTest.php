@@ -15,16 +15,16 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Mvc;
+namespace WapplerSystems\MapMagic\Tests\Unit\Mvc;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use TYPO3\CMS\Form\Mvc\ProcessingRule;
-use TYPO3\CMS\Form\Tests\Unit\Mvc\Fixtures\AnotherTestValidator;
-use TYPO3\CMS\Form\Tests\Unit\Mvc\Fixtures\TestValidator;
+use WapplerSystems\MapMagic\Mvc\ProcessingRule;
+use WapplerSystems\MapMagic\Tests\Unit\Mvc\Fixtures\AnotherTestValidator;
+use WapplerSystems\MapMagic\Tests\Unit\Mvc\Fixtures\TestValidator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class ProcessingRuleTest extends UnitTestCase

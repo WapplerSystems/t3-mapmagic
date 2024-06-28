@@ -52,7 +52,7 @@ implementationClassName
          :emphasize-lines: 2
 
          Count:
-           implementationClassName: TYPO3\CMS\Form\Mvc\Validation\DateRangeValidator
+           implementationClassName: WapplerSystems\MapMagic\Mvc\Validation\DateRangeValidator
 
 :aspect:`Good to know`
       - :ref:`"Custom validator implementations"<concepts-validators-customvalidatorimplementations>`

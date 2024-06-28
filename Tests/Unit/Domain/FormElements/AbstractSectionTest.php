@@ -15,19 +15,19 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Domain\FormElements;
+namespace WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Form\Domain\Exception\IdentifierNotValidException;
-use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotFoundException;
-use TYPO3\CMS\Form\Domain\Exception\TypeDefinitionNotValidException;
-use TYPO3\CMS\Form\Domain\Model\FormDefinition;
-use TYPO3\CMS\Form\Domain\Model\FormElements\AbstractSection;
-use TYPO3\CMS\Form\Domain\Model\FormElements\Section;
-use TYPO3\CMS\Form\Domain\Model\FormElements\UnknownFormElement;
-use TYPO3\CMS\Form\Tests\Unit\Domain\FormElements\Fixtures\TestingFormElement;
-use TYPO3\CMS\Form\Tests\Unit\Domain\FormElements\Fixtures\TestingSection;
+use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
+use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
+use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotValidException;
+use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractSection;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\Section;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\UnknownFormElement;
+use WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements\Fixtures\TestingFormElement;
+use WapplerSystems\MapMagic\Tests\Unit\Domain\FormElements\Fixtures\TestingSection;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 final class AbstractSectionTest extends UnitTestCase

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace TYPO3\CMS\Form\Tests\Unit\Mvc\Fixtures;
+namespace WapplerSystems\MapMagic\Tests\Unit\Mvc\Fixtures;
 
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
