@@ -1,7 +1,0 @@
-plugin.tx_mapmagic {
-    settings {
-        yamlConfigurations {
-            100 = EXT:map_magic/Tests/Functional/RequestHandling/Fixtures/FormSetup.yaml
-        }
-    }
-}

@@ -10,10 +10,10 @@
 <f:section name="Content">
     <div data-identifier="moduleLoadingIndicator" class="form-editor-loading-spinner">
         <core:icon identifier="spinner-circle" size="medium" />
-        <div class="form-editor-loading-spinner-label"><f:translate key="LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.loading" /></div>
+        <div class="form-editor-loading-spinner-label"><f:translate key="LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.loading" /></div>
     </div>
     <div data-identifier="moduleWrapper" class="hidden">
-        <f:format.raw>{formEditorTemplates}</f:format.raw>
+        <f:format.raw>{mapEditorTemplates}</f:format.raw>
         <section id="t3-mapmagic-navigation-component" class="t3-mapmagic-x-component" data-identifier="structureSection">
             <div id="t3-mapmagic-structure-panel">
                 <f:render section="ElementSidebarTree" />
@@ -44,7 +44,7 @@
         <div class="tree" data-identifier="structure-element"></div>
         <div class="form-group col-sm-12">
             <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-default t3-mapmagic-element-new-page-button" href="#" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button')}" data-identifier="treeNewPageBottom"><core:icon identifier="actions-page-new" /> {f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button')}</a>
+                <a class="btn btn-default t3-mapmagic-element-new-page-button" href="#" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.new_page_button')}" data-identifier="treeNewPageBottom"><core:icon identifier="actions-page-new" /> {f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.new_page_button')}</a>
             </div>
         </div>
     </div>
@@ -59,14 +59,14 @@
         <div class="panel-heading" data-identifier="panelHeading">
             <span data-identifier="stageHeaderToolbar">
                 <div class="btn-group">
-                    <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.preview_mode_button')}" data-identifier="buttonViewModePreview"><core:icon identifier="actions-document-view" alternativeMarkupIdentifier="inline" /></button>
-                    <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.edit_mode_button')}" data-identifier="buttonViewModeAbstract"><core:icon identifier="actions-document-open" alternativeMarkupIdentifier="inline" /></button>
+                    <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.preview_mode_button')}" data-identifier="buttonViewModePreview"><core:icon identifier="actions-document-view" alternativeMarkupIdentifier="inline" /></button>
+                    <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.edit_mode_button')}" data-identifier="buttonViewModeAbstract"><core:icon identifier="actions-document-open" alternativeMarkupIdentifier="inline" /></button>
                 </div>
                 <div class="float-end">
                     <span class="pagination-label" data-identifier="paginationTitle"></span>
                     <div class="btn-group">
-                        <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.previous_step_button')}" data-identifier="buttonPaginationPrevious"><core:icon identifier="actions-view-paging-previous" alternativeMarkupIdentifier="inline" /></button>
-                        <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.next_step_button')}" data-identifier="buttonPaginationNext"><core:icon identifier="actions-view-paging-next" alternativeMarkupIdentifier="inline" /></button>
+                        <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.previous_step_button')}" data-identifier="buttonPaginationPrevious"><core:icon identifier="actions-view-paging-previous" alternativeMarkupIdentifier="inline" /></button>
+                        <button class="btn btn-default" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.next_step_button')}" data-identifier="buttonPaginationNext"><core:icon identifier="actions-view-paging-next" alternativeMarkupIdentifier="inline" /></button>
                     </div>
                 </div>
             </span>
@@ -79,7 +79,7 @@
                 <div class="form-group col-sm-12">
                     <div class="t3-mapmagic-new-element-container">
                         <div class="btn-group btn-group-sm" role="group">
-                            <a class="btn btn-default" href="#" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.stage.toolbar.new_element')}" data-identifier="stageNewElementBottom"><core:icon identifier="actions-document-new" /> {f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.stage.toolbar.new_element')}</a>
+                            <a class="btn btn-default" href="#" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.stage.toolbar.new_element')}" data-identifier="stageNewElementBottom"><core:icon identifier="actions-document-new" /> {f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapEditor.stage.toolbar.new_element')}</a>
                         </div>
                     </div>
                 </div>

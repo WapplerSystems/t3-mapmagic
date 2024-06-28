@@ -29,12 +29,12 @@ class ValidationDto
     /**
      * @var string
      */
-    protected $formElementType;
+    protected $mapElementType;
 
     /**
      * @var string
      */
-    protected $formElementIdentifier;
+    protected $mapElementIdentifier;
 
     /**
      * @var string
@@ -53,15 +53,15 @@ class ValidationDto
 
     public function __construct(
         ?string $prototypeName = null,
-        ?string $formElementType = null,
-        ?string $formElementIdentifier = null,
+        ?string $mapElementType = null,
+        ?string $mapElementIdentifier = null,
         ?string $propertyPath = null,
         ?string $propertyCollectionName = null,
         ?string $propertyCollectionElementIdentifier = null
     ) {
         $this->prototypeName = $prototypeName;
-        $this->formElementType = $formElementType;
-        $this->formElementIdentifier = $formElementIdentifier;
+        $this->mapElementType = $mapElementType;
+        $this->mapElementIdentifier = $mapElementIdentifier;
         $this->propertyPath = $propertyPath;
         $this->propertyCollectionName = $propertyCollectionName;
         $this->propertyCollectionElementIdentifier = $propertyCollectionElementIdentifier;
@@ -74,12 +74,12 @@ class ValidationDto
 
     public function getFormElementType(): string
     {
-        return $this->formElementType;
+        return $this->mapElementType;
     }
 
     public function getFormElementIdentifier(): string
     {
-        return $this->formElementIdentifier;
+        return $this->mapElementIdentifier;
     }
 
     public function getPropertyPath(): string
@@ -104,12 +104,12 @@ class ValidationDto
 
     public function hasFormElementType(): bool
     {
-        return !empty($this->formElementType);
+        return !empty($this->mapElementType);
     }
 
     public function hasFormElementIdentifier(): bool
     {
-        return !empty($this->formElementIdentifier);
+        return !empty($this->mapElementIdentifier);
     }
 
     public function hasPropertyPath(): bool
@@ -129,31 +129,31 @@ class ValidationDto
 
     public function withPrototypeName(string $prototypeName): ValidationDto
     {
-        return GeneralUtility::makeInstance(self::class, $prototypeName, $this->formElementType, $this->formElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
+        return GeneralUtility::makeInstance(self::class, $prototypeName, $this->mapElementType, $this->mapElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
     }
 
-    public function withFormElementType(string $formElementType): ValidationDto
+    public function withFormElementType(string $mapElementType): ValidationDto
     {
-        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $formElementType, $this->formElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
+        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $mapElementType, $this->mapElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
     }
 
-    public function withFormElementIdentifier(string $formElementIdentifier): ValidationDto
+    public function withFormElementIdentifier(string $mapElementIdentifier): ValidationDto
     {
-        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->formElementType, $formElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
+        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->mapElementType, $mapElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
     }
 
     public function withPropertyPath(string $propertyPath): ValidationDto
     {
-        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->formElementType, $this->formElementIdentifier, $propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
+        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->mapElementType, $this->mapElementIdentifier, $propertyPath, $this->propertyCollectionName, $this->propertyCollectionElementIdentifier);
     }
 
     public function withPropertyCollectionName(string $propertyCollectionName): ValidationDto
     {
-        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->formElementType, $this->formElementIdentifier, $this->propertyPath, $propertyCollectionName, $this->propertyCollectionElementIdentifier);
+        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->mapElementType, $this->mapElementIdentifier, $this->propertyPath, $propertyCollectionName, $this->propertyCollectionElementIdentifier);
     }
 
     public function withPropertyCollectionElementIdentifier(string $propertyCollectionElementIdentifier): ValidationDto
     {
-        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->formElementType, $this->formElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $propertyCollectionElementIdentifier);
+        return GeneralUtility::makeInstance(self::class, $this->prototypeName, $this->mapElementType, $this->mapElementIdentifier, $this->propertyPath, $this->propertyCollectionName, $propertyCollectionElementIdentifier);
     }
 }

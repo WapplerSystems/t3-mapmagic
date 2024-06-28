@@ -27,8 +27,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
-use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\FinisherOptionsFlexFormOverridesConverter;
-use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Converters\FlexFormFinisherOverridesConverterDto;
 use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**
@@ -110,28 +108,6 @@ class MapFrontendController extends ActionController
                 $sheetIdentifier = $this->getFlexformSheetIdentifier($formDefinition, $prototypeName, $finisherIdentifier);
                 $flexFormSheetSettings = $this->getFlexFormSettingsFromSheet($flexFormData, $sheetIdentifier);
 
-                if (($this->settings['overrideFinishers'] ?? false) && isset($flexFormSheetSettings['finishers'][$finisherIdentifier])) {
-                    $prototypeFinisherDefinition = $prototypeConfiguration['finishersDefinition'][$finisherIdentifier] ?? [];
-                    $converterDto = GeneralUtility::makeInstance(
-                        FlexFormFinisherOverridesConverterDto::class,
-                        $prototypeFinisherDefinition,
-                        $formFinisherDefinition,
-                        $finisherIdentifier,
-                        $flexFormSheetSettings
-                    );
-
-                    // Iterate over all `prototypes.<prototypeName>.finishersDefinition.<finisherIdentifier>.FormEngine.elements` values
-                    GeneralUtility::makeInstance(ArrayProcessor::class, $prototypeFinisherDefinition['FormEngine']['elements'])->forEach(
-                        GeneralUtility::makeInstance(
-                            ArrayProcessing::class,
-                            'modifyFinisherOptionsFromFlexFormOverrides',
-                            '^(.*)(?:\.config\.type|\.section)$',
-                            GeneralUtility::makeInstance(FinisherOptionsFlexFormOverridesConverter::class, $converterDto)
-                        )
-                    );
-
-                    $formDefinition['finishers'][$index] = $converterDto->getFinisherDefinition();
-                }
             }
         }
         return $formDefinition;

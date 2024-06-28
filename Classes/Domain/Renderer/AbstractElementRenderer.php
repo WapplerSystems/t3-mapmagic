@@ -34,15 +34,15 @@ abstract class AbstractElementRenderer implements RendererInterface
     /**
      * @var \WapplerSystems\MapMagic\Domain\Runtime\MapRuntime
      */
-    protected $formRuntime;
+    protected $mapRuntime;
 
-    public function setFormRuntime(MapRuntime $formRuntime)
+    public function setMapRuntime(MapRuntime $formRuntime)
     {
-        $this->formRuntime = $formRuntime;
+        $this->mapRuntime = $formRuntime;
     }
 
-    public function getFormRuntime(): MapRuntime
+    public function getMapRuntime(): MapRuntime
     {
-        return $this->formRuntime;
+        return $this->mapRuntime;
     }
 }

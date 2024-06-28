@@ -43,7 +43,7 @@ class MapElementHooks
     {
         if ($renderable->getType() === 'AdvancedPassword') {
             if ($elementValue['password'] !== $elementValue['confirmation']) {
-                $processingRule = $renderable->getRootForm()->getProcessingRule($renderable->getIdentifier());
+                $processingRule = $renderable->getRootMap()->getProcessingRule($renderable->getIdentifier());
                 $processingRule->getProcessingMessages()->addError(
                     GeneralUtility::makeInstance(
                         Error::class,

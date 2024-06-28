@@ -30,14 +30,14 @@ class PropertyPathsExtractor extends AbstractExtractor
      */
     public function __invoke(string $_, $value, array $matches)
     {
-        [, $formElementType, $propertyCollectionName, $propertyCollectionIndex] = $matches;
+        [, $mapElementType, $propertyCollectionName, $propertyCollectionIndex] = $matches;
 
         $identifierPath = implode(
             '.',
             [
-                'formElementsDefinition',
-                $formElementType,
-                'formEditor',
+                'mapElementsDefinition',
+                $mapElementType,
+                'mapEditor',
                 'propertyCollections',
                 $propertyCollectionName,
                 $propertyCollectionIndex,
@@ -47,7 +47,7 @@ class PropertyPathsExtractor extends AbstractExtractor
         $identifier = ArrayUtility::getValueByPath($this->extractorDto->getPrototypeConfiguration(), $identifierPath, '.');
 
         $result = $this->extractorDto->getResult();
-        $result['formElements'][$formElementType]['collections'][$propertyCollectionName][$identifier]['propertyPaths'][] = $value;
+        $result['mapElements'][$mapElementType]['collections'][$propertyCollectionName][$identifier]['propertyPaths'][] = $value;
         $this->extractorDto->setResult($result);
     }
 }

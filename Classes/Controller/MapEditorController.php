@@ -302,43 +302,43 @@ class MapEditorController extends AbstractBackendController
     }
 
     /**
-     * Prepare the formElements.*.mapMagic section from the YAML settings.
-     * Sort all formElements into groups and add additional data.
+     * Prepare the mapElements.*.mapMagic section from the YAML settings.
+     * Sort all mapElements into groups and add additional data.
      */
-    protected function getInsertRenderablesPanelConfiguration(array $formElementsDefinition): array
+    protected function getInsertRenderablesPanelConfiguration(array $mapElementsDefinition): array
     {
-        /** @var array<string, list<array<string, array{key: string, cssKey: string, label: string, sorting: int, iconIdentifier: string}>>> $formElementsByGroup */
-        $formElementsByGroup = [];
+        /** @var array<string, list<array<string, array{key: string, cssKey: string, label: string, sorting: int, iconIdentifier: string}>>> $mapElementsByGroup */
+        $mapElementsByGroup = [];
 
-        foreach ($formElementsDefinition as $formElementName => $formElementConfiguration) {
-            if (!isset($formElementConfiguration['group'])) {
+        foreach ($mapElementsDefinition as $mapElementName => $mapElementConfiguration) {
+            if (!isset($mapElementConfiguration['group'])) {
                 continue;
             }
-            if (!isset($formElementsByGroup[$formElementConfiguration['group']])) {
-                $formElementsByGroup[$formElementConfiguration['group']] = [];
+            if (!isset($mapElementsByGroup[$mapElementConfiguration['group']])) {
+                $mapElementsByGroup[$mapElementConfiguration['group']] = [];
             }
 
-            $formElementConfiguration = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
-                $formElementConfiguration,
+            $mapElementConfiguration = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
+                $mapElementConfiguration,
                 $this->prototypeConfiguration['mapMagic']['translationFiles'] ?? []
             );
 
-            $formElementsByGroup[$formElementConfiguration['group']][] = [
-                'key' => $formElementName,
-                'cssKey' => preg_replace('/[^a-z0-9]/', '-', strtolower($formElementName)),
-                'label' => $formElementConfiguration['label'],
-                'sorting' => $formElementConfiguration['groupSorting'],
-                'iconIdentifier' => $formElementConfiguration['iconIdentifier'],
+            $mapElementsByGroup[$mapElementConfiguration['group']][] = [
+                'key' => $mapElementName,
+                'cssKey' => preg_replace('/[^a-z0-9]/', '-', strtolower($mapElementName)),
+                'label' => $mapElementConfiguration['label'],
+                'sorting' => $mapElementConfiguration['groupSorting'],
+                'iconIdentifier' => $mapElementConfiguration['iconIdentifier'],
             ];
         }
 
         $formGroups = [];
-        foreach ($this->prototypeConfiguration['mapMagic']['formElementGroups'] ?? [] as $groupName => $groupConfiguration) {
-            if (!isset($formElementsByGroup[$groupName])) {
+        foreach ($this->prototypeConfiguration['mapMagic']['mapElementGroups'] ?? [] as $groupName => $groupConfiguration) {
+            if (!isset($mapElementsByGroup[$groupName])) {
                 continue;
             }
 
-            usort($formElementsByGroup[$groupName], static function ($a, $b) {
+            usort($mapElementsByGroup[$groupName], static function ($a, $b) {
                 return $a['sorting'] - $b['sorting'];
             });
 
@@ -349,7 +349,7 @@ class MapEditorController extends AbstractBackendController
 
             $formGroups[] = [
                 'key' => $groupName,
-                'elements' => $formElementsByGroup[$groupName],
+                'elements' => $mapElementsByGroup[$groupName],
                 'label' => $groupConfiguration['label'],
             ];
         }
@@ -494,7 +494,7 @@ class MapEditorController extends AbstractBackendController
             );
         }
 
-        $insertRenderablesPanelConfiguration = $this->getInsertRenderablesPanelConfiguration($mapMagicDefinitions['formElements']);
+        $insertRenderablesPanelConfiguration = $this->getInsertRenderablesPanelConfiguration($mapMagicDefinitions['mapElements']);
 
         $view = GeneralUtility::makeInstance(TemplateView::class);
         $view->getRenderingContext()->setRequest($this->request);
@@ -518,7 +518,7 @@ class MapEditorController extends AbstractBackendController
         /** @var array<string, list<string>> $multiValueFinisherProperties */
         $multiValueFinisherProperties = [];
 
-        foreach ($this->prototypeConfiguration['formElementsDefinition'] as $type => $configuration) {
+        foreach ($this->prototypeConfiguration['mapElementsDefinition'] as $type => $configuration) {
             if (!isset($configuration['mapMagic']['editors'])) {
                 continue;
             }
@@ -529,7 +529,7 @@ class MapEditorController extends AbstractBackendController
             }
         }
 
-        foreach ($this->prototypeConfiguration['formElementsDefinition']['MapMagic']['mapMagic']['propertyCollections']['finishers'] ?? [] as $configuration) {
+        foreach ($this->prototypeConfiguration['mapElementsDefinition']['MapMagic']['mapMagic']['propertyCollections']['finishers'] ?? [] as $configuration) {
             if (!isset($configuration['editors'])) {
                 continue;
             }

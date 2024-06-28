@@ -885,7 +885,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
 
     protected function looksLikeAMapDefinition(array $data): bool
     {
-        return isset($data['identifier'], $data['type']) && !empty($data['identifier']) && trim($data['type']) === 'Map';
+        return isset($data['identifier'], $data['type']) && !empty($data['identifier']) && trim($data['type']) === 'MapMagic';
     }
 
     protected function sortMaps(array $forms): array

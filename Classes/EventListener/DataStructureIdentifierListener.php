@@ -347,7 +347,7 @@ class DataStructureIdentifierListener
         if (isset($finishersDefinition[$finisherIdentifier]['FormEngine']['translationFiles'])) {
             $translationFiles = $finishersDefinition[$finisherIdentifier]['FormEngine']['translationFiles'];
         } else {
-            $translationFiles = $prototypeConfiguration['formEngine']['translationFiles'];
+            $translationFiles = $prototypeConfiguration['mapEngine']['translationFiles'];
         }
 
         $finishersDefinition[$finisherIdentifier]['FormEngine'] = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(

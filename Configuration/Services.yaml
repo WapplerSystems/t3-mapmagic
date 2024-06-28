@@ -24,15 +24,15 @@ services:
     arguments:
       $runtimeCache: '@cache.runtime'
 
-  WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory:
+  WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory:
     public: true
     shared: false
 
-  WapplerSystems\MapMagic\Domain\Renderer\FluidFormRenderer:
+  WapplerSystems\MapMagic\Domain\Renderer\MapRenderer:
     public: true
     shared: false
 
-  WapplerSystems\MapMagic\Domain\Runtime\FormRuntime:
+  WapplerSystems\MapMagic\Domain\Runtime\MapRuntime:
     public: true
     shared: false
 

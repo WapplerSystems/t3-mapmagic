@@ -30,7 +30,7 @@ class MultiValuePropertiesExtractor extends AbstractExtractor
      */
     public function __invoke(string $_, $value, array $matches)
     {
-        [, $formElementType, $propertyCollectionName, $propertyCollectionIndex, $propertyCollectionEditorIndex] = $matches;
+        [, $mapElementType, $propertyCollectionName, $propertyCollectionIndex, $propertyCollectionEditorIndex] = $matches;
 
         if (
             $value !== 'Inspector-PropertyGridEditor'
@@ -44,9 +44,9 @@ class MultiValuePropertiesExtractor extends AbstractExtractor
         $propertyPath = implode(
             '.',
             [
-                'formElementsDefinition',
-                $formElementType,
-                'formEditor',
+                'mapElementsDefinition',
+                $mapElementType,
+                'mapEditor',
                 'propertyCollections',
                 $propertyCollectionName,
                 $propertyCollectionIndex,
@@ -66,9 +66,9 @@ class MultiValuePropertiesExtractor extends AbstractExtractor
             $identifierPath = implode(
                 '.',
                 [
-                    'formElementsDefinition',
-                    $formElementType,
-                    'formEditor',
+                    'mapElementsDefinition',
+                    $mapElementType,
+                    'mapEditor',
                     'propertyCollections',
                     $propertyCollectionName,
                     $propertyCollectionIndex,
@@ -77,12 +77,12 @@ class MultiValuePropertiesExtractor extends AbstractExtractor
             );
             $identifier = ArrayUtility::getValueByPath($this->extractorDto->getPrototypeConfiguration(), $identifierPath, '.');
 
-            $result['formElements'][$formElementType]['collections'][$propertyCollectionName][$identifier]['multiValueProperties'][] = $propertyValue;
+            $result['mapElements'][$mapElementType]['collections'][$propertyCollectionName][$identifier]['multiValueProperties'][] = $propertyValue;
             if ($value === 'Inspector-PropertyGridEditor') {
-                $result['formElements'][$formElementType]['collections'][$propertyCollectionName][$identifier]['multiValueProperties'][] = 'defaultValue';
+                $result['mapElements'][$mapElementType]['collections'][$propertyCollectionName][$identifier]['multiValueProperties'][] = 'defaultValue';
             }
         } else {
-            $result['formElements'][$formElementType]['multiValueProperties'][] = $propertyValue;
+            $result['mapElements'][$mapElementType]['multiValueProperties'][] = $propertyValue;
         }
 
         $this->extractorDto->setResult($result);

@@ -80,7 +80,7 @@ class Section extends AbstractSection implements FormElementInterface
      */
     public function getUniqueIdentifier(): string
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
         return sprintf('%s-%s', $formDefinition->getIdentifier(), $this->identifier);
     }
 

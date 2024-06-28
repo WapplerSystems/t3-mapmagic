@@ -1,3 +1,6 @@
+imports:
+  - { resource: './MapElements/MapMagic.yaml' }
+
 
 persistenceManager:
   allowedFileMounts:
@@ -29,7 +32,7 @@ prototypes:
         layoutRootPaths:
           10: 'EXT:map_magic/Resources/Private/Backend/Layouts/MapEditor/'
 
-      formEditorPartials:
+      mapEditorPartials:
         FormElement-_ElementToolbar: Stage/_ElementToolbar
         FormElement-_UnknownElement: Stage/_UnknownElement
         Modal-InsertElements: Modals/InsertElements
@@ -53,41 +56,41 @@ prototypes:
         Inspector-MaximumFileSizeEditor: Inspector/MaximumFileSizeEditor
         Inspector-CountrySelectEditor: Inspector/CountrySelectEditor
 
-      formElementPropertyValidatorsDefinition:
+      mapElementPropertyValidatorsDefinition:
         NotEmpty:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.NotEmpty.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.NotEmpty.label
         Integer:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.Integer.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.Integer.label
         NaiveEmail:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.NaiveEmail.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.NaiveEmail.label
         NaiveEmailOrEmpty:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.NaiveEmail.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.NaiveEmail.label
         FormElementIdentifierWithinCurlyBracesInclusive:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.FormElementIdentifierWithinCurlyBraces.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.FormElementIdentifierWithinCurlyBraces.label
         FormElementIdentifierWithinCurlyBracesExclusive:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.FormElementIdentifierWithinCurlyBraces.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.FormElementIdentifierWithinCurlyBraces.label
         FileSize:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.FileSize.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.FileSize.label
         RFC3339FullDate:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.RFC3339FullDate.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.RFC3339FullDate.label
         RegularExpressionPattern:
-          errorMessage: formEditor.formElementPropertyValidatorsDefinition.RegularExpressionPattern.label
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.RegularExpressionPattern.label
 
-      formElementGroups:
+      mapElementGroups:
         input:
-          label: formEditor.formElementGroups.input.label
+          label: mapEditor.mapElementGroups.input.label
         html5:
-          label: formEditor.formElementGroups.html5.label
+          label: mapEditor.mapElementGroups.html5.label
         select:
-          label: formEditor.formElementGroups.select.label
+          label: mapEditor.mapElementGroups.select.label
         custom:
-          label: formEditor.formElementGroups.custom.label
+          label: mapEditor.mapElementGroups.custom.label
         container:
-          label: formEditor.formElementGroups.container.label
+          label: mapEditor.mapElementGroups.container.label
         page:
-          label: formEditor.formElementGroups.page.label
+          label: mapEditor.mapElementGroups.page.label
 
-    formEngine:
+    mapEngine:
       translationFiles:
         10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
 

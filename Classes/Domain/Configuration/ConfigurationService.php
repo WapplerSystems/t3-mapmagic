@@ -26,7 +26,6 @@ use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PrototypeNotFoundException;
-use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\ValidationDto;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\AdditionalElementPropertyPathsExtractor;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\ExtractorDto;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\IsCreatableFormElementExtractor;
@@ -62,7 +61,7 @@ class ConfigurationService implements SingletonInterface
 
     public function __construct(ConfigurationManagerInterface $configurationManager)
     {
-        $this->formSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'form');
+        $this->formSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'mapmagic');
     }
 
     /**
@@ -113,17 +112,17 @@ class ConfigurationService implements SingletonInterface
      * means that the form element property can be written by the form editor.
      * A form element property can be written if the property path is defined within
      * the following form editor properties:
-     * * formElementsDefinition.<formElementType>.formEditor.editors.<index>.propertyPath
-     * * formElementsDefinition.<formElementType>.formEditor.editors.<index>.*.propertyPath
-     * * formElementsDefinition.<formElementType>.formEditor.editors.<index>.additionalElementPropertyPaths
-     * * formElementsDefinition.<formElementType>.formEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.additionalElementPropertyPaths
+     * * mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.propertyPath
+     * * mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.*.propertyPath
+     * * mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.additionalElementPropertyPaths
+     * * mapElementsDefinition.<mapElementType>.mapEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.additionalElementPropertyPaths
      * If a form editor property "templateName" is
      * "Inspector-PropertyGridEditor" or "Inspector-MultiSelectEditor" or "Inspector-ValidationErrorMessageEditor"
      * it means that the form editor property "propertyPath" is interpreted as a so called "multiValueProperty".
      * A "multiValueProperty" can contain any subproperties relative to the value from "propertyPath" which are valid.
-     * If "formElementsDefinition.<formElementType>.formEditor.editors.<index>.templateName = Inspector-PropertyGridEditor"
+     * If "mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.templateName = Inspector-PropertyGridEditor"
      * and
-     * "formElementsDefinition.<formElementType>.formEditor.editors.<index>.propertyPath = options.xxx"
+     * "mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.propertyPath = options.xxx"
      * then (for example) "options.xxx.yyy" is a valid property path to write.
      * If you use a custom form editor "inspector editor" implementation which does not define the writable
      * property paths by one of the above described inspector editor properties (e.g "propertyPath") within
@@ -138,7 +137,7 @@ class ConfigurationService implements SingletonInterface
             $dto->getPrototypeName()
         );
 
-        $subConfig = $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()] ?? [];
+        $subConfig = $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()] ?? [];
         return $this->isPropertyDefinedInFormEditorSetup($dto->getPropertyPath(), $subConfig);
     }
 
@@ -148,15 +147,15 @@ class ConfigurationService implements SingletonInterface
      * means that the form elements finisher|validator property can be written by the form editor.
      * A form elements finisher|validator property can be written if the property path is defined within
      * the following form editor properties:
-     * * formElementsDefinition.<formElementType>.formEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.propertyPath
-     * * formElementsDefinition.<formElementType>.formEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.*.propertyPath
+     * * mapElementsDefinition.<mapElementType>.mapEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.propertyPath
+     * * mapElementsDefinition.<mapElementType>.mapEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.*.propertyPath
      * If a form elements finisher|validator property "templateName" is
      * "Inspector-PropertyGridEditor" or "Inspector-MultiSelectEditor" or "Inspector-ValidationErrorMessageEditor"
      * it means that the form editor property "propertyPath" is interpreted as a so called "multiValueProperty".
      * A "multiValueProperty" can contain any subproperties relative to the value from "propertyPath" which are valid.
-     * If "formElementsDefinition.<formElementType>.formEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.templateName = Inspector-PropertyGridEditor"
+     * If "mapElementsDefinition.<mapElementType>.mapEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.templateName = Inspector-PropertyGridEditor"
      * and
-     * "formElementsDefinition.<formElementType>.formEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.propertyPath = options.xxx"
+     * "mapElementsDefinition.<mapElementType>.mapEditor.propertyCollections.<finishers|validators>.<index>.editors.<index>.propertyPath = options.xxx"
      * that (for example) "options.xxx.yyy" is a valid property path to write.
      * If you use a custom form editor "inspector editor" implementation which not defines the writable
      * property paths by one of the above described inspector editor properties (e.g "propertyPath") within
@@ -170,7 +169,7 @@ class ConfigurationService implements SingletonInterface
         $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
             $dto->getPrototypeName()
         );
-        $subConfig = $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()] ?? [];
+        $subConfig = $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()] ?? [];
 
         return $this->isPropertyDefinedInFormEditorSetup($dto->getPropertyPath(), $subConfig);
     }
@@ -183,7 +182,7 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function formElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup(
+    public function mapElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup(
         ValidationDto $dto
     ): bool {
         $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
@@ -192,7 +191,7 @@ class ConfigurationService implements SingletonInterface
 
         $propertyPath = $this->getBasePropertyPathFromMultiValueFormElementProperty($dto);
         return isset(
-            $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()]['selectOptions'][$propertyPath]
+            $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['selectOptions'][$propertyPath]
         );
     }
 
@@ -206,7 +205,7 @@ class ConfigurationService implements SingletonInterface
         ValidationDto $dto,
         bool $translated = true
     ): array {
-        if (!$this->formElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup($dto)) {
+        if (!$this->mapElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup($dto)) {
             throw new PropertyException(
                 sprintf(
                     'No selectOptions found for form element type "%s" and property path "%s"',
@@ -223,7 +222,7 @@ class ConfigurationService implements SingletonInterface
 
         $property = $translated ? 'selectOptions' : 'untranslatedSelectOptions';
         $propertyPath = $this->getBasePropertyPathFromMultiValueFormElementProperty($dto);
-        return $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()][$property][$propertyPath];
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()][$property][$propertyPath];
     }
 
     /**
@@ -286,7 +285,7 @@ class ConfigurationService implements SingletonInterface
         );
 
         $propertyPath = $dto->getPropertyPath();
-        $multiValueProperties = $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()]['multiValueProperties'] ?? [];
+        $multiValueProperties = $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['multiValueProperties'] ?? [];
         foreach ($multiValueProperties as $multiValueProperty) {
             if (str_starts_with($propertyPath, $multiValueProperty)) {
                 $propertyPath = $multiValueProperty;
@@ -321,7 +320,7 @@ class ConfigurationService implements SingletonInterface
      * If a form element property is defined in the "predefinedDefaults" in the form setup then it
      * means that the form element property can be written by the form editor.
      * A form element default property is defined within the following form editor properties:
-     * * formElementsDefinition.<formElementType>.formEditor.predefinedDefaults.<propertyPath> = "default value"
+     * * mapElementsDefinition.<mapElementType>.mapEditor.predefinedDefaults.<propertyPath> = "default value"
      *
      * @internal
      */
@@ -332,14 +331,14 @@ class ConfigurationService implements SingletonInterface
             $dto->getPrototypeName()
         );
         return isset(
-            $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()]['predefinedDefaults'][$dto->getPropertyPath()]
+            $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['predefinedDefaults'][$dto->getPropertyPath()]
         );
     }
 
     /**
      * Get the "predefinedDefaults" value for a form element property from the form setup.
      * A form element default property is defined within the following form editor properties:
-     * * formElementsDefinition.<formElementType>.formEditor.predefinedDefaults.<propertyPath> = "default value"
+     * * mapElementsDefinition.<mapElementType>.mapEditor.predefinedDefaults.<propertyPath> = "default value"
      *
      * @return mixed
      * @throws PropertyException
@@ -363,7 +362,7 @@ class ConfigurationService implements SingletonInterface
         );
 
         $property = $translated ? 'predefinedDefaults' : 'untranslatedPredefinedDefaults';
-        return $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()][$property][$dto->getPropertyPath()];
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()][$property][$dto->getPropertyPath()];
     }
 
     /**
@@ -371,7 +370,7 @@ class ConfigurationService implements SingletonInterface
      * If a form elements finisher|validator property is defined in "predefinedDefaults" in the form setup then it
      * means that the form elements finisher|validator property can be written by the form editor.
      * A form elements finisher|validator default property is defined within the following form editor properties:
-     * * <validatorsDefinition|finishersDefinition>.<index>.formEditor.predefinedDefaults.<propertyPath> = "default value"
+     * * <validatorsDefinition|finishersDefinition>.<index>.mapEditor.predefinedDefaults.<propertyPath> = "default value"
      *
      * @internal
      */
@@ -389,7 +388,7 @@ class ConfigurationService implements SingletonInterface
     /**
      * Get the "predefinedDefaults" value for a form elements finisher|validator property from the form setup.
      * A form elements finisher|validator default property is defined within the following form editor properties:
-     * * <validatorsDefinition|finishersDefinition>.<index>.formEditor.predefinedDefaults.<propertyPath> = "default value"
+     * * <validatorsDefinition|finishersDefinition>.<index>.mapEditor.predefinedDefaults.<propertyPath> = "default value"
      *
      * @return mixed
      * @throws PropertyException
@@ -420,10 +419,10 @@ class ConfigurationService implements SingletonInterface
     /**
      * Check if the form element is creatable through the form editor.
      * A form element is creatable if the following properties are set:
-     *  * formElementsDefinition.<formElementType>.formEditor.group
-     *  * formElementsDefinition.<formElementType>.formEditor.groupSorting
-     * And the value from "formElementsDefinition.<formElementType>.formEditor.group" is
-     * one of the keys within "formEditor.formElementGroups"
+     *  * mapElementsDefinition.<mapElementType>.mapEditor.group
+     *  * mapElementsDefinition.<mapElementType>.mapEditor.groupSorting
+     * And the value from "mapElementsDefinition.<mapElementType>.mapEditor.group" is
+     * one of the keys within "mapEditor.mapElementGroups"
      *
      * @internal
      */
@@ -435,17 +434,17 @@ class ConfigurationService implements SingletonInterface
         $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
             $dto->getPrototypeName()
         );
-        return $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()]['creatable'] ?? false;
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['creatable'] ?? false;
     }
 
     /**
      * Check if the form elements finisher|validator is creatable through the form editor.
      * A form elements finisher|validator is creatable if the following conditions are true:
-     * "formElementsDefinition.<formElementType>.formEditor.editors.<index>.templateName = Inspector-FinishersEditor"
+     * "mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.templateName = Inspector-FinishersEditor"
      * or
-     * "formElementsDefinition.<formElementType>.formEditor.editors.<index>.templateName = Inspector-ValidatorsEditor"
+     * "mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.templateName = Inspector-ValidatorsEditor"
      * and
-     * "formElementsDefinition.<formElementType>.formEditor.editors.<index>.selectOptions.<index>.value = <finisherIdentifier|validatorIdentifier>"
+     * "mapElementsDefinition.<mapElementType>.mapEditor.editors.<index>.selectOptions.<index>.value = <finisherIdentifier|validatorIdentifier>"
      *
      * @internal
      */
@@ -454,7 +453,7 @@ class ConfigurationService implements SingletonInterface
         $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
             $dto->getPrototypeName()
         );
-        return $formDefinitionValidationConfiguration['formElements'][$dto->getFormElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()]['creatable'] ?? false;
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()]['creatable'] ?? false;
     }
 
     /**
@@ -467,7 +466,7 @@ class ConfigurationService implements SingletonInterface
         $prototypeConfiguration = $this->getPrototypeConfiguration($dto->getPrototypeName());
         return ArrayUtility::isValidPath(
             $prototypeConfiguration,
-            'formElementsDefinition.' . $dto->getFormElementType(),
+            'mapElementsDefinition.' . $dto->getFormElementType(),
             '.'
         );
     }
@@ -496,7 +495,7 @@ class ConfigurationService implements SingletonInterface
         return $this->getTranslationService()->translateToAllBackendLanguages(
             $key,
             [],
-            $prototypeConfiguration['formEditor']['translationFiles'] ?? []
+            $prototypeConfiguration['mapEditor']['translationFiles'] ?? []
         );
     }
 
@@ -516,74 +515,74 @@ class ConfigurationService implements SingletonInterface
             GeneralUtility::makeInstance(ArrayProcessor::class, $prototypeConfiguration)->forEach(
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
-                    'formElementPropertyPaths',
-                    '^formElementsDefinition\.(.*)\.formEditor\.editors\.([\d]+)\.(propertyPath|.*\.propertyPath)$',
+                    'mapElementPropertyPaths',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.editors\.([\d]+)\.(propertyPath|.*\.propertyPath)$',
                     GeneralUtility::makeInstance(PropertyPathsExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
-                    'formElementAdditionalElementPropertyPaths',
-                    '^formElementsDefinition\.(.*)\.formEditor\.editors\.([\d]+)\.additionalElementPropertyPaths\.([\d]+)',
+                    'mapElementAdditionalElementPropertyPaths',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.editors\.([\d]+)\.additionalElementPropertyPaths\.([\d]+)',
                     GeneralUtility::makeInstance(AdditionalElementPropertyPathsExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
-                    'formElementRelativeMultiValueProperties',
-                    '^formElementsDefinition\.(.*)\.formEditor\.editors\.([\d]+)\.templateName$',
+                    'mapElementRelativeMultiValueProperties',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.editors\.([\d]+)\.templateName$',
                     GeneralUtility::makeInstance(MultiValuePropertiesExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
-                    'formElementSelectOptions',
-                    '^formElementsDefinition\.(.*)\.formEditor\.editors\.([\d]+)\.selectOptions\.([\d]+)\.value$',
+                    'mapElementSelectOptions',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.editors\.([\d]+)\.selectOptions\.([\d]+)\.value$',
                     GeneralUtility::makeInstance(SelectOptionsExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
-                    'formElementPredefinedDefaults',
-                    '^formElementsDefinition\.(.*)\.formEditor\.predefinedDefaults\.(.+)$',
+                    'mapElementPredefinedDefaults',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.predefinedDefaults\.(.+)$',
                     GeneralUtility::makeInstance(PredefinedDefaultsExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
-                    'formElementCreatable',
-                    '^formElementsDefinition\.(.*)\.formEditor.group$',
+                    'mapElementCreatable',
+                    '^mapElementsDefinition\.(.*)\.mapEditor.group$',
                     GeneralUtility::makeInstance(IsCreatableFormElementExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
                     'propertyCollectionCreatable',
-                    '^formElementsDefinition\.(.*)\.formEditor\.editors\.([\d]+)\.templateName$',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.editors\.([\d]+)\.templateName$',
                     GeneralUtility::makeInstance(IsCreatablePropertyCollectionElementExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
                     'propertyCollectionPropertyPaths',
-                    '^formElementsDefinition\.(.*)\.formEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.(propertyPath|.*\.propertyPath)$',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.(propertyPath|.*\.propertyPath)$',
                     GeneralUtility::makeInstance(CollectionPropertyPathsExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
                     'propertyCollectionAdditionalElementPropertyPaths',
-                    '^formElementsDefinition\.(.*)\.formEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.additionalElementPropertyPaths\.([\d]+)',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.additionalElementPropertyPaths\.([\d]+)',
                     GeneralUtility::makeInstance(AdditionalElementPropertyPathsExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
                     'propertyCollectionRelativeMultiValueProperties',
-                    '^formElementsDefinition\.(.*)\.formEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.templateName$',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.templateName$',
                     GeneralUtility::makeInstance(CollectionMultiValuePropertiesExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
                     'propertyCollectionSelectOptions',
-                    '^formElementsDefinition\.(.*)\.formEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.selectOptions\.([\d]+)\.value$',
+                    '^mapElementsDefinition\.(.*)\.mapEditor\.propertyCollections\.(finishers|validators)\.([\d]+)\.editors\.([\d]+)\.selectOptions\.([\d]+)\.value$',
                     GeneralUtility::makeInstance(CollectionSelectOptionsExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
                     'propertyCollectionPredefinedDefaults',
-                    '^(validatorsDefinition|finishersDefinition)\.(.*)\.formEditor\.predefinedDefaults\.(.+)$',
+                    '^(validatorsDefinition|finishersDefinition)\.(.*)\.mapEditor\.predefinedDefaults\.(.+)$',
                     GeneralUtility::makeInstance(CollectionPredefinedDefaultsExtractor::class, $extractorDto)
                 )
             );
@@ -687,11 +686,11 @@ class ConfigurationService implements SingletonInterface
                 );
             }
 
-            $formElementType = $validationDto->getFormElementType();
+            $mapElementType = $validationDto->getFormElementType();
             if (!$this->isFormElementTypeDefinedInFormSetup($validationDto)) {
                 $message = 'Form element type "%s" does not exist in prototype configuration "%s"';
                 throw new PropertyException(
-                    sprintf($message, $formElementType, $validationDto->getPrototypeName()),
+                    sprintf($message, $mapElementType, $validationDto->getPrototypeName()),
                     1528633967
                 );
             }
@@ -704,15 +703,15 @@ class ConfigurationService implements SingletonInterface
                 if ($propertyCollectionName !== 'finishers' && $propertyCollectionName !== 'validators') {
                     $message = 'The property collection name "%s" for form element "%s" must be "finishers" or "validators"';
                     throw new PropertyException(
-                        sprintf($message, $propertyCollectionName, $formElementType),
+                        sprintf($message, $propertyCollectionName, $mapElementType),
                         1528636941
                     );
                 }
 
-                $configuration['formElements'][$formElementType]['collections'][$propertyCollectionName][$propertyCollectionElementIdentifier]['additionalPropertyPaths'][]
+                $configuration['mapElements'][$mapElementType]['collections'][$propertyCollectionName][$propertyCollectionElementIdentifier]['additionalPropertyPaths'][]
                     = $validationDto->getPropertyPath();
             } else {
-                $configuration['formElements'][$formElementType]['additionalPropertyPaths'][]
+                $configuration['mapElements'][$mapElementType]['additionalPropertyPaths'][]
                     = $validationDto->getPropertyPath();
             }
         }
@@ -743,15 +742,15 @@ class ConfigurationService implements SingletonInterface
 
     protected function translateValues(array $prototypeConfiguration, array $configuration): array
     {
-        if (isset($configuration['formElements'])) {
-            $configuration['formElements'] = $this->translatePredefinedDefaults(
+        if (isset($configuration['mapElements'])) {
+            $configuration['mapElements'] = $this->translatePredefinedDefaults(
                 $prototypeConfiguration,
-                $configuration['formElements']
+                $configuration['mapElements']
             );
 
-            $configuration['formElements'] = $this->translateSelectOptions(
+            $configuration['mapElements'] = $this->translateSelectOptions(
                 $prototypeConfiguration,
-                $configuration['formElements']
+                $configuration['mapElements']
             );
         }
 
@@ -762,37 +761,37 @@ class ConfigurationService implements SingletonInterface
         return $configuration;
     }
 
-    protected function translatePredefinedDefaults(array $prototypeConfiguration, array $formElements): array
+    protected function translatePredefinedDefaults(array $prototypeConfiguration, array $mapElements): array
     {
-        foreach ($formElements ?? [] as $name => $formElement) {
-            if (!isset($formElement['predefinedDefaults'])) {
+        foreach ($mapElements ?? [] as $name => $mapElement) {
+            if (!isset($mapElement['predefinedDefaults'])) {
                 continue;
             }
-            $formElement['untranslatedPredefinedDefaults'] = $formElement['predefinedDefaults'];
-            $formElement['predefinedDefaults'] = $this->getTranslationService()->translateValuesRecursive(
-                $formElement['predefinedDefaults'],
-                $prototypeConfiguration['formEditor']['translationFiles'] ?? []
+            $mapElement['untranslatedPredefinedDefaults'] = $mapElement['predefinedDefaults'];
+            $mapElement['predefinedDefaults'] = $this->getTranslationService()->translateValuesRecursive(
+                $mapElement['predefinedDefaults'],
+                $prototypeConfiguration['mapEditor']['translationFiles'] ?? []
             );
-            $formElements[$name] = $formElement;
+            $mapElements[$name] = $mapElement;
         }
-        return $formElements;
+        return $mapElements;
     }
 
-    protected function translateSelectOptions(array $prototypeConfiguration, array $formElements): array
+    protected function translateSelectOptions(array $prototypeConfiguration, array $mapElements): array
     {
-        foreach ($formElements ?? [] as $name => $formElement) {
-            if (empty($formElement['selectOptions']) || !is_array($formElement['selectOptions'])) {
+        foreach ($mapElements ?? [] as $name => $mapElement) {
+            if (empty($mapElement['selectOptions']) || !is_array($mapElement['selectOptions'])) {
                 continue;
             }
-            $formElement['untranslatedSelectOptions'] = $formElement['selectOptions'];
+            $mapElement['untranslatedSelectOptions'] = $mapElement['selectOptions'];
 
-            $formElement['selectOptions'] = $this->getTranslationService()->translateValuesRecursive(
-                $formElement['selectOptions'],
-                $prototypeConfiguration['formEditor']['translationFiles'] ?? []
+            $mapElement['selectOptions'] = $this->getTranslationService()->translateValuesRecursive(
+                $mapElement['selectOptions'],
+                $prototypeConfiguration['mapEditor']['translationFiles'] ?? []
             );
-            $formElements[$name] = $formElement;
+            $mapElements[$name] = $mapElement;
         }
-        return $formElements;
+        return $mapElements;
     }
 
     /**

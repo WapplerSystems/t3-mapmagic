@@ -30,7 +30,7 @@ class IsCreatablePropertyCollectionElementExtractor extends AbstractExtractor
      */
     public function __invoke(string $_, $value, array $matches)
     {
-        [, $formElementType, $formEditorIndex] = $matches;
+        [, $mapElementType, $mapEditorIndex] = $matches;
 
         if (
             $value !== 'Inspector-FinishersEditor'
@@ -51,11 +51,11 @@ class IsCreatablePropertyCollectionElementExtractor extends AbstractExtractor
             $selectOptionsPath = implode(
                 '.',
                 [
-                    'formElementsDefinition',
-                    $formElementType,
-                    'formEditor',
+                    'mapElementsDefinition',
+                    $mapElementType,
+                    'mapEditor',
                     'editors',
-                    $formEditorIndex,
+                    $mapEditorIndex,
                     'selectOptions',
                 ]
             );
@@ -73,17 +73,17 @@ class IsCreatablePropertyCollectionElementExtractor extends AbstractExtractor
                     continue;
                 }
 
-                $result['formElements'][$formElementType]['collections'][$propertyCollectionName][$validatorIdentifier]['creatable'] = true;
+                $result['mapElements'][$mapElementType]['collections'][$propertyCollectionName][$validatorIdentifier]['creatable'] = true;
             }
         } else {
             $validatorIdentifierPath = implode(
                 '.',
                 [
-                    'formElementsDefinition',
-                    $formElementType,
-                    'formEditor',
+                    'mapElementsDefinition',
+                    $mapElementType,
+                    'mapEditor',
                     'editors',
-                    $formEditorIndex,
+                    $mapEditorIndex,
                     'validatorIdentifier',
                 ]
             );
@@ -95,7 +95,7 @@ class IsCreatablePropertyCollectionElementExtractor extends AbstractExtractor
                 $validatorIdentifierPath,
                 '.'
             );
-            $result['formElements'][$formElementType]['collections'][$propertyCollectionName][$validatorIdentifier]['creatable'] = true;
+            $result['mapElements'][$mapElementType]['collections'][$propertyCollectionName][$validatorIdentifier]['creatable'] = true;
         }
 
         $this->extractorDto->setResult($result);

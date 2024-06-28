@@ -34,17 +34,7 @@ interface VariableRenderableInterface
      *
      * @internal
      */
-    public function setOptions(array $options, bool $reset = false);
+    public function setOptions(array $options);
 
-    /**
-     * Get all rendering variants
-     *
-     * @return RenderableVariantInterface[]
-     */
-    public function getVariants(): array;
 
-    /**
-     * Adds the specified variant to this form element
-     */
-    public function addVariant(RenderableVariantInterface $variant);
 }

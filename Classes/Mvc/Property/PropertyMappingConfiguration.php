@@ -64,7 +64,7 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
 
             $typeConverter = GeneralUtility::makeInstance(UploadedFileReferenceConverter::class);
             /** @var \TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration $propertyMappingConfiguration */
-            $propertyMappingConfiguration = $renderable->getRootForm()
+            $propertyMappingConfiguration = $renderable->getRootMap()
                 ->getProcessingRule($renderable->getIdentifier())
                 ->getPropertyMappingConfiguration()
                 ->setTypeConverter($typeConverter);
@@ -79,7 +79,7 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
                 $validators = [$mimeTypeValidator];
             }
 
-            $renderable->getRootForm()
+            $renderable->getRootMap()
                 ->getProcessingRule($renderable->getIdentifier())
                 ->filterValidators(
                     static function ($validator) use (&$validators) {
@@ -101,7 +101,7 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
                 $uploadConfiguration[UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER] = $saveToFileMountIdentifier;
             } else {
                 // @todo Why should uploaded files be stored to the same directory as the *.map.yaml definitions?
-                $persistenceIdentifier = $renderable->getRootForm()->getPersistenceIdentifier();
+                $persistenceIdentifier = $renderable->getRootMap()->getPersistenceIdentifier();
                 if (!empty($persistenceIdentifier)) {
                     $pathinfo = PathUtility::pathinfo($persistenceIdentifier);
                     $saveToFileMountIdentifier = $pathinfo['dirname'];
@@ -118,7 +118,7 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
             // Set the property mapping configuration for the `Date` element.
 
             /** @var \TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration $propertyMappingConfiguration */
-            $propertyMappingConfiguration = $renderable->getRootForm()->getProcessingRule($renderable->getIdentifier())->getPropertyMappingConfiguration();
+            $propertyMappingConfiguration = $renderable->getRootMap()->getProcessingRule($renderable->getIdentifier())->getPropertyMappingConfiguration();
             // @see https://www.w3.org/TR/2011/WD-html-markup-20110405/input.date.html#input.date.attrs.value
             // 'Y-m-d' = https://tools.ietf.org/html/rfc3339#section-5.6 -> full-date
             $propertyMappingConfiguration->setTypeConverterOption(DateTimeConverter::class, DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
@@ -172,18 +172,18 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
         RenderableInterface $renderable
     ): void {
         if (!$renderable instanceof FileUpload
-            || $formRuntime->getFormSession() === null
+            || $formRuntime->getMapSession() === null
             || !$formRuntime->canProcessFormSubmission()
         ) {
             return;
         }
-        $renderable->getRootForm()
+        $renderable->getRootMap()
             ->getProcessingRule($renderable->getIdentifier())
             ->getPropertyMappingConfiguration()
             ->setTypeConverterOption(
                 UploadedFileReferenceConverter::class,
                 UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_SEED,
-                $formRuntime->getFormSession()->getIdentifier()
+                $formRuntime->getMapSession()->getIdentifier()
             );
     }
 }

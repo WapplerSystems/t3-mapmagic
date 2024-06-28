@@ -42,7 +42,7 @@ class CreatableFormElementPropertiesValidator extends ElementBasedValidator
         $dto = $this->validationDto->withPropertyPath($key);
 
         if ($this->getConfigurationService()->isFormElementPropertyDefinedInFormEditorSetup($dto)) {
-            if ($this->getConfigurationService()->formElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup($dto)) {
+            if ($this->getConfigurationService()->mapElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup($dto)) {
                 $this->validateFormElementValue($value, $dto);
             }
         } elseif (

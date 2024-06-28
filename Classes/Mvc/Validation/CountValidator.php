@@ -48,7 +48,7 @@ final class CountValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1475002976',
-                    'form'
+                    'map_magic'
                 ),
                 1475002976
             );
@@ -61,7 +61,7 @@ final class CountValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1475002994',
-                    'form',
+                    'map_magic',
                     [$minimum, $maximum]
                 ),
                 1475002994,

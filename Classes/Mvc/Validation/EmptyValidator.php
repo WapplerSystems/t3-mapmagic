@@ -43,7 +43,7 @@ final class EmptyValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1476396435',
-                    'form'
+                    'map_magic'
                 ),
                 1476396435
             );

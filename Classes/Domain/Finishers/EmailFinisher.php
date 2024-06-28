@@ -207,7 +207,7 @@ class EmailFinisher extends AbstractFinisher
             ->setTemplate($this->options['templateName'])
             ->assignMultiple([
                 'finisherVariableProvider' => $this->finisherContext->getFinisherVariableProvider(),
-                'form' => $formRuntime,
+                'map' => $formRuntime,
             ]);
 
         if (is_array($this->options['variables'] ?? null)) {

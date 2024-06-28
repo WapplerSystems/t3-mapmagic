@@ -29,6 +29,7 @@ use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\ValidatorPresetNotFoundException;
 use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 
 /**
  * Convenience base class which implements common functionality for most
@@ -91,14 +92,6 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      */
     protected $templateName = '';
 
-    /**
-     * associative array of rendering variants
-     *
-     * @var array
-     */
-    protected $variants = [];
-
-    protected ?ValidatorResolver $validatorResolver = null;
 
     /**
      * Get the type of the renderable
@@ -129,7 +122,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      * Every property which has a corresponding set* method can be set using
      * the passed $options array.
      */
-    public function setOptions(array $options, bool $resetValidators = false)
+    public function setOptions(array $options)
     {
         if (isset($options['label'])) {
             $this->setLabel($options['label']);
@@ -145,10 +138,6 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
             $runtimeCache = GeneralUtility::makeInstance(CacheManager::class)->getCache('runtime');
             $configurationHashes = $runtimeCache->get('formAbstractRenderableConfigurationHashes') ?: [];
 
-            if ($resetValidators) {
-                $this->getRootForm()->getProcessingRule($this->getIdentifier())->removeAllValidators();
-                $configurationHashes = [];
-            }
 
             foreach ($options['validators'] as $validatorConfiguration) {
                 $configurationHash = md5(
@@ -164,15 +153,9 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
             }
         }
 
-        if (isset($options['variants'])) {
-            foreach ($options['variants'] as $variantConfiguration) {
-                $this->createVariant($variantConfiguration);
-            }
-        }
-
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['label', 'defaultValue', 'properties', 'renderingOptions', 'validators', 'formEditor', 'variants']
+            ['label', 'defaultValue', 'properties', 'renderingOptions', 'validators', 'mapEditor']
         );
     }
 
@@ -183,7 +166,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      */
     public function createValidator(string $validatorIdentifier, array $options = []): ValidatorInterface
     {
-        $validatorsDefinition = $this->getRootForm()->getValidatorsDefinition();
+        $validatorsDefinition = $this->getRootMap()->getValidatorsDefinition();
         if (isset($validatorsDefinition[$validatorIdentifier]) && is_array($validatorsDefinition[$validatorIdentifier]) && isset($validatorsDefinition[$validatorIdentifier]['implementationClassName'])) {
             $implementationClassName = $validatorsDefinition[$validatorIdentifier]['implementationClassName'];
             $defaultOptions = $validatorsDefinition[$validatorIdentifier]['options'] ?? [];
@@ -209,7 +192,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      */
     public function addValidator(ValidatorInterface $validator)
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
         $formDefinition->getProcessingRule($this->getIdentifier())->addValidator($validator);
     }
 
@@ -220,7 +203,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      */
     public function getValidators(): \SplObjectStorage
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
         return $formDefinition->getProcessingRule($this->getIdentifier())->getValidators();
     }
 
@@ -229,7 +212,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      */
     public function setDataType(string $dataType)
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
         $formDefinition->getProcessingRule($this->getIdentifier())->setDataType($dataType);
     }
 
@@ -238,7 +221,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      */
     public function getRendererClassName(): string
     {
-        return $this->getRootForm()->getRendererClassName();
+        return $this->getRootMap()->getRendererClassName();
     }
 
     /**
@@ -289,16 +272,16 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
     /**
      * Get the root form this element belongs to
      *
-     * @throws FormDefinitionConsistencyException
+     * @throws MapDefinitionConsistencyException
      */
-    public function getRootForm(): FormDefinition
+    public function getRootMap(): MapDefinition
     {
         $rootRenderable = $this->parentRenderable;
-        while ($rootRenderable !== null && !($rootRenderable instanceof FormDefinition)) {
+        while ($rootRenderable !== null && !($rootRenderable instanceof MapDefinition)) {
             $rootRenderable = $rootRenderable->getParentRenderable();
         }
         if ($rootRenderable === null) {
-            throw new FormDefinitionConsistencyException(sprintf('The form element "%s" is not attached to a parent form.', $this->identifier), 1326803398);
+            throw new MapDefinitionConsistencyException(sprintf('The map element "%s" is not attached to a parent form.', $this->identifier), 1326803398);
         }
 
         return $rootRenderable;
@@ -312,9 +295,9 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
     public function registerInFormIfPossible()
     {
         try {
-            $rootForm = $this->getRootForm();
+            $rootForm = $this->getRootMap();
             $rootForm->registerRenderable($this);
-        } catch (FormDefinitionConsistencyException $exception) {
+        } catch (MapDefinitionConsistencyException $exception) {
         }
     }
 
@@ -335,9 +318,9 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
         }
 
         try {
-            $rootForm = $this->getRootForm();
+            $rootForm = $this->getRootMap();
             $rootForm->unregisterRenderable($this);
-        } catch (FormDefinitionConsistencyException $exception) {
+        } catch (MapDefinitionConsistencyException $exception) {
         }
         $this->parentRenderable = null;
     }
@@ -394,16 +377,6 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
     public function isEnabled(): bool
     {
         return !isset($this->renderingOptions['enabled']) || (bool)$this->renderingOptions['enabled'] === true;
-    }
-
-    /**
-     * Get all rendering variants
-     *
-     * @return RenderableVariantInterface[]
-     */
-    public function getVariants(): array
-    {
-        return $this->variants;
     }
 
     public function createVariant(array $options): RenderableVariantInterface

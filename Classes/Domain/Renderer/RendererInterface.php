@@ -40,7 +40,7 @@ interface RendererInterface
      */
     public function render(): string;
 
-    public function setFormRuntime(MapRuntime $formRuntime);
+    public function setMapRuntime(MapRuntime $formRuntime);
 
-    public function getFormRuntime(): MapRuntime;
+    public function getMapRuntime(): MapRuntime;
 }

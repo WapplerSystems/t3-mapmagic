@@ -110,7 +110,7 @@ class MapManagerController extends AbstractBackendController
             $this->pageRenderer->loadRequireJs();
         }
         $this->pageRenderer->getJavaScriptRenderer()->addJavaScriptModuleInstruction(
-            JavaScriptModuleInstruction::create('@typo3/form/backend/helper.js', 'Helper')
+            JavaScriptModuleInstruction::create('@wapplersystems/mapmagic/backend/helper.js', 'Helper')
                 ->invoke('dispatchFormManager', $jsModules, $this->getFormManagerAppInitialData())
         );
         array_map($this->pageRenderer->getJavaScriptRenderer()->addJavaScriptModuleInstruction(...), $javaScriptModules);
@@ -119,7 +119,7 @@ class MapManagerController extends AbstractBackendController
         $moduleTemplate->setTitle(
             $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab')
         );
-        return $moduleTemplate->renderResponse('Backend/FormManager/Index');
+        return $moduleTemplate->renderResponse('Backend/MapManager/Index');
     }
 
     /**
@@ -137,7 +137,7 @@ class MapManagerController extends AbstractBackendController
      * @throws FormException
      * @throws PersistenceManagerException
      */
-    protected function createAction(string $formName, string $templatePath, string $prototypeName, string $savePath): ResponseInterface
+    protected function createAction(string $mapName, string $templatePath, string $prototypeName, string $savePath): ResponseInterface
     {
         if (!$this->mapPersistenceManager->isAllowedPersistencePath($savePath)) {
             throw new PersistenceManagerException(sprintf('Save to path "%s" is not allowed', $savePath), 1614500657);
@@ -146,14 +146,14 @@ class MapManagerController extends AbstractBackendController
         if (!$this->isValidTemplatePath($prototypeName, $templatePath)) {
             throw new FormException(sprintf('The template path "%s" is not allowed', $templatePath), 1329233410);
         }
-        if (empty($formName)) {
-            throw new FormException('No form name', 1472312204);
+        if (empty($mapName)) {
+            throw new FormException('No map name', 1472312204);
         }
 
         $templatePath = GeneralUtility::getFileAbsFileName($templatePath);
         $form = Yaml::parse((string)file_get_contents($templatePath));
-        $form['label'] = $formName;
-        $form['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($formName));
+        $form['label'] = $mapName;
+        $form['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($mapName));
         $form['prototypeName'] = $prototypeName;
 
         $formPersistenceIdentifier = $this->mapPersistenceManager->getUniquePersistenceIdentifier($form['identifier'], $savePath);

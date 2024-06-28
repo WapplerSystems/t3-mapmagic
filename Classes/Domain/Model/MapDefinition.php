@@ -22,6 +22,7 @@ declare(strict_types=1);
 namespace WapplerSystems\MapMagic\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -32,7 +33,7 @@ use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException
 use WapplerSystems\MapMagic\Domain\Model\Exception\FinisherPresetNotFoundException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\Layer;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\VariableRenderableInterface;
@@ -50,7 +51,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * The Anatomy Of A Form
  * =====================
  *
- * A MapDefinition consists of multiple *Page* ({@link Page}) objects. When a
+ * A MapDefinition consists of multiple *Page* ({@link Layer}) objects. When a
  * form is displayed to the user, only one *Page* is visible at any given time,
  * and there is a navigation to go back and forth between the pages.
  *
@@ -82,10 +83,10 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * Creating a Form, Using Abstract Form Element Types
  * =====================================================
  *
- * While you can use the {@link MapDefinition::addPage} or {@link Page::addElement}
+ * While you can use the {@link MapDefinition::addLayer} or {@link Layer::addElement}
  * methods and create the Page and FormElement objects manually, it is often better
  * to use the corresponding create* methods ({@link MapDefinition::createPage}
- * and {@link Page::createElement}), as you pass them an abstract *Form Element Type*
+ * and {@link Layer::createElement}), as you pass them an abstract *Form Element Type*
  * such as *Text* or *Page*, and the system **automatically
  * resolves the implementation class name and sets default values**.
  *
@@ -107,7 +108,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  *
  * <pre>
  * $prototypeConfiguration = [
- *   'formElementsDefinition' => [
+ *   'mapElementsDefinition' => [
  *     'Page' => [
  *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page'
  *     ],
@@ -125,7 +126,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  *
  * <pre>
  * $prototypeConfiguration = [
- *   'formElementsDefinition' => [
+ *   'mapElementsDefinition' => [
  *     'Page' => [
  *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page',
  *       'label' => 'this is the label of the page if nothing is specified'
@@ -220,12 +221,12 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * @internal May change any time, use FormFactoryInterface to select a different FormDefinition if needed
  * @todo: Declare final in v12
  */
-class MapDefinition extends AbstractCompositeRenderable implements VariableRenderableInterface
+class MapDefinition extends AbstractCompositeRenderable
 {
     /**
      * The Form's pages
      *
-     * @var array<int, Page>
+     * @var array<int, Layer>
      */
     protected $renderables = [];
 
@@ -273,7 +274,7 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
     /**
      * @var array<string, array<string, mixed>>
      */
-    protected $validatorsDefinition;
+    protected $layersDefinition;
 
     /**
      * @var array<string, array<string, mixed>>
@@ -302,8 +303,9 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
         string $type = 'MapMagic',
         ?string $persistenceIdentifier = null
     ) {
-        $this->typeDefinitions = $prototypeConfiguration['formElementsDefinition'] ?? [];
-        $this->validatorsDefinition = $prototypeConfiguration['validatorsDefinition'] ?? [];
+        DebugUtility::debug($prototypeConfiguration);
+        $this->typeDefinitions = $prototypeConfiguration['mapElementsDefinition'] ?? [];
+        $this->layersDefinition = $prototypeConfiguration['layersDefinition'] ?? [];
         $this->finishersDefinition = $prototypeConfiguration['finishersDefinition'] ?? [];
 
         if (!is_string($identifier) || strlen($identifier) === 0) {
@@ -315,7 +317,7 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
         $this->persistenceIdentifier = (string)$persistenceIdentifier;
 
         if ($prototypeConfiguration !== []) {
-            $this->initializeFromFormDefaults();
+            $this->initializeFromMapDefaults();
         }
     }
 
@@ -325,8 +327,9 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
      * @throws TypeDefinitionNotFoundException
      * @internal
      */
-    protected function initializeFromFormDefaults()
+    protected function initializeFromMapDefaults()
     {
+        DebugUtility::debug($this->typeDefinitions);
         if (!isset($this->typeDefinitions[$this->type])) {
             throw new TypeDefinitionNotFoundException(sprintf('Type "%s" not found. Probably some configuration is missing.', $this->type), 1474905835);
         }
@@ -341,7 +344,7 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
      *
      * @internal
      */
-    public function setOptions(array $options, bool $resetFinishers = false)
+    public function setOptions(array $options)
     {
         if (isset($options['rendererClassName'])) {
             $this->setRendererClassName($options['rendererClassName']);
@@ -354,24 +357,10 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
                 $this->setRenderingOption($key, $value);
             }
         }
-        if (isset($options['finishers'])) {
-            if ($resetFinishers) {
-                $this->finishers = [];
-            }
-            foreach ($options['finishers'] as $finisherConfiguration) {
-                $this->createFinisher($finisherConfiguration['identifier'], $finisherConfiguration['options'] ?? []);
-            }
-        }
-
-        if (isset($options['variants'])) {
-            foreach ($options['variants'] as $variantConfiguration) {
-                $this->createVariant($variantConfiguration);
-            }
-        }
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['rendererClassName', 'renderingOptions', 'finishers', 'formEditor', 'label', 'variants']
+            ['rendererClassName', 'renderingOptions', 'layers', 'mapEditor', 'label']
         );
     }
 
@@ -385,10 +374,10 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
      *
      * @param string $identifier Identifier of the new page
      * @param string $typeName Type of the new page
-     * @return Page the newly created page
+     * @return Layer the newly created page
      * @throws TypeDefinitionNotFoundException
      */
-    public function createPage(string $identifier, string $typeName = 'Page'): Page
+    public function createPage(string $identifier, string $typeName = 'Page'): Layer
     {
         if (!isset($this->typeDefinitions[$typeName])) {
             throw new TypeDefinitionNotFoundException(sprintf('Type "%s" not found. Probably some configuration is missing.', $typeName), 1474905953);
@@ -401,32 +390,26 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
         }
         $implementationClassName = $typeDefinition['implementationClassName'];
 
-        /** @var Page $page */
-        $page = GeneralUtility::makeInstance($implementationClassName, $identifier, $typeName);
+        /** @var Layer $layer */
+        $layer = GeneralUtility::makeInstance($implementationClassName, $identifier, $typeName);
 
         if (isset($typeDefinition['label'])) {
-            $page->setLabel($typeDefinition['label']);
+            $layer->setLabel($typeDefinition['label']);
         }
 
         if (isset($typeDefinition['renderingOptions'])) {
             foreach ($typeDefinition['renderingOptions'] as $key => $value) {
-                $page->setRenderingOption($key, $value);
-            }
-        }
-
-        if (isset($typeDefinition['variants'])) {
-            foreach ($typeDefinition['variants'] as $variantConfiguration) {
-                $page->createVariant($variantConfiguration);
+                $layer->setRenderingOption($key, $value);
             }
         }
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $typeDefinition,
-            ['implementationClassName', 'label', 'renderingOptions', 'formEditor', 'variants']
+            ['implementationClassName', 'label', 'renderingOptions', 'mapEditor']
         );
 
-        $this->addPage($page);
-        return $page;
+        $this->addLayer($layer);
+        return $layer;
     }
 
     /**
@@ -434,11 +417,11 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
      *
      * Instead of this method, you should often use {@link createPage} instead.
      *
-     * @param Page $page
-     * @throws FormDefinitionConsistencyException if Page is already added to a FormDefinition
+     * @param Layer $page
+     * @throws MapDefinitionConsistencyException if Page is already added to a FormDefinition
      * @see createPage
      */
-    public function addPage(Page $page)
+    public function addLayer(Layer $page)
     {
         $this->addRenderable($page);
     }
@@ -446,9 +429,9 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
     /**
      * Get the Form's pages
      *
-     * @return array<int, Page> The Form's pages in the correct order
+     * @return array<int, Layer> The Form's pages in the correct order
      */
-    public function getPages(): array
+    public function getLayers(): array
     {
         return $this->renderables;
     }
@@ -458,7 +441,7 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
      *
      * @return bool TRUE if a page with the given $index exists, otherwise FALSE
      */
-    public function hasPageWithIndex(int $index): bool
+    public function hasLayerWithIndex(int $index): bool
     {
         return isset($this->renderables[$index]);
     }
@@ -466,58 +449,20 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
     /**
      * Get the page with the passed index. The first page has index zero.
      *
-     * If page at $index does not exist, an exception is thrown. @see hasPageWithIndex()
-     *
-     * @param int $index
-     * @return Page the page
+     * If page at $index does not exist, an exception is thrown. @param int $index
+     * @return Layer the page
      * @throws FormException if the specified index does not exist
+     *@see hasLayerWithIndex()
+     *
      */
-    public function getPageByIndex(int $index)
+    public function getLayerByIndex(int $index)
     {
-        if (!$this->hasPageWithIndex($index)) {
+        if (!$this->hasLayerWithIndex($index)) {
             throw new FormException(sprintf('There is no page with an index of %d', $index), 1329233627);
         }
         return $this->renderables[$index];
     }
 
-    /**
-     * Adds the specified finisher to this form
-     */
-    public function addFinisher(FinisherInterface $finisher)
-    {
-        $this->finishers[] = $finisher;
-    }
-
-    /**
-     * @param string $finisherIdentifier identifier of the finisher as registered in the current form (for example: "Redirect")
-     * @param array $options options for this finisher in the format ['option1' => 'value1', 'option2' => 'value2', ...]
-     * @throws FinisherPresetNotFoundException
-     */
-    public function createFinisher(string $finisherIdentifier, array $options = []): FinisherInterface
-    {
-        if (isset($this->finishersDefinition[$finisherIdentifier]) && is_array($this->finishersDefinition[$finisherIdentifier]) && isset($this->finishersDefinition[$finisherIdentifier]['implementationClassName'])) {
-            $implementationClassName = $this->finishersDefinition[$finisherIdentifier]['implementationClassName'];
-            $defaultOptions = $this->finishersDefinition[$finisherIdentifier]['options'] ?? [];
-            ArrayUtility::mergeRecursiveWithOverrule($defaultOptions, $options);
-            /** @var FinisherInterface $finisher */
-            $finisher = GeneralUtility::makeInstance($implementationClassName);
-            $finisher->setFinisherIdentifier($finisherIdentifier);
-            $finisher->setOptions($defaultOptions);
-            $this->addFinisher($finisher);
-            return $finisher;
-        }
-        throw new FinisherPresetNotFoundException('The finisher preset identified by "' . $finisherIdentifier . '" could not be found, or the implementationClassName was not specified.', 1328709784);
-    }
-
-    /**
-     * Gets all finishers of this form
-     *
-     * @return list<FinisherInterface>
-     */
-    public function getFinishers(): array
-    {
-        return $this->finishers;
-    }
 
     /**
      * Add an element to the ElementsByIdentifier Cache.
@@ -603,7 +548,7 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
     /**
      * Move $pageToMove before $referencePage
      */
-    public function movePageBefore(Page $pageToMove, Page $referencePage)
+    public function moveLayerBefore(Layer $pageToMove, Layer $referencePage)
     {
         $this->moveRenderableBefore($pageToMove, $referencePage);
     }
@@ -611,7 +556,7 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
     /**
      * Move $pageToMove after $referencePage
      */
-    public function movePageAfter(Page $pageToMove, Page $referencePage)
+    public function moveLayerAfter(Layer $pageToMove, Layer $referencePage)
     {
         $this->moveRenderableAfter($pageToMove, $referencePage);
     }
@@ -619,7 +564,7 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
     /**
      * Remove $pageToRemove from form
      */
-    public function removePage(Page $pageToRemove)
+    public function removeLayer(Layer $pageToRemove)
     {
         $this->removeRenderable($pageToRemove);
     }
@@ -630,11 +575,11 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
      */
     public function bind(RequestInterface $request): MapRuntime
     {
-        $formRuntime = GeneralUtility::makeInstance(MapRuntime::class);
-        $formRuntime->setMapDefinition($this);
-        $formRuntime->setRequest($request);
-        $formRuntime->initialize();
-        return $formRuntime;
+        $mapRuntime = GeneralUtility::makeInstance(MapRuntime::class);
+        $mapRuntime->setMapDefinition($this);
+        $mapRuntime->setRequest($request);
+        $mapRuntime->initialize();
+        return $mapRuntime;
     }
 
     public function getProcessingRule(string $propertyPath): ProcessingRule
@@ -669,9 +614,9 @@ class MapDefinition extends AbstractCompositeRenderable implements VariableRende
      * @return array<string, array<string, mixed>>
      * @internal
      */
-    public function getValidatorsDefinition(): array
+    public function getLayersDefinition(): array
     {
-        return $this->validatorsDefinition;
+        return $this->layersDefinition;
     }
 
     /**

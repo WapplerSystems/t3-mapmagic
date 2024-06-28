@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/WapplerSystems/MapMagic/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:for each="{formEditorPartials}" key="formEditorTemplateName" as="formEditorPartial">
-    <template data-template-name="{formEditorTemplateName}">
-        <f:render partial="{formEditorPartial}" arguments="{insertRenderablesPanelConfiguration: insertRenderablesPanelConfiguration}" />
+<f:for each="{mapEditorPartials}" key="mapEditorTemplateName" as="mapEditorPartial">
+    <template data-template-name="{mapEditorTemplateName}">
+        <f:render partial="{mapEditorPartial}" arguments="{insertRenderablesPanelConfiguration: insertRenderablesPanelConfiguration}" />
     </template>
 </f:for>
 </html>

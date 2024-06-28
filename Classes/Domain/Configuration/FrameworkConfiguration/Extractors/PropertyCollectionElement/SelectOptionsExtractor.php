@@ -30,16 +30,16 @@ class SelectOptionsExtractor extends AbstractExtractor
      */
     public function __invoke(string $_, $value, array $matches)
     {
-        [, $formElementType, $propertyCollectionName, $propertyCollectionIndex, $propertyCollectionEditorIndex] = $matches;
+        [, $mapElementType, $propertyCollectionName, $propertyCollectionIndex, $propertyCollectionEditorIndex] = $matches;
 
         $propertyPath = ArrayUtility::getValueByPath(
             $this->extractorDto->getPrototypeConfiguration(),
             implode(
                 '.',
                 [
-                    'formElementsDefinition',
-                    $formElementType,
-                    'formEditor',
+                    'mapElementsDefinition',
+                    $mapElementType,
+                    'mapEditor',
                     'propertyCollections',
                     $propertyCollectionName,
                     $propertyCollectionIndex,
@@ -56,9 +56,9 @@ class SelectOptionsExtractor extends AbstractExtractor
             implode(
                 '.',
                 [
-                    'formElementsDefinition',
-                    $formElementType,
-                    'formEditor',
+                    'mapElementsDefinition',
+                    $mapElementType,
+                    'mapEditor',
                     'propertyCollections',
                     $propertyCollectionName,
                     $propertyCollectionIndex,

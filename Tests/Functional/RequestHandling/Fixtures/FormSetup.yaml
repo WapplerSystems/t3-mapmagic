@@ -1,3 +1,0 @@
-persistenceManager:
-  allowedExtensionPaths:
-    10: EXT:map_magic/Tests/Functional/RequestHandling/Fixtures/Forms/

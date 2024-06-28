@@ -67,13 +67,13 @@ abstract class AbstractCompositeRenderable extends AbstractRenderable implements
      *
      * @param RenderableInterface $renderableToMove
      * @param RenderableInterface $referenceRenderable
-     * @throws FormDefinitionConsistencyException
+     * @throws MapDefinitionConsistencyException
      * @internal
      */
     protected function moveRenderableBefore(RenderableInterface $renderableToMove, RenderableInterface $referenceRenderable)
     {
         if ($renderableToMove->getParentRenderable() !== $referenceRenderable->getParentRenderable() || $renderableToMove->getParentRenderable() !== $this) {
-            throw new FormDefinitionConsistencyException('Moved renderables need to be part of the same parent element.', 1326089744);
+            throw new MapDefinitionConsistencyException('Moved renderables need to be part of the same parent element.', 1326089744);
         }
 
         $reorderedRenderables = [];
@@ -103,13 +103,13 @@ abstract class AbstractCompositeRenderable extends AbstractRenderable implements
      *
      * @param RenderableInterface $renderableToMove
      * @param RenderableInterface $referenceRenderable
-     * @throws FormDefinitionConsistencyException
+     * @throws MapDefinitionConsistencyException
      * @internal
      */
     protected function moveRenderableAfter(RenderableInterface $renderableToMove, RenderableInterface $referenceRenderable)
     {
         if ($renderableToMove->getParentRenderable() !== $referenceRenderable->getParentRenderable() || $renderableToMove->getParentRenderable() !== $this) {
-            throw new FormDefinitionConsistencyException('Moved renderables need to be part of the same parent element.', 1477083145);
+            throw new MapDefinitionConsistencyException('Moved renderables need to be part of the same parent element.', 1477083145);
         }
 
         $reorderedRenderables = [];
@@ -157,13 +157,13 @@ abstract class AbstractCompositeRenderable extends AbstractRenderable implements
      * or "removeElement" method with the correct type hint.
      *
      * @param RenderableInterface $renderableToRemove
-     * @throws FormDefinitionConsistencyException
+     * @throws MapDefinitionConsistencyException
      * @internal
      */
     protected function removeRenderable(RenderableInterface $renderableToRemove)
     {
         if ($renderableToRemove->getParentRenderable() !== $this) {
-            throw new FormDefinitionConsistencyException('The renderable to be removed must be part of the calling parent renderable.', 1326090127);
+            throw new MapDefinitionConsistencyException('The renderable to be removed must be part of the calling parent renderable.', 1326090127);
         }
 
         $updatedRenderables = [];

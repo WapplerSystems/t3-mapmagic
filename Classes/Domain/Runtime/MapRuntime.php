@@ -48,7 +48,7 @@ use WapplerSystems\MapMagic\Domain\Finishers\FinisherContext;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
 use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\Page;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\Layer;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\VariableRenderableInterface;
@@ -109,10 +109,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     protected RequestInterface $request;
     protected ResponseInterface $response;
 
-    /**
-     * @var MapState
-     */
-    protected $mapState;
 
     /**
      * The current site language configuration.
@@ -131,7 +127,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
         $this->response = new Response();
     }
 
-
     public function setRequest(RequestInterface $request)
     {
         $this->request = clone $request;
@@ -139,50 +134,14 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
 
     public function initialize()
     {
-        $arguments = $this->request->getArguments();
-        $formIdentifier = $this->mapDefinition->getIdentifier();
-        if (isset($arguments[$formIdentifier])) {
-            $this->request = $this->request->withArguments($arguments[$formIdentifier]);
-        }
-
-        $this->initializeCurrentSiteLanguage();
-        $this->initializeFormStateFromRequest();
-        $this->triggerAfterFormStateInitialized();
-        $this->processVariants();
-        $this->initializeCurrentPageFromRequest();
-        $this->initializeHoneypotFromRequest();
-
-        // Only validate and set form values within the form state
-        // if the current request is not the very first request
-        // and the current request can be processed (POST request and uncached).
-        if (!$this->isFirstRequest() && $this->canProcessFormSubmission()) {
-            $this->processSubmittedFormValues();
-        }
-
-        $this->renderHoneypot();
+        //$this->initializeCurrentSiteLanguage();
+        $this->triggerAfterMapStateInitialized();
     }
 
 
-    /**
-     * Initializes the current state of the form, based on the request
-     * @throws BadRequestException
-     */
-    protected function initializeFormStateFromRequest()
+    protected function triggerAfterMapStateInitialized(): void
     {
-        // Only try to reconstitute the form state if the current request
-        // is not the very first request and if the current request can
-        // be processed (POST request and uncached).
-        /** @var ExtbaseRequestParameters $extbaseRequestParameters */
-        $extbaseRequestParameters = $this->request->getAttribute('extbase');
-        $serializedFormStateWithHmac = $extbaseRequestParameters->getInternalArgument('__state');
-
-        $this->mapState = GeneralUtility::makeInstance(MapState::class);
-
-    }
-
-    protected function triggerAfterFormStateInitialized(): void
-    {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterFormStateInitialized'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterMapStateInitialized'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if ($hookObj instanceof AfterMapStateInitializedInterface) {
                 $hookObj->afterFormStateInitialized($this);
@@ -202,22 +161,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
             ->getPropertyFromAspect('frontend.user', 'isLoggedIn', false);
     }
 
-    protected function processVariants()
-    {
-        $conditionResolver = $this->getConditionResolver();
-
-        $renderables = array_merge([$this->mapDefinition], $this->mapDefinition->getRenderablesRecursively());
-        foreach ($renderables as $renderable) {
-            if ($renderable instanceof VariableRenderableInterface) {
-                $variants = $renderable->getVariants();
-                foreach ($variants as $variant) {
-                    if ($variant->conditionMatches($conditionResolver)) {
-                        $variant->apply();
-                    }
-                }
-            }
-        }
-    }
 
     /**
      * Determine whether the surrounding content object is cached.
@@ -255,7 +198,7 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
             throw new RenderingException(sprintf('The renderer "%s" des not implement RendererInterface', $rendererClassName), 1326096024);
         }
 
-        $renderer->setFormRuntime($this);
+        $renderer->setMapRuntime($this);
         return $renderer->render();
     }
 
@@ -294,6 +237,11 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
         return $this->response;
     }
 
+    public function setMapDefinition(MapDefinition $mapDefinition): void
+    {
+        $this->mapDefinition = $mapDefinition;
+    }
+
 
     /**
      * Abstract "type" of this Renderable. Is used during the rendering process
@@ -312,9 +260,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     public function offsetExists(mixed $identifier): bool
     {
         $identifier = (string)$identifier;
-        if ($this->getElementValue((string)$identifier) !== null) {
-            return true;
-        }
 
         if (is_callable([$this, 'get' . ucfirst($identifier)])) {
             return true;
@@ -340,9 +285,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     public function offsetGet(mixed $identifier): mixed
     {
         $identifier = (string)$identifier;
-        if ($this->getElementValue($identifier) !== null) {
-            return $this->getElementValue($identifier);
-        }
         $getterMethodName = 'get' . ucfirst($identifier);
         if (is_callable([$this, $getterMethodName])) {
             return $this->{$getterMethodName}();
@@ -357,7 +299,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     public function offsetSet(mixed $identifier, mixed $value): void
     {
         $identifier = (string)$identifier;
-        $this->mapState->setFormValue($identifier, $value);
     }
 
     /**
@@ -367,30 +308,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     public function offsetUnset(mixed $identifier): void
     {
         $identifier = (string)$identifier;
-        $this->mapState->setFormValue($identifier, null);
-    }
-
-    /**
-     * Returns the value of the specified element
-     *
-     * @return mixed
-     */
-    public function getElementValue(string $identifier)
-    {
-        $formValue = $this->mapState->getFormValue($identifier);
-        if ($formValue !== null) {
-            return $formValue;
-        }
-        return $this->mapDefinition->getElementDefaultValueByIdentifier($identifier);
-    }
-
-
-    /**
-     * @internal
-     */
-    public function getMapState(): ?MapState
-    {
-        return $this->mapState;
     }
 
     /**

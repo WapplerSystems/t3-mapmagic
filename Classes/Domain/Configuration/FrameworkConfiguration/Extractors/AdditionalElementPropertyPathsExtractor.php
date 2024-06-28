@@ -27,10 +27,10 @@ class AdditionalElementPropertyPathsExtractor extends AbstractExtractor
      */
     public function __invoke(string $_, $value, array $matches)
     {
-        [, $formElementType] = $matches;
+        [, $mapElementType] = $matches;
 
         $result = $this->extractorDto->getResult();
-        $result['formElements'][$formElementType]['additionalElementPropertyPaths'][] = $value;
+        $result['mapElements'][$mapElementType]['additionalElementPropertyPaths'][] = $value;
         $this->extractorDto->setResult($result);
     }
 }

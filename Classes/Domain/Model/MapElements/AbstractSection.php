@@ -81,12 +81,12 @@ abstract class AbstractSection extends AbstractCompositeRenderable
     /**
      * Add a new form element at the end of the section
      *
-     * @param FormElementInterface $formElement The form element to add
+     * @param FormElementInterface $mapElement The form element to add
      * @throws FormDefinitionConsistencyException if FormElement is already added to a section
      */
-    public function addElement(FormElementInterface $formElement)
+    public function addElement(FormElementInterface $mapElement)
     {
-        $this->addRenderable($formElement);
+        $this->addRenderable($mapElement);
     }
 
     /**
@@ -106,7 +106,7 @@ abstract class AbstractSection extends AbstractCompositeRenderable
      */
     public function createElement(string $identifier, string $typeName): FormElementInterface
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
 
         $typeDefinitions = $formDefinition->getTypeDefinitions();
         if (isset($typeDefinitions[$typeName])) {

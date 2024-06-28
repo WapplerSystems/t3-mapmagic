@@ -90,12 +90,12 @@ final class RenderViewHelper extends AbstractViewHelper
         /** @var MapFactoryInterface $factory */
         $factory = GeneralUtility::getContainer()->get($factoryClass);
 
-        $formDefinition = $factory->build($overrideConfiguration, $prototypeName);
+        $mapDefinition = $factory->build($overrideConfiguration, $prototypeName);
         /** @var RenderingContext $renderingContext */
         /** @var RequestInterface $request */
         $request = $renderingContext->getRequest();
-        $form = $formDefinition->bind($request);
+        $map = $mapDefinition->bind($request);
 
-        return $form->render();
+        return $map->render();
     }
 }

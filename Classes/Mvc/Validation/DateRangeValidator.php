@@ -47,7 +47,7 @@ final class DateRangeValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1521293685',
-                    'form',
+                    'map_magic',
                     [gettype($value)]
                 ),
                 1521293685
@@ -64,7 +64,7 @@ final class DateRangeValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1521293686',
-                    'form',
+                    'map_magic',
                     [$minimum->format($format)]
                 ),
                 1521293686,
@@ -76,7 +76,7 @@ final class DateRangeValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1521293687',
-                    'form',
+                    'map_magic',
                     [$maximum->format($format)]
                 ),
                 1521293687,

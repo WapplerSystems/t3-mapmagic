@@ -530,7 +530,7 @@ class TranslationService implements SingletonInterface
      */
     protected function loadTypoScriptLabels(): array
     {
-        $frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'form');
+        $frameworkConfiguration = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, 'mapmagic');
         if (!is_array($frameworkConfiguration['_LOCAL_LANG'] ?? false)) {
             return [];
         }

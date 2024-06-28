@@ -35,7 +35,7 @@ class ConverterDto
     /**
      * @var string
      */
-    protected $formElementIdentifier = '';
+    protected $mapElementIdentifier = '';
 
     /**
      * @var int
@@ -81,12 +81,12 @@ class ConverterDto
 
     public function getFormElementIdentifier(): string
     {
-        return $this->formElementIdentifier;
+        return $this->mapElementIdentifier;
     }
 
-    public function setFormElementIdentifier(string $formElementIdentifier): ConverterDto
+    public function setFormElementIdentifier(string $mapElementIdentifier): ConverterDto
     {
-        $this->formElementIdentifier = $formElementIdentifier;
+        $this->mapElementIdentifier = $mapElementIdentifier;
         return $this;
     }
 

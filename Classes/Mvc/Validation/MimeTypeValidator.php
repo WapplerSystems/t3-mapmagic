@@ -63,7 +63,7 @@ final class MimeTypeValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1471708997',
-                    'form'
+                    'map_magic'
                 ),
                 1471708997
             );
@@ -75,7 +75,7 @@ final class MimeTypeValidator extends AbstractValidator
             $this->addError(
                 $this->translateErrorMessage(
                     'validation.error.1471708998',
-                    'form',
+                    'map_magic',
                     [$mimeType]
                 ),
                 1471708998,
@@ -91,7 +91,7 @@ final class MimeTypeValidator extends AbstractValidator
                 $this->addError(
                     $this->translateErrorMessage(
                         'validation.error.1613126216',
-                        'form',
+                        'map_magic',
                         [$fileExtension]
                     ),
                     1613126216,

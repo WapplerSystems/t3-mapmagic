@@ -89,7 +89,7 @@ abstract class AbstractFormElement extends AbstractRenderable implements FormEle
      */
     public function getUniqueIdentifier(): string
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
         $uniqueIdentifier = sprintf('%s-%s', $formDefinition->getIdentifier(), $this->identifier);
         $uniqueIdentifier = (string)preg_replace('/[^a-zA-Z0-9_-]/', '_', $uniqueIdentifier);
         return lcfirst($uniqueIdentifier);
@@ -117,7 +117,7 @@ abstract class AbstractFormElement extends AbstractRenderable implements FormEle
      */
     public function getDefaultValue()
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
         return $formDefinition->getElementDefaultValueByIdentifier($this->identifier);
     }
 
@@ -128,7 +128,7 @@ abstract class AbstractFormElement extends AbstractRenderable implements FormEle
      */
     public function setDefaultValue($defaultValue)
     {
-        $formDefinition = $this->getRootForm();
+        $formDefinition = $this->getRootMap();
         $currentDefaultValue = $formDefinition->getElementDefaultValueByIdentifier($this->identifier);
         if (is_array($currentDefaultValue) && is_array($defaultValue)) {
             ArrayUtility::mergeRecursiveWithOverrule($currentDefaultValue, $defaultValue);

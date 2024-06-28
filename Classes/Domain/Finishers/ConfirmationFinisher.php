@@ -142,7 +142,7 @@ class ConfirmationFinisher extends AbstractFinisher
             $standaloneView->assignMultiple($this->options['variables']);
         }
 
-        $standaloneView->assign('form', $formRuntime);
+        $standaloneView->assign('map', $formRuntime);
         $standaloneView->assign('finisherVariableProvider', $this->finisherContext->getFinisherVariableProvider());
 
         $standaloneView->getRenderingContext()
