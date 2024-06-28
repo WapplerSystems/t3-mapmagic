@@ -51,15 +51,15 @@ class MapPagePreviewRenderer extends StandardContentPreviewRenderer
         $persistenceIdentifier = $flexFormData['settings']['persistenceIdentifier'] ?? '';
         if (!empty($persistenceIdentifier)) {
             try {
-                $formPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
+                $mapPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
 
                 try {
                     if (
-                        $formPersistenceManager->hasValidFileExtension($persistenceIdentifier)
+                        $mapPersistenceManager->hasValidFileExtension($persistenceIdentifier)
                         || PathUtility::isExtensionPath($persistenceIdentifier)
                     ) {
-                        $formDefinition = $formPersistenceManager->load($persistenceIdentifier);
-                        $mapLabel = $formDefinition['label'];
+                        $mapDefinition = $mapPersistenceManager->load($persistenceIdentifier);
+                        $mapLabel = $mapDefinition['label'];
                     } else {
                         $mapLabel = sprintf(
                             $this->getLanguageService()->sL(self::L10N_PREFIX . 'tt_content.preview.inaccessiblePersistenceIdentifier'),

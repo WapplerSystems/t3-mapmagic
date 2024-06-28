@@ -57,9 +57,9 @@ interface MapPersistenceManagerInterface
      * manager.
      *
      * Returns an associative array with each item containing the keys 'name' (the human-readable name of the form)
-     * and 'persistenceIdentifier' (the unique identifier for the Form Persistence Manager e.g. the path to the saved form definition).
+     * and 'persistenceIdentifier' (the unique identifier for the Map Persistence Manager e.g. the path to the saved form definition).
      *
-     * @return array in the format [['name' => 'Form 01', 'persistenceIdentifier' => 'path1'], [ .... ]]
+     * @return array in the format [['name' => 'Map 01', 'persistenceIdentifier' => 'path1'], [ .... ]]
      */
     public function listMaps(): array;
 
@@ -68,7 +68,7 @@ interface MapPersistenceManagerInterface
      *
      * @return Folder[]
      */
-    public function getAccessibleFormStorageFolders(): array;
+    public function getAccessibleMapStorageFolders(): array;
 
     /**
      * Return a list of all accessible extension folders

@@ -96,7 +96,7 @@ class MapDefinitionArrayConverter extends AbstractTypeConverter
             throw new PropertyException('Unauthorized modification of "prototype name" or "identifier".', 1528538322);
         }
 
-        $formDefinitionValidationService->validateFormDefinitionProperties($rawFormDefinitionArray, $prototypeName, $sessionToken);
+        $formDefinitionValidationService->validateMapDefinitionProperties($rawFormDefinitionArray, $prototypeName, $sessionToken);
 
         // @todo move all the transformations to FormDefinitionConversionService
         $rawFormDefinitionArray = $this->filterEmptyArrays($rawFormDefinitionArray);
@@ -173,15 +173,15 @@ class MapDefinitionArrayConverter extends AbstractTypeConverter
 
     protected function retrieveSessionToken(): string
     {
-        return $this->getBackendUser()->getSessionData('extFormProtectionSessionToken');
+        return $this->getBackendUser()->getSessionData('extMapProtectionSessionToken');
     }
 
-    protected function getFormDefinitionValidationService(): MapDefinitionValidationService
+    protected function getMapDefinitionValidationService(): MapDefinitionValidationService
     {
         return GeneralUtility::makeInstance(MapDefinitionValidationService::class);
     }
 
-    protected function getFormDefinitionConversionService(): MapDefinitionConversionService
+    protected function getMapDefinitionConversionService(): MapDefinitionConversionService
     {
         return GeneralUtility::makeInstance(MapDefinitionConversionService::class);
     }

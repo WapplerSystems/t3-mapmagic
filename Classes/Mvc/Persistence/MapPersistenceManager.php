@@ -15,10 +15,6 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
-
 namespace WapplerSystems\MapMagic\Mvc\Persistence;
 
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -36,7 +32,6 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -239,9 +234,9 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
      * manager.
      *
      * Returns an associative array with each item containing the keys 'name' (the human-readable name of the form)
-     * and 'persistenceIdentifier' (the unique identifier for the Form Persistence Manager e.g. the path to the saved form definition).
+     * and 'persistenceIdentifier' (the unique identifier for the Map Persistence Manager e.g. the path to the saved form definition).
      *
-     * @return array in the format [['name' => 'Form 01', 'persistenceIdentifier' => 'path1'], [ .... ]]
+     * @return array in the format [['name' => 'Map 01', 'persistenceIdentifier' => 'path1'], [ .... ]]
      * @internal
      */
     public function listMaps(): array
@@ -310,7 +305,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
             }
         }
 
-        return $this->sortForms($maps);
+        return $this->sortMaps($maps);
     }
 
     /**
@@ -327,7 +322,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
         $fileExtensionFilter = GeneralUtility::makeInstance(FileExtensionFilter::class);
         $fileExtensionFilter->setAllowedFileExtensions(['yaml']);
 
-        foreach ($this->getAccessibleFormStorageFolders() as $folder) {
+        foreach ($this->getAccessibleMapStorageFolders() as $folder) {
             $storage = $folder->getStorage();
             $storage->setFileAndFolderNameFilters([
                 [$fileExtensionFilter, 'filterFileList'],
@@ -380,7 +375,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
      * @return Folder[]
      * @internal
      */
-    public function getAccessibleFormStorageFolders(): array
+    public function getAccessibleMapStorageFolders(): array
     {
         $storageFolders = [];
 
@@ -593,7 +588,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
             $persistencePathIsFile
             && $this->pathIsIntendedAsFileMountPath($persistencePath)
             && $this->hasValidFileExtension($persistencePath)
-            && $this->isFileWithinAccessibleFormStorageFolders($persistencePath)
+            && $this->isFileWithinAccessibleMapStorageFolders($persistencePath)
         ) {
             return true;
         }
@@ -607,7 +602,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
         if (
             !$persistencePathIsFile
             && $this->pathIsIntendedAsFileMountPath($persistencePath)
-            && $this->isAccessibleFormStorageFolder($persistencePath)
+            && $this->isAccessibleMapStorageFolder($persistencePath)
         ) {
             return true;
         }
@@ -756,11 +751,11 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
         return $yaml;
     }
 
-    protected function extractMetaDataFromCouldBeFormDefinition(string $maybeRawFormDefinition): array
+    protected function extractMetaDataFromCouldBeMapDefinition(string $maybeRawMapDefinition): array
     {
         $metaDataProperties = ['identifier', 'type', 'label', 'prototypeName'];
         $metaData = [];
-        foreach (explode(LF, $maybeRawFormDefinition) as $line) {
+        foreach (explode(LF, $maybeRawMapDefinition) as $line) {
             if (empty($line) || $line[0] === ' ') {
                 continue;
             }
@@ -791,10 +786,10 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
     /**
      * @throws PersistenceManagerException
      */
-    protected function generateErrorsIfFormDefinitionIsValidButHasInvalidFileExtension(array $formDefinition, string $persistenceIdentifier): void
+    protected function generateErrorsIfMapDefinitionIsValidButHasInvalidFileExtension(array $formDefinition, string $persistenceIdentifier): void
     {
         if (
-            $this->looksLikeAFormDefinition($formDefinition)
+            $this->looksLikeAMapDefinition($formDefinition)
             && !$this->hasValidFileExtension($persistenceIdentifier)
         ) {
             throw new PersistenceManagerException(sprintf('Map definition "%s" does not end with ".map.yaml".', $persistenceIdentifier), 1531160649);
@@ -862,13 +857,13 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
         return array_key_exists($dirName, $this->getAccessibleExtensionFolders());
     }
 
-    protected function isFileWithinAccessibleFormStorageFolders(string $fileName): bool
+    protected function isFileWithinAccessibleMapStorageFolders(string $fileName): bool
     {
         $pathInfo = PathUtility::pathinfo($fileName, PATHINFO_DIRNAME);
         $pathInfo = is_string($pathInfo) ? $pathInfo : '';
         $dirName = rtrim($pathInfo, '/') . '/';
 
-        foreach (array_keys($this->getAccessibleFormStorageFolders()) as $allowedPath) {
+        foreach (array_keys($this->getAccessibleMapStorageFolders()) as $allowedPath) {
             if (str_starts_with($dirName, $allowedPath)) {
                 return true;
             }
@@ -882,18 +877,18 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
         return array_key_exists($folderName, $this->getAccessibleExtensionFolders());
     }
 
-    protected function isAccessibleFormStorageFolder(string $folderName): bool
+    protected function isAccessibleMapStorageFolder(string $folderName): bool
     {
         $folderName = rtrim($folderName, '/') . '/';
-        return array_key_exists($folderName, $this->getAccessibleFormStorageFolders());
+        return array_key_exists($folderName, $this->getAccessibleMapStorageFolders());
     }
 
-    protected function looksLikeAFormDefinition(array $data): bool
+    protected function looksLikeAMapDefinition(array $data): bool
     {
         return isset($data['identifier'], $data['type']) && !empty($data['identifier']) && trim($data['type']) === 'Map';
     }
 
-    protected function sortForms(array $forms): array
+    protected function sortMaps(array $forms): array
     {
         $keys = $this->mapSettings['persistenceManager']['sortByKeys'] ?? ['name', 'fileUid'];
         $ascending = $this->mapSettings['persistenceManager']['sortAscending'] ?? true;
