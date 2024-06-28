@@ -29,6 +29,7 @@ datasources:
 layers:
   basemaps:
     osm:
+      type: background
       label: OpenStreetMap
       datasource: osm-raster
   featuremaps:
