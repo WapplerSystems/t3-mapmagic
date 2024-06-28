@@ -1,7 +1,7 @@
 mod.wizards.newContentElement.wizardItems.forms {
-  show :=addToList(formframework)
+  show :=addToList(mapmagic)
   elements {
-    formframework {
+    mapmagic {
       iconIdentifier = content-form
       title = LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:form_new_wizard_title
       description = LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:form_new_wizard_description

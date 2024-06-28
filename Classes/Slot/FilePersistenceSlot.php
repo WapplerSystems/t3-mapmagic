@@ -202,7 +202,7 @@ final class FilePersistenceSlot implements SingletonInterface
     }
 
     /**
-     * @throws FormDefinitionPersistenceException
+     * @throws MapDefinitionPersistenceException
      */
     protected function assertFileName(
         string $command,
@@ -220,7 +220,7 @@ final class FilePersistenceSlot implements SingletonInterface
         }
         // blacklisted command
         if ($definedInvocation === false) {
-            throw new FormDefinitionPersistenceException(
+            throw new MapDefinitionPersistenceException(
                 sprintf(
                     'Persisting form definition "%s" is denied',
                     $combinedFileIdentifier
@@ -240,7 +240,7 @@ final class FilePersistenceSlot implements SingletonInterface
         );
 
         if ($allowedInvocationIndex === null) {
-            throw new FormDefinitionPersistenceException(
+            throw new MapDefinitionPersistenceException(
                 sprintf(
                     'Persisting form definition "%s" is denied',
                     $combinedFileIdentifier

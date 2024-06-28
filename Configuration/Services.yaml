@@ -15,8 +15,8 @@ services:
   WapplerSystems\MapMagic\Mvc\Configuration\TypoScriptService:
     public: true
 
-  WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManagerInterface:
-    alias: WapplerSystems\MapMagic\Mvc\Persistence\FormPersistenceManager
+  WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface:
+    alias: WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManager
     public: true
 
   WapplerSystems\MapMagic\Service\TranslationService:
@@ -84,10 +84,10 @@ services:
         identifier: 'mapmagic/modify-data-structure'
         method: 'modifyDataStructure'
 
-  WapplerSystems\MapMagic\SoftReference\FormPersistenceIdentifierSoftReferenceParser:
+  WapplerSystems\MapMagic\SoftReference\MapPersistenceIdentifierSoftReferenceParser:
     tags:
       - name: softreference.parser
-        parserKey: formPersistenceIdentifier
+        parserKey: mapmagicPersistenceIdentifier
 
   WapplerSystems\MapMagic\Mvc\Property\TypeConverter\FormDefinitionArrayConverter:
     tags:

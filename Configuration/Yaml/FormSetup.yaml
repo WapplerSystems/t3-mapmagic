@@ -63,7 +63,7 @@ persistenceManager:
 
 prototypes:
   standard:
-    formEditor:
+    mapEditor:
       translationFiles:
         10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
       dynamicJavaScriptModules:
@@ -73,13 +73,13 @@ prototypes:
       addInlineSettings: {  }
       maximumUndoSteps: 10
       stylesheets:
-        200: 'EXT:map_magic/Resources/Public/Css/form.css'
-      formEditorFluidConfiguration:
-        templatePathAndFilename: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/InlineTemplates.html'
+        200: 'EXT:map_magic/Resources/Public/Css/maps.css'
+      MapEditorFluidConfiguration:
+        templatePathAndFilename: 'EXT:map_magic/Resources/Private/Backend/Templates/MapEditor/InlineTemplates.html'
         partialRootPaths:
-          10: 'EXT:map_magic/Resources/Private/Backend/Partials/FormEditor/'
+          10: 'EXT:map_magic/Resources/Private/Backend/Partials/MapEditor/'
         layoutRootPaths:
-          10: 'EXT:map_magic/Resources/Private/Backend/Layouts/FormEditor/'
+          10: 'EXT:map_magic/Resources/Private/Backend/Layouts/MapEditor/'
 
       formEditorPartials:
         FormElement-_ElementToolbar: Stage/_ElementToolbar
@@ -158,10 +158,10 @@ mapManager:
       label: mapManager.selectablePrototypesConfiguration.standard.label
       newFormTemplates:
         100:
-          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/BlankForm.yaml'
+          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/MapEditor/Yaml/NewForms/BlankForm.yaml'
           label: mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label
         200:
-          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/FormEditor/Yaml/NewForms/SimpleContactForm.yaml'
+          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/MapEditor/Yaml/NewForms/SimpleContactForm.yaml'
           label: mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label
   controller:
     deleteAction:

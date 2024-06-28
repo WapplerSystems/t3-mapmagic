@@ -47,7 +47,7 @@ class MapFrontendController extends ActionController
     /**
      * @internal
      */
-    public function injectFormPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
+    public function injectMapPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
     {
         $this->formPersistenceManager = $formPersistenceManager;
     }

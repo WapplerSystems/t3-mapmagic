@@ -2,22 +2,22 @@
     <sheets>
         <sDEF>
             <ROOT>
-                <sheetTitle>LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.pi_flexform.formframework.sheet_general</sheetTitle>
+                <sheetTitle>LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.pi_flexform.mapmagic.sheet_general</sheetTitle>
                 <type>array</type>
                 <el>
                     <settings.persistenceIdentifier>
-                        <label>LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.pi_flexform.formframework.persistenceIdentifier</label>
+                        <label>LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.pi_flexform.mapmagic.persistenceIdentifier</label>
                         <onChange>reload</onChange>
                         <config>
                             <type>select</type>
                             <renderType>selectSingle</renderType>
                             <items>
                                 <numIndex index="0" type="array">
-                                    <label>LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.pi_flexform.formframework.selectPersistenceIdentifier</label>
+                                    <label>LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.pi_flexform.mapmagic.selectPersistenceIdentifier</label>
                                     <value></value>
                                 </numIndex>
                             </items>
-                            <softref>formPersistenceIdentifier</softref>
+                            <softref>mapmagicPersistenceIdentifier</softref>
                         </config>
                     </settings.persistenceIdentifier>
                 </el>

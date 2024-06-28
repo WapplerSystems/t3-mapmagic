@@ -14,19 +14,19 @@
                 <source>[Empty]</source>
             </trans-unit>
 
-            <trans-unit id="tt_content.pi_flexform.formframework.persistenceIdentifier" resname="tt_content.pi_flexform.formframework.persistenceIdentifier" xml:space="preserve">
-                <source>Form definition</source>
+            <trans-unit id="tt_content.pi_flexform.mapmagic.persistenceIdentifier" resname="tt_content.pi_flexform.mapmagic.persistenceIdentifier" xml:space="preserve">
+                <source>Map definition</source>
             </trans-unit>
-            <trans-unit id="tt_content.pi_flexform.formframework.sheet_general" resname="tt_content.pi_flexform.formframework.sheet_general" xml:space="preserve">
+            <trans-unit id="tt_content.pi_flexform.mapmagic.sheet_general" resname="tt_content.pi_flexform.mapmagic.sheet_general" xml:space="preserve">
                 <source>General</source>
             </trans-unit>
-            <trans-unit id="tt_content.pi_flexform.formframework.selectPersistenceIdentifier" resname="tt_content.pi_flexform.formframework.selectPersistenceIdentifier" xml:space="preserve">
-                <source>Please select a form definition</source>
+            <trans-unit id="tt_content.pi_flexform.mapmagic.selectPersistenceIdentifier" resname="tt_content.pi_flexform.mapmagic.selectPersistenceIdentifier" xml:space="preserve">
+                <source>Please select a map definition</source>
             </trans-unit>
-            <trans-unit id="tt_content.pi_flexform.formframework.overrideFinishers" resname="tt_content.pi_flexform.formframework.overrideFinishers" xml:space="preserve">
+            <trans-unit id="tt_content.pi_flexform.mapmagic.overrideFinishers" resname="tt_content.pi_flexform.mapmagic.overrideFinishers" xml:space="preserve">
                 <source>Override finisher settings</source>
             </trans-unit>
-            <trans-unit id="tt_content.pi_flexform.formframework.overrideFinishers.empty" resname="tt_content.pi_flexform.formframework.overrideFinishers.empty" xml:space="preserve">
+            <trans-unit id="tt_content.pi_flexform.mapmagic.overrideFinishers.empty" resname="tt_content.pi_flexform.mapmagic.overrideFinishers.empty" xml:space="preserve">
                 <source>There are no finishers or finisher options in the current form definition.</source>
             </trans-unit>
 

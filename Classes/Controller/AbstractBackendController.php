@@ -33,7 +33,7 @@ abstract class AbstractBackendController extends ActionController
     protected array $mapSettings;
     protected MapPersistenceManagerInterface $mapPersistenceManager;
 
-    public function injectFormPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
+    public function injectMapPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
     {
         $this->mapPersistenceManager = $formPersistenceManager;
     }

@@ -10,7 +10,7 @@
                 <source>This module ships a flexible and user-friendly form editor. It allows you to build and create versatile forms for your frontend. Your forms can easily be added to any page by using the content element "Form". Within this element, finishers can be overridden.</source>
             </trans-unit>
             <trans-unit id="mlang_tabs_tab" resname="mlang_tabs_tab">
-                <source>Forms</source>
+                <source>Maps</source>
             </trans-unit>
         </body>
     </file>

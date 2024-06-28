@@ -69,21 +69,21 @@ class MapEditorController extends AbstractBackendController
      *
      * @throws PersistenceManagerException
      */
-    public function indexAction(string $formPersistenceIdentifier, ?string $prototypeName = null): ResponseInterface
+    public function indexAction(string $mapPersistenceIdentifier, ?string $prototypeName = null): ResponseInterface
     {
-        if (!$this->mapPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
-            throw new PersistenceManagerException(sprintf('Read "%s" is not allowed', $formPersistenceIdentifier), 1614500662);
+        if (!$this->mapPersistenceManager->isAllowedPersistencePath($mapPersistenceIdentifier)) {
+            throw new PersistenceManagerException(sprintf('Read "%s" is not allowed', $mapPersistenceIdentifier), 1614500662);
         }
 
         if (
-            PathUtility::isExtensionPath($formPersistenceIdentifier)
+            PathUtility::isExtensionPath($mapPersistenceIdentifier)
             && !$this->mapSettings['persistenceManager']['allowSaveToExtensionPaths']
         ) {
             throw new PersistenceManagerException('Edit an extension formDefinition is not allowed.', 1478265661);
         }
 
         $configurationService = GeneralUtility::makeInstance(ConfigurationService::class);
-        $formDefinition = $this->mapPersistenceManager->load($formPersistenceIdentifier);
+        $formDefinition = $this->mapPersistenceManager->load($mapPersistenceIdentifier);
 
         if ($prototypeName === null) {
             $prototypeName = $formDefinition['prototypeName'] ?? 'standard';
@@ -123,7 +123,7 @@ class MapEditorController extends AbstractBackendController
         $formEditorAppInitialData = [
             'formEditorDefinitions' => $formEditorDefinitions,
             'formDefinition' => $formDefinition,
-            'formPersistenceIdentifier' => $formPersistenceIdentifier,
+            'formPersistenceIdentifier' => $mapPersistenceIdentifier,
             'prototypeName' => $prototypeName,
             'endpoints' => [
                 'formPageRenderer' => $this->uriBuilder->uriFor('renderFormPage'),

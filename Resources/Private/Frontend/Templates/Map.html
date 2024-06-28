@@ -1,0 +1,21 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/WapplerSystems/MapMagic/ViewHelpers" data-namespace-typo3-fluid="true">
+<mapmagicvh:renderRenderable renderable="{map}">
+        <mapmagicvh:map
+                object="{map}"
+                action="{map.renderingOptions.controllerAction}"
+                method="{map.renderingOptions.httpMethod}"
+                id="{map.identifier}"
+                section="{map.identifier}"
+                enctype="{map.renderingOptions.httpEnctype}"
+                addQueryString="{map.renderingOptions.addQueryString}"
+                argumentsToBeExcludedFromQueryString="{map.renderingOptions.argumentsToBeExcludedFromQueryString}"
+                additionalParams="{map.renderingOptions.additionalParams}"
+                additionalAttributes="{mapmagicvh:translateElementProperty(element: map, property: 'fluidAdditionalAttributes')}"
+        >
+            <f:render partial="{map.currentPage.templateName}" arguments="{page: map.currentPage}" />
+            <div class="actions">
+                <f:render partial="Form/Navigation" arguments="{map: map}" />
+            </div>
+        </mapmagicvh:map>
+</mapmagicvh:renderRenderable>
+</html>

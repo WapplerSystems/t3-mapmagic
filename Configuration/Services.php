@@ -22,7 +22,7 @@ return static function (ContainerConfigurator $container, ContainerBuilder $cont
             ->tag(
                 'lowlevel.configuration.module.provider',
                 [
-                    'identifier' => 'formYamlConfiguration',
+                    'identifier' => 'mapmagicYamlConfiguration',
                     'after' => 'eventListeners',
                 ]
             );

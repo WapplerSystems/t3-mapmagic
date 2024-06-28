@@ -141,7 +141,7 @@ class DataStructureIdentifierListener
 
                 $translationFile = 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf';
                 $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideFinishers'] = [
-                    'label' => $translationFile . ':tt_content.pi_flexform.formframework.overrideFinishers',
+                    'label' => $translationFile . ':tt_content.pi_flexform.mapmagic.overrideFinishers',
                     'onChange' => 'reload',
                     'config' => [
                         'type' => 'check',
@@ -158,7 +158,7 @@ class DataStructureIdentifierListener
                     ArrayUtility::mergeRecursiveWithOverrule(
                         $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideFinishers'],
                         [
-                            'description' => $translationFile . ':tt_content.pi_flexform.formframework.overrideFinishers.empty',
+                            'description' => $translationFile . ':tt_content.pi_flexform.mapmagic.overrideFinishers.empty',
                             'config' => [
                                 'readOnly' => true,
                             ],

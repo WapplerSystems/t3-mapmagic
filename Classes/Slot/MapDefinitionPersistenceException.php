@@ -20,4 +20,4 @@ namespace WapplerSystems\MapMagic\Slot;
 /**
  * @internal
  */
-class FormDefinitionPersistenceException extends \RuntimeException {}
+class MapDefinitionPersistenceException extends \RuntimeException {}

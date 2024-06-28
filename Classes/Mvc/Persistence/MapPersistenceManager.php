@@ -50,7 +50,7 @@ use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerExceptio
 use WapplerSystems\MapMagic\Slot\FilePersistenceSlot;
 
 /**
- * Concrete implementation of the FormPersistenceManagerInterface
+ * Concrete implementation of the MapPersistenceManagerInterface
  *
  * Scope: frontend / backend
  */
@@ -80,7 +80,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
         $this->resourceFactory = $resourceFactory;
         $fakeRequest = false;
         if (!isset($GLOBALS['TYPO3_REQUEST'])) {
-            // @todo: FormPersistenceManager is sometimes triggered via CLI without request. In this
+            // @todo: MapPersistenceManager is sometimes triggered via CLI without request. In this
             //        case we fake a request so extbase ConfigurationManager still works.
             $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
             $GLOBALS['TYPO3_REQUEST'] = $request;
@@ -796,7 +796,7 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
             $this->looksLikeAFormDefinition($formDefinition)
             && !$this->hasValidFileExtension($persistenceIdentifier)
         ) {
-            throw new PersistenceManagerException(sprintf('Form definition "%s" does not end with ".form.yaml".', $persistenceIdentifier), 1531160649);
+            throw new PersistenceManagerException(sprintf('Map definition "%s" does not end with ".map.yaml".', $persistenceIdentifier), 1531160649);
         }
     }
 

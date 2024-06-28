@@ -32,7 +32,7 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  * Scope: backend
  * @internal
  */
-class FormPersistenceIdentifierSoftReferenceParser extends AbstractSoftReferenceParser
+class MapPersistenceIdentifierSoftReferenceParser extends AbstractSoftReferenceParser
 {
     public function parse(string $table, string $field, int $uid, string $content, string $structurePath = ''): SoftReferenceParserResult
     {
