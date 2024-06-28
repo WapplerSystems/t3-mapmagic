@@ -99,11 +99,11 @@ final class DatePickerViewHelper extends AbstractFormFieldViewHelper
             if (!$previewMode) {
                 $datePickerDateFormat = $this->convertDateFormatToDatePickerFormat($dateFormat);
                 $this->tag->addAttribute('data-format', $datePickerDateFormat);
-                $this->tag->addAttribute('data-t3-form-datepicker', '');
+                $this->tag->addAttribute('data-t3-mapmagic-datepicker', '');
                 if (!empty($this->arguments['datePickerInitializationJavaScriptFile'])) {
                     GeneralUtility::makeInstance(AssetCollector::class)
                         ->addJavaScript(
-                            't3-form-datepicker',
+                            't3-mapmagic-datepicker',
                             $this->arguments['datePickerInitializationJavaScriptFile'],
                             []
                         );

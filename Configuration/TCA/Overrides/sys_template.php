@@ -4,8 +4,8 @@ defined('TYPO3') or die();
 
 call_user_func(static function () {
     TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-        'form',
+        'map_magic',
         'Configuration/TypoScript/',
-        'MapMagic'
+        'Map Magic'
     );
 });

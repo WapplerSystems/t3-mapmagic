@@ -14,44 +14,44 @@
     </div>
     <div data-identifier="moduleWrapper" class="hidden">
         <f:format.raw>{formEditorTemplates}</f:format.raw>
-        <section id="t3-form-navigation-component" class="t3-form-x-component" data-identifier="structureSection">
-            <div id="t3-form-structure-panel">
+        <section id="t3-mapmagic-navigation-component" class="t3-mapmagic-x-component" data-identifier="structureSection">
+            <div id="t3-mapmagic-structure-panel">
                 <f:render section="ElementSidebarTree" />
             </div>
         </section>
-        <section id="t3-form-stage-container" data-identifier="stageContainer">
-            <div id="t3-form-stage-inner-container" data-identifier="stageContainerInner">
-                <header id="t3-form-stage-header">
+        <section id="t3-mapmagic-stage-container" data-identifier="stageContainer">
+            <div id="t3-mapmagic-stage-inner-container" data-identifier="stageContainerInner">
+                <header id="t3-mapmagic-stage-header">
                     <f:render section="Header" />
                 </header>
-                <div id="t3-form-stage-content">
+                <div id="t3-mapmagic-stage-content">
                     <f:render section="Stage" />
                 </div>
             </div>
         </section>
-        <section id="t3-form-inspector-panels-container" class="t3-form-x-component" data-identifier="inspectorSection">
+        <section id="t3-mapmagic-inspector-panels-container" class="t3-mapmagic-x-component" data-identifier="inspectorSection">
             <f:render section="Inspector" />
         </section>
     </div>
 </f:section>
 
 <f:section name="ElementSidebarTree">
-    <div class="t3-form-x-component-inner-wrapper">
-        <div id="t3-form-navigation-component-tree-root-container" data-identifier="treeRootContainer">
+    <div class="t3-mapmagic-x-component-inner-wrapper">
+        <div id="t3-mapmagic-navigation-component-tree-root-container" data-identifier="treeRootContainer">
             <core:icon identifier="content-form" />
-            <span id="t3-form-navigation-component-tree-root" data-identifier="treeRootElement"></span>
+            <span id="t3-mapmagic-navigation-component-tree-root" data-identifier="treeRootElement"></span>
         </div>
         <div class="tree" data-identifier="structure-element"></div>
         <div class="form-group col-sm-12">
             <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-default t3-form-element-new-page-button" href="#" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button')}" data-identifier="treeNewPageBottom"><core:icon identifier="actions-page-new" /> {f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button')}</a>
+                <a class="btn btn-default t3-mapmagic-element-new-page-button" href="#" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button')}" data-identifier="treeNewPageBottom"><core:icon identifier="actions-page-new" /> {f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button')}</a>
             </div>
         </div>
     </div>
 </f:section>
 
 <f:section name="Header">
-    <h1><span id="t3-form-map-definition-label" data-identifier="formDefinitionLabel"></span></h1>
+    <h1><span id="t3-mapmagic-map-definition-label" data-identifier="formDefinitionLabel"></span></h1>
 </f:section>
 
 <f:section name="Stage">
@@ -73,11 +73,11 @@
         </div>
         <div class="form-section" data-identifier="stageSection">
             <div class="row">
-                <div id="t3-form-stage" class="form-group col-sm-12" data-identifier="stageArea"></div>
+                <div id="t3-mapmagic-stage" class="form-group col-sm-12" data-identifier="stageArea"></div>
             </div>
             <div class="row" data-identifier="stageNewElementRow">
                 <div class="form-group col-sm-12">
-                    <div class="t3-form-new-element-container">
+                    <div class="t3-mapmagic-new-element-container">
                         <div class="btn-group btn-group-sm" role="group">
                             <a class="btn btn-default" href="#" title="{f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.stage.toolbar.new_element')}" data-identifier="stageNewElementBottom"><core:icon identifier="actions-document-new" /> {f:translate(key: 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.stage.toolbar.new_element')}</a>
                         </div>
@@ -89,9 +89,9 @@
 </f:section>
 
 <f:section name="Inspector">
-    <div id="t3-form-inspector-panels">
-        <div class="t3-form-x-component-inner-wrapper">
-            <div id="t3-form-inspector" data-identifier="inspector"></div>
+    <div id="t3-mapmagic-inspector-panels">
+        <div class="t3-mapmagic-x-component-inner-wrapper">
+            <div id="t3-mapmagic-inspector" data-identifier="inspector"></div>
         </div>
     </div>
 </f:section>

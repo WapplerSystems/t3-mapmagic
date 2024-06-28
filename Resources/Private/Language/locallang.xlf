@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" datatype="plaintext" original="EXT:map_magic/Resources/Private/Language/locallang.xlf" date="2016-10-09T03:38:32Z" product-name="form">
+    <file source-language="en" datatype="plaintext" original="EXT:map_magic/Resources/Private/Language/locallang.xlf" date="2016-10-09T03:38:32Z" product-name="map_magic">
         <header/>
         <body>
             <trans-unit id="element.ImageUpload.properties.SummaryPage.altText" resname="element.ImageUpload.properties.SummaryPage.altText" xml:space="preserve">
@@ -106,49 +106,15 @@
             <trans-unit id="validation.error.1556283177" resname="validation.error.1556283177" xml:space="preserve">
                 <source>Password does not match confirmation</source>
             </trans-unit>
-            <trans-unit id="form_new_wizard_title" resname="form_new_wizard_title" xml:space="preserve">
-                <source>Form</source>
+            <trans-unit id="map_new_wizard_title" resname="map_new_wizard_title" xml:space="preserve">
+                <source>Map Magic</source>
             </trans-unit>
-            <trans-unit id="form_new_wizard_description" resname="form_new_wizard_description" xml:space="preserve">
-                <source>A form that allows website users to submit messages.</source>
-            </trans-unit>
-            <trans-unit id="upload.error.150530345" resname="upload.error.150530345" xml:space="preserve">
-                <source>Maximum file size exceeded.</source>
-            </trans-unit>
-            <trans-unit id="upload.error.150530346" resname="upload.error.150530346" xml:space="preserve">
-                <source>Upload failed. The file was only partially uploaded, please try again.</source>
-            </trans-unit>
-            <trans-unit id="upload.error.150530347" resname="upload.error.150530347" xml:space="preserve">
-                <source>No file was uploaded.</source>
-            </trans-unit>
-            <trans-unit id="upload.error.150530348" resname="upload.error.150530348" xml:space="preserve">
-                <source>Upload failed.</source>
+            <trans-unit id="map_new_wizard_description" resname="map_new_wizard_description" xml:space="preserve">
+                <source>A map.</source>
             </trans-unit>
 
-            <trans-unit id="form.configuration.module.provider" resname="form.configuration.module.provider" xml:space="preserve">
-                <source>Form: YAML Configuration</source>
-            </trans-unit>
-
-            <trans-unit id="pagination.previous" resname="pagination.previous">
-                <source>Previous</source>
-            </trans-unit>
-            <trans-unit id="pagination.next" resname="pagination.next">
-                <source>Next</source>
-            </trans-unit>
-            <trans-unit id="pagination.first" resname="pagination.first">
-                <source>First</source>
-            </trans-unit>
-            <trans-unit id="pagination.last" resname="pagination.last">
-                <source>Last</source>
-            </trans-unit>
-            <trans-unit id="pagination.forms" resname="pagination.forms">
-                <source>Forms</source>
-            </trans-unit>
-            <trans-unit id="pagination.page" resname="pagination.page">
-                <source>Page</source>
-            </trans-unit>
-            <trans-unit id="pagination.refresh" resname="pagination.refresh">
-                <source>Refresh</source>
+            <trans-unit id="mapmagic.configuration.module.provider" resname="form.configuration.module.provider" xml:space="preserve">
+                <source>Map Magic: YAML Configuration</source>
             </trans-unit>
         </body>
     </file>

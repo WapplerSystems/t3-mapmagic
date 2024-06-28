@@ -31,17 +31,17 @@ use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 abstract class AbstractBackendController extends ActionController
 {
     protected array $mapSettings;
-    protected MapPersistenceManagerInterface $formPersistenceManager;
+    protected MapPersistenceManagerInterface $mapPersistenceManager;
 
     public function injectFormPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
     {
-        $this->formPersistenceManager = $formPersistenceManager;
+        $this->mapPersistenceManager = $formPersistenceManager;
     }
 
     public function initializeObject()
     {
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        $this->mapSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'form');
+        $this->mapSettings = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_YAML_SETTINGS, 'map_magic');
         if (!isset($this->mapSettings['mapManager'])) {
             // Config sub array mapManager is crucial and should always exist. If it does
             // not, this indicates an issue in config loading logic. Except in this case.

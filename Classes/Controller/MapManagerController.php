@@ -139,7 +139,7 @@ class MapManagerController extends AbstractBackendController
      */
     protected function createAction(string $formName, string $templatePath, string $prototypeName, string $savePath): ResponseInterface
     {
-        if (!$this->formPersistenceManager->isAllowedPersistencePath($savePath)) {
+        if (!$this->mapPersistenceManager->isAllowedPersistencePath($savePath)) {
             throw new PersistenceManagerException(sprintf('Save to path "%s" is not allowed', $savePath), 1614500657);
         }
 
@@ -153,10 +153,10 @@ class MapManagerController extends AbstractBackendController
         $templatePath = GeneralUtility::getFileAbsFileName($templatePath);
         $form = Yaml::parse((string)file_get_contents($templatePath));
         $form['label'] = $formName;
-        $form['identifier'] = $this->formPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($formName));
+        $form['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($formName));
         $form['prototypeName'] = $prototypeName;
 
-        $formPersistenceIdentifier = $this->formPersistenceManager->getUniquePersistenceIdentifier($form['identifier'], $savePath);
+        $formPersistenceIdentifier = $this->mapPersistenceManager->getUniquePersistenceIdentifier($form['identifier'], $savePath);
 
         foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeFormCreate'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
@@ -175,7 +175,7 @@ class MapManagerController extends AbstractBackendController
 
         $form = ArrayUtility::stripTagsFromValuesRecursive($form);
         try {
-            $this->formPersistenceManager->save($formPersistenceIdentifier, $form);
+            $this->mapPersistenceManager->save($formPersistenceIdentifier, $form);
         } catch (PersistenceManagerException $e) {
             $response = [
                 'status' => 'error',
@@ -210,18 +210,18 @@ class MapManagerController extends AbstractBackendController
      */
     protected function duplicateAction(string $formName, string $formPersistenceIdentifier, string $savePath): ResponseInterface
     {
-        if (!$this->formPersistenceManager->isAllowedPersistencePath($savePath)) {
+        if (!$this->mapPersistenceManager->isAllowedPersistencePath($savePath)) {
             throw new PersistenceManagerException(sprintf('Save to path "%s" is not allowed', $savePath), 1614500658);
         }
-        if (!$this->formPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
+        if (!$this->mapPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
             throw new PersistenceManagerException(sprintf('Read of "%s" is not allowed', $formPersistenceIdentifier), 1614500659);
         }
 
-        $formToDuplicate = $this->formPersistenceManager->load($formPersistenceIdentifier);
+        $formToDuplicate = $this->mapPersistenceManager->load($formPersistenceIdentifier);
         $formToDuplicate['label'] = $formName;
-        $formToDuplicate['identifier'] = $this->formPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($formName));
+        $formToDuplicate['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($formName));
 
-        $formPersistenceIdentifier = $this->formPersistenceManager->getUniquePersistenceIdentifier($formToDuplicate['identifier'], $savePath);
+        $formPersistenceIdentifier = $this->mapPersistenceManager->getUniquePersistenceIdentifier($formToDuplicate['identifier'], $savePath);
 
         foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeFormDuplicate'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
@@ -240,7 +240,7 @@ class MapManagerController extends AbstractBackendController
 
         $formToDuplicate = ArrayUtility::stripTagsFromValuesRecursive($formToDuplicate);
         try {
-            $this->formPersistenceManager->save($formPersistenceIdentifier, $formToDuplicate);
+            $this->mapPersistenceManager->save($formPersistenceIdentifier, $formToDuplicate);
         } catch (PersistenceManagerException $e) {
             $response = [
                 'status' => 'error',
@@ -275,7 +275,7 @@ class MapManagerController extends AbstractBackendController
      */
     protected function referencesAction(string $formPersistenceIdentifier): ResponseInterface
     {
-        if (!$this->formPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
+        if (!$this->mapPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
             throw new PersistenceManagerException(sprintf('Read from "%s" is not allowed', $formPersistenceIdentifier), 1614500660);
         }
 
@@ -298,7 +298,7 @@ class MapManagerController extends AbstractBackendController
      */
     protected function deleteAction(string $formPersistenceIdentifier): ResponseInterface
     {
-        if (!$this->formPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
+        if (!$this->mapPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
             throw new PersistenceManagerException(sprintf('Delete "%s" is not allowed', $formPersistenceIdentifier), 1614500661);
         }
 
@@ -312,7 +312,7 @@ class MapManagerController extends AbstractBackendController
                 }
             }
 
-            $this->formPersistenceManager->delete($formPersistenceIdentifier);
+            $this->mapPersistenceManager->delete($formPersistenceIdentifier);
         } else {
             $controllerConfiguration = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
                 $this->mapSettings['mapManager']['controller'],
@@ -340,7 +340,7 @@ class MapManagerController extends AbstractBackendController
     protected function getAccessibleFormStorageFolders(): array
     {
         $preparedAccessibleFormStorageFolders = [];
-        foreach ($this->formPersistenceManager->getAccessibleFormStorageFolders() as $identifier => $folder) {
+        foreach ($this->mapPersistenceManager->getAccessibleFormStorageFolders() as $identifier => $folder) {
             $preparedAccessibleFormStorageFolders[] = [
                 'label' => $folder->getStorage()->isPublic() ? $folder->getPublicUrl() : $identifier,
                 'value' => $identifier,
@@ -348,7 +348,7 @@ class MapManagerController extends AbstractBackendController
         }
 
         if ($this->mapSettings['persistenceManager']['allowSaveToExtensionPaths']) {
-            foreach ($this->formPersistenceManager->getAccessibleExtensionFolders() as $relativePath => $fullPath) {
+            foreach ($this->mapPersistenceManager->getAccessibleExtensionFolders() as $relativePath => $fullPath) {
                 $preparedAccessibleFormStorageFolders[] = [
                     'label' => $relativePath,
                     'value' => $relativePath,
@@ -394,7 +394,7 @@ class MapManagerController extends AbstractBackendController
         $allReferencesForPersistenceIdentifier = $this->databaseService->getAllReferencesForPersistenceIdentifier();
 
         $availableFormDefinitions = [];
-        foreach ($this->formPersistenceManager->listForms() as $formDefinition) {
+        foreach ($this->mapPersistenceManager->listForms() as $formDefinition) {
             $referenceCount  = 0;
             if (
                 isset($formDefinition['fileUid'])
@@ -440,7 +440,7 @@ class MapManagerController extends AbstractBackendController
                         $referenceRow['recuid'] => 'edit',
                     ],
                 ],
-                'returnUrl' => $this->getModuleUrl('web_FormFormbuilder'),
+                'returnUrl' => $this->getModuleUrl('web_MapMagicbuilder'),
             ];
 
             $references[] = [
@@ -512,7 +512,7 @@ class MapManagerController extends AbstractBackendController
 
         // Shortcut
         $shortcutButton = $buttonBar->makeShortcutButton()
-            ->setRouteIdentifier('web_FormFormbuilder')
+            ->setRouteIdentifier('web_MapMagicbuilder')
             ->setDisplayName($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:module.shortcut_name'));
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
 

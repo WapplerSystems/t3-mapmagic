@@ -7,16 +7,16 @@ call_user_func(static function () {
     $contentTypeName = \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         'MapMagic',
         'Map',
-        'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:form_new_wizard_title',
-        'content-form',
-        'forms',
-        'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:form_new_wizard_description',
+        'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:map_new_wizard_title',
+        'content-map',
+        'maps',
+        'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:map_new_wizard_description',
     );
 
     // Add the FlexForm
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
         '*',
-        'FILE:EXT:map_magic/Configuration/FlexForms/FormFramework.xml',
+        'FILE:EXT:map_magic/Configuration/FlexForms/MapFramework.xml',
         $contentTypeName
     );
 

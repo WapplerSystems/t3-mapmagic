@@ -71,7 +71,7 @@ class MapEditorController extends AbstractBackendController
      */
     public function indexAction(string $formPersistenceIdentifier, ?string $prototypeName = null): ResponseInterface
     {
-        if (!$this->formPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
+        if (!$this->mapPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
             throw new PersistenceManagerException(sprintf('Read "%s" is not allowed', $formPersistenceIdentifier), 1614500662);
         }
 
@@ -83,7 +83,7 @@ class MapEditorController extends AbstractBackendController
         }
 
         $configurationService = GeneralUtility::makeInstance(ConfigurationService::class);
-        $formDefinition = $this->formPersistenceManager->load($formPersistenceIdentifier);
+        $formDefinition = $this->mapPersistenceManager->load($formPersistenceIdentifier);
 
         if ($prototypeName === null) {
             $prototypeName = $formDefinition['prototypeName'] ?? 'standard';
@@ -211,7 +211,7 @@ class MapEditorController extends AbstractBackendController
     /**
      * Save a formDefinition which was build by the form editor.
      */
-    public function saveFormAction(string $formPersistenceIdentifier, MapDefinitionArray $formDefinition): ResponseInterface
+    public function saveMapAction(string $formPersistenceIdentifier, MapDefinitionArray $formDefinition): ResponseInterface
     {
         $formDefinition = $formDefinition->getArrayCopy();
 
@@ -230,10 +230,10 @@ class MapEditorController extends AbstractBackendController
         ];
 
         try {
-            if (!$this->formPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
+            if (!$this->mapPersistenceManager->isAllowedPersistencePath($formPersistenceIdentifier)) {
                 throw new PersistenceManagerException(sprintf('Save "%s" is not allowed', $formPersistenceIdentifier), 1614500663);
             }
-            $this->formPersistenceManager->save($formPersistenceIdentifier, $formDefinition);
+            $this->mapPersistenceManager->save($formPersistenceIdentifier, $formDefinition);
             $configurationService = GeneralUtility::makeInstance(ConfigurationService::class);
             $this->prototypeConfiguration = $configurationService->getPrototypeConfiguration($formDefinition['prototypeName']);
             $formDefinition = $this->transformFormDefinitionForFormEditor($formDefinition);
@@ -260,7 +260,7 @@ class MapEditorController extends AbstractBackendController
      * Render a page from the formDefinition which was build by the form editor.
      * Use the frontend rendering and set the form framework to preview mode.
      */
-    public function renderFormPageAction(
+    public function renderMapPageAction(
         MapDefinitionArray $formDefinition,
         int                $pageIndex,
         ?string            $prototypeName = null
@@ -403,15 +403,15 @@ class MapEditorController extends AbstractBackendController
                 ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.new_page_button'))
                 ->setName('formeditor-new-page')
                 ->setValue('new-page')
-                ->setClasses('t3-form-element-new-page-button hidden')
+                ->setClasses('t3-mapmagic-element-new-page-button hidden')
                 ->setIcon($this->iconFactory->getIcon('actions-page-new', Icon::SIZE_SMALL));
 
             $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
             $closeButton = $buttonBar->makeLinkButton()
                 ->setDataAttributes(['identifier' => 'closeButton'])
-                ->setHref((string)$uriBuilder->buildUriFromRoute('web_FormFormbuilder'))
-                ->setClasses('t3-form-element-close-form-button hidden')
+                ->setHref((string)$uriBuilder->buildUriFromRoute('web_MapMagicbuilder'))
+                ->setClasses('t3-mapmagic-element-close-form-button hidden')
                 ->setTitle($this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:rm.closeDoc'))
                 ->setShowLabelText(true)
                 ->setIcon($this->iconFactory->getIcon('actions-close', Icon::SIZE_SMALL));
@@ -421,7 +421,7 @@ class MapEditorController extends AbstractBackendController
                 ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.save_button'))
                 ->setName('formeditor-save-form')
                 ->setValue('save')
-                ->setClasses('t3-form-element-save-form-button hidden')
+                ->setClasses('t3-mapmagic-element-save-form-button hidden')
                 ->setIcon($this->iconFactory->getIcon('actions-document-save', Icon::SIZE_SMALL))
                 ->setShowLabelText(true);
 
@@ -430,7 +430,7 @@ class MapEditorController extends AbstractBackendController
                 ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.form_settings_button'))
                 ->setName('formeditor-form-settings')
                 ->setValue('settings')
-                ->setClasses('t3-form-element-form-settings-button hidden')
+                ->setClasses('t3-mapmagic-element-form-settings-button hidden')
                 ->setIcon($this->iconFactory->getIcon('actions-system-extension-configure', Icon::SIZE_SMALL))
                 ->setShowLabelText(true);
 
@@ -439,7 +439,7 @@ class MapEditorController extends AbstractBackendController
                 ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.undo_button'))
                 ->setName('formeditor-undo-form')
                 ->setValue('undo')
-                ->setClasses('t3-form-element-undo-form-button hidden disabled')
+                ->setClasses('t3-mapmagic-element-undo-form-button hidden disabled')
                 ->setIcon($this->iconFactory->getIcon('actions-edit-undo', Icon::SIZE_SMALL));
 
             $redoButton = $buttonBar->makeInputButton()
@@ -447,7 +447,7 @@ class MapEditorController extends AbstractBackendController
                 ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:formEditor.redo_button'))
                 ->setName('formeditor-redo-form')
                 ->setValue('redo')
-                ->setClasses('t3-form-element-redo-form-button hidden disabled')
+                ->setClasses('t3-mapmagic-element-redo-form-button hidden disabled')
                 ->setIcon($this->iconFactory->getIcon('actions-edit-redo', Icon::SIZE_SMALL));
 
             $buttonBar->addButton($newPageButton, ButtonBar::BUTTON_POSITION_LEFT, 1);
