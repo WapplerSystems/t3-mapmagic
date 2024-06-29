@@ -358,7 +358,7 @@ class MapDefinition extends AbstractCompositeRenderable
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['rendererClassName', 'renderingOptions', 'layers', 'mapEditor', 'label']
+            ['rendererClassName', 'renderingOptions', 'layers', 'mapEditor', 'label', 'datasources', 'controls', 'styles', 'plugins']
         );
     }
 
