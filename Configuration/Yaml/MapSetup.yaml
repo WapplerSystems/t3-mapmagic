@@ -94,8 +94,8 @@ prototypes:
 
 mapManager:
   dynamicJavaScriptModules:
-    app: '@typo3/form/backend/form-manager.js'
-    viewModel: '@typo3/form/backend/form-manager/view-model.js'
+    app: '@wapplersystems/mapmagic/backend/form-manager.js'
+    viewModel: '@wapplersystems/mapmagic/backend/form-manager/view-model.js'
   stylesheets:
     100: 'EXT:map_magic/Resources/Public/Css/form.css'
   translationFiles:

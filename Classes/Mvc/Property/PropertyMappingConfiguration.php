@@ -20,15 +20,10 @@ namespace WapplerSystems\MapMagic\Mvc\Property;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
-use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\FileUpload;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterMapStateInitializedInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
-use WapplerSystems\MapMagic\Mvc\Property\TypeConverter\UploadedFileReferenceConverter;
-use WapplerSystems\MapMagic\Mvc\Validation\MimeTypeValidator;
 
 /**
  * Scope: frontend
@@ -50,79 +45,7 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
      */
     public function afterBuildingFinished(RenderableInterface $renderable)
     {
-        if ($renderable instanceof FileUpload) {
-            // Set the property mapping configuration for the file upload element.
-            // * Add the UploadedFileReferenceConverter to convert an uploaded file to a
-            //   FileReference.
-            // * Add the MimeTypeValidator to the UploadedFileReferenceConverter to
-            //   delete non-valid file types directly.
-            // * Setup the storage:
-            //   If the property "saveToFileMount" exist for this element it will be used.
-            //   If this file mount or the property "saveToFileMount" does not exist
-            //   the default storage "1:/user_uploads/" will be used. Uploads are placed
-            //   in a dedicated sub-folder (e.g. ".../form_<40-chars-hash>/actual.file").
 
-            $typeConverter = GeneralUtility::makeInstance(UploadedFileReferenceConverter::class);
-            /** @var \TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration $propertyMappingConfiguration */
-            $propertyMappingConfiguration = $renderable->getRootMap()
-                ->getProcessingRule($renderable->getIdentifier())
-                ->getPropertyMappingConfiguration()
-                ->setTypeConverter($typeConverter);
-
-            $allowedMimeTypes = [];
-            $validators = [];
-            if (isset($renderable->getProperties()['allowedMimeTypes']) && \is_array($renderable->getProperties()['allowedMimeTypes'])) {
-                $allowedMimeTypes = array_filter($renderable->getProperties()['allowedMimeTypes']);
-            }
-            if (!empty($allowedMimeTypes)) {
-                $mimeTypeValidator = $this->validatorResolver->createValidator(MimeTypeValidator::class, ['allowedMimeTypes' => $allowedMimeTypes]);
-                $validators = [$mimeTypeValidator];
-            }
-
-            $renderable->getRootMap()
-                ->getProcessingRule($renderable->getIdentifier())
-                ->filterValidators(
-                    static function ($validator) use (&$validators) {
-                        if ($validator instanceof NotEmptyValidator) {
-                            return true;
-                        }
-                        $validators[] = $validator;
-                        return false;
-                    }
-                );
-
-            $uploadConfiguration = [
-                UploadedFileReferenceConverter::CONFIGURATION_FILE_VALIDATORS => $validators,
-                UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_CONFLICT_MODE => 'rename',
-            ];
-
-            $saveToFileMountIdentifier = $renderable->getProperties()['saveToFileMount'] ?? '';
-            if ($this->checkSaveFileMountAccess($saveToFileMountIdentifier)) {
-                $uploadConfiguration[UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER] = $saveToFileMountIdentifier;
-            } else {
-                // @todo Why should uploaded files be stored to the same directory as the *.map.yaml definitions?
-                $persistenceIdentifier = $renderable->getRootMap()->getPersistenceIdentifier();
-                if (!empty($persistenceIdentifier)) {
-                    $pathinfo = PathUtility::pathinfo($persistenceIdentifier);
-                    $saveToFileMountIdentifier = $pathinfo['dirname'];
-                    if ($this->checkSaveFileMountAccess($saveToFileMountIdentifier)) {
-                        $uploadConfiguration[UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_FOLDER] = $saveToFileMountIdentifier;
-                    }
-                }
-            }
-            $propertyMappingConfiguration->setTypeConverterOptions(UploadedFileReferenceConverter::class, $uploadConfiguration);
-            return;
-        }
-
-        if ($renderable->getType() === 'Date') {
-            // Set the property mapping configuration for the `Date` element.
-
-            /** @var \TYPO3\CMS\Extbase\Property\PropertyMappingConfiguration $propertyMappingConfiguration */
-            $propertyMappingConfiguration = $renderable->getRootMap()->getProcessingRule($renderable->getIdentifier())->getPropertyMappingConfiguration();
-            // @see https://www.w3.org/TR/2011/WD-html-markup-20110405/input.date.html#input.date.attrs.value
-            // 'Y-m-d' = https://tools.ietf.org/html/rfc3339#section-5.6 -> full-date
-            $propertyMappingConfiguration->setTypeConverterOption(DateTimeConverter::class, DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'Y-m-d');
-        }
     }
 
     /**
@@ -154,36 +77,9 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
     public function afterFormStateInitialized(MapRuntime $formRuntime): void
     {
         foreach ($formRuntime->getMapDefinition()->getRenderablesRecursively() as $renderable) {
-            $this->adjustPropertyMappingForFileUploadsAtRuntime($formRuntime, $renderable);
+
         }
     }
 
-    /**
-     * If the form runtime is able to process form submissions
-     * (determined by $formRuntime->canProcessFormSubmission()) then a
-     * 'form session' is available.
-     * This form session identifier will be used to deriving storage sub-folders
-     * for the file uploads.
-     * This is done by setting `UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_SEED`
-     * type converter option.
-     */
-    protected function adjustPropertyMappingForFileUploadsAtRuntime(
-        MapRuntime          $formRuntime,
-        RenderableInterface $renderable
-    ): void {
-        if (!$renderable instanceof FileUpload
-            || $formRuntime->getMapSession() === null
-            || !$formRuntime->canProcessFormSubmission()
-        ) {
-            return;
-        }
-        $renderable->getRootMap()
-            ->getProcessingRule($renderable->getIdentifier())
-            ->getPropertyMappingConfiguration()
-            ->setTypeConverterOption(
-                UploadedFileReferenceConverter::class,
-                UploadedFileReferenceConverter::CONFIGURATION_UPLOAD_SEED,
-                $formRuntime->getMapSession()->getIdentifier()
-            );
-    }
+
 }

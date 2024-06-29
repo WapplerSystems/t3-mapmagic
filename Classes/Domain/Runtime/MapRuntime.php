@@ -103,7 +103,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
         protected readonly ContainerInterface $container,
         protected readonly ConfigurationManagerInterface $configurationManager,
         protected readonly HashService $hashService,
-        protected readonly ValidatorResolver $validatorResolver,
     ) {
         $this->response = new Response();
     }
