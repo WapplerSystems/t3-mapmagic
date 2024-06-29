@@ -53,8 +53,6 @@ prototypes:
         Inspector-CheckboxEditor: Inspector/CheckboxEditor
         Inspector-ValidationErrorMessageEditor: Inspector/ValidationErrorMessageEditor
         Inspector-Typo3WinBrowserEditor: Inspector/Typo3WinBrowserEditor
-        Inspector-MaximumFileSizeEditor: Inspector/MaximumFileSizeEditor
-        Inspector-CountrySelectEditor: Inspector/CountrySelectEditor
 
       mapElementPropertyValidatorsDefinition:
         NotEmpty:
