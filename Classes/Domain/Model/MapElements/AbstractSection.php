@@ -16,10 +16,10 @@ declare(strict_types=1);
  */
 
 /*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
+ * Inspired by and partially taken from the Neos.Map package (www.neos.io)
  */
 
-namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\MapElements;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
@@ -31,7 +31,7 @@ use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
  * A base class for "section-like" form parts like "Page" or "Section" (which
  * is rendered as "Fieldset")
  *
- * This class contains multiple FormElements ({@link FormElementInterface}).
+ * This class contains multiple MapElements ({@link MapElementInterface}).
  *
  * Please see {@link MapDefinition} for an in-depth explanation.
  *
@@ -58,9 +58,9 @@ abstract class AbstractSection extends AbstractCompositeRenderable
     }
 
     /**
-     * Get the child Form Elements
+     * Get the child Map Elements
      *
-     * @return FormElementInterface[] The Page's elements
+     * @return MapElementInterface[] The Page's elements
      */
     public function getElements(): array
     {
@@ -68,9 +68,9 @@ abstract class AbstractSection extends AbstractCompositeRenderable
     }
 
     /**
-     * Get the child Form Elements
+     * Get the child Map Elements
      *
-     * @return FormElementInterface[] The Page's elements
+     * @return MapElementInterface[] The Page's elements
      */
     public function getElementsRecursively(): array
     {
@@ -80,10 +80,10 @@ abstract class AbstractSection extends AbstractCompositeRenderable
     /**
      * Add a new form element at the end of the section
      *
-     * @param FormElementInterface $mapElement The form element to add
-     * @throws FormDefinitionConsistencyException if FormElement is already added to a section
+     * @param MapElementInterface $mapElement The form element to add
+     * @throws MapDefinitionConsistencyException if MapElement is already added to a section
      */
-    public function addElement(FormElementInterface $mapElement)
+    public function addElement(MapElementInterface $mapElement)
     {
         $this->addRenderable($mapElement);
     }
@@ -91,19 +91,19 @@ abstract class AbstractSection extends AbstractCompositeRenderable
     /**
      * Create a form element with the given $identifier and attach it to this section/page.
      *
-     * - Create Form Element object based on the given $typeName
-     * - set defaults inside the Form Element (based on the parent form's field defaults)
-     * - attach Form Element to this Section/Page
-     * - return the newly created Form Element object
+     * - Create Map Element object based on the given $typeName
+     * - set defaults inside the Map Element (based on the parent form's field defaults)
+     * - attach Map Element to this Section/Page
+     * - return the newly created Map Element object
      *
      *
      * @param string $identifier Identifier of the new form element
      * @param string $typeName type of the new form element
-     * @return FormElementInterface the newly created form element
+     * @return MapElementInterface the newly created form element
      * @throws TypeDefinitionNotFoundException
      * @throws TypeDefinitionNotValidException
      */
-    public function createElement(string $identifier, string $typeName): FormElementInterface
+    public function createElement(string $identifier, string $typeName): MapElementInterface
     {
         $formDefinition = $this->getRootMap();
 
@@ -117,7 +117,7 @@ abstract class AbstractSection extends AbstractCompositeRenderable
                 throw new TypeDefinitionNotFoundException(sprintf('Type "%s" not found. Probably some configuration is missing.', $typeName), 1382364019);
             }
 
-            $element = GeneralUtility::makeInstance(UnknownFormElement::class, $identifier, $typeName);
+            $element = GeneralUtility::makeInstance(UnknownMapElement::class, $identifier, $typeName);
             $this->addElement($element);
             return $element;
         }
@@ -128,40 +128,40 @@ abstract class AbstractSection extends AbstractCompositeRenderable
 
         $implementationClassName = $typeDefinition['implementationClassName'];
         $element = GeneralUtility::makeInstance($implementationClassName, $identifier, $typeName);
-        if (!$element instanceof FormElementInterface) {
-            throw new TypeDefinitionNotValidException(sprintf('The "implementationClassName" for element "%s" ("%s") does not implement the FormElementInterface.', $identifier, $implementationClassName), 1327318156);
+        if (!$element instanceof MapElementInterface) {
+            throw new TypeDefinitionNotValidException(sprintf('The "implementationClassName" for element "%s" ("%s") does not implement the MapElementInterface.', $identifier, $implementationClassName), 1327318156);
         }
         unset($typeDefinition['implementationClassName']);
 
         $this->addElement($element);
         $element->setOptions($typeDefinition);
 
-        $element->initializeFormElement();
+        $element->initializeMapElement();
         return $element;
     }
 
     /**
-     * Move FormElement $element before $referenceElement.
+     * Move MapElement $element before $referenceElement.
      *
      * Both $element and $referenceElement must be direct descendants of this Section/Page.
      *
-     * @param FormElementInterface $elementToMove
-     * @param FormElementInterface $referenceElement
+     * @param MapElementInterface $elementToMove
+     * @param MapElementInterface $referenceElement
      */
-    public function moveElementBefore(FormElementInterface $elementToMove, FormElementInterface $referenceElement)
+    public function moveElementBefore(MapElementInterface $elementToMove, MapElementInterface $referenceElement)
     {
         $this->moveRenderableBefore($elementToMove, $referenceElement);
     }
 
     /**
-     * Move FormElement $element after $referenceElement
+     * Move MapElement $element after $referenceElement
      *
      * Both $element and $referenceElement must be direct descendants of this Section/Page.
      *
-     * @param FormElementInterface $elementToMove
-     * @param FormElementInterface $referenceElement
+     * @param MapElementInterface $elementToMove
+     * @param MapElementInterface $referenceElement
      */
-    public function moveElementAfter(FormElementInterface $elementToMove, FormElementInterface $referenceElement)
+    public function moveElementAfter(MapElementInterface $elementToMove, MapElementInterface $referenceElement)
     {
         $this->moveRenderableAfter($elementToMove, $referenceElement);
     }
@@ -169,7 +169,7 @@ abstract class AbstractSection extends AbstractCompositeRenderable
     /**
      * Remove $elementToRemove from this Section/Page
      */
-    public function removeElement(FormElementInterface $elementToRemove)
+    public function removeElement(MapElementInterface $elementToRemove)
     {
         $this->removeRenderable($elementToRemove);
     }

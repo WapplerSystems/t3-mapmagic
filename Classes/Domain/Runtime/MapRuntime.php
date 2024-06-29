@@ -89,7 +89,7 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     protected MapDefinition $mapDefinition;
     protected RequestInterface $request;
     protected ResponseInterface $response;
-
+    protected array $layers = [];
 
     /**
      * The current site language configuration.
@@ -116,6 +116,12 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     {
         //$this->initializeCurrentSiteLanguage();
         $this->triggerAfterMapStateInitialized();
+        $this->initializeLayers();
+    }
+
+    protected function initializeLayers()
+    {
+        $this->layers = $this->mapDefinition->getLayers();
     }
 
 

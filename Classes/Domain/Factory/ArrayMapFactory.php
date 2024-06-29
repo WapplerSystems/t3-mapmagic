@@ -26,7 +26,7 @@ use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
 use WapplerSystems\MapMagic\Domain\Exception\UnknownCompositRenderableException;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractSection;
+use WapplerSystems\MapMagic\Domain\Model\MapElements\AbstractSection;
 use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
 
@@ -57,29 +57,33 @@ class ArrayMapFactory extends AbstractMapFactory
         $prototypeConfiguration = GeneralUtility::makeInstance(ConfigurationService::class)
             ->getPrototypeConfiguration($prototypeName);
 
-        $form = GeneralUtility::makeInstance(
+        $map = GeneralUtility::makeInstance(
             MapDefinition::class,
             $configuration['identifier'],
             $prototypeConfiguration,
             'Map',
             $persistenceIdentifier
         );
-        if (isset($configuration['renderables'])) {
-            foreach ($configuration['renderables'] as $pageConfiguration) {
-                $this->addNestedRenderable($pageConfiguration, $form);
+        if (isset($configuration['layers'])) {
+            foreach ($configuration['layers'] as $layerConfiguration) {
+                $this->addLayer($layerConfiguration, $map);
             }
         }
 
         unset($configuration['persistenceIdentifier']);
         unset($configuration['prototypeName']);
-        unset($configuration['renderables']);
+        unset($configuration['layers']);
+        unset($configuration['styles']);
+        unset($configuration['plugins']);
+        unset($configuration['controls']);
+        unset($configuration['datasources']);
         unset($configuration['type']);
         unset($configuration['identifier']);
-        $form->setOptions($configuration);
+        $map->setOptions($configuration);
 
-        $this->triggerFormBuildingFinished($form);
+        $this->triggerMapBuildingFinished($map);
 
-        return $form;
+        return $map;
     }
 
     /**
@@ -89,34 +93,32 @@ class ArrayMapFactory extends AbstractMapFactory
      * @throws IdentifierNotValidException
      * @throws UnknownCompositRenderableException
      */
-    protected function addNestedRenderable(array $nestedRenderableConfiguration, CompositeRenderableInterface $parentRenderable)
+    protected function addLayer(array $layerConfiguration, CompositeRenderableInterface $parentRenderable)
     {
-        if (!isset($nestedRenderableConfiguration['identifier'])) {
+        if (!isset($layerConfiguration['identifier'])) {
             throw new IdentifierNotValidException('Identifier not set.', 1329289436);
         }
         if ($parentRenderable instanceof MapDefinition) {
-            $renderable = $parentRenderable->createPage($nestedRenderableConfiguration['identifier'], $nestedRenderableConfiguration['type']);
-        } elseif ($parentRenderable instanceof AbstractSection) {
-            $renderable = $parentRenderable->createElement($nestedRenderableConfiguration['identifier'], $nestedRenderableConfiguration['type']);
+            $renderable = $parentRenderable->createLayer($layerConfiguration['identifier'], $layerConfiguration['type']);
         } else {
             throw new UnknownCompositRenderableException('Unknown composit renderable "' . get_class($parentRenderable) . '"', 1479593622);
         }
 
-        if (isset($nestedRenderableConfiguration['renderables']) && is_array($nestedRenderableConfiguration['renderables'])) {
-            $childRenderables = $nestedRenderableConfiguration['renderables'];
+        if (isset($layerConfiguration['renderables']) && is_array($layerConfiguration['renderables'])) {
+            $childRenderables = $layerConfiguration['renderables'];
         } else {
             $childRenderables = [];
         }
 
-        unset($nestedRenderableConfiguration['type']);
-        unset($nestedRenderableConfiguration['identifier']);
-        unset($nestedRenderableConfiguration['renderables']);
+        unset($layerConfiguration['type']);
+        unset($layerConfiguration['identifier']);
+        unset($layerConfiguration['datasource']);
 
-        $renderable->setOptions($nestedRenderableConfiguration);
+        $renderable->setOptions($layerConfiguration);
 
         if ($renderable instanceof CompositeRenderableInterface) {
             foreach ($childRenderables as $elementConfiguration) {
-                $this->addNestedRenderable($elementConfiguration, $renderable);
+                $this->addLayer($elementConfiguration, $renderable);
             }
         }
 

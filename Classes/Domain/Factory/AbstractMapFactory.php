@@ -56,7 +56,7 @@ abstract class AbstractMapFactory implements MapFactoryInterface
      * Helper to be called by every AbstractFormFactory after everything has been built to call the "afterBuildingFinished"
      * hook on all form elements.
      */
-    protected function triggerFormBuildingFinished(MapDefinition $form)
+    protected function triggerMapBuildingFinished(MapDefinition $form)
     {
         foreach ($form->getRenderablesRecursively() as $renderable) {
             foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterBuildingFinished'] ?? [] as $className) {

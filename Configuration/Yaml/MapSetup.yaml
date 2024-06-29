@@ -1,5 +1,7 @@
 imports:
   - { resource: './MapElements/Map.yaml' }
+  - { resource: './MapElements/OSMLayer.yaml' }
+  - { resource: './MapElements/PolygonLayer.yaml' }
 
 
 persistenceManager:

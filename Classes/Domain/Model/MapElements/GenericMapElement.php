@@ -15,18 +15,11 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
-
-namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\MapElements;
 
 /**
- * Interface for form elements capable of converting their complex values to string
+ * A generic form element
  *
- * @internal
+ * Scope: frontend
  */
-interface StringableFormElementInterface
-{
-    public function valueToString($value): string;
-}
+class GenericMapElement extends AbstractMapElement {}

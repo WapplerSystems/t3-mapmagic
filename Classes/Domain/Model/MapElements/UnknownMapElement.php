@@ -15,28 +15,24 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
-
-namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\MapElements;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable;
 
 /**
- * A Form Element that has no definition.
+ * A Map Element that has no definition.
  *
  * Scope: frontend
  */
-class UnknownFormElement extends AbstractRenderable implements FormElementInterface
+class UnknownMapElement extends AbstractRenderable implements MapElementInterface
 {
     /**
-     * Constructor. Needs this FormElement's identifier and the FormElement type
+     * Constructor. Needs this MapElement's identifier and the MapElement type
      *
-     * @param string $identifier The FormElement's identifier
-     * @param string $type The Form Element Type
+     * @param string $identifier The MapElement's identifier
+     * @param string $type The Map Element Type
      * @throws IdentifierNotValidException
      */
     public function __construct(string $identifier, string $type)
@@ -51,12 +47,12 @@ class UnknownFormElement extends AbstractRenderable implements FormElementInterf
     /**
      * Sets up the form element
      */
-    public function initializeFormElement()
+    public function initializeMapElement()
     {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeFormElement'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeMapElement'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
-            if (method_exists($hookObj, 'initializeFormElement')) {
-                $hookObj->initializeFormElement(
+            if (method_exists($hookObj, 'initializeMapElement')) {
+                $hookObj->initializeMapElement(
                     $this
                 );
             }
@@ -87,7 +83,7 @@ class UnknownFormElement extends AbstractRenderable implements FormElementInterf
     }
 
     /**
-     * @return mixed the default value for this Form Element
+     * @return mixed the default value for this Map Element
      * @internal
      */
     public function getDefaultValue()
@@ -98,7 +94,7 @@ class UnknownFormElement extends AbstractRenderable implements FormElementInterf
     /**
      * Not used in this implementation
      *
-     * @param mixed $defaultValue the default value for this Form Element
+     * @param mixed $defaultValue the default value for this Map Element
      * @internal
      */
     public function setDefaultValue($defaultValue) {}

@@ -15,11 +15,7 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
-
-namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\MapElements;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -29,24 +25,24 @@ use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable;
 
 /**
  * A base form element, which is the starting point for creating custom (PHP-based)
- * Form Elements.
+ * Map Elements.
  *
- * A *FormElement* is a part of a *Page*, which in turn is part of a MapDefinition.
- * See {@link FormDefinition} for an in-depth explanation.
+ * A *MapElement* is a part of a *Page*, which in turn is part of a MapDefinition.
+ * See {@link MapDefinition} for an in-depth explanation.
  *
  * Subclassing this class is a good starting-point for implementing custom PHP-based
- * Form Elements.
+ * Map Elements.
  *
  * Most of the functionality and API is implemented in {@link \WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractRenderable}, so
  * make sure to check out this class as well.
  *
  * Still, it is quite rare that you need to subclass this class; often
- * you can just use the {@link \WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement} and replace some templates.
+ * you can just use the {@link \WapplerSystems\MapMagic\Domain\Model\MapElements\GenericMapElement} and replace some templates.
  *
  * Scope: frontend
  * **This class is meant to be sub classed by developers.**
  */
-abstract class AbstractFormElement extends AbstractRenderable implements FormElementInterface
+abstract class AbstractMapElement extends AbstractRenderable implements MapElementInterface
 {
     /**
      * @var array
@@ -54,10 +50,10 @@ abstract class AbstractFormElement extends AbstractRenderable implements FormEle
     protected $properties = [];
 
     /**
-     * Constructor. Needs this FormElement's identifier and the FormElement type
+     * Constructor. Needs this MapElement's identifier and the MapElement type
      *
-     * @param string $identifier The FormElement's identifier
-     * @param string $type The Form Element Type
+     * @param string $identifier The MapElement's identifier
+     * @param string $type The Map Element Type
      * @throws IdentifierNotValidException
      */
     public function __construct(string $identifier, string $type)
@@ -70,14 +66,14 @@ abstract class AbstractFormElement extends AbstractRenderable implements FormEle
     }
 
     /**
-     * Override this method in your custom FormElements if needed
+     * Override this method in your custom MapElements if needed
      */
-    public function initializeFormElement()
+    public function initializeMapElement()
     {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeFormElement'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['initializeMapElement'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
-            if (method_exists($hookObj, 'initializeFormElement')) {
-                $hookObj->initializeFormElement(
+            if (method_exists($hookObj, 'initializeMapElement')) {
+                $hookObj->initializeMapElement(
                     $this
                 );
             }

@@ -29,7 +29,7 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Model\MapElements\FormElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 

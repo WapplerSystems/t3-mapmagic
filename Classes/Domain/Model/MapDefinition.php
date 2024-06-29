@@ -31,8 +31,8 @@ use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
 use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\Layer;
+use WapplerSystems\MapMagic\Domain\Model\MapElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Model\MapElements\Layer;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
@@ -53,12 +53,12 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * form is displayed to the user, only one *Page* is visible at any given time,
  * and there is a navigation to go back and forth between the pages.
  *
- * A *Page* consists of multiple *FormElements* ({@link FormElementInterface}, {@link AbstractFormElement}),
+ * A *Page* consists of multiple *MapElements* ({@link FormElementInterface}, {@link AbstractFormElement}),
  * which represent the input fields, textareas, checkboxes shown inside the page.
  *
  * *MapDefinition*, *Page* and *FormElement* have *identifier* properties, which
  * must be unique for each given type (i.e. it is allowed that the MapDefinition and
- * a FormElement have the *same* identifier, but two FormElements are not allowed to
+ * a FormElement have the *same* identifier, but two MapElements are not allowed to
  * have the same identifier.
  *
  * Simple Example
@@ -83,7 +83,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  *
  * While you can use the {@link MapDefinition::addLayer} or {@link Layer::addElement}
  * methods and create the Page and FormElement objects manually, it is often better
- * to use the corresponding create* methods ({@link MapDefinition::createPage}
+ * to use the corresponding create* methods ({@link MapDefinition::createLayer}
  * and {@link Layer::createElement}), as you pass them an abstract *Form Element Type*
  * such as *Text* or *Page*, and the system **automatically
  * resolves the implementation class name and sets default values**.
@@ -108,10 +108,10 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * $prototypeConfiguration = [
  *   'mapElementsDefinition' => [
  *     'Page' => [
- *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page'
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\Page'
  *     ],
  *     'Textfield' => [
- *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement'
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\GenericFormElement'
  *     ]
  *   ]
  * ]
@@ -126,11 +126,11 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * $prototypeConfiguration = [
  *   'mapElementsDefinition' => [
  *     'Page' => [
- *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\Page',
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\Page',
  *       'label' => 'this is the label of the page if nothing is specified'
  *     ],
  *     'Textfield' => [
- *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\FormElements\GenericFormElement',
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\GenericFormElement',
  *       'label' = >'Default Label',
  *       'defaultValue' => 'Default form element value',
  *       'properties' => [
@@ -153,7 +153,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * Property Mapping and Validation Rules
  * =====================================
  *
- * Besides Pages and FormElements, the FormDefinition can contain information
+ * Besides Pages and MapElements, the FormDefinition can contain information
  * about the *format of the data* which is inputted into the form. This generally means:
  *
  * - expected Data Types
@@ -184,7 +184,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * but the *validator* needs to be attached to the *compound object* *address*,
  * as both parts need to be validated together.
  *
- * Connecting FormElements to the output data structure
+ * Connecting MapElements to the output data structure
  * ====================================================
  *
  * The *identifier* of the *FormElement* is most important, as it determines
@@ -363,19 +363,14 @@ class MapDefinition extends AbstractCompositeRenderable
     }
 
     /**
-     * Create a page with the given $identifier and attach this page to the form.
      *
-     * - Create Page object based on the given $typeName
-     * - set defaults inside the Page object
-     * - attach Page object to this form
-     * - return the newly created Page object
      *
      * @param string $identifier Identifier of the new page
      * @param string $typeName Type of the new page
      * @return Layer the newly created page
      * @throws TypeDefinitionNotFoundException
      */
-    public function createPage(string $identifier, string $typeName = 'Page'): Layer
+    public function createLayer(string $identifier, string $typeName = 'Layer'): Layer
     {
         if (!isset($this->typeDefinitions[$typeName])) {
             throw new TypeDefinitionNotFoundException(sprintf('Type "%s" not found. Probably some configuration is missing.', $typeName), 1474905953);
@@ -413,11 +408,11 @@ class MapDefinition extends AbstractCompositeRenderable
     /**
      * Add a new page at the end of the form.
      *
-     * Instead of this method, you should often use {@link createPage} instead.
+     * Instead of this method, you should often use {@link createLayer} instead.
      *
      * @param Layer $page
      * @throws MapDefinitionConsistencyException if Page is already added to a FormDefinition
-     * @see createPage
+     * @see createLayer
      */
     public function addLayer(Layer $page)
     {

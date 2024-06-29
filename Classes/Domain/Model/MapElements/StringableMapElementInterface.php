@@ -15,11 +15,14 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-namespace WapplerSystems\MapMagic\Domain\Finishers\Exception;
-
-use WapplerSystems\MapMagic\Domain\Exception;
+namespace WapplerSystems\MapMagic\Domain\Model\MapElements;
 
 /**
- * This exception is thrown in Form Finishers
+ * Interface for form elements capable of converting their complex values to string
+ *
+ * @internal
  */
-class FinisherException extends Exception {}
+interface StringableMapElementInterface
+{
+    public function valueToString($value): string;
+}

@@ -21,14 +21,10 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
-use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
-use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
-use WapplerSystems\MapMagic\Domain\Model\Exception\ValidatorPresetNotFoundException;
-use WapplerSystems\MapMagic\Domain\Model\FormDefinition;
 use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 
 /**
@@ -134,58 +130,12 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
             }
         }
 
-        if (isset($options['validators'])) {
-            $runtimeCache = GeneralUtility::makeInstance(CacheManager::class)->getCache('runtime');
-            $configurationHashes = $runtimeCache->get('formAbstractRenderableConfigurationHashes') ?: [];
-
-
-            foreach ($options['validators'] as $validatorConfiguration) {
-                $configurationHash = md5(
-                    spl_object_hash($this) .
-                    json_encode($validatorConfiguration)
-                );
-                if (in_array($configurationHash, $configurationHashes)) {
-                    continue;
-                }
-                $this->createValidator($validatorConfiguration['identifier'], $validatorConfiguration['options'] ?? []);
-                $configurationHashes[] = $configurationHash;
-                $runtimeCache->set('formAbstractRenderableConfigurationHashes', $configurationHashes);
-            }
-        }
-
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['label', 'defaultValue', 'properties', 'renderingOptions', 'validators', 'mapEditor']
+            ['label', 'properties', 'renderingOptions', 'validators', 'mapEditor', 'options']
         );
     }
 
-    /**
-     * Create a validator for the element.
-     *
-     * @throws ValidatorPresetNotFoundException
-     */
-    public function createValidator(string $validatorIdentifier, array $options = []): ValidatorInterface
-    {
-        $validatorsDefinition = $this->getRootMap()->getValidatorsDefinition();
-        if (isset($validatorsDefinition[$validatorIdentifier]) && is_array($validatorsDefinition[$validatorIdentifier]) && isset($validatorsDefinition[$validatorIdentifier]['implementationClassName'])) {
-            $implementationClassName = $validatorsDefinition[$validatorIdentifier]['implementationClassName'];
-            $defaultOptions = $validatorsDefinition[$validatorIdentifier]['options'] ?? [];
-            ArrayUtility::mergeRecursiveWithOverrule($defaultOptions, $options);
-            // @todo: It would be great if Renderable's and FormElements could use DI, but especially
-            //        FormElements which extend AbstractRenderable pollute __construct() with manual
-            //        arguments. To retrieve the ValidatorResolver, we have to fall back to getContainer()
-            //        for now, until this has been resolved.
-            if ($this->validatorResolver === null) {
-                $container = GeneralUtility::getContainer();
-                $this->validatorResolver = $container->get(ValidatorResolver::class);
-            }
-            /** @var ValidatorInterface $validator */
-            $validator = $this->validatorResolver->createValidator($implementationClassName, $defaultOptions);
-            $this->addValidator($validator);
-            return $validator;
-        }
-        throw new ValidatorPresetNotFoundException('The validator preset identified by "' . $validatorIdentifier . '" could not be found, or the implementationClassName was not specified.', 1328710202);
-    }
 
     /**
      * Add a validator to the element.

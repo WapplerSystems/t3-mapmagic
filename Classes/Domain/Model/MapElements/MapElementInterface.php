@@ -15,36 +15,33 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
 
-namespace WapplerSystems\MapMagic\Domain\Model\FormElements;
+namespace WapplerSystems\MapMagic\Domain\Model\MapElements;
 
 use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 
 /**
  * A base form element interface, which can be the starting point for creating
- * custom (PHP-based) Form Elements.
+ * custom (PHP-based) Map Elements.
  *
- * A *FormElement* is a part of a *Page*, which in turn is part of a MapDefinition.
- * See {@link FormDefinition} for an in-depth explanation.
+ * A *MapElement* is a part of a *Page*, which in turn is part of a MapDefinition.
+ * See {@link MapDefinition} for an in-depth explanation.
  *
- * **Often, you should rather subclass {@link AbstractFormElement} instead of
+ * **Often, you should rather subclass {@link AbstractMapElement} instead of
  * implementing this interface.**
  *
  * Scope: frontend
  */
-interface FormElementInterface extends RenderableInterface
+interface MapElementInterface extends RenderableInterface
 {
     /**
      * Will be called as soon as the element is (tried to be) added to a form
-     * @see registerInFormIfPossible()
+     * @see registerInMapIfPossible()
      *
      * @internal
      */
-    public function initializeFormElement();
+    public function initializeMapElement();
 
     /**
      * Returns a unique identifier of this element.
@@ -56,18 +53,18 @@ interface FormElementInterface extends RenderableInterface
     public function getUniqueIdentifier(): string;
 
     /**
-     * Get the default value with which the Form Element should be initialized
+     * Get the default value with which the Map Element should be initialized
      * during display.
      *
-     * @return mixed the default value for this Form Element
+     * @return mixed the default value for this Map Element
      */
     public function getDefaultValue();
 
     /**
-     * Set the default value with which the Form Element should be initialized
+     * Set the default value with which the Map Element should be initialized
      * during display.
      *
-     * @param mixed $defaultValue the default value for this Form Element
+     * @param mixed $defaultValue the default value for this Map Element
      */
     public function setDefaultValue($defaultValue);
 
@@ -91,27 +88,10 @@ interface FormElementInterface extends RenderableInterface
     public function setRenderingOption(string $key, $value);
 
     /**
-     * Returns the child validators of the ConjunctionValidator that is registered for this element
-     *
-     * @return \SplObjectStorage<ValidatorInterface>
-     * @internal
-     */
-    public function getValidators(): \SplObjectStorage;
-
-    /**
-     * Registers a validator for this element
-     */
-    public function addValidator(ValidatorInterface $validator);
-
-    /**
      * Set the target data type for this element
      *
      * @param string $dataType the target data type
      */
     public function setDataType(string $dataType);
 
-    /**
-     * Whether or not this element is required
-     */
-    public function isRequired(): bool;
 }
