@@ -36,7 +36,7 @@ use WapplerSystems\MapMagic\Exception as MapException;
  * Scope: frontend
  * **This class is NOT meant to be sub classed by developers.**
  */
-class Layer extends AbstractSection
+class Layer extends AbstractMapElement
 {
     /**
      * Constructor. Needs this Page's identifier
@@ -51,7 +51,6 @@ class Layer extends AbstractSection
     }
 
     /**
-     * Set the parent renderable
      *
      * @throws MapException
      */
@@ -62,4 +61,6 @@ class Layer extends AbstractSection
         }
         parent::setParentRenderable($parentRenderable);
     }
+
+
 }

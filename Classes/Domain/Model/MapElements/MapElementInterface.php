@@ -53,22 +53,6 @@ interface MapElementInterface extends RenderableInterface
     public function getUniqueIdentifier(): string;
 
     /**
-     * Get the default value with which the Map Element should be initialized
-     * during display.
-     *
-     * @return mixed the default value for this Map Element
-     */
-    public function getDefaultValue();
-
-    /**
-     * Set the default value with which the Map Element should be initialized
-     * during display.
-     *
-     * @param mixed $defaultValue the default value for this Map Element
-     */
-    public function setDefaultValue($defaultValue);
-
-    /**
      * Set an element-specific configuration property.
      *
      * @param mixed $value

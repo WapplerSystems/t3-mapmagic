@@ -15,15 +15,10 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
-
 namespace WapplerSystems\MapMagic\Domain\Model\Renderable;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Validation\Validator\ValidatorInterface;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 
@@ -132,30 +127,10 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['label', 'properties', 'renderingOptions', 'validators', 'mapEditor', 'options']
+            ['label', 'properties', 'renderingOptions', 'mapEditor', 'options']
         );
     }
 
-
-    /**
-     * Add a validator to the element.
-     */
-    public function addValidator(ValidatorInterface $validator)
-    {
-        $formDefinition = $this->getRootMap();
-        $formDefinition->getProcessingRule($this->getIdentifier())->addValidator($validator);
-    }
-
-    /**
-     * Get all validators on the element
-     *
-     * @internal
-     */
-    public function getValidators(): \SplObjectStorage
-    {
-        $formDefinition = $this->getRootMap();
-        return $formDefinition->getProcessingRule($this->getIdentifier())->getValidators();
-    }
 
     /**
      * Set the datatype
@@ -216,7 +191,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
     public function setParentRenderable(CompositeRenderableInterface $parentRenderable)
     {
         $this->parentRenderable = $parentRenderable;
-        $this->registerInFormIfPossible();
+        $this->registerInMapIfPossible();
     }
 
     /**
@@ -242,7 +217,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
      *
      * @internal
      */
-    public function registerInFormIfPossible()
+    public function registerInMapIfPossible()
     {
         try {
             $rootForm = $this->getRootMap();
@@ -329,31 +304,5 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
         return !isset($this->renderingOptions['enabled']) || (bool)$this->renderingOptions['enabled'] === true;
     }
 
-    public function createVariant(array $options): RenderableVariantInterface
-    {
-        $identifier = $options['identifier'] ?? '';
-        unset($options['identifier']);
 
-        $variant = GeneralUtility::makeInstance(RenderableVariant::class, $identifier, $options, $this);
-
-        $this->addVariant($variant);
-        return $variant;
-    }
-
-    /**
-     * Adds the specified variant to this form element
-     */
-    public function addVariant(RenderableVariantInterface $variant)
-    {
-        $this->variants[$variant->getIdentifier()] = $variant;
-    }
-
-    /**
-     * Apply the specified variant to this form element
-     * regardless of their conditions
-     */
-    public function applyVariant(RenderableVariantInterface $variant)
-    {
-        $variant->apply();
-    }
 }

@@ -83,23 +83,6 @@ class UnknownMapElement extends AbstractRenderable implements MapElementInterfac
     }
 
     /**
-     * @return mixed the default value for this Map Element
-     * @internal
-     */
-    public function getDefaultValue()
-    {
-        return null;
-    }
-
-    /**
-     * Not used in this implementation
-     *
-     * @param mixed $defaultValue the default value for this Map Element
-     * @internal
-     */
-    public function setDefaultValue($defaultValue) {}
-
-    /**
      * Not used in this implementation
      *
      * @param mixed $value

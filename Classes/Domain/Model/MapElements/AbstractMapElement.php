@@ -86,16 +86,13 @@ abstract class AbstractMapElement extends AbstractRenderable implements MapEleme
     public function getUniqueIdentifier(): string
     {
         $formDefinition = $this->getRootMap();
-        $uniqueIdentifier = sprintf('%s-%s', $formDefinition->getIdentifier(), $this->identifier);
+        $uniqueIdentifier = sprintf('%s_%s', $formDefinition->getIdentifier(), $this->identifier);
         $uniqueIdentifier = (string)preg_replace('/[^a-zA-Z0-9_-]/', '_', $uniqueIdentifier);
         return lcfirst($uniqueIdentifier);
     }
 
     public function setOptions(array $options, bool $resetValidators = false)
     {
-        if (isset($options['defaultValue'])) {
-            $this->setDefaultValue($options['defaultValue']);
-        }
 
         if (isset($options['properties'])) {
             foreach ($options['properties'] as $key => $value) {
@@ -106,45 +103,6 @@ abstract class AbstractMapElement extends AbstractRenderable implements MapEleme
         parent::setOptions($options, $resetValidators);
     }
 
-    /**
-     * Get the default value of the element
-     *
-     * @return mixed
-     */
-    public function getDefaultValue()
-    {
-        $formDefinition = $this->getRootMap();
-        return $formDefinition->getElementDefaultValueByIdentifier($this->identifier);
-    }
-
-    /**
-     * Set the default value of the element
-     *
-     * @param mixed $defaultValue
-     */
-    public function setDefaultValue($defaultValue)
-    {
-        $formDefinition = $this->getRootMap();
-        $currentDefaultValue = $formDefinition->getElementDefaultValueByIdentifier($this->identifier);
-        if (is_array($currentDefaultValue) && is_array($defaultValue)) {
-            ArrayUtility::mergeRecursiveWithOverrule($currentDefaultValue, $defaultValue);
-            $defaultValue = ArrayUtility::removeNullValuesRecursive($currentDefaultValue);
-        }
-        $formDefinition->addElementDefaultValue($this->identifier, $defaultValue);
-    }
-
-    /**
-     * Check if the element is required
-     */
-    public function isRequired(): bool
-    {
-        foreach ($this->getValidators() as $validator) {
-            if ($validator instanceof NotEmptyValidator) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Set a property of the element
@@ -169,5 +127,11 @@ abstract class AbstractMapElement extends AbstractRenderable implements MapEleme
     public function getProperties(): array
     {
         return $this->properties;
+    }
+
+
+    public function getJavaScript(): string
+    {
+        return '';
     }
 }

@@ -1,16 +1,24 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/WapplerSystems/MapMagic/ViewHelpers" data-namespace-typo3-fluid="true">
 <mapmagicvh:renderRenderable renderable="{map}">
-        <mapmagicvh:map
-                object="{map}"
-                id="{map.identifier}"
-                section="{map.identifier}"
-                additionalParams="{map.renderingOptions.additionalParams}"
-                additionalAttributes="{mapmagicvh:translateElementProperty(element: map, property: 'fluidAdditionalAttributes')}"
-        >
 
-            Map
-            <f:debug>{_all}</f:debug>
+    <f:asset.css identifier="leaflet" href="EXT:map_magic/Resources/Public/Css/leaflet.css" />
+    <f:asset.script identifier="leaflet" src="EXT:map_magic/Resources/Public/JavaScript/frontend/leaflet.js" />
 
-        </mapmagicvh:map>
+    <mapmagicvh:map
+            object="{map}"
+            id="{map.identifier}"
+            style="height: 400px;"
+            section="{map.identifier}"
+            additionalParams="{map.renderingOptions.additionalParams}"
+            additionalAttributes="{mapmagicvh:translateElementProperty(element: map, property: 'fluidAdditionalAttributes')}"
+    >
+
+        <f:debug>{_all}</f:debug>
+
+
+        <f:asset.script identifier="map-{map.identifier}">{map.javaScript}</f:asset.script>
+
+
+    </mapmagicvh:map>
 </mapmagicvh:renderRenderable>
 </html>

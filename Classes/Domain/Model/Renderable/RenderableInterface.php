@@ -76,7 +76,7 @@ interface RenderableInterface extends RootRenderableInterface
      *
      * @internal
      */
-    public function registerInFormIfPossible();
+    public function registerInMapIfPossible();
 
     /**
      * Get the template name of the renderable

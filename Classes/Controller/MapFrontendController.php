@@ -65,7 +65,7 @@ class MapFrontendController extends ActionController
             $formDefinition['persistenceIdentifier'] = $this->settings['persistenceIdentifier'];
             $formDefinition = $this->overrideByFlexFormSettings($formDefinition);
             $formDefinition = ArrayUtility::setValueByPath($formDefinition, 'renderingOptions._originalIdentifier', $formDefinition['identifier'], '.');
-            $formDefinition['identifier'] .= '-' . ($this->request->getAttribute('currentContentObject')?->data['uid'] ?? '');
+            $formDefinition['identifier'] .= '_' . ($this->request->getAttribute('currentContentObject')?->data['uid'] ?? '');
         }
         $this->view->assign('formConfiguration', $formDefinition);
 

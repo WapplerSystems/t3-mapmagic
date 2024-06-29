@@ -184,11 +184,11 @@ abstract class AbstractCompositeRenderable extends AbstractRenderable implements
      *
      * @internal
      */
-    public function registerInFormIfPossible()
+    public function registerInMapIfPossible()
     {
-        parent::registerInFormIfPossible();
+        parent::registerInMapIfPossible();
         foreach ($this->renderables as $renderable) {
-            $renderable->registerInFormIfPossible();
+            $renderable->registerInMapIfPossible();
         }
     }
 

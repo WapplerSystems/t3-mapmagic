@@ -33,6 +33,7 @@ use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\MapElements\FormElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\MapElements\Layer;
+use WapplerSystems\MapMagic\Domain\Model\MapElements\MapElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
@@ -229,13 +230,6 @@ class MapDefinition extends AbstractCompositeRenderable
     protected $renderables = [];
 
     /**
-     * The finishers for this form
-     *
-     * @var list<FinisherInterface>
-     */
-    protected $finishers = [];
-
-    /**
      * Property Mapping Rules, indexed by element identifier
      *
      * @var array<string, ProcessingRule>
@@ -246,7 +240,7 @@ class MapDefinition extends AbstractCompositeRenderable
      * Contains all elements of the form, indexed by identifier.
      * Is used as internal cache as we need this really often.
      *
-     * @var array<string, FormElementInterface>
+     * @var array<string, MapElementInterface>
      */
     protected $elementsByIdentifier = [];
 
@@ -301,7 +295,6 @@ class MapDefinition extends AbstractCompositeRenderable
         string $type = 'Map',
         ?string $persistenceIdentifier = null
     ) {
-        DebugUtility::debug($prototypeConfiguration);
         $this->typeDefinitions = $prototypeConfiguration['mapElementsDefinition'] ?? [];
         $this->layersDefinition = $prototypeConfiguration['layersDefinition'] ?? [];
         $this->finishersDefinition = $prototypeConfiguration['finishersDefinition'] ?? [];
@@ -465,7 +458,7 @@ class MapDefinition extends AbstractCompositeRenderable
      */
     public function registerRenderable(RenderableInterface $renderable)
     {
-        if ($renderable instanceof FormElementInterface) {
+        if ($renderable instanceof MapElementInterface) {
             if (isset($this->elementsByIdentifier[$renderable->getIdentifier()])) {
                 throw new DuplicateFormElementException(sprintf('A form element with identifier "%s" is already part of the form.', $renderable->getIdentifier()), 1325663761);
             }
@@ -480,7 +473,7 @@ class MapDefinition extends AbstractCompositeRenderable
      */
     public function unregisterRenderable(RenderableInterface $renderable)
     {
-        if ($renderable instanceof FormElementInterface) {
+        if ($renderable instanceof MapElementInterface) {
             unset($this->elementsByIdentifier[$renderable->getIdentifier()]);
         }
     }
@@ -488,7 +481,7 @@ class MapDefinition extends AbstractCompositeRenderable
     /**
      * Get all form elements with their identifiers as keys
      *
-     * @return array<string, FormElementInterface>
+     * @return array<string, MapElementInterface>
      */
     public function getElements(): array
     {
@@ -501,7 +494,7 @@ class MapDefinition extends AbstractCompositeRenderable
      * If identifier does not exist, returns NULL.
      *
      * @param string $elementIdentifier
-     * @return FormElementInterface|null The element with the given $elementIdentifier or NULL if none found
+     * @return MapElementInterface|null The element with the given $elementIdentifier or NULL if none found
      */
     public function getElementByIdentifier(string $elementIdentifier)
     {
