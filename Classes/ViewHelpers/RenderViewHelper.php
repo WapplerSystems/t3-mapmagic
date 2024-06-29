@@ -25,12 +25,12 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
-use WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory;
-use WapplerSystems\MapMagic\Domain\Factory\MapFactoryInterface;
-use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+use WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory;
+use WapplerSystems\MapMagic\Domain\Factory\MapFactoryInterface;
+use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**
  * Main Entry Point to render a Form into a Fluid Template

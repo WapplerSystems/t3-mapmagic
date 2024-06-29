@@ -1,5 +1,5 @@
 imports:
-  - { resource: './MapElements/MapMagic.yaml' }
+  - { resource: './MapElements/Map.yaml' }
 
 
 persistenceManager:

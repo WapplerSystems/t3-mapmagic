@@ -23,12 +23,12 @@ namespace WapplerSystems\MapMagic\ViewHelpers;
 
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
-use WapplerSystems\MapMagic\Domain\Model\FormElements\StringableFormElementInterface;
-use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Model\FormElements\StringableFormElementInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 
 /**
  * Renders a single value of a form

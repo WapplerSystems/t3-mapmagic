@@ -19,9 +19,9 @@ namespace WapplerSystems\MapMagic\ConfigurationModuleProvider;
 
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderInterface;
 use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManager;
 use WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderInterface;
 
 class MapYamlProvider implements ProviderInterface
 {

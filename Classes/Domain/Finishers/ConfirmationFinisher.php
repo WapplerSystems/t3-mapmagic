@@ -20,10 +20,10 @@ namespace WapplerSystems\MapMagic\Domain\Finishers;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use WapplerSystems\MapMagic\Domain\Finishers\Exception\FinisherException;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * A finisher that outputs a given text

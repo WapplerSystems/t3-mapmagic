@@ -21,11 +21,11 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\ViewHelpers;
 
-use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
-use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
+use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 
 /**
  * Renders the values of a form

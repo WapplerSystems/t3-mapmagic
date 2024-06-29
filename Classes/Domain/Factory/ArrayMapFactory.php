@@ -26,8 +26,8 @@ use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
 use WapplerSystems\MapMagic\Domain\Exception\UnknownCompositRenderableException;
-use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\AbstractSection;
+use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\CompositeRenderableInterface;
 
 /**
@@ -61,7 +61,7 @@ class ArrayMapFactory extends AbstractMapFactory
             MapDefinition::class,
             $configuration['identifier'],
             $prototypeConfiguration,
-            'MapMagic',
+            'Map',
             $persistenceIdentifier
         );
         if (isset($configuration['renderables'])) {

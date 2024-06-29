@@ -30,13 +30,11 @@ use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
 use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
 use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException;
-use WapplerSystems\MapMagic\Domain\Model\Exception\FinisherPresetNotFoundException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\FormElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\FormElements\Layer;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
-use WapplerSystems\MapMagic\Domain\Model\Renderable\VariableRenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Exception as FormException;
 use WapplerSystems\MapMagic\Mvc\ProcessingRule;
@@ -300,7 +298,7 @@ class MapDefinition extends AbstractCompositeRenderable
     public function __construct(
         string $identifier,
         array $prototypeConfiguration = [],
-        string $type = 'MapMagic',
+        string $type = 'Map',
         ?string $persistenceIdentifier = null
     ) {
         DebugUtility::debug($prototypeConfiguration);
