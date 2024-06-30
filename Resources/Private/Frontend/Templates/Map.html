@@ -1,8 +1,17 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:mapmagicvh="http://typo3.org/ns/WapplerSystems/MapMagic/ViewHelpers" data-namespace-typo3-fluid="true">
 <mapmagicvh:renderRenderable renderable="{map}">
 
+
+    <f:asset.script identifier="mapmagic-constants">
+        const MM_ImagePath = '/_assets/d27febd9f0cfe747a82ec66dd0625559/Images/';
+    </f:asset.script>
+
     <f:asset.css identifier="leaflet" href="EXT:map_magic/Resources/Public/Css/leaflet.css" />
     <f:asset.script identifier="leaflet" src="EXT:map_magic/Resources/Public/JavaScript/frontend/leaflet.js" />
+
+    <f:asset.script identifier="mapmagic_leaflet_setup">
+        L.Icon.Default.imagePath = MM_ImagePath;
+    </f:asset.script>
 
     <mapmagicvh:map
             object="{map}"

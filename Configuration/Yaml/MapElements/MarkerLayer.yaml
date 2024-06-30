@@ -1,0 +1,12 @@
+prototypes:
+  standard:
+    mapElementsDefinition:
+      MarkerLayer:
+        mapEditor:
+
+        properties:
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\MarkerLayer
+
+    formEditor:
+      formEditorPartials:
+        MapElement-OSMLayer: Stage/SimpleTemplate

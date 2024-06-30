@@ -6,6 +6,7 @@ imports:
   - { resource: './MapElements/AddressDataLayer.yaml' }
   - { resource: './MapElements/CircleLayer.yaml' }
   - { resource: './MapElements/Map.yaml' }
+  - { resource: './MapElements/MarkerLayer.yaml' }
   - { resource: './MapElements/OSMLayer.yaml' }
   - { resource: './MapElements/PolygonLayer.yaml' }
 
@@ -26,9 +27,9 @@ prototypes:
       translationFiles:
         10: 'EXT:map_magic/Resources/Private/Language/Database.xlf'
       dynamicJavaScriptModules:
-        app: '@typo3/form/backend/form-editor.js'
-        mediator: '@typo3/form/backend/form-editor/mediator.js'
-        viewModel: '@typo3/form/backend/form-editor/view-model.js'
+        app: '@wapplersystems/mapmagic/backend/form-editor.js'
+        mediator: '@wapplersystems/mapmagic/backend/form-editor/mediator.js'
+        viewModel: '@wapplersystems/mapmagic/backend/form-editor/view-model.js'
       addInlineSettings: {  }
       maximumUndoSteps: 10
       stylesheets:
