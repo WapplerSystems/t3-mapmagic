@@ -1,4 +1,10 @@
 imports:
+  - { resource: './DataSources/DefaultOSM.yaml' }
+  - { resource: './DataSourceTypes/AddressDataSource.yaml' }
+  - { resource: './DataSourceTypes/GeoJSONDataSource.yaml' }
+  - { resource: './DataSourceTypes/OSMDataSource.yaml' }
+  - { resource: './MapElements/AddressDataLayer.yaml' }
+  - { resource: './MapElements/CircleLayer.yaml' }
   - { resource: './MapElements/Map.yaml' }
   - { resource: './MapElements/OSMLayer.yaml' }
   - { resource: './MapElements/PolygonLayer.yaml' }

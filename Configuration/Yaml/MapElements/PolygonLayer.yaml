@@ -6,7 +6,7 @@ prototypes:
 
         #rendererClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\Layer
         properties:
-        implementationClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\Layer
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\PolygonLayer
 
     formEditor:
       formEditorPartials:

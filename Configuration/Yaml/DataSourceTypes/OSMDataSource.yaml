@@ -1,0 +1,13 @@
+prototypes:
+  standard:
+    dataSourceDefinition:
+      OSMDataSource:
+        label: 'OpenStreetMap'
+        mapEditor:
+        properties:
+          url: ''
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\DataSources\OSMDataSource
+
+    formEditor:
+      formEditorPartials:
+        MapElement-OSMLayer: Stage/SimpleTemplate

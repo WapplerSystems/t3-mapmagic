@@ -127,7 +127,7 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['label', 'properties', 'renderingOptions', 'mapEditor', 'options']
+            ['label', 'properties', 'renderingOptions', 'mapEditor', 'options', 'dataSourceType', 'dataSourceProperties']
         );
     }
 

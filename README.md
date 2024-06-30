@@ -12,7 +12,7 @@
 
 # Konfiguration für Datenquellen, "Woher bekomme ich meine Daten?"
 # Beschreibt zentral, wo die Abhängigkeiten von dieser YAML Datei liegen
-datasources:
+dataSources:
   osm-raster:
     type: xyz
     url: http://a.tile.openstreetmap.org/{z}/{x}/{y}.png
@@ -31,15 +31,15 @@ layers:
     osm:
       type: background
       label: OpenStreetMap
-      datasource: osm-raster
+      dataSource: osm-raster
   featuremaps:
     standorte:
       type: markers
-      datasource: standorte-geojson
+      dataSource: standorte-geojson
       label: Meine Standorte
     konkurrenten:
       type: markers
-      datasource: konkurrenten-geojson
+      dataSource: konkurrenten-geojson
       label: Standorte von Konkurrenten
 
 # Konfiguration für Kartenstile, "Wie möchte ich meine Daten darstellen?"

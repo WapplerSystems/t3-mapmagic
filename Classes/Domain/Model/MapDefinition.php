@@ -28,10 +28,9 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
-use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
+use WapplerSystems\MapMagic\Domain\Model\DataSources\DataSourceInterface;
 use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
-use WapplerSystems\MapMagic\Domain\Model\MapElements\FormElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\MapElements\Layer;
 use WapplerSystems\MapMagic\Domain\Model\MapElements\MapElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
@@ -223,11 +222,13 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
 class MapDefinition extends AbstractCompositeRenderable
 {
     /**
-     * The Form's pages
      *
      * @var array<int, Layer>
      */
     protected $renderables = [];
+
+
+    protected $dataSources = [];
 
     /**
      * Property Mapping Rules, indexed by element identifier
@@ -266,7 +267,12 @@ class MapDefinition extends AbstractCompositeRenderable
     /**
      * @var array<string, array<string, mixed>>
      */
-    protected $layersDefinition;
+    protected $layersDefinitions;
+
+    /**
+     * @var array<string, array<string, mixed>>
+     */
+    protected $dataSourceDefinitions;
 
     /**
      * @var array<string, array<string, mixed>>
@@ -296,7 +302,8 @@ class MapDefinition extends AbstractCompositeRenderable
         ?string $persistenceIdentifier = null
     ) {
         $this->typeDefinitions = $prototypeConfiguration['mapElementsDefinition'] ?? [];
-        $this->layersDefinition = $prototypeConfiguration['layersDefinition'] ?? [];
+        $this->dataSourceDefinitions = $prototypeConfiguration['dataSourceDefinition'] ?? [];
+        $this->layersDefinitions = $prototypeConfiguration['layersDefinition'] ?? [];
         $this->finishersDefinition = $prototypeConfiguration['finishersDefinition'] ?? [];
 
         if (!is_string($identifier) || strlen($identifier) === 0) {
@@ -320,7 +327,6 @@ class MapDefinition extends AbstractCompositeRenderable
      */
     protected function initializeFromMapDefaults()
     {
-        DebugUtility::debug($this->typeDefinitions);
         if (!isset($this->typeDefinitions[$this->type])) {
             throw new TypeDefinitionNotFoundException(sprintf('Type "%s" not found. Probably some configuration is missing.', $this->type), 1474905835);
         }
@@ -351,7 +357,7 @@ class MapDefinition extends AbstractCompositeRenderable
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['rendererClassName', 'renderingOptions', 'layers', 'mapEditor', 'label', 'datasources', 'controls', 'styles', 'plugins']
+            ['rendererClassName', 'renderingOptions', 'layers', 'mapEditor', 'label', 'dataSources', 'controls', 'styles', 'plugins']
         );
     }
 
@@ -398,18 +404,58 @@ class MapDefinition extends AbstractCompositeRenderable
         return $layer;
     }
 
+
+
+    public function createDataSource(string $identifier, string $typeName = 'DataSource'): DataSourceInterface
+    {
+        if (!isset($this->dataSourceDefinitions[$typeName])) {
+            throw new TypeDefinitionNotFoundException(sprintf('Data source type "%s" not found. Probably some configuration is missing.', $typeName), 1474905953);
+        }
+
+        $dataSourceDefinition = $this->dataSourceDefinitions[$typeName];
+
+        if (!isset($dataSourceDefinition['implementationClassName'])) {
+            throw new TypeDefinitionNotFoundException(sprintf('The "implementationClassName" was not set in data source definition "%s".', $typeName), 1477083126);
+        }
+        $implementationClassName = $dataSourceDefinition['implementationClassName'];
+
+        /** @var DataSourceInterface $dataSource */
+        $dataSource = GeneralUtility::makeInstance($implementationClassName, $identifier, $typeName);
+
+        if (isset($dataSourceDefinition['label'])) {
+            $dataSource->setLabel($dataSourceDefinition['label']);
+        }
+
+
+        ArrayUtility::assertAllArrayKeysAreValid(
+            $dataSourceDefinition,
+            ['implementationClassName', 'label', 'mapEditor', 'properties']
+        );
+
+        $this->addDataSource($dataSource);
+        return $dataSource;
+    }
+
+
+
     /**
      * Add a new page at the end of the form.
      *
      * Instead of this method, you should often use {@link createLayer} instead.
      *
-     * @param Layer $page
+     * @param Layer $layer
      * @throws MapDefinitionConsistencyException if Page is already added to a FormDefinition
      * @see createLayer
      */
-    public function addLayer(Layer $page)
+    public function addLayer(Layer $layer)
     {
-        $this->addRenderable($page);
+        $this->addRenderable($layer);
+    }
+
+
+    public function addDataSource(DataSourceInterface $dataSource)
+    {
+
     }
 
     /**
@@ -600,9 +646,9 @@ class MapDefinition extends AbstractCompositeRenderable
      * @return array<string, array<string, mixed>>
      * @internal
      */
-    public function getLayersDefinition(): array
+    public function getLayersDefinitions(): array
     {
-        return $this->layersDefinition;
+        return $this->layersDefinitions;
     }
 
     /**

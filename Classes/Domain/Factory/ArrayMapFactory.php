@@ -69,6 +69,11 @@ class ArrayMapFactory extends AbstractMapFactory
                 $this->addLayer($layerConfiguration, $map);
             }
         }
+        if (isset($configuration['dataSources'])) {
+            foreach ($configuration['dataSources'] as $dataSourceConfiguration) {
+                $this->addDataSource($dataSourceConfiguration, $map);
+            }
+        }
 
         unset($configuration['persistenceIdentifier']);
         unset($configuration['prototypeName']);
@@ -76,7 +81,7 @@ class ArrayMapFactory extends AbstractMapFactory
         unset($configuration['styles']);
         unset($configuration['plugins']);
         unset($configuration['controls']);
-        unset($configuration['datasources']);
+        unset($configuration['dataSources']);
         unset($configuration['type']);
         unset($configuration['identifier']);
         $map->setOptions($configuration);
@@ -112,7 +117,7 @@ class ArrayMapFactory extends AbstractMapFactory
 
         unset($layerConfiguration['type']);
         unset($layerConfiguration['identifier']);
-        unset($layerConfiguration['datasource']);
+        unset($layerConfiguration['dataSource']);
 
         $renderable->setOptions($layerConfiguration);
 
@@ -124,4 +129,26 @@ class ArrayMapFactory extends AbstractMapFactory
 
         return $renderable;
     }
+
+
+    protected function addDataSource(array $dataSourceConfiguration, CompositeRenderableInterface $parentRenderable)
+    {
+        if (!isset($dataSourceConfiguration['identifier'])) {
+            throw new IdentifierNotValidException('Identifier not set.', 1329289436);
+        }
+        if ($parentRenderable instanceof MapDefinition) {
+            $dataSource = $parentRenderable->createDataSource($dataSourceConfiguration['identifier'], $dataSourceConfiguration['type']);
+        } else {
+            throw new UnknownCompositRenderableException('Unknown composit renderable "' . get_class($parentRenderable) . '"', 1479593622);
+        }
+
+        unset($dataSourceConfiguration['type']);
+        unset($dataSourceConfiguration['identifier']);
+        unset($dataSourceConfiguration['dataSource']);
+
+        $dataSource->setOptions($dataSourceConfiguration);
+
+        return $dataSource;
+    }
+
 }

@@ -1,0 +1,13 @@
+prototypes:
+  standard:
+    dataSourceDefinition:
+      AddressDataSource:
+        label: 'Address Data Source'
+        mapEditor:
+        properties:
+          url: ''
+        implementationClassName: WapplerSystems\MapMagic\Domain\Model\DataSources\AddressDataSource
+
+    formEditor:
+      formEditorPartials:
+        MapElement-OSMLayer: Stage/SimpleTemplate
