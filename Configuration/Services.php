@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-namespace TYPO3\CMS\Form;
+namespace WapplerSystems\MapMagic;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use TYPO3\CMS\Core\DependencyInjection\PublicServicePass;
 use WapplerSystems\MapMagic\ConfigurationModuleProvider\MapYamlProvider;
-use WapplerSystems\MapMagic\Domain\Finishers\FinisherInterface;
 use TYPO3\CMS\Lowlevel\ConfigurationModuleProvider\ProviderRegistry;
 
 return static function (ContainerConfigurator $container, ContainerBuilder $containerBuilder) {
-    $containerBuilder->registerForAutoconfiguration(FinisherInterface::class)->addTag('form.finisher');
-    $containerBuilder->addCompilerPass(new PublicServicePass('form.finisher', true));
 
     if ($containerBuilder->hasDefinition(ProviderRegistry::class)) {
         $container->services()->defaults()->autowire()->autoconfigure()->public()

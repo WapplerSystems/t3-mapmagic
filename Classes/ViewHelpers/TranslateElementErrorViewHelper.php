@@ -37,7 +37,7 @@ final class TranslateElementErrorViewHelper extends AbstractViewHelper
 
     public function initializeArguments(): void
     {
-        $this->registerArgument('element', RootRenderableInterface::class, 'Form Element to translate', true);
+        $this->registerArgument('element', RootRenderableInterface::class, 'Map Element to translate', true);
         $this->registerArgument('error', Error::class, 'Error', true);
     }
 
@@ -51,7 +51,7 @@ final class TranslateElementErrorViewHelper extends AbstractViewHelper
             ->getViewHelperVariableContainer()
             ->get(RenderRenderableViewHelper::class, 'formRuntime');
 
-        return GeneralUtility::makeInstance(TranslationService::class)->translateFormElementError(
+        return GeneralUtility::makeInstance(TranslationService::class)->translateMapElementError(
             $element,
             $error->getCode(),
             $error->getArguments(),

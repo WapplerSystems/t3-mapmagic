@@ -15,10 +15,6 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
-
 namespace WapplerSystems\MapMagic\Domain\Runtime;
 
 use Psr\Container\ContainerInterface;
@@ -40,7 +36,7 @@ use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 use WapplerSystems\MapMagic\Domain\Renderer\RendererInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterMapStateInitializedInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime\Lifecycle\AfterMapStateInitializedInterface;
 
 /**
  * This class implements the *runtime logic* of a form, i.e. deciding which
@@ -49,17 +45,17 @@ use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterMapStateIn
  *
  * You generally receive an instance of this class by calling {@link \WapplerSystems\MapMagic\Domain\Model\MapDefinition::bind}.
  *
- * Rendering a Form
+ * Rendering a Map
  * ================
  *
- * That's easy, just call render() on the FormRuntime:
+ * That's easy, just call render() on the MapRuntime:
  *
  * /---code php
  * $form = $formDefinition->bind($request);
- * $renderedForm = $form->render();
+ * $renderedMap = $form->render();
  * \---
  *
- * Accessing Form Values
+ * Accessing Map Values
  * =====================
  *
  * In order to get the values the user has entered into the form, you can access
@@ -71,7 +67,7 @@ use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterMapStateIn
  * Rendering Internals
  * ===================
  *
- * The FormRuntime asks the MapDefinition about the configured Renderer
+ * The MapRuntime asks the MapDefinition about the configured Renderer
  * which should be used ({@link \WapplerSystems\MapMagic\Domain\Model\MapDefinition::getRendererClassName}),
  * and then trigger render() on this Renderer.
  *
@@ -130,7 +126,7 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
         foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterMapStateInitialized'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if ($hookObj instanceof AfterMapStateInitializedInterface) {
-                $hookObj->afterFormStateInitialized($this);
+                $hookObj->afterMapStateInitialized($this);
             }
         }
     }

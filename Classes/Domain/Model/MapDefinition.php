@@ -15,10 +15,6 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
-
 namespace WapplerSystems\MapMagic\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -29,62 +25,62 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use WapplerSystems\MapMagic\Domain\Exception\IdentifierNotValidException;
 use WapplerSystems\MapMagic\Domain\Exception\TypeDefinitionNotFoundException;
 use WapplerSystems\MapMagic\Domain\Model\DataSources\DataSourceInterface;
-use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateFormElementException;
+use WapplerSystems\MapMagic\Domain\Model\Exception\DuplicateMapElementException;
 use WapplerSystems\MapMagic\Domain\Model\Exception\MapDefinitionConsistencyException;
 use WapplerSystems\MapMagic\Domain\Model\MapElements\Layer;
 use WapplerSystems\MapMagic\Domain\Model\MapElements\MapElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\AbstractCompositeRenderable;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
-use WapplerSystems\MapMagic\Exception as FormException;
+use WapplerSystems\MapMagic\Exception as MapException;
 use WapplerSystems\MapMagic\Mvc\ProcessingRule;
 
 /**
- * This class encapsulates a complete *Form Definition*, with all of its pages,
+ * This class encapsulates a complete *Map Definition*, with all of its pages,
  * form elements, validation rules which apply and finishers which should be
  * executed when the form is completely filled in.
  *
  * It is *not modified* when the form executes.
  *
- * The Anatomy Of A Form
+ * The Anatomy Of A Map
  * =====================
  *
  * A MapDefinition consists of multiple *Page* ({@link Layer}) objects. When a
  * form is displayed to the user, only one *Page* is visible at any given time,
  * and there is a navigation to go back and forth between the pages.
  *
- * A *Page* consists of multiple *MapElements* ({@link FormElementInterface}, {@link AbstractFormElement}),
+ * A *Page* consists of multiple *MapElements* ({@link MapElementInterface}, {@link AbstractMapElement}),
  * which represent the input fields, textareas, checkboxes shown inside the page.
  *
- * *MapDefinition*, *Page* and *FormElement* have *identifier* properties, which
+ * *MapDefinition*, *Page* and *MapElement* have *identifier* properties, which
  * must be unique for each given type (i.e. it is allowed that the MapDefinition and
- * a FormElement have the *same* identifier, but two MapElements are not allowed to
+ * a MapElement have the *same* identifier, but two MapElements are not allowed to
  * have the same identifier.
  *
  * Simple Example
  * --------------
  *
  * Generally, you can create a MapDefinition manually by just calling the API
- * methods on it, or you use a *Form Definition Factory* to build the form from
+ * methods on it, or you use a *Map Definition Factory* to build the form from
  * another representation format such as YAML.
  *
  * /---code php
- * $formDefinition = GeneralUtility::makeInstance(FormDefinition::class, 'myForm');
+ * $formDefinition = GeneralUtility::makeInstance(MapDefinition::class, 'myMap');
  *
  * $page1 = GeneralUtility::makeInstance(Page::class, 'page1');
  * $formDefinition->addPage($page);
  *
- * $element1 = GeneralUtility::makeInstance(GenericFormElement::class, 'title', 'Textfield'); # the second argument is the type of the form element
+ * $element1 = GeneralUtility::makeInstance(GenericMapElement::class, 'title', 'Textfield'); # the second argument is the type of the form element
  * $page1->addElement($element1);
  * \---
  *
- * Creating a Form, Using Abstract Form Element Types
+ * Creating a Map, Using Abstract Map Element Types
  * =====================================================
  *
  * While you can use the {@link MapDefinition::addLayer} or {@link Layer::addElement}
- * methods and create the Page and FormElement objects manually, it is often better
+ * methods and create the Page and MapElement objects manually, it is often better
  * to use the corresponding create* methods ({@link MapDefinition::createLayer}
- * and {@link Layer::createElement}), as you pass them an abstract *Form Element Type*
+ * and {@link Layer::createElement}), as you pass them an abstract *Map Element Type*
  * such as *Text* or *Page*, and the system **automatically
  * resolves the implementation class name and sets default values**.
  *
@@ -93,13 +89,13 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * /---code php
  * $prototypeConfiguration = []; // We'll talk about this later
  *
- * $formDefinition = GeneralUtility::makeInstance(FormDefinition::class, 'myForm', $prototypeConfiguration);
+ * $formDefinition = GeneralUtility::makeInstance(MapDefinition::class, 'myMap', $prototypeConfiguration);
  * $page1 = $formDefinition->createPage('page1');
  * $element1 = $page1->addElement('title', 'Textfield');
  * \---
  *
  * Now, you might wonder how the system knows that the element *Textfield*
- * is implemented using a GenericFormElement: **This is configured in the $prototypeConfiguration**.
+ * is implemented using a GenericMapElement: **This is configured in the $prototypeConfiguration**.
  *
  * To make the example from above actually work, we need to add some sensible
  * values to *$prototypeConfiguration*:
@@ -111,13 +107,13 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\Page'
  *     ],
  *     'Textfield' => [
- *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\GenericFormElement'
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\GenericMapElement'
  *     ]
  *   ]
  * ]
  * </pre>
  *
- * For each abstract *Form Element Type* we add some configuration; in the above
+ * For each abstract *Map Element Type* we add some configuration; in the above
  * case only the *implementation class name*. Still, it is possible to set defaults
  * for *all* configuration options of such an element, as the following example
  * shows:
@@ -130,7 +126,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  *       'label' => 'this is the label of the page if nothing is specified'
  *     ],
  *     'Textfield' => [
- *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\GenericFormElement',
+ *       'implementationClassName' => 'WapplerSystems\MapMagic\Domain\Model\MapElements\GenericMapElement',
  *       'label' = >'Default Label',
  *       'defaultValue' => 'Default form element value',
  *       'properties' => [
@@ -153,7 +149,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * Property Mapping and Validation Rules
  * =====================================
  *
- * Besides Pages and MapElements, the FormDefinition can contain information
+ * Besides Pages and MapElements, the MapDefinition can contain information
  * about the *format of the data* which is inputted into the form. This generally means:
  *
  * - expected Data Types
@@ -163,7 +159,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * Background Info
  * ---------------
  * You might wonder why Data Types and Validation Rules are *not attached
- * to each FormElement itself*.
+ * to each MapElement itself*.
  *
  * If the form should create a *hierarchical output structure* such as a multi-
  * dimensional array or a PHP object, your expected data structure might look as follows:
@@ -187,18 +183,18 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * Connecting MapElements to the output data structure
  * ====================================================
  *
- * The *identifier* of the *FormElement* is most important, as it determines
+ * The *identifier* of the *MapElement* is most important, as it determines
  * where in the output structure the value which is entered by the user is placed,
  * and thus also determines which validation rules need to apply.
  *
- * Using the above example, if you want to create a FormElement for the *street*,
+ * Using the above example, if you want to create a MapElement for the *street*,
  * you should use the identifier *person.address.street*.
  *
- * Rendering a FormDefinition
+ * Rendering a MapDefinition
  * ==========================
  *
- * In order to trigger *rendering* on a FormDefinition,
- * the current {@link \TYPO3\CMS\Extbase\Mvc\Request} needs to be bound to the FormDefinition,
+ * In order to trigger *rendering* on a MapDefinition,
+ * the current {@link \TYPO3\CMS\Extbase\Mvc\Request} needs to be bound to the MapDefinition,
  * resulting in a {@link \WapplerSystems\MapMagic\Domain\Runtime\MapRuntime} object which contains the *Runtime State* of the form
  * (such as the currently inserted values).
  *
@@ -216,7 +212,7 @@ use WapplerSystems\MapMagic\Mvc\ProcessingRule;
  * Scope: frontend
  * **This class is NOT meant to be sub classed by developers.**
  *
- * @internal May change any time, use FormFactoryInterface to select a different FormDefinition if needed
+ * @internal May change any time, use MapFactoryInterface to select a different MapDefinition if needed
  * @todo: Declare final in v12
  */
 class MapDefinition extends AbstractCompositeRenderable
@@ -246,7 +242,7 @@ class MapDefinition extends AbstractCompositeRenderable
     protected $elementsByIdentifier = [];
 
     /**
-     * Form element default values in the format ['elementIdentifier' => 'default value']
+     * Map element default values in the format ['elementIdentifier' => 'default value']
      *
      * @var array<string, mixed>
      */
@@ -287,9 +283,9 @@ class MapDefinition extends AbstractCompositeRenderable
     protected $persistenceIdentifier;
 
     /**
-     * Constructor. Creates a new FormDefinition with the given identifier.
+     * Constructor. Creates a new MapDefinition with the given identifier.
      *
-     * @param string $identifier The Form Definition's identifier, must be a non-empty string.
+     * @param string $identifier The Map Definition's identifier, must be a non-empty string.
      * @param array $prototypeConfiguration overrides form defaults of this definition
      * @param string $type element type of this form
      * @param string|null $persistenceIdentifier the persistence identifier of the form
@@ -444,7 +440,7 @@ class MapDefinition extends AbstractCompositeRenderable
      * Instead of this method, you should often use {@link createLayer} instead.
      *
      * @param Layer $layer
-     * @throws MapDefinitionConsistencyException if Page is already added to a FormDefinition
+     * @throws MapDefinitionConsistencyException if Page is already added to a MapDefinition
      * @see createLayer
      */
     public function addLayer(Layer $layer)
@@ -459,9 +455,9 @@ class MapDefinition extends AbstractCompositeRenderable
     }
 
     /**
-     * Get the Form's pages
+     * Get the Map's layers
      *
-     * @return array<int, Layer> The Form's pages in the correct order
+     * @return array<int, Layer> The Map's pages in the correct order
      */
     public function getLayers(): array
     {
@@ -483,14 +479,14 @@ class MapDefinition extends AbstractCompositeRenderable
      *
      * If page at $index does not exist, an exception is thrown. @param int $index
      * @return Layer the page
-     * @throws FormException if the specified index does not exist
+     * @throws MapException if the specified index does not exist
      *@see hasLayerWithIndex()
      *
      */
     public function getLayerByIndex(int $index)
     {
         if (!$this->hasLayerWithIndex($index)) {
-            throw new FormException(sprintf('There is no page with an index of %d', $index), 1329233627);
+            throw new MapException(sprintf('There is no page with an index of %d', $index), 1329233627);
         }
         return $this->renderables[$index];
     }
@@ -499,14 +495,14 @@ class MapDefinition extends AbstractCompositeRenderable
     /**
      * Add an element to the ElementsByIdentifier Cache.
      *
-     * @throws DuplicateFormElementException
+     * @throws DuplicateMapElementException
      * @internal
      */
     public function registerRenderable(RenderableInterface $renderable)
     {
         if ($renderable instanceof MapElementInterface) {
             if (isset($this->elementsByIdentifier[$renderable->getIdentifier()])) {
-                throw new DuplicateFormElementException(sprintf('A form element with identifier "%s" is already part of the form.', $renderable->getIdentifier()), 1325663761);
+                throw new DuplicateMapElementException(sprintf('A form element with identifier "%s" is already part of the form.', $renderable->getIdentifier()), 1325663761);
             }
             $this->elementsByIdentifier[$renderable->getIdentifier()] = $renderable;
         }
@@ -535,7 +531,7 @@ class MapDefinition extends AbstractCompositeRenderable
     }
 
     /**
-     * Get a Form Element by its identifier
+     * Get a Map Element by its identifier
      *
      * If identifier does not exist, returns NULL.
      *
@@ -603,7 +599,7 @@ class MapDefinition extends AbstractCompositeRenderable
 
     /**
      * Bind the current request & response to this form instance, effectively creating
-     * a new "instance" of the Form.
+     * a new "instance" of the Map.
      */
     public function bind(RequestInterface $request): MapRuntime
     {

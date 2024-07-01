@@ -17,9 +17,9 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain;
 
-use WapplerSystems\MapMagic\Exception as FormException;
+use WapplerSystems\MapMagic\Exception as MapException;
 
 /**
- * A generic Form domain Exception
+ * A generic Map domain Exception
  */
-class Exception extends FormException {}
+class Exception extends MapException {}

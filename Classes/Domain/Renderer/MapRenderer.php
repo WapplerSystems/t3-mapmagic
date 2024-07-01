@@ -34,7 +34,7 @@ use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
  * Options
  * =======
  *
- * The FluidFormRenderer uses some rendering options which are of particular
+ * The FluidMapRenderer uses some rendering options which are of particular
  * importance, as they determine how the form field is resolved to a path
  * in the file system.
  *
@@ -53,8 +53,8 @@ use WapplerSystems\MapMagic\ViewHelpers\RenderRenderableViewHelper;
  * renderable *type*.
  * For example:
  *   templateRootPaths.10 = EXT:map_magic/Resources/Private/Frontend/Templates/
- *   $renderable->getType() = Form
- *   Expected template file: EXT:map_magic/Resources/Private/Frontend/Templates/Form.html
+ *   $renderable->getType() = Map
+ *   Expected template file: EXT:map_magic/Resources/Private/Frontend/Templates/Map.html
  * There is a setting available to set a custom template name. Please read
  * the section 'templateName'.
  *

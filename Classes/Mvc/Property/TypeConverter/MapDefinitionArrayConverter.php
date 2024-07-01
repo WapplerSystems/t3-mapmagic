@@ -80,32 +80,32 @@ class MapDefinitionArrayConverter extends AbstractTypeConverter
         $sessionToken = $this->retrieveSessionToken();
 
         $prototypeName = $rawMapDefinitionArray['prototypeName'] ?? null;
-        $identifier = $rawFormDefinitionArray['identifier'] ?? null;
+        $identifier = $rawMapDefinitionArray['identifier'] ?? null;
 
         // A modification of the properties "prototypeName" and "identifier" from the root form element
         // through the form editor is always forbidden.
         try {
-            if (!$formDefinitionValidationService->isPropertyValueEqualToHistoricalValue([$identifier, 'identifier'], $identifier, $rawFormDefinitionArray['_orig_identifier'] ?? [], $sessionToken)) {
+            if (!$formDefinitionValidationService->isPropertyValueEqualToHistoricalValue([$identifier, 'identifier'], $identifier, $rawMapDefinitionArray['_orig_identifier'] ?? [], $sessionToken)) {
                 throw new PropertyException('Unauthorized modification of "identifier".', 1528538324);
             }
 
-            if (!$formDefinitionValidationService->isPropertyValueEqualToHistoricalValue([$identifier, 'prototypeName'], $prototypeName, $rawFormDefinitionArray['_orig_prototypeName'] ?? [], $sessionToken)) {
+            if (!$formDefinitionValidationService->isPropertyValueEqualToHistoricalValue([$identifier, 'prototypeName'], $prototypeName, $rawMapDefinitionArray['_orig_prototypeName'] ?? [], $sessionToken)) {
                 throw new PropertyException('Unauthorized modification of "prototype name".', 1528538323);
             }
         } catch (PropertyException $e) {
             throw new PropertyException('Unauthorized modification of "prototype name" or "identifier".', 1528538322);
         }
 
-        $formDefinitionValidationService->validateMapDefinitionProperties($rawFormDefinitionArray, $prototypeName, $sessionToken);
+        $formDefinitionValidationService->validateMapDefinitionProperties($rawMapDefinitionArray, $prototypeName, $sessionToken);
 
-        // @todo move all the transformations to FormDefinitionConversionService
-        $rawFormDefinitionArray = $this->filterEmptyArrays($rawFormDefinitionArray);
-        $rawFormDefinitionArray = $this->transformMultiValueElementsForFormFramework($rawFormDefinitionArray);
+        // @todo move all the transformations to MapDefinitionConversionService
+        $rawMapDefinitionArray = $this->filterEmptyArrays($rawMapDefinitionArray);
+        $rawMapDefinitionArray = $this->transformMultiValueElementsForMapFramework($rawMapDefinitionArray);
         // @todo: replace with rte parsing
-        $rawFormDefinitionArray = ArrayUtility::stripTagsFromValuesRecursive($rawFormDefinitionArray);
-        $rawFormDefinitionArray = $formDefinitionConversionService->removeHmacData($rawFormDefinitionArray);
+        $rawMapDefinitionArray = ArrayUtility::stripTagsFromValuesRecursive($rawMapDefinitionArray);
+        $rawMapDefinitionArray = $formDefinitionConversionService->removeHmacData($rawMapDefinitionArray);
 
-        $formDefinitionArray = GeneralUtility::makeInstance(MapDefinitionArray::class, $rawFormDefinitionArray);
+        $formDefinitionArray = GeneralUtility::makeInstance(MapDefinitionArray::class, $rawMapDefinitionArray);
         return $formDefinitionArray;
     }
 
@@ -127,7 +127,7 @@ class MapDefinitionArrayConverter extends AbstractTypeConverter
      *
      * @param array $input
      */
-    protected function transformMultiValueElementsForFormFramework(array $input): array
+    protected function transformMultiValueElementsForMapFramework(array $input): array
     {
         $output = [];
 
@@ -138,7 +138,7 @@ class MapDefinitionArrayConverter extends AbstractTypeConverter
             }
 
             if (is_array($value)) {
-                $output[$key] = $this->transformMultiValueElementsForFormFramework($value);
+                $output[$key] = $this->transformMultiValueElementsForMapFramework($value);
             } else {
                 $output[$key] = $value;
             }

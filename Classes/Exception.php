@@ -20,6 +20,6 @@ namespace WapplerSystems\MapMagic;
 use TYPO3\CMS\Core\Error\Exception as CoreException;
 
 /**
- * A generic Form Exception
+ * A generic Map Exception
  */
 class Exception extends CoreException {}

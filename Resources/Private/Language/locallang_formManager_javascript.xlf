@@ -19,7 +19,7 @@
                 <source>Select the storage where you want to save your form definition.</source>
             </trans-unit>
             <trans-unit id="mapManager.form_prototype" resname="mapManager.form_prototype" xml:space="preserve">
-                <source>Form prototype</source>
+                <source>Map prototype</source>
             </trans-unit>
             <trans-unit id="mapManager.form_template" resname="mapManager.form_template" xml:space="preserve">
                 <source>Template</source>
@@ -45,55 +45,55 @@
             <trans-unit id="mapManager.remove_form_message" resname="mapManager.remove_form_message" xml:space="preserve">
                 <source>Are you sure that you want to remove this form?</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step1.title" resname="mapManager.newFormWizard.step1.title" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step1.title" resname="mapManager.newMapWizard.step1.title" xml:space="preserve">
                 <source>Create new form</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step1.progressLabel" resname="mapManager.newFormWizard.step1.progressLabel" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step1.progressLabel" resname="mapManager.newMapWizard.step1.progressLabel" xml:space="preserve">
                 <source>Choose</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step1.noStorages" resname="mapManager.newFormWizard.step1.noStorages" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step1.noStorages" resname="mapManager.newMapWizard.step1.noStorages" xml:space="preserve">
                 <source>No accessible form storage folders</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step2.title" resname="mapManager.newFormWizard.step2.title" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step2.title" resname="mapManager.newMapWizard.step2.title" xml:space="preserve">
                 <source>Settings</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step3.title" resname="mapManager.newFormWizard.step3.title" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step3.title" resname="mapManager.newMapWizard.step3.title" xml:space="preserve">
                 <source>Ready?</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step3.progressLabel" resname="mapManager.newFormWizard.step3.progressLabel" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step3.progressLabel" resname="mapManager.newMapWizard.step3.progressLabel" xml:space="preserve">
                 <source>Check</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step3.message" resname="mapManager.newFormWizard.step3.message" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step3.message" resname="mapManager.newMapWizard.step3.message" xml:space="preserve">
                 <source>Just check and confirm the settings you have entered. Done? Then you are ready to go.</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step3.check" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step3.check" xml:space="preserve">
                 <source>Check and confirm</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step4.errorTitle" resname="mapManager.newFormWizard.step4.errorTitle" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step4.errorTitle" resname="mapManager.newMapWizard.step4.errorTitle" xml:space="preserve">
                 <source>Create</source>
             </trans-unit>
-            <trans-unit id="mapManager.newFormWizard.step4.errorMessage" resname="mapManager.newFormWizard.step4.errorMessage" xml:space="preserve">
+            <trans-unit id="mapManager.newMapWizard.step4.errorMessage" resname="mapManager.newMapWizard.step4.errorMessage" xml:space="preserve">
                 <source>The form could not be saved</source>
             </trans-unit>
-            <trans-unit id="mapManager.duplicateFormWizard.step1.title" resname="mapManager.duplicateFormWizard.step1.title" xml:space="preserve">
+            <trans-unit id="mapManager.duplicateMapWizard.step1.title" resname="mapManager.duplicateMapWizard.step1.title" xml:space="preserve">
                 <source>Duplicate form "{0}"</source>
             </trans-unit>
-            <trans-unit id="mapManager.duplicateFormWizard.step2.title" resname="mapManager.duplicateFormWizard.step2.title" xml:space="preserve">
+            <trans-unit id="mapManager.duplicateMapWizard.step2.title" resname="mapManager.duplicateMapWizard.step2.title" xml:space="preserve">
                 <source>Ready?</source>
             </trans-unit>
-            <trans-unit id="mapManager.duplicateFormWizard.step2.progressLabel" resname="mapManager.duplicateFormWizard.step2.progressLabel" xml:space="preserve">
+            <trans-unit id="mapManager.duplicateMapWizard.step2.progressLabel" resname="mapManager.duplicateMapWizard.step2.progressLabel" xml:space="preserve">
                 <source>Check</source>
             </trans-unit>
-            <trans-unit id="mapManager.duplicateFormWizard.step2.check" resname="mapManager.duplicateFormWizard.step2.check" xml:space="preserve">
+            <trans-unit id="mapManager.duplicateMapWizard.step2.check" resname="mapManager.duplicateMapWizard.step2.check" xml:space="preserve">
                 <source>Check and confirm</source>
             </trans-unit>
-            <trans-unit id="mapManager.duplicateFormWizard.step2.message" resname="mapManager.duplicateFormWizard.step2.message" xml:space="preserve">
+            <trans-unit id="mapManager.duplicateMapWizard.step2.message" resname="mapManager.duplicateMapWizard.step2.message" xml:space="preserve">
                 <source>Just check and confirm the settings you have entered. Done? Then you are ready to go.</source>
             </trans-unit>
-            <trans-unit id="mapManager.duplicateFormWizard.step3.errorTitle" resname="mapManager.duplicateFormWizard.step3.errorTitle" xml:space="preserve">
+            <trans-unit id="mapManager.duplicateMapWizard.step3.errorTitle" resname="mapManager.duplicateMapWizard.step3.errorTitle" xml:space="preserve">
                 <source>Duplicate</source>
             </trans-unit>
-            <trans-unit id="mapManager.duplicateFormWizard.step3.errorMessage" resname="mapManager.duplicateFormWizard.step3.errorMessage" xml:space="preserve">
+            <trans-unit id="mapManager.duplicateMapWizard.step3.errorMessage" resname="mapManager.duplicateMapWizard.step3.errorMessage" xml:space="preserve">
                 <source>The form could not be saved</source>
             </trans-unit>
             <trans-unit id="mapManager.no_references" resname="mapManager.no_references" xml:space="preserve">
@@ -111,22 +111,22 @@
             <trans-unit id="mapManager.references.headline" resname="mapManager.references.headline" xml:space="preserve">
                 <source>References for "{0}"</source>
             </trans-unit>
-            <trans-unit id="mapManager.blankForm.label" resname="mapManager.blankForm.label" xml:space="preserve">
+            <trans-unit id="mapManager.blankMap.label" resname="mapManager.blankMap.label" xml:space="preserve">
                 <source>Blank form</source>
             </trans-unit>
-            <trans-unit id="mapManager.blankForm.subtitle" resname="mapManager.blankForm.subtitle" xml:space="preserve">
+            <trans-unit id="mapManager.blankMap.subtitle" resname="mapManager.blankMap.subtitle" xml:space="preserve">
                 <source>Start fresh</source>
             </trans-unit>
-            <trans-unit id="mapManager.blankForm.description" resname="mapManager.blankForm.description" xml:space="preserve">
+            <trans-unit id="mapManager.blankMap.description" resname="mapManager.blankMap.description" xml:space="preserve">
                 <source>Create a new form from scratch.</source>
             </trans-unit>
-            <trans-unit id="mapManager.predefinedForm.label" resname="mapManager.predefinedForm.label" xml:space="preserve">
+            <trans-unit id="mapManager.predefinedMap.label" resname="mapManager.predefinedMap.label" xml:space="preserve">
                 <source>Predefined form</source>
             </trans-unit>
-            <trans-unit id="mapManager.predefinedForm.subtitle" resname="mapManager.predefinedForm.subtitle" xml:space="preserve">
+            <trans-unit id="mapManager.predefinedMap.subtitle" resname="mapManager.predefinedMap.subtitle" xml:space="preserve">
                 <source>Use a form template</source>
             </trans-unit>
-            <trans-unit id="mapManager.predefinedForm.description" resname="mapManager.predefinedForm.description" xml:space="preserve">
+            <trans-unit id="mapManager.predefinedMap.description" resname="mapManager.predefinedMap.description" xml:space="preserve">
                 <source>Create a new form and use an existing form template for it.</source>
             </trans-unit>
         </body>

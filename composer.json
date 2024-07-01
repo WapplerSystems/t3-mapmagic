@@ -4,11 +4,17 @@
 	"description": "TYPO3 Map Magic - Flexible TYPO3 map framework.",
 	"homepage": "https://wappler.systems",
 	"license": ["GPL-2.0-or-later"],
-	"authors": [{
-		"name": "WapplerSystems",
-		"email": "typo3@wappler.systems",
-		"role": "Developer"
-	}],
+	"authors": [
+		{
+			"name": "WapplerSystems",
+			"email": "typo3@wappler.systems",
+			"role": "Developer"
+		},
+		{
+			"name": "TYPO3 Core Team",
+			"email": "typo3cms@typo3.org",
+			"role": "Developer"
+		}],
 	"support": {
 	},
 	"config": {

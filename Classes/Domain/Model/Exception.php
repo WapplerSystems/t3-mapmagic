@@ -20,6 +20,6 @@ namespace WapplerSystems\MapMagic\Domain\Model;
 use WapplerSystems\MapMagic\Domain\Exception as DomainException;
 
 /**
- * A generic Form model Exception
+ * A generic Map model Exception
  */
 class Exception extends DomainException {}

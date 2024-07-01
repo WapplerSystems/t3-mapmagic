@@ -90,7 +90,7 @@ class MapEditorController extends AbstractBackendController
         } else {
             // Loading a form definition with another prototype is currently not implemented but is planned in the future.
             // This safety check is a preventive measure.
-            $selectablePrototypeNames = $configurationService->getSelectablePrototypeNamesDefinedInFormEditorSetup();
+            $selectablePrototypeNames = $configurationService->getSelectablePrototypeNamesDefinedInMapEditorSetup();
             if (!in_array($prototypeName, $selectablePrototypeNames, true)) {
                 throw new Exception(sprintf('The prototype name "%s" is not configured within "mapManager.selectablePrototypesConfiguration" ', $prototypeName), 1528625039);
             }
@@ -99,8 +99,8 @@ class MapEditorController extends AbstractBackendController
         $formDefinition['prototypeName'] = $prototypeName;
         $this->prototypeConfiguration = $configurationService->getPrototypeConfiguration($prototypeName);
 
-        $formDefinition = $this->transformMapDefinitionForFormEditor($formDefinition);
-        $mapMagicDefinitions = $this->getFormEditorDefinitions();
+        $formDefinition = $this->transformMapDefinitionForMapEditor($formDefinition);
+        $mapMagicDefinitions = $this->getMapEditorDefinitions();
 
         $additionalViewModelJavaScriptModules = array_map(
             static fn(string $name) => JavaScriptModuleInstruction::create($name),
@@ -126,19 +126,19 @@ class MapEditorController extends AbstractBackendController
             'formPersistenceIdentifier' => $formPersistenceIdentifier,
             'prototypeName' => $prototypeName,
             'endpoints' => [
-                'formPageRenderer' => $this->uriBuilder->uriFor('renderFormPage'),
-                'saveForm' => $this->uriBuilder->uriFor('saveForm'),
+                'mapPageRenderer' => $this->uriBuilder->uriFor('renderMapPage'),
+                'saveMap' => $this->uriBuilder->uriFor('saveMap'),
             ],
             'additionalViewModelModules' => $additionalViewModelModules,
             'maximumUndoSteps' => $this->prototypeConfiguration['mapMagic']['maximumUndoSteps'],
         ];
 
         $moduleTemplate = $this->initializeModuleTemplate($this->request);
-        $moduleTemplate->assign('mapMagicTemplates', $this->renderFormEditorTemplates($mapMagicDefinitions));
+        $moduleTemplate->assign('mapMagicTemplates', $this->renderMapEditorTemplates($mapMagicDefinitions));
 
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
         $addInlineSettings = [
-            'FormEditor' => [
+            'MapEditor' => [
                 'typo3WinBrowserUrl' => (string)$uriBuilder->buildUriFromRoute('wizard_element_browser'),
             ],
         ];
@@ -180,7 +180,7 @@ class MapEditorController extends AbstractBackendController
         $pageRenderer = $this->pageRenderer;
         $pageRenderer->getJavaScriptRenderer()->addJavaScriptModuleInstruction(
             JavaScriptModuleInstruction::create('@typo3/form/backend/helper.js', 'Helper')
-                ->invoke('dispatchFormEditor', $jsModules, $mapMagicAppInitialData)
+                ->invoke('dispatchMapEditor', $jsModules, $mapMagicAppInitialData)
         );
         array_map($pageRenderer->getJavaScriptRenderer()->addJavaScriptModuleInstruction(...), $javaScriptModules);
         $pageRenderer->addInlineSettingArray(null, $addInlineSettings);
@@ -196,14 +196,14 @@ class MapEditorController extends AbstractBackendController
             $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab'),
             $formDefinition['label']
         );
-        return $moduleTemplate->renderResponse('Backend/FormEditor/Index');
+        return $moduleTemplate->renderResponse('Backend/MapEditor/Index');
     }
 
     /**
      * Initialize the save action.
      * This action uses the Fluid JsonView::class as view.
      */
-    public function initializeSaveFormAction(): void
+    public function initializeSaveMapAction(): void
     {
         $this->defaultViewObjectName = JsonView::class;
     }
@@ -215,10 +215,10 @@ class MapEditorController extends AbstractBackendController
     {
         $formDefinition = $formDefinition->getArrayCopy();
 
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeFormSave'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeMapSave'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
-            if (method_exists($hookObj, 'beforeFormSave')) {
-                $formDefinition = $hookObj->beforeFormSave(
+            if (method_exists($hookObj, 'beforeMapSave')) {
+                $formDefinition = $hookObj->beforeMapSave(
                     $formPersistenceIdentifier,
                     $formDefinition
                 );
@@ -236,7 +236,7 @@ class MapEditorController extends AbstractBackendController
             $this->mapPersistenceManager->save($formPersistenceIdentifier, $formDefinition);
             $configurationService = GeneralUtility::makeInstance(ConfigurationService::class);
             $this->prototypeConfiguration = $configurationService->getPrototypeConfiguration($formDefinition['prototypeName']);
-            $formDefinition = $this->transformMapDefinitionForFormEditor($formDefinition);
+            $formDefinition = $this->transformMapDefinitionForMapEditor($formDefinition);
             $response['formDefinition'] = $formDefinition;
         } catch (PersistenceManagerException $e) {
             $response = [
@@ -247,7 +247,7 @@ class MapEditorController extends AbstractBackendController
         }
 
         $this->view->assign('response', $response);
-        // saveFormAction uses the extbase JsonView::class.
+        // saveMapAction uses the extbase JsonView::class.
         // That's why we have to set the view variables in this way.
         $this->view->setVariablesToRender([
             'response',
@@ -360,7 +360,7 @@ class MapEditorController extends AbstractBackendController
     /**
      * Reduce the YAML settings by the 'mapMagic' keyword.
      */
-    protected function getFormEditorDefinitions(): array
+    protected function getMapEditorDefinitions(): array
     {
         $mapMagicDefinitions = [];
         foreach ([$this->prototypeConfiguration, $this->prototypeConfiguration['mapMagic']] as $configuration) {
@@ -464,7 +464,7 @@ class MapEditorController extends AbstractBackendController
     /**
      * Render the form editor templates.
      */
-    protected function renderFormEditorTemplates(array $mapMagicDefinitions): string
+    protected function renderMapEditorTemplates(array $mapMagicDefinitions): string
     {
         $fluidConfiguration = $this->prototypeConfiguration['mapMagic']['mapMagicFluidConfiguration'] ?? null;
         $mapMagicPartials = $this->prototypeConfiguration['mapMagic']['mapMagicPartials'] ?? null;
@@ -511,10 +511,10 @@ class MapEditorController extends AbstractBackendController
     /**
      * @todo move this to MapDefinitionConversionService
      */
-    protected function transformMapDefinitionForFormEditor(array $formDefinition): array
+    protected function transformMapDefinitionForMapEditor(array $formDefinition): array
     {
-        /** @var array<string, list<string>> $multiValueFormElementProperties */
-        $multiValueFormElementProperties = [];
+        /** @var array<string, list<string>> $multiValueMapElementProperties */
+        $multiValueMapElementProperties = [];
         /** @var array<string, list<string>> $multiValueFinisherProperties */
         $multiValueFinisherProperties = [];
 
@@ -524,7 +524,7 @@ class MapEditorController extends AbstractBackendController
             }
             foreach ($configuration['mapMagic']['editors'] as $editorConfiguration) {
                 if (($editorConfiguration['templateName'] ?? '') === 'Inspector-PropertyGridEditor') {
-                    $multiValueFormElementProperties[$type][] = $editorConfiguration['propertyPath'];
+                    $multiValueMapElementProperties[$type][] = $editorConfiguration['propertyPath'];
                 }
             }
         }
@@ -546,12 +546,12 @@ class MapEditorController extends AbstractBackendController
 
         // @todo: replace with rte parsing
         $formDefinition = ArrayUtility::stripTagsFromValuesRecursive($formDefinition);
-        $formDefinition = $this->transformMultiValuePropertiesForFormEditor(
+        $formDefinition = $this->transformMultiValuePropertiesForMapEditor(
             $formDefinition,
             'type',
-            $multiValueFormElementProperties
+            $multiValueMapElementProperties
         );
-        $formDefinition = $this->transformMultiValuePropertiesForFormEditor(
+        $formDefinition = $this->transformMultiValuePropertiesForMapEditor(
             $formDefinition,
             'identifier',
             $multiValueFinisherProperties
@@ -595,7 +595,7 @@ class MapEditorController extends AbstractBackendController
      *
      * @param array<string, list<string>> $multiValueProperties
      */
-    protected function transformMultiValuePropertiesForFormEditor(
+    protected function transformMultiValuePropertiesForMapEditor(
         array $formDefinition,
         string $identifierProperty,
         array $multiValueProperties
@@ -634,7 +634,7 @@ class MapEditorController extends AbstractBackendController
             $output[$key] = $value;
 
             if (is_array($value)) {
-                $output[$key] = $this->transformMultiValuePropertiesForFormEditor(
+                $output[$key] = $this->transformMultiValuePropertiesForMapEditor(
                     $value,
                     $identifierProperty,
                     $multiValueProperties

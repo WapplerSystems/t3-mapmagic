@@ -38,7 +38,7 @@ use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\JsonView;
-use WapplerSystems\MapMagic\Exception as FormException;
+use WapplerSystems\MapMagic\Exception as MapException;
 use WapplerSystems\MapMagic\Mvc\Persistence\Exception\PersistenceManagerException;
 use WapplerSystems\MapMagic\Service\DatabaseService;
 use WapplerSystems\MapMagic\Service\TranslationService;
@@ -64,11 +64,11 @@ class MapManagerController extends AbstractBackendController
     ) {}
 
     /**
-     * Display the Form Manager. The main showing available forms.
+     * Display the Map Manager. The main showing available forms.
      */
     protected function indexAction(int $page = 1): ResponseInterface
     {
-        $forms = $this->getAvailableFormDefinitions();
+        $forms = $this->getAvailableMapDefinitions();
         $arrayPaginator = new ArrayPaginator($forms, $page, $this->limit);
         $pagination = new SimplePagination($arrayPaginator);
 
@@ -77,7 +77,7 @@ class MapManagerController extends AbstractBackendController
             'paginator' => $arrayPaginator,
             'pagination' => $pagination,
             'stylesheets' => $this->mapSettings['mapManager']['stylesheets'],
-            'mapManagerAppInitialData' => json_encode($this->getFormManagerAppInitialData()),
+            'mapManagerAppInitialData' => json_encode($this->getMapManagerAppInitialData()),
         ]);
         if (!empty($this->mapSettings['mapManager']['javaScriptTranslationFile'])) {
             $this->pageRenderer->addInlineLanguageLabelFile($this->mapSettings['mapManager']['javaScriptTranslationFile']);
@@ -111,7 +111,7 @@ class MapManagerController extends AbstractBackendController
         }
         $this->pageRenderer->getJavaScriptRenderer()->addJavaScriptModuleInstruction(
             JavaScriptModuleInstruction::create('@wapplersystems/mapmagic/backend/helper.js', 'Helper')
-                ->invoke('dispatchFormManager', $jsModules, $this->getFormManagerAppInitialData())
+                ->invoke('dispatchMapManager', $jsModules, $this->getMapManagerAppInitialData())
         );
         array_map($this->pageRenderer->getJavaScriptRenderer()->addJavaScriptModuleInstruction(...), $javaScriptModules);
         $moduleTemplate->setModuleClass($this->request->getPluginName() . '_' . $this->request->getControllerName());
@@ -132,9 +132,9 @@ class MapManagerController extends AbstractBackendController
     }
 
     /**
-     * Creates a new Form and redirects to the Form Editor
+     * Creates a new Map and redirects to the Map Editor
      *
-     * @throws FormException
+     * @throws MapException
      * @throws PersistenceManagerException
      */
     protected function createAction(string $mapName, string $templatePath, string $prototypeName, string $savePath): ResponseInterface
@@ -144,24 +144,24 @@ class MapManagerController extends AbstractBackendController
         }
 
         if (!$this->isValidTemplatePath($prototypeName, $templatePath)) {
-            throw new FormException(sprintf('The template path "%s" is not allowed', $templatePath), 1329233410);
+            throw new MapException(sprintf('The template path "%s" is not allowed', $templatePath), 1329233410);
         }
         if (empty($mapName)) {
-            throw new FormException('No map name', 1472312204);
+            throw new MapException('No map name', 1472312204);
         }
 
         $templatePath = GeneralUtility::getFileAbsFileName($templatePath);
         $form = Yaml::parse((string)file_get_contents($templatePath));
         $form['label'] = $mapName;
-        $form['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($mapName));
+        $form['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertMapNameToIdentifier($mapName));
         $form['prototypeName'] = $prototypeName;
 
         $formPersistenceIdentifier = $this->mapPersistenceManager->getUniquePersistenceIdentifier($form['identifier'], $savePath);
 
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeFormCreate'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeMapCreate'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
-            if (method_exists($hookObj, 'beforeFormCreate')) {
-                $form = $hookObj->beforeFormCreate(
+            if (method_exists($hookObj, 'beforeMapCreate')) {
+                $form = $hookObj->beforeMapCreate(
                     $formPersistenceIdentifier,
                     $form
                 );
@@ -170,7 +170,7 @@ class MapManagerController extends AbstractBackendController
 
         $response = [
             'status' => 'success',
-            'url' => $this->uriBuilder->uriFor('index', ['formPersistenceIdentifier' => $formPersistenceIdentifier], 'FormEditor'),
+            'url' => $this->uriBuilder->uriFor('index', ['formPersistenceIdentifier' => $formPersistenceIdentifier], 'MapEditor'),
         ];
 
         $form = ArrayUtility::stripTagsFromValuesRecursive($form);
@@ -204,7 +204,7 @@ class MapManagerController extends AbstractBackendController
     }
 
     /**
-     * Duplicates a given formDefinition and redirects to the Form Editor
+     * Duplicates a given formDefinition and redirects to the Map Editor
      *
      * @throws PersistenceManagerException
      */
@@ -219,14 +219,14 @@ class MapManagerController extends AbstractBackendController
 
         $formToDuplicate = $this->mapPersistenceManager->load($formPersistenceIdentifier);
         $formToDuplicate['label'] = $formName;
-        $formToDuplicate['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertFormNameToIdentifier($formName));
+        $formToDuplicate['identifier'] = $this->mapPersistenceManager->getUniqueIdentifier($this->convertMapNameToIdentifier($formName));
 
         $formPersistenceIdentifier = $this->mapPersistenceManager->getUniquePersistenceIdentifier($formToDuplicate['identifier'], $savePath);
 
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeFormDuplicate'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeMapDuplicate'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
-            if (method_exists($hookObj, 'beforeFormDuplicate')) {
-                $formToDuplicate = $hookObj->beforeFormDuplicate(
+            if (method_exists($hookObj, 'beforeMapDuplicate')) {
+                $formToDuplicate = $hookObj->beforeMapDuplicate(
                     $formPersistenceIdentifier,
                     $formToDuplicate
                 );
@@ -235,7 +235,7 @@ class MapManagerController extends AbstractBackendController
 
         $response = [
             'status' => 'success',
-            'url' => $this->uriBuilder->uriFor('index', ['formPersistenceIdentifier' => $formPersistenceIdentifier], 'FormEditor'),
+            'url' => $this->uriBuilder->uriFor('index', ['formPersistenceIdentifier' => $formPersistenceIdentifier], 'MapEditor'),
         ];
 
         $formToDuplicate = ArrayUtility::stripTagsFromValuesRecursive($formToDuplicate);
@@ -303,10 +303,10 @@ class MapManagerController extends AbstractBackendController
         }
 
         if (empty($this->databaseService->getReferencesByPersistenceIdentifier($formPersistenceIdentifier))) {
-            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeFormDelete'] ?? [] as $className) {
+            foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeMapDelete'] ?? [] as $className) {
                 $hookObj = GeneralUtility::makeInstance($className);
-                if (method_exists($hookObj, 'beforeFormDelete')) {
-                    $hookObj->beforeFormDelete(
+                if (method_exists($hookObj, 'beforeMapDelete')) {
+                    $hookObj->beforeMapDelete(
                         $formPersistenceIdentifier
                     );
                 }
@@ -337,11 +337,11 @@ class MapManagerController extends AbstractBackendController
      * are listed. This list will be reduced by the configured
      * mount points for the current backend user.
      */
-    protected function getAccessibleFormStorageFolders(): array
+    protected function getAccessibleMapStorageFolders(): array
     {
-        $preparedAccessibleFormStorageFolders = [];
-        foreach ($this->mapPersistenceManager->getAccessibleFormStorageFolders() as $identifier => $folder) {
-            $preparedAccessibleFormStorageFolders[] = [
+        $preparedAccessibleMapStorageFolders = [];
+        foreach ($this->mapPersistenceManager->getAccessibleMapStorageFolders() as $identifier => $folder) {
+            $preparedAccessibleMapStorageFolders[] = [
                 'label' => $folder->getStorage()->isPublic() ? $folder->getPublicUrl() : $identifier,
                 'value' => $identifier,
             ];
@@ -349,25 +349,25 @@ class MapManagerController extends AbstractBackendController
 
         if ($this->mapSettings['persistenceManager']['allowSaveToExtensionPaths']) {
             foreach ($this->mapPersistenceManager->getAccessibleExtensionFolders() as $relativePath => $fullPath) {
-                $preparedAccessibleFormStorageFolders[] = [
+                $preparedAccessibleMapStorageFolders[] = [
                     'label' => $relativePath,
                     'value' => $relativePath,
                 ];
             }
         }
 
-        return $preparedAccessibleFormStorageFolders;
+        return $preparedAccessibleMapStorageFolders;
     }
 
     /**
      * Returns the json encoded data which is used by the form editor
      * JavaScript app.
      */
-    protected function getFormManagerAppInitialData(): array
+    protected function getMapManagerAppInitialData(): array
     {
         $mapManagerAppInitialData = [
             'selectablePrototypesConfiguration' => $this->mapSettings['mapManager']['selectablePrototypesConfiguration'],
-            'accessibleFormStorageFolders' => $this->getAccessibleFormStorageFolders(),
+            'accessibleMapStorageFolders' => $this->getAccessibleMapStorageFolders(),
             'endpoints' => [
                 'create' => $this->uriBuilder->uriFor('create'),
                 'duplicate' => $this->uriBuilder->uriFor('duplicate'),
@@ -388,12 +388,12 @@ class MapManagerController extends AbstractBackendController
      * List all formDefinitions which can be loaded through t form persistence
      * manager. Enrich this data by a reference counter.
      */
-    protected function getAvailableFormDefinitions(): array
+    protected function getAvailableMapDefinitions(): array
     {
         $allReferencesForFileUid = $this->databaseService->getAllReferencesForFileUid();
         $allReferencesForPersistenceIdentifier = $this->databaseService->getAllReferencesForPersistenceIdentifier();
 
-        $availableFormDefinitions = [];
+        $availableMapDefinitions = [];
         foreach ($this->mapPersistenceManager->listMaps() as $formDefinition) {
             $referenceCount  = 0;
             if (
@@ -406,10 +406,10 @@ class MapManagerController extends AbstractBackendController
             }
 
             $formDefinition['referenceCount'] = $referenceCount;
-            $availableFormDefinitions[] = $formDefinition;
+            $availableMapDefinitions[] = $formDefinition;
         }
 
-        return $availableFormDefinitions;
+        return $availableMapDefinitions;
     }
 
     /**
@@ -459,7 +459,7 @@ class MapManagerController extends AbstractBackendController
      * and accessible.
      *
      * Valid template paths has to be configured within
-     * mapManager.selectablePrototypesConfiguration.[('identifier':  $prototypeName)].newFormTemplates.[('templatePath': $templatePath)]
+     * mapManager.selectablePrototypesConfiguration.[('identifier':  $prototypeName)].newMapTemplates.[('templatePath': $templatePath)]
      */
     protected function isValidTemplatePath(string $prototypeName, string $templatePath): bool
     {
@@ -468,7 +468,7 @@ class MapManagerController extends AbstractBackendController
             if ($prototypesConfiguration['identifier'] !== $prototypeName) {
                 continue;
             }
-            foreach ($prototypesConfiguration['newFormTemplates'] as $templatesConfiguration) {
+            foreach ($prototypesConfiguration['newMapTemplates'] as $templatesConfiguration) {
                 if ($templatesConfiguration['templatePath'] !== $templatePath) {
                     continue;
                 }
@@ -495,13 +495,13 @@ class MapManagerController extends AbstractBackendController
         $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
 
         // Create new
-        $addFormButton = $buttonBar->makeLinkButton()
-            ->setDataAttributes(['identifier' => 'newForm'])
+        $addMapButton = $buttonBar->makeLinkButton()
+            ->setDataAttributes(['identifier' => 'newMap'])
             ->setHref('#')
             ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapManager.create_new_form'))
             ->setShowLabelText(true)
             ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
-        $buttonBar->addButton($addFormButton, ButtonBar::BUTTON_POSITION_LEFT);
+        $buttonBar->addButton($addMapButton, ButtonBar::BUTTON_POSITION_LEFT);
 
         // Reload
         $reloadButton = $buttonBar->makeLinkButton()
@@ -522,7 +522,7 @@ class MapManagerController extends AbstractBackendController
     /**
      * Returns a form identifier which is the lower cased form name.
      */
-    protected function convertFormNameToIdentifier(string $formName): string
+    protected function convertMapNameToIdentifier(string $formName): string
     {
         $csConverter = GeneralUtility::makeInstance(CharsetConverter::class);
 

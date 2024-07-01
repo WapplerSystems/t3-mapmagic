@@ -20,7 +20,7 @@ namespace WapplerSystems\MapMagic\Mvc\Configuration;
 use WapplerSystems\MapMagic\Exception as MapException;
 
 /**
- * A generic Form configuration Exception
+ * A generic Map configuration Exception
  *
  * @internal
  */

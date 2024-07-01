@@ -29,7 +29,7 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\Exception\MissingArrayPathException;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use WapplerSystems\MapMagic\Domain\Model\MapElements\FormElementInterface;
+use WapplerSystems\MapMagic\Domain\Model\MapElements\MapElementInterface;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 
@@ -224,15 +224,15 @@ class TranslationService implements SingletonInterface
             $arguments = [];
         }
 
-        $originalFormIdentifier = null;
+        $originalMapIdentifier = null;
         if (isset($formRuntime->getRenderingOptions()['_originalIdentifier'])) {
-            $originalFormIdentifier = $formRuntime->getRenderingOptions()['_originalIdentifier'];
+            $originalMapIdentifier = $formRuntime->getRenderingOptions()['_originalIdentifier'];
         }
 
         $translationKeyChain = [];
         foreach ($translationFiles as $translationFile) {
-            if (!empty($originalFormIdentifier)) {
-                $translationKeyChain[] = sprintf('%s:%s.finisher.%s.%s', $translationFile, $originalFormIdentifier, $finisherIdentifier, $optionKey);
+            if (!empty($originalMapIdentifier)) {
+                $translationKeyChain[] = sprintf('%s:%s.finisher.%s.%s', $translationFile, $originalMapIdentifier, $finisherIdentifier, $optionKey);
             }
             $translationKeyChain[] = sprintf('%s:%s.finisher.%s.%s', $translationFile, $formRuntime->getIdentifier(), $finisherIdentifier, $optionKey);
             $translationKeyChain[] = sprintf('%s:finisher.%s.%s', $translationFile, $finisherIdentifier, $optionKey);
@@ -249,7 +249,7 @@ class TranslationService implements SingletonInterface
      * @throws \InvalidArgumentException
      * @internal
      */
-    public function translateFormElementValue(
+    public function translateMapElementValue(
         RootRenderableInterface $element,
         array $propertyParts,
         MapRuntime $formRuntime
@@ -265,7 +265,7 @@ class TranslationService implements SingletonInterface
         if ($property === 'label') {
             $defaultValue = $element->getLabel();
         } else {
-            if ($element instanceof FormElementInterface) {
+            if ($element instanceof MapElementInterface) {
                 try {
                     $defaultValue = ArrayUtility::getValueByPath($element->getProperties(), $propertyParts, '.');
                 } catch (MissingArrayPathException $exception) {
@@ -310,21 +310,21 @@ class TranslationService implements SingletonInterface
             $arguments = [];
         }
 
-        $originalFormIdentifier = null;
+        $originalMapIdentifier = null;
         if (isset($formRuntime->getRenderingOptions()['_originalIdentifier'])) {
-            $originalFormIdentifier = $formRuntime->getRenderingOptions()['_originalIdentifier'];
+            $originalMapIdentifier = $formRuntime->getRenderingOptions()['_originalIdentifier'];
         }
 
         if ($property === 'options' && is_array($defaultValue)) {
             foreach ($defaultValue as $optionValue => &$optionLabel) {
                 $translationKeyChain = [];
                 foreach ($translationFiles as $translationFile) {
-                    if (!empty($originalFormIdentifier)) {
+                    if (!empty($originalMapIdentifier)) {
                         if ($element instanceof MapRuntime) {
-                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $propertyType, $property, $optionValue);
-                            $translationKeyChain[] = sprintf('%s:element.%s.%s.%s.%s', $translationFile, $originalFormIdentifier, $propertyType, $property, $optionValue);
+                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s.%s', $translationFile, $originalMapIdentifier, $originalMapIdentifier, $propertyType, $property, $optionValue);
+                            $translationKeyChain[] = sprintf('%s:element.%s.%s.%s.%s', $translationFile, $originalMapIdentifier, $propertyType, $property, $optionValue);
                         } else {
-                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s.%s', $translationFile, $originalFormIdentifier, $element->getIdentifier(), $propertyType, $property, $optionValue);
+                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s.%s', $translationFile, $originalMapIdentifier, $element->getIdentifier(), $propertyType, $property, $optionValue);
                         }
                     }
                     $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s.%s', $translationFile, $formRuntime->getIdentifier(), $element->getIdentifier(), $propertyType, $property, $optionValue);
@@ -340,12 +340,12 @@ class TranslationService implements SingletonInterface
             foreach ($defaultValue as $propertyName => &$propertyValue) {
                 $translationKeyChain = [];
                 foreach ($translationFiles as $translationFile) {
-                    if (!empty($originalFormIdentifier)) {
+                    if (!empty($originalMapIdentifier)) {
                         if ($element instanceof MapRuntime) {
-                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $propertyType, $propertyName);
-                            $translationKeyChain[] = sprintf('%s:element.%s.%s.%s', $translationFile, $originalFormIdentifier, $propertyType, $propertyName);
+                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalMapIdentifier, $originalMapIdentifier, $propertyType, $propertyName);
+                            $translationKeyChain[] = sprintf('%s:element.%s.%s.%s', $translationFile, $originalMapIdentifier, $propertyType, $propertyName);
                         } else {
-                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalFormIdentifier, $element->getIdentifier(), $propertyType, $propertyName);
+                            $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalMapIdentifier, $element->getIdentifier(), $propertyType, $propertyName);
                         }
                     }
                     $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $formRuntime->getIdentifier(), $element->getIdentifier(), $propertyType, $propertyName);
@@ -360,12 +360,12 @@ class TranslationService implements SingletonInterface
         } else {
             $translationKeyChain = [];
             foreach ($translationFiles as $translationFile) {
-                if (!empty($originalFormIdentifier)) {
+                if (!empty($originalMapIdentifier)) {
                     if ($element instanceof MapRuntime) {
-                        $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $propertyType, $property);
-                        $translationKeyChain[] = sprintf('%s:element.%s.%s.%s', $translationFile, $originalFormIdentifier, $propertyType, $property);
+                        $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalMapIdentifier, $originalMapIdentifier, $propertyType, $property);
+                        $translationKeyChain[] = sprintf('%s:element.%s.%s.%s', $translationFile, $originalMapIdentifier, $propertyType, $property);
                     } else {
-                        $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalFormIdentifier, $element->getIdentifier(), $propertyType, $property);
+                        $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $originalMapIdentifier, $element->getIdentifier(), $propertyType, $property);
                     }
                 }
                 $translationKeyChain[] = sprintf('%s:%s.element.%s.%s.%s', $translationFile, $formRuntime->getIdentifier(), $element->getIdentifier(), $propertyType, $property);
@@ -384,7 +384,7 @@ class TranslationService implements SingletonInterface
      * @throws \InvalidArgumentException
      * @internal
      */
-    public function translateFormElementError(
+    public function translateMapElementError(
         RootRenderableInterface $element,
         int $code,
         array $arguments,
@@ -417,21 +417,21 @@ class TranslationService implements SingletonInterface
             $language = $renderingOptions['language'];
         }
 
-        $originalFormIdentifier = null;
+        $originalMapIdentifier = null;
         if (isset($formRuntime->getRenderingOptions()['_originalIdentifier'])) {
-            $originalFormIdentifier = $formRuntime->getRenderingOptions()['_originalIdentifier'];
+            $originalMapIdentifier = $formRuntime->getRenderingOptions()['_originalIdentifier'];
         }
 
         $translationKeyChain = [];
         foreach ($translationFiles as $translationFile) {
-            if (!empty($originalFormIdentifier)) {
+            if (!empty($originalMapIdentifier)) {
                 if ($element instanceof MapRuntime) {
-                    $translationKeyChain[] = sprintf('%s:%s.validation.error.%s.%s', $translationFile, $originalFormIdentifier, $originalFormIdentifier, $code);
-                    $translationKeyChain[] = sprintf('%s:validation.error.%s.%s', $translationFile, $originalFormIdentifier, $code);
+                    $translationKeyChain[] = sprintf('%s:%s.validation.error.%s.%s', $translationFile, $originalMapIdentifier, $originalMapIdentifier, $code);
+                    $translationKeyChain[] = sprintf('%s:validation.error.%s.%s', $translationFile, $originalMapIdentifier, $code);
                 } else {
-                    $translationKeyChain[] = sprintf('%s:%s.validation.error.%s.%s', $translationFile, $originalFormIdentifier, $element->getIdentifier(), $code);
+                    $translationKeyChain[] = sprintf('%s:%s.validation.error.%s.%s', $translationFile, $originalMapIdentifier, $element->getIdentifier(), $code);
                 }
-                $translationKeyChain[] = sprintf('%s:%s.validation.error.%s', $translationFile, $originalFormIdentifier, $code);
+                $translationKeyChain[] = sprintf('%s:%s.validation.error.%s', $translationFile, $originalMapIdentifier, $code);
             }
             $translationKeyChain[] = sprintf('%s:%s.validation.error.%s.%s', $translationFile, $formRuntime->getIdentifier(), $element->getIdentifier(), $code);
             $translationKeyChain[] = sprintf('%s:%s.validation.error.%s', $translationFile, $formRuntime->getIdentifier(), $code);

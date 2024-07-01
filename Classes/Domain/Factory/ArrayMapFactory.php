@@ -15,9 +15,6 @@ declare(strict_types=1);
  * The TYPO3 project - inspiring people to share!
  */
 
-/*
- * Inspired by and partially taken from the Neos.Form package (www.neos.io)
- */
 
 namespace WapplerSystems\MapMagic\Domain\Factory;
 

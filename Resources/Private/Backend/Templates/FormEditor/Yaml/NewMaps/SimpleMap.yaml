@@ -1,0 +1,64 @@
+identifier: ext-magicmap-simple-map-example
+label: 'Simple Map'
+type: MagicMap
+
+
+
+renderables:
+  -
+    identifier: page-1
+    label: 'Contact Map'
+    type: Page
+
+    renderables:
+      -
+        identifier: name
+        label: 'Name'
+        type: Text
+        properties:
+          fluidAdditionalAttributes:
+            placeholder: 'Name'
+        defaultValue: ''
+        validators:
+          -
+            identifier: NotEmpty
+      -
+        identifier: subject
+        label: 'Subject'
+        type: Text
+        properties:
+          fluidAdditionalAttributes:
+            placeholder: 'Subject'
+        defaultValue: ''
+        validators:
+          -
+            identifier: NotEmpty
+      -
+        identifier: email
+        label: 'Email'
+        type: Text
+        properties:
+          fluidAdditionalAttributes:
+            placeholder: 'Email address'
+        defaultValue: ''
+        validators:
+          -
+            identifier: NotEmpty
+          -
+            identifier: EmailAddress
+      -
+        identifier: message
+        label: 'Message'
+        type: Textarea
+        properties:
+          fluidAdditionalAttributes:
+            placeholder: ''
+        defaultValue: ''
+        validators:
+          -
+            identifier: NotEmpty
+
+  -
+    identifier: summarypage
+    label: 'Summary page'
+    type: SummaryPage

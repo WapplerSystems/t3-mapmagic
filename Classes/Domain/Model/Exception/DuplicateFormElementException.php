@@ -20,7 +20,7 @@ namespace WapplerSystems\MapMagic\Domain\Model\Exception;
 use WapplerSystems\MapMagic\Domain\Model\Exception;
 
 /**
- * This exception is thrown if two Form Elements with the same Identifier are added
+ * This exception is thrown if two Map Elements with the same Identifier are added
  * to a form.
  */
-class DuplicateFormElementException extends Exception {}
+class DuplicateMapElementException extends Exception {}

@@ -29,9 +29,9 @@ use WapplerSystems\MapMagic\Service\TranslationService;
 class MapElementHooks
 {
     /**
-     * This hook is invoked by the FormRuntime for each form element
+     * This hook is invoked by the MapRuntime for each form element
      * **after** a form page was submitted but **before** values are
-     * property-mapped, validated and pushed within the FormRuntime's `FormState`.
+     * property-mapped, validated and pushed within the MapRuntime's `MapState`.
      *
      * @param mixed $elementValue submitted value of the element *before post processing*
      * @param array $requestArguments submitted raw request values

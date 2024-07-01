@@ -220,8 +220,8 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
     public function registerInMapIfPossible()
     {
         try {
-            $rootForm = $this->getRootMap();
-            $rootForm->registerRenderable($this);
+            $rootMap = $this->getRootMap();
+            $rootMap->registerRenderable($this);
         } catch (MapDefinitionConsistencyException $exception) {
         }
     }
@@ -243,8 +243,8 @@ abstract class AbstractRenderable implements RenderableInterface, VariableRender
         }
 
         try {
-            $rootForm = $this->getRootMap();
-            $rootForm->unregisterRenderable($this);
+            $rootMap = $this->getRootMap();
+            $rootMap->unregisterRenderable($this);
         } catch (MapDefinitionConsistencyException $exception) {
         }
         $this->parentRenderable = null;

@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
-use WapplerSystems\MapMagic\Domain\Runtime\FormRuntime\Lifecycle\AfterMapStateInitializedInterface;
+use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime\Lifecycle\AfterMapStateInitializedInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 
 /**
@@ -35,10 +35,10 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
 
     /**
      * This hook is called for each form element after the class
-     * WapplerSystems\MapMagic\Domain\Factory\ArrayFormFactory has built the entire form.
+     * WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory has built the entire form.
      *
      * It is invoked after the static form definition is ready, but without knowing
-     * about the individual state organized in `FormRuntime` and `FormState`.
+     * about the individual state organized in `MapRuntime` and `MapState`.
      *
      * @param RenderableInterface $renderable
      * @internal
@@ -74,7 +74,7 @@ class PropertyMappingConfiguration implements AfterMapStateInitializedInterface
     /**
      * @param MapRuntime $formRuntime holding current form state and static form definition
      */
-    public function afterFormStateInitialized(MapRuntime $formRuntime): void
+    public function afterMapStateInitialized(MapRuntime $formRuntime): void
     {
         foreach ($formRuntime->getMapDefinition()->getRenderablesRecursively() as $renderable) {
 

@@ -22,9 +22,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessing;
 use WapplerSystems\MapMagic\Domain\Configuration\ArrayProcessing\ArrayProcessor;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
-use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\CreatableFormElementPropertiesValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\CreatableMapElementPropertiesValidator;
 use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\CreatablePropertyCollectionElementPropertiesValidator;
-use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\FormElementHmacDataValidator;
+use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\MapElementHmacDataValidator;
 use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\PropertyCollectionElementHmacDataValidator;
 use WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\ValidationDto;
 
@@ -137,28 +137,28 @@ class MapDefinitionValidationService implements SingletonInterface
      * @throws PropertyException
      */
     public function validateMapDefinitionProperties(
-        array $currentFormElement,
+        array $currentMapElement,
         string $prototypeName,
         string $sessionToken
     ): void {
-        $renderables = $currentFormElement['renderables'] ?? [];
-        $propertyCollectionElements = $currentFormElement['finishers'] ?? $currentFormElement['validators'] ?? [];
-        $propertyCollectionName = $currentFormElement['type'] === 'MapMagic' ? 'finishers' : 'validators';
-        unset($currentFormElement['renderables'], $currentFormElement['finishers'], $currentFormElement['validators']);
+        $renderables = $currentMapElement['renderables'] ?? [];
+        $propertyCollectionElements = $currentMapElement['finishers'] ?? $currentMapElement['validators'] ?? [];
+        $propertyCollectionName = $currentMapElement['type'] === 'MapMagic' ? 'finishers' : 'validators';
+        unset($currentMapElement['renderables'], $currentMapElement['finishers'], $currentMapElement['validators']);
 
         $validationDto = GeneralUtility::makeInstance(
             ValidationDto::class,
             $prototypeName,
-            $currentFormElement['type'],
-            $currentFormElement['identifier'],
+            $currentMapElement['type'],
+            $currentMapElement['identifier'],
             null,
             $propertyCollectionName
         );
 
         $configurationService = GeneralUtility::makeInstance(ConfigurationService::class);
-        if ($configurationService->isFormElementTypeCreatableByFormEditor($validationDto)) {
-            $this->validateAllPropertyValuesFromCreatableFormElement(
-                $currentFormElement,
+        if ($configurationService->isMapElementTypeCreatableByMapEditor($validationDto)) {
+            $this->validateAllPropertyValuesFromCreatableMapElement(
+                $currentMapElement,
                 $sessionToken,
                 $validationDto
             );
@@ -168,7 +168,7 @@ class MapDefinitionValidationService implements SingletonInterface
                     $propertyCollectionElement['identifier']
                 );
 
-                if ($configurationService->isPropertyCollectionElementIdentifierCreatableByFormEditor($validationDto)) {
+                if ($configurationService->isPropertyCollectionElementIdentifierCreatableByMapEditor($validationDto)) {
                     $this->validateAllPropertyValuesFromCreatablePropertyCollectionElement(
                         $propertyCollectionElement,
                         $sessionToken,
@@ -183,7 +183,7 @@ class MapDefinitionValidationService implements SingletonInterface
                 }
             }
         } else {
-            $this->validateAllFormElementPropertyValuesByHmac($currentFormElement, $sessionToken, $validationDto);
+            $this->validateAllMapElementPropertyValuesByHmac($currentMapElement, $sessionToken, $validationDto);
 
             foreach ($propertyCollectionElements as $propertyCollectionElement) {
                 $this->validateAllPropertyCollectionElementValuesByHmac(
@@ -255,7 +255,7 @@ class MapDefinitionValidationService implements SingletonInterface
      *
      * @param string $sessionToken
      */
-    protected function validateAllFormElementPropertyValuesByHmac(
+    protected function validateAllMapElementPropertyValuesByHmac(
         array $currentElement,
         $sessionToken,
         ValidationDto $validationDto
@@ -266,7 +266,7 @@ class MapDefinitionValidationService implements SingletonInterface
                 'validateProperties',
                 '^(?!(_orig_.*|.*\._orig_.*)$).*',
                 GeneralUtility::makeInstance(
-                    FormElementHmacDataValidator::class,
+                    MapElementHmacDataValidator::class,
                     $currentElement,
                     $sessionToken,
                     $validationDto
@@ -310,7 +310,7 @@ class MapDefinitionValidationService implements SingletonInterface
      *
      * @param string $sessionToken
      */
-    protected function validateAllPropertyValuesFromCreatableFormElement(
+    protected function validateAllPropertyValuesFromCreatableMapElement(
         array $currentElement,
         $sessionToken,
         ValidationDto $validationDto
@@ -321,7 +321,7 @@ class MapDefinitionValidationService implements SingletonInterface
                 'validateProperties',
                 '^(?!(_orig_.*|.*\._orig_.*|type|identifier)$).*',
                 GeneralUtility::makeInstance(
-                    CreatableFormElementPropertiesValidator::class,
+                    CreatableMapElementPropertiesValidator::class,
                     $currentElement,
                     $sessionToken,
                     $validationDto

@@ -28,11 +28,11 @@ use WapplerSystems\MapMagic\Domain\Configuration\Exception\PropertyException;
 use WapplerSystems\MapMagic\Domain\Configuration\Exception\PrototypeNotFoundException;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\AdditionalElementPropertyPathsExtractor;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\ExtractorDto;
-use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\IsCreatableFormElementExtractor;
-use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\MultiValuePropertiesExtractor;
-use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\PredefinedDefaultsExtractor;
-use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\PropertyPathsExtractor;
-use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\FormElement\SelectOptionsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\MapElement\IsCreatableMapElementExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\MapElement\MultiValuePropertiesExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\MapElement\PredefinedDefaultsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\MapElement\PropertyPathsExtractor;
+use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\MapElement\SelectOptionsExtractor;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\IsCreatablePropertyCollectionElementExtractor;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\MultiValuePropertiesExtractor as CollectionMultiValuePropertiesExtractor;
 use WapplerSystems\MapMagic\Domain\Configuration\FrameworkConfiguration\Extractors\PropertyCollectionElement\PredefinedDefaultsExtractor as CollectionPredefinedDefaultsExtractor;
@@ -87,7 +87,7 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function getSelectablePrototypeNamesDefinedInFormEditorSetup(): array
+    public function getSelectablePrototypeNamesDefinedInMapEditorSetup(): array
     {
         $returnValue = GeneralUtility::makeInstance(
             ArrayProcessor::class,
@@ -128,17 +128,17 @@ class ConfigurationService implements SingletonInterface
      * property paths by one of the above described inspector editor properties (e.g "propertyPath") within
      * the form setup, you must provide the writable property paths with a hook.
      *
-     * @see executeBuildFormDefinitionValidationConfigurationHooks()
+     * @see executeBuildMapDefinitionValidationConfigurationHooks()
      * @internal
      */
-    public function isFormElementPropertyDefinedInFormEditorSetup(ValidationDto $dto): bool
+    public function isMapElementPropertyDefinedInMapEditorSetup(ValidationDto $dto): bool
     {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
-        $subConfig = $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()] ?? [];
-        return $this->isPropertyDefinedInFormEditorSetup($dto->getPropertyPath(), $subConfig);
+        $subConfig = $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()] ?? [];
+        return $this->isPropertyDefinedInMapEditorSetup($dto->getPropertyPath(), $subConfig);
     }
 
     /**
@@ -161,17 +161,17 @@ class ConfigurationService implements SingletonInterface
      * property paths by one of the above described inspector editor properties (e.g "propertyPath") within
      * the form setup, you must provide the writable property paths with a hook.
      *
-     * @see executeBuildFormDefinitionValidationConfigurationHooks()
+     * @see executeBuildMapDefinitionValidationConfigurationHooks()
      * @internal
      */
-    public function isPropertyCollectionPropertyDefinedInFormEditorSetup(ValidationDto $dto): bool
+    public function isPropertyCollectionPropertyDefinedInMapEditorSetup(ValidationDto $dto): bool
     {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
-        $subConfig = $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()] ?? [];
+        $subConfig = $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()] ?? [];
 
-        return $this->isPropertyDefinedInFormEditorSetup($dto->getPropertyPath(), $subConfig);
+        return $this->isPropertyDefinedInMapEditorSetup($dto->getPropertyPath(), $subConfig);
     }
 
     /**
@@ -182,16 +182,16 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function mapElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup(
+    public function mapElementPropertyHasLimitedAllowedValuesDefinedWithinMapEditorSetup(
         ValidationDto $dto
     ): bool {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
-        $propertyPath = $this->getBasePropertyPathFromMultiValueFormElementProperty($dto);
+        $propertyPath = $this->getBasePropertyPathFromMultiValueMapElementProperty($dto);
         return isset(
-            $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['selectOptions'][$propertyPath]
+            $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()]['selectOptions'][$propertyPath]
         );
     }
 
@@ -201,28 +201,28 @@ class ConfigurationService implements SingletonInterface
      * @throws PropertyException
      * @internal
      */
-    public function getAllowedValuesForFormElementPropertyFromFormEditorSetup(
+    public function getAllowedValuesForMapElementPropertyFromMapEditorSetup(
         ValidationDto $dto,
         bool $translated = true
     ): array {
-        if (!$this->mapElementPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup($dto)) {
+        if (!$this->mapElementPropertyHasLimitedAllowedValuesDefinedWithinMapEditorSetup($dto)) {
             throw new PropertyException(
                 sprintf(
                     'No selectOptions found for form element type "%s" and property path "%s"',
-                    $dto->getFormElementType(),
+                    $dto->getMapElementType(),
                     $dto->getPropertyPath()
                 ),
                 1614264312
             );
         }
 
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
         $property = $translated ? 'selectOptions' : 'untranslatedSelectOptions';
-        $propertyPath = $this->getBasePropertyPathFromMultiValueFormElementProperty($dto);
-        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()][$property][$propertyPath];
+        $propertyPath = $this->getBasePropertyPathFromMultiValueMapElementProperty($dto);
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()][$property][$propertyPath];
     }
 
     /**
@@ -233,10 +233,10 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function propertyCollectionPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup(
+    public function propertyCollectionPropertyHasLimitedAllowedValuesDefinedWithinMapEditorSetup(
         ValidationDto $dto
     ): bool {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
@@ -252,11 +252,11 @@ class ConfigurationService implements SingletonInterface
      * @throws PropertyException
      * @internal
      */
-    public function getAllowedValuesForPropertyCollectionPropertyFromFormEditorSetup(
+    public function getAllowedValuesForPropertyCollectionPropertyFromMapEditorSetup(
         ValidationDto $dto,
         bool $translated = true
     ): array {
-        if (!$this->propertyCollectionPropertyHasLimitedAllowedValuesDefinedWithinFormEditorSetup($dto)) {
+        if (!$this->propertyCollectionPropertyHasLimitedAllowedValuesDefinedWithinMapEditorSetup($dto)) {
             throw new PropertyException(
                 sprintf(
                     'No selectOptions found for property collection "%s" and identifier "%s" and property path "%s"',
@@ -268,7 +268,7 @@ class ConfigurationService implements SingletonInterface
             );
         }
 
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
@@ -277,15 +277,15 @@ class ConfigurationService implements SingletonInterface
         return $formDefinitionValidationConfiguration['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()][$property][$propertyPath];
     }
 
-    protected function getBasePropertyPathFromMultiValueFormElementProperty(
+    protected function getBasePropertyPathFromMultiValueMapElementProperty(
         ValidationDto $dto
     ): string {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
         $propertyPath = $dto->getPropertyPath();
-        $multiValueProperties = $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['multiValueProperties'] ?? [];
+        $multiValueProperties = $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()]['multiValueProperties'] ?? [];
         foreach ($multiValueProperties as $multiValueProperty) {
             if (str_starts_with($propertyPath, $multiValueProperty)) {
                 $propertyPath = $multiValueProperty;
@@ -299,7 +299,7 @@ class ConfigurationService implements SingletonInterface
     protected function getBasePropertyPathFromMultiValuePropertyCollectionElement(
         ValidationDto $dto
     ): string {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
@@ -324,14 +324,14 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function isFormElementPropertyDefinedInPredefinedDefaultsInFormEditorSetup(
+    public function isMapElementPropertyDefinedInPredefinedDefaultsInMapEditorSetup(
         ValidationDto $dto
     ): bool {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
         return isset(
-            $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['predefinedDefaults'][$dto->getPropertyPath()]
+            $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()]['predefinedDefaults'][$dto->getPropertyPath()]
         );
     }
 
@@ -344,25 +344,25 @@ class ConfigurationService implements SingletonInterface
      * @throws PropertyException
      * @internal
      */
-    public function getFormElementPredefinedDefaultValueFromFormEditorSetup(ValidationDto $dto, bool $translated = true)
+    public function getMapElementPredefinedDefaultValueFromMapEditorSetup(ValidationDto $dto, bool $translated = true)
     {
-        if (!$this->isFormElementPropertyDefinedInPredefinedDefaultsInFormEditorSetup($dto)) {
+        if (!$this->isMapElementPropertyDefinedInPredefinedDefaultsInMapEditorSetup($dto)) {
             throw new PropertyException(
                 sprintf(
                     'No predefinedDefaults found for form element type "%s" and property path "%s"',
-                    $dto->getFormElementType(),
+                    $dto->getMapElementType(),
                     $dto->getPropertyPath()
                 ),
                 1528578401
             );
         }
 
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
         $property = $translated ? 'predefinedDefaults' : 'untranslatedPredefinedDefaults';
-        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()][$property][$dto->getPropertyPath()];
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()][$property][$dto->getPropertyPath()];
     }
 
     /**
@@ -374,10 +374,10 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function isPropertyCollectionPropertyDefinedInPredefinedDefaultsInFormEditorSetup(
+    public function isPropertyCollectionPropertyDefinedInPredefinedDefaultsInMapEditorSetup(
         ValidationDto $dto
     ): bool {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
         return isset(
@@ -394,9 +394,9 @@ class ConfigurationService implements SingletonInterface
      * @throws PropertyException
      * @internal
      */
-    public function getPropertyCollectionPredefinedDefaultValueFromFormEditorSetup(ValidationDto $dto, bool $translated = true)
+    public function getPropertyCollectionPredefinedDefaultValueFromMapEditorSetup(ValidationDto $dto, bool $translated = true)
     {
-        if (!$this->isPropertyCollectionPropertyDefinedInPredefinedDefaultsInFormEditorSetup($dto)) {
+        if (!$this->isPropertyCollectionPropertyDefinedInPredefinedDefaultsInMapEditorSetup($dto)) {
             throw new PropertyException(
                 sprintf(
                     'No predefinedDefaults found for property collection "%s" and identifier "%s" and property path "%s"',
@@ -408,7 +408,7 @@ class ConfigurationService implements SingletonInterface
             );
         }
 
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
 
@@ -426,15 +426,15 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function isFormElementTypeCreatableByFormEditor(ValidationDto $dto): bool
+    public function isMapElementTypeCreatableByMapEditor(ValidationDto $dto): bool
     {
-        if ($dto->getFormElementType() === 'MapMagic') {
+        if ($dto->getMapElementType() === 'MapMagic') {
             return true;
         }
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
-        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['creatable'] ?? false;
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()]['creatable'] ?? false;
     }
 
     /**
@@ -448,12 +448,12 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function isPropertyCollectionElementIdentifierCreatableByFormEditor(ValidationDto $dto): bool
+    public function isPropertyCollectionElementIdentifierCreatableByMapEditor(ValidationDto $dto): bool
     {
-        $formDefinitionValidationConfiguration = $this->buildFormDefinitionValidationConfigurationFromFormEditorSetup(
+        $formDefinitionValidationConfiguration = $this->buildMapDefinitionValidationConfigurationFromMapEditorSetup(
             $dto->getPrototypeName()
         );
-        return $formDefinitionValidationConfiguration['mapElements'][$dto->getFormElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()]['creatable'] ?? false;
+        return $formDefinitionValidationConfiguration['mapElements'][$dto->getMapElementType()]['collections'][$dto->getPropertyCollectionName()][$dto->getPropertyCollectionElementIdentifier()]['creatable'] ?? false;
     }
 
     /**
@@ -461,12 +461,12 @@ class ConfigurationService implements SingletonInterface
      *
      * @internal
      */
-    public function isFormElementTypeDefinedInFormSetup(ValidationDto $dto): bool
+    public function isMapElementTypeDefinedInMapSetup(ValidationDto $dto): bool
     {
         $prototypeConfiguration = $this->getPrototypeConfiguration($dto->getPrototypeName());
         return ArrayUtility::isValidPath(
             $prototypeConfiguration,
-            'mapElementsDefinition.' . $dto->getFormElementType(),
+            'mapElementsDefinition.' . $dto->getMapElementType(),
             '.'
         );
     }
@@ -503,9 +503,9 @@ class ConfigurationService implements SingletonInterface
      * Collect all the form editor configurations which are needed to check if a
      * form definition property can be written or not.
      */
-    protected function buildFormDefinitionValidationConfigurationFromFormEditorSetup(string $prototypeName): array
+    protected function buildMapDefinitionValidationConfigurationFromMapEditorSetup(string $prototypeName): array
     {
-        $cacheKey = implode('_', ['buildFormDefinitionValidationConfigurationFromFormEditorSetup', $prototypeName]);
+        $cacheKey = implode('_', ['buildMapDefinitionValidationConfigurationFromMapEditorSetup', $prototypeName]);
         $configuration = $this->getCacheEntry($cacheKey);
 
         if ($configuration === null) {
@@ -547,7 +547,7 @@ class ConfigurationService implements SingletonInterface
                     ArrayProcessing::class,
                     'mapElementCreatable',
                     '^mapElementsDefinition\.(.*)\.mapEditor.group$',
-                    GeneralUtility::makeInstance(IsCreatableFormElementExtractor::class, $extractorDto)
+                    GeneralUtility::makeInstance(IsCreatableMapElementExtractor::class, $extractorDto)
                 ),
                 GeneralUtility::makeInstance(
                     ArrayProcessing::class,
@@ -590,7 +590,7 @@ class ConfigurationService implements SingletonInterface
 
             $configuration = $this->translateValues($prototypeConfiguration, $configuration);
 
-            $configuration = $this->executeBuildFormDefinitionValidationConfigurationHooks(
+            $configuration = $this->executeBuildMapDefinitionValidationConfigurationHooks(
                 $prototypeName,
                 $configuration
             );
@@ -606,16 +606,16 @@ class ConfigurationService implements SingletonInterface
      * property paths by one of the described inspector editor properties (e.g "propertyPath") within
      * the form setup, you must provide the writable property paths with a hook.
      *
-     * @see isFormElementPropertyDefinedInFormEditorSetup()
-     * @see isPropertyCollectionPropertyDefinedInFormEditorSetup()
+     * @see isMapElementPropertyDefinedInMapEditorSetup()
+     * @see isPropertyCollectionPropertyDefinedInMapEditorSetup()
      * Connect to the hook:
-     * $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['buildFormDefinitionValidationConfiguration'][] = \Vendor\YourNamespace\YourClass::class;
+     * $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['buildMapDefinitionValidationConfiguration'][] = \Vendor\YourNamespace\YourClass::class;
      * Use the hook:
-     * public function addAdditionalPropertyPaths(\WapplerSystems\MapMagic\Domain\Configuration\FormDefinition\Validators\ValidationDto $validationDto): array
+     * public function addAdditionalPropertyPaths(\WapplerSystems\MapMagic\Domain\Configuration\MapDefinition\Validators\ValidationDto $validationDto): array
      * {
-     *     $textValidationDto = $validationDto->withFormElementType('Text');
+     *     $textValidationDto = $validationDto->withMapElementType('Text');
      *     $textValidatorsValidationDto = $textValidationDto->withPropertyCollectionName('validators');
-     *     $dateValidationDto = $validationDto->withFormElementType('Date');
+     *     $dateValidationDto = $validationDto->withMapElementType('Date');
      *     $propertyPaths = [
      *         $textValidationDto->withPropertyPath('properties.my.custom.property'),
      *         $textValidationDto->withPropertyPath('properties.my.other.custom.property'),
@@ -628,11 +628,11 @@ class ConfigurationService implements SingletonInterface
      * }
      * @throws PropertyException
      */
-    protected function executeBuildFormDefinitionValidationConfigurationHooks(
+    protected function executeBuildMapDefinitionValidationConfigurationHooks(
         string $prototypeName,
         array $configuration
     ): array {
-        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['buildFormDefinitionValidationConfiguration'] ?? [] as $className) {
+        foreach ($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['buildMapDefinitionValidationConfiguration'] ?? [] as $className) {
             $hookObj = GeneralUtility::makeInstance($className);
             if (method_exists($hookObj, 'addAdditionalPropertyPaths')) {
                 $validationDto = GeneralUtility::makeInstance(ValidationDto::class, $prototypeName);
@@ -686,9 +686,9 @@ class ConfigurationService implements SingletonInterface
                 );
             }
 
-            $mapElementType = $validationDto->getFormElementType();
-            if (!$this->isFormElementTypeDefinedInFormSetup($validationDto)) {
-                $message = 'Form element type "%s" does not exist in prototype configuration "%s"';
+            $mapElementType = $validationDto->getMapElementType();
+            if (!$this->isMapElementTypeDefinedInMapSetup($validationDto)) {
+                $message = 'Map element type "%s" does not exist in prototype configuration "%s"';
                 throw new PropertyException(
                     sprintf($message, $mapElementType, $validationDto->getPrototypeName()),
                     1528633967
@@ -719,7 +719,7 @@ class ConfigurationService implements SingletonInterface
         return $configuration;
     }
 
-    protected function isPropertyDefinedInFormEditorSetup(string $propertyPath, array $subConfig): bool
+    protected function isPropertyDefinedInMapEditorSetup(string $propertyPath, array $subConfig): bool
     {
         if (empty($subConfig)) {
             return false;

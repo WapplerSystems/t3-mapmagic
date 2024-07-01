@@ -43,7 +43,7 @@ use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
  *    {namespace mapmagicvh=WapplerSystems\MapMagic\ViewHelpers}
  *    <mapmagicvh:render factoryClass="NameOfYourCustomFactoryClass" />
  *
- * The factory class must implement :php:`WapplerSystems\MapMagic\Domain\Factory\FormFactoryInterface`.
+ * The factory class must implement :php:`WapplerSystems\MapMagic\Domain\Factory\MapFactoryInterface`.
  *
  * Scope: frontend
  */

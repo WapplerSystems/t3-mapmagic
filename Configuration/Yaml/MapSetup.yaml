@@ -42,12 +42,12 @@ prototypes:
           10: 'EXT:map_magic/Resources/Private/Backend/Layouts/MapEditor/'
 
       mapEditorPartials:
-        FormElement-_ElementToolbar: Stage/_ElementToolbar
-        FormElement-_UnknownElement: Stage/_UnknownElement
+        MapElement-_ElementToolbar: Stage/_ElementToolbar
+        MapElement-_UnknownElement: Stage/_UnknownElement
         Modal-InsertElements: Modals/InsertElements
         Modal-InsertPages: Modals/InsertPages
         Modal-ValidationErrors: Modals/ValidationErrors
-        Inspector-FormElementHeaderEditor: Inspector/FormElementHeaderEditor
+        Inspector-MapElementHeaderEditor: Inspector/MapElementHeaderEditor
         Inspector-CollectionElementHeaderEditor: Inspector/CollectionElementHeaderEditor
         Inspector-TextEditor: Inspector/TextEditor
         Inspector-PropertyGridEditor: Inspector/PropertyGridEditor
@@ -72,10 +72,10 @@ prototypes:
           errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.NaiveEmail.label
         NaiveEmailOrEmpty:
           errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.NaiveEmail.label
-        FormElementIdentifierWithinCurlyBracesInclusive:
-          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.FormElementIdentifierWithinCurlyBraces.label
-        FormElementIdentifierWithinCurlyBracesExclusive:
-          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.FormElementIdentifierWithinCurlyBraces.label
+        MapElementIdentifierWithinCurlyBracesInclusive:
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.MapElementIdentifierWithinCurlyBraces.label
+        MapElementIdentifierWithinCurlyBracesExclusive:
+          errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.MapElementIdentifierWithinCurlyBraces.label
         FileSize:
           errorMessage: mapEditor.mapElementPropertyValidatorsDefinition.FileSize.label
         RFC3339FullDate:
@@ -114,13 +114,13 @@ mapManager:
     100:
       identifier: standard
       label: mapManager.selectablePrototypesConfiguration.standard.label
-      newFormTemplates:
+      newMapTemplates:
         100:
-          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/MapEditor/Yaml/NewForms/BlankForm.yaml'
-          label: mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.blankForm.label
+          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/MapEditor/Yaml/NewMaps/BlankMap.yaml'
+          label: mapManager.selectablePrototypesConfiguration.standard.newMapTemplates.blankMap.label
         200:
-          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/MapEditor/Yaml/NewForms/SimpleContactForm.yaml'
-          label: mapManager.selectablePrototypesConfiguration.standard.newFormTemplates.simpleContactForm.label
+          templatePath: 'EXT:map_magic/Resources/Private/Backend/Templates/MapEditor/Yaml/NewMaps/SimpleContactMap.yaml'
+          label: mapManager.selectablePrototypesConfiguration.standard.newMapTemplates.simpleContactMap.label
   controller:
     deleteAction:
       errorTitle: mapManagerController.deleteAction.error.title

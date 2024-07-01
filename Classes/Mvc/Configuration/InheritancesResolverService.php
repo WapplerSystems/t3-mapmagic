@@ -33,20 +33,20 @@ use WapplerSystems\MapMagic\Mvc\Configuration\Exception\CycleInheritancesExcepti
  * e.g.
  * ---------------------
  *
- * Form:
+ * Map:
  *  part1:
  *    key1: value1
  *    key2: value2
  *    key3: value3
  *  part2:
  *    __inheritances:
- *      10: Form.part1
+ *      10: Map.part1
  *    key2: another_value
  *
  * will result in:
  * ---------------------
  *
- * Form:
+ * Map:
  *  part1:
  *    key1: value1
  *    key2: value2
@@ -155,7 +155,7 @@ class InheritancesResolverService
      * Return the completed configuration.
      *
      * @param array $configuration - a mapped YAML configuration (full or partial)
-     * @param array $pathStack - an identifier for YAML key as array (Form.part1.key => {Form, part1, key})
+     * @param array $pathStack - an identifier for YAML key as array (Map.part1.key => {Map, part1, key})
      * @param bool $setInheritancePathToCheck
      */
     protected function resolve(
@@ -351,7 +351,7 @@ class InheritancesResolverService
 
     protected function removeVendorNamespaceFromInheritancePath(string $inheritancePath): string
     {
-        return str_starts_with($inheritancePath, 'TYPO3.CMS.Form.')
+        return str_starts_with($inheritancePath, 'WapplerSystems.MagicMap.')
                ? substr($inheritancePath, 15)
                : $inheritancePath;
     }

@@ -37,7 +37,7 @@ final class TranslateElementPropertyViewHelper extends AbstractViewHelper
 
     public function initializeArguments(): void
     {
-        $this->registerArgument('element', RootRenderableInterface::class, 'Form Element to translate', true);
+        $this->registerArgument('element', RootRenderableInterface::class, 'Map Element to translate', true);
         $this->registerArgument('property', 'mixed', 'Property to translate', false);
         $this->registerArgument('renderingOptionProperty', 'mixed', 'Property to translate', false);
     }
@@ -73,7 +73,7 @@ final class TranslateElementPropertyViewHelper extends AbstractViewHelper
             ->getViewHelperVariableContainer()
             ->get(RenderRenderableViewHelper::class, 'formRuntime');
 
-        return GeneralUtility::makeInstance(TranslationService::class)->translateFormElementValue($element, $propertyParts, $formRuntime);
+        return GeneralUtility::makeInstance(TranslationService::class)->translateMapElementValue($element, $propertyParts, $formRuntime);
     }
 
     protected static function assertArgumentTypes(array $arguments)

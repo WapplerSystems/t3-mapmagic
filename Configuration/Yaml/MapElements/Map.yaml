@@ -8,46 +8,46 @@ prototypes:
           editors:
             100:
               identifier: header
-              templateName: Inspector-FormElementHeaderEditor
+              templateName: Inspector-MapElementHeaderEditor
             200:
               identifier: label
               templateName: Inspector-TextEditor
-              label: mapEditor.elements.BaseFormElementMixin.editor.label.label
+              label: mapEditor.elements.BaseMapElementMixin.editor.label.label
               propertyPath: label
             300:
               identifier: submitButtonLabel
               templateName: Inspector-TextEditor
-              label: mapEditor.elements.Form.editor.submitButtonLabel.label
+              label: mapEditor.elements.Map.editor.submitButtonLabel.label
               propertyPath: renderingOptions.submitButtonLabel
             900:
               identifier: finishers
               templateName: Inspector-FinishersEditor
-              label: mapEditor.elements.Form.editor.finishers.label
+              label: mapEditor.elements.Map.editor.finishers.label
               selectOptions:
                 10:
                   value: ''
-                  label: mapEditor.elements.Form.editor.finishers.EmptyValue.label
+                  label: mapEditor.elements.Map.editor.finishers.EmptyValue.label
                 20:
                   value: EmailToSender
-                  label: mapEditor.elements.Form.editor.finishers.EmailToSender.label
+                  label: mapEditor.elements.Map.editor.finishers.EmailToSender.label
                 30:
                   value: EmailToReceiver
-                  label: mapEditor.elements.Form.editor.finishers.EmailToReceiver.label
+                  label: mapEditor.elements.Map.editor.finishers.EmailToReceiver.label
                 40:
                   value: Redirect
-                  label: mapEditor.elements.Form.editor.finishers.Redirect.label
+                  label: mapEditor.elements.Map.editor.finishers.Redirect.label
                 50:
                   value: DeleteUploads
-                  label: mapEditor.elements.Form.editor.finishers.DeleteUploads.label
+                  label: mapEditor.elements.Map.editor.finishers.DeleteUploads.label
                 60:
                   value: Confirmation
-                  label: mapEditor.elements.Form.editor.finishers.Confirmation.label
-          _isCompositeFormElement: false
-          _isTopLevelFormElement: true
-          saveSuccessFlashMessageTitle: mapEditor.elements.Form.saveSuccessFlashMessageTitle
-          saveSuccessFlashMessageMessage: mapEditor.elements.Form.saveSuccessFlashMessageMessage
-          saveErrorFlashMessageTitle: mapEditor.elements.Form.saveErrorFlashMessageTitle
-          saveErrorFlashMessageMessage: mapEditor.elements.Form.saveErrorFlashMessageMessage
+                  label: mapEditor.elements.Map.editor.finishers.Confirmation.label
+          _isCompositeMapElement: false
+          _isTopLevelMapElement: true
+          saveSuccessFlashMessageTitle: mapEditor.elements.Map.saveSuccessFlashMessageTitle
+          saveSuccessFlashMessageMessage: mapEditor.elements.Map.saveSuccessFlashMessageMessage
+          saveErrorFlashMessageTitle: mapEditor.elements.Map.saveErrorFlashMessageTitle
+          saveErrorFlashMessageMessage: mapEditor.elements.Map.saveErrorFlashMessageMessage
           modalValidationErrorsDialogTitle: mapEditor.modals.validationErrors.dialogTitle
           modalValidationErrorsConfirmButton: mapEditor.modals.validationErrors.confirmButton
           modalInsertElementsDialogTitle: mapEditor.modals.insertElements.dialogTitle
@@ -62,7 +62,7 @@ prototypes:
           modalRemoveElementCancelButton: mapEditor.modals.removeElement.cancelButton
           modalRemoveElementLastAvailablePageFlashMessageTitle: mapEditor.modals.removeElement.lastAvailablePageFlashMessageTitle
           modalRemoveElementLastAvailablePageFlashMessageMessage: mapEditor.modals.removeElement.lastAvailablePageFlashMessageMessage
-          inspectorEditorFormElementSelectorNoElements: mapEditor.inspector.editor.formelement_selector.no_elements
+          inspectorEditorMapElementSelectorNoElements: mapEditor.inspector.editor.formelement_selector.no_elements
           paginationTitle: mapEditor.pagination.title
           iconIdentifier: content-map
           propertyCollections:
@@ -78,6 +78,6 @@ prototypes:
             10: 'EXT:map_magic/Resources/Private/Frontend/Partials/'
           layoutRootPaths:
             10: 'EXT:map_magic/Resources/Private/Frontend/Layouts/'
-          _isCompositeFormElement: false
-          _isTopLevelFormElement: true
+          _isCompositeMapElement: false
+          _isTopLevelMapElement: true
           skipUnknownElements: true

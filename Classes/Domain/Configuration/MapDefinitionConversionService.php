@@ -111,7 +111,7 @@ class MapDefinitionConversionService implements SingletonInterface
 
     protected function persistSessionToken(string $sessionToken)
     {
-        $this->getBackendUser()->setAndSaveSessionData('extFormProtectionSessionToken', $sessionToken);
+        $this->getBackendUser()->setAndSaveSessionData('extMapProtectionSessionToken', $sessionToken);
     }
 
     /**

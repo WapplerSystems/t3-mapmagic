@@ -37,7 +37,7 @@ class ProcessorDto
     /**
      * @var array
      */
-    protected $finisherDefinitionFromFormDefinition;
+    protected $finisherDefinitionFromMapDefinition;
 
     /**
      * @var array
@@ -47,11 +47,11 @@ class ProcessorDto
     public function __construct(
         string $finisherIdentifier,
         array $finisherDefinitionFromSetup,
-        array $finisherDefinitionFromFormDefinition
+        array $finisherDefinitionFromMapDefinition
     ) {
         $this->finisherIdentifier = $finisherIdentifier;
         $this->finisherDefinitionFromSetup = $finisherDefinitionFromSetup;
-        $this->finisherDefinitionFromFormDefinition = $finisherDefinitionFromFormDefinition;
+        $this->finisherDefinitionFromMapDefinition = $finisherDefinitionFromMapDefinition;
     }
 
     public function getFinisherIdentifier(): string
@@ -64,9 +64,9 @@ class ProcessorDto
         return $this->finisherDefinitionFromSetup;
     }
 
-    public function getFinisherDefinitionFromFormDefinition(): array
+    public function getFinisherDefinitionFromMapDefinition(): array
     {
-        return $this->finisherDefinitionFromFormDefinition;
+        return $this->finisherDefinitionFromMapDefinition;
     }
 
     public function getResult(): array

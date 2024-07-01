@@ -32,7 +32,7 @@ use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 /**
  * Render a renderable.
  *
- * Set the renderable into the \WapplerSystems\MapMagic\Mvc\View\FormView
+ * Set the renderable into the \WapplerSystems\MapMagic\Mvc\View\MapView
  * and return the rendered content.
  *
  * Scope: frontend

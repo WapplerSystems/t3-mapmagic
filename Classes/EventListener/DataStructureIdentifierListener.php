@@ -207,7 +207,7 @@ class DataStructureIdentifierListener
         $sheets = ['sheets' => []];
         foreach ($formDefinition['finishers'] as $formFinisherDefinition) {
             $finisherIdentifier = $formFinisherDefinition['identifier'];
-            if (!isset($finishersDefinition[$finisherIdentifier]['FormEngine']['elements'])) {
+            if (!isset($finishersDefinition[$finisherIdentifier]['MapEngine']['elements'])) {
                 continue;
             }
             $sheetIdentifier = $this->buildFlexformSheetIdentifier(
@@ -224,7 +224,7 @@ class DataStructureIdentifierListener
             );
 
             $prototypeFinisherDefinition = $finishersDefinition[$finisherIdentifier];
-            $finisherLabel = $prototypeFinisherDefinition['FormEngine']['label'] ?? '';
+            $finisherLabel = $prototypeFinisherDefinition['MapEngine']['label'] ?? '';
             $sheet = $this->initializeNewSheetArray($sheetIdentifier, $finisherLabel);
 
             $converterDto = GeneralUtility::makeInstance(
@@ -237,14 +237,14 @@ class DataStructureIdentifierListener
             // Remove all container elements "el" from sections beforehand.
             // These should not be matched by the regex below.
             // This greatly reduces headaches.
-            $elements = $prototypeFinisherDefinition['FormEngine']['elements'];
+            $elements = $prototypeFinisherDefinition['MapEngine']['elements'];
             foreach ($elements as $key => $element) {
                 if ($element['section'] ?? false) {
                     unset($elements[$key]['el']);
                 }
             }
 
-            // Iterate over all `prototypes.<prototypeName>.finishersDefinition.<finisherIdentifier>.FormEngine.elements` values
+            // Iterate over all `prototypes.<prototypeName>.finishersDefinition.<finisherIdentifier>.MapEngine.elements` values
             // and convert them to FlexForm elements
             GeneralUtility::makeInstance(ArrayProcessor::class, $elements)->forEach(
                 GeneralUtility::makeInstance(
@@ -344,14 +344,14 @@ class DataStructureIdentifierListener
         array $finishersDefinition,
         array $prototypeConfiguration
     ): array {
-        if (isset($finishersDefinition[$finisherIdentifier]['FormEngine']['translationFiles'])) {
-            $translationFiles = $finishersDefinition[$finisherIdentifier]['FormEngine']['translationFiles'];
+        if (isset($finishersDefinition[$finisherIdentifier]['MapEngine']['translationFiles'])) {
+            $translationFiles = $finishersDefinition[$finisherIdentifier]['MapEngine']['translationFiles'];
         } else {
             $translationFiles = $prototypeConfiguration['mapEngine']['translationFiles'];
         }
 
-        $finishersDefinition[$finisherIdentifier]['FormEngine'] = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
-            $finishersDefinition[$finisherIdentifier]['FormEngine'],
+        $finishersDefinition[$finisherIdentifier]['MapEngine'] = GeneralUtility::makeInstance(TranslationService::class)->translateValuesRecursive(
+            $finishersDefinition[$finisherIdentifier]['MapEngine'],
             $translationFiles
         );
 
