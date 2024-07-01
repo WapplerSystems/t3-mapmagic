@@ -1,6 +1,6 @@
 <?php
 
-$EM_CONF['map_magic'] = [
+$EM_CONF[$_EXTKEY] = [
     'title' => 'Map Magic',
     'description' => 'TYPO3 Map Magic - Flexible TYPO3 map framework.',
     'category' => 'misc',
