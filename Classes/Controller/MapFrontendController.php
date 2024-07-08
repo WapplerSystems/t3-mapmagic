@@ -61,7 +61,7 @@ class MapFrontendController extends ActionController
             $formDefinition = ArrayUtility::setValueByPath($formDefinition, 'renderingOptions._originalIdentifier', $formDefinition['identifier'], '.');
             $formDefinition['identifier'] .= '_' . ($this->request->getAttribute('currentContentObject')?->data['uid'] ?? '');
         }
-        $this->view->assign('formConfiguration', $formDefinition);
+        $this->view->assign('mapConfiguration', $formDefinition);
 
         return $this->htmlResponse();
     }

@@ -30,3 +30,11 @@ lib.tx_mapmagic.contentElementRendering {
     source.current = 1
     dontCheckPid = 1
 }
+
+lib.tx_mapmagic.javascript = TWIGTEMPLATE
+lib.tx_mapmagic.javascript {
+    templateName = MapElements/Map.twig
+    templateRootPaths {
+        10 = EXT:map_magic/Resources/Private/Frontend/JavaScriptTemplates/
+    }
+}

@@ -1,0 +1,10 @@
+
+
+let {{ data.map.identifier }} = L.map('{{ data.map.identifier }}').setView([51.505, -0.09], 13);
+
+{% for layer in data.map.layers %}
+
+     {% include 'MapElements/' ~ layer.type~ '.twig' with {'layer': layer, 'map': data.map} %}
+
+{% endfor %}
+

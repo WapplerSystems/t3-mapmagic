@@ -81,6 +81,7 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     protected ResponseInterface $response;
     protected array $layers = [];
 
+
     /**
      * The current site language configuration.
      *
@@ -420,6 +421,11 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
             $s .= $layer->getJavaScript();
         }
         return $s;
+    }
+
+    public function getLayers(): array
+    {
+        return $this->layers;
     }
 
 }

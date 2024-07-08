@@ -22,12 +22,19 @@
             additionalAttributes="{mapmagicvh:translateElementProperty(element: map, property: 'fluidAdditionalAttributes')}"
     >
 
-        <f:debug>{_all}</f:debug>
+        <f:asset.script identifier="map-{map.identifier}">
+            <f:cObject typoscriptObjectPath="lib.tx_mapmagic.javascript" data="{map:map}" />
+        </f:asset.script>
 
 
-        <f:asset.script identifier="map-{map.identifier}">{map.javaScript}</f:asset.script>
+        <f:comment>
+            <f:asset.script identifier="map-{map.identifier}">{map.javaScript}</f:asset.script>
+        </f:comment>
 
 
     </mapmagicvh:map>
+
+    <f:cObject typoscriptObjectPath="lib.tx_mapmagic.javascript" data="{map:map}" />
+
 </mapmagicvh:renderRenderable>
 </html>

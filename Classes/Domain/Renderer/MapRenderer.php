@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain\Renderer;
 
+use Cvc\Typo3\CvcTwig\ContentObject\TwigTemplateContentObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
@@ -137,6 +138,7 @@ class MapRenderer extends AbstractElementRenderer
         $mapElementType = $this->mapRuntime->getType();
         $renderingOptions = $this->mapRuntime->getRenderingOptions();
 
+
         $view = GeneralUtility::makeInstance(TemplateView::class);
         $view->getRenderingContext()->setRequest($this->getMapRuntime()->getRequest());
 
@@ -160,6 +162,7 @@ class MapRenderer extends AbstractElementRenderer
         }
 
         $view->assign('map', $this->mapRuntime);
+        $view->assign('data',$this->getMapRuntime()->getRequest()->getAttribute('currentContentObject')?->data);
 
         $view->getRenderingContext()
             ->getViewHelperVariableContainer()

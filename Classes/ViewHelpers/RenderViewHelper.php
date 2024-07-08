@@ -66,13 +66,13 @@ final class RenderViewHelper extends AbstractViewHelper
         $overrideConfiguration = $arguments['overrideConfiguration'];
 
         if (!empty($persistenceIdentifier)) {
-            $formPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
-            $formConfiguration = $formPersistenceManager->load($persistenceIdentifier);
+            $mapPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
+            $mapConfiguration = $mapPersistenceManager->load($persistenceIdentifier);
             ArrayUtility::mergeRecursiveWithOverrule(
-                $formConfiguration,
+                $mapConfiguration,
                 $overrideConfiguration
             );
-            $overrideConfiguration = $formConfiguration;
+            $overrideConfiguration = $mapConfiguration;
             $overrideConfiguration['persistenceIdentifier'] = $persistenceIdentifier;
         }
 
