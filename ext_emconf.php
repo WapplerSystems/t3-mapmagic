@@ -13,6 +13,7 @@ $EM_CONF[$_EXTKEY] = [
         'depends' => [
             'typo3' => '12.4.17',
             'frontend' => '12.4.17',
+            'cvc_twig' => '3.0.0'
         ],
         'conflicts' => [],
         'suggests' => [
