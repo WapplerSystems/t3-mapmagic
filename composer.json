@@ -1,6 +1,6 @@
 {
 	"name": "wapplersystems/mapmagic",
-	"type": "typo3-cms-framework",
+	"type": "typo3-cms-extension",
 	"description": "TYPO3 Map Magic - Flexible TYPO3 map framework.",
 	"homepage": "https://wappler.systems",
 	"license": ["GPL-2.0-or-later"],
