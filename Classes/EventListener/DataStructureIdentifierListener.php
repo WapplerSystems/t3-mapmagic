@@ -42,7 +42,7 @@ class DataStructureIdentifierListener
 {
     /**
      * The data structure depends on a current form selection (persistenceIdentifier)
-     * and if the field "overrideFinishers" is active. Add both to the identifier to
+     * and if the field "overrideSettings" is active. Add both to the identifier to
      * hand these information over to parseDataStructureByIdentifierPostProcess() hook.
      */
     public function modifyDataStructureIdentifier(AfterFlexFormDataStructureIdentifierInitializedEvent $event): void
@@ -69,12 +69,12 @@ class DataStructureIdentifierListener
         }
 
         // Add bool - finisher override active or not
-        $identifier['ext-mapmagic-overrideFinishers'] = '';
+        $identifier['ext-mapmagic-overrideSettings'] = '';
         if (
-            isset($currentFlexData['data']['sDEF']['lDEF']['settings.overrideFinishers']['vDEF'])
-            && (int)$currentFlexData['data']['sDEF']['lDEF']['settings.overrideFinishers']['vDEF'] === 1
+            isset($currentFlexData['data']['sDEF']['lDEF']['settings.overrideSettings']['vDEF'])
+            && (int)$currentFlexData['data']['sDEF']['lDEF']['settings.overrideSettings']['vDEF'] === 1
         ) {
-            $identifier['ext-mapmagic-overrideFinishers'] = 'enabled';
+            $identifier['ext-mapmagic-overrideSettings'] = 'enabled';
         }
 
         $event->setIdentifier($identifier);
@@ -134,8 +134,8 @@ class DataStructureIdentifierListener
                 $formDefinition = $mapPersistenceManager->load($persistenceIdentifier);
 
                 $translationFile = 'LLL:EXT:map_magic/Resources/Private/Language/Database.xlf';
-                $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideFinishers'] = [
-                    'label' => $translationFile . ':tt_content.pi_flexform.mapmagic.overrideFinishers',
+                $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideSettings'] = [
+                    'label' => $translationFile . ':tt_content.pi_flexform.mapmagic.overrideSettings',
                     'onChange' => 'reload',
                     'config' => [
                         'type' => 'check',
@@ -150,9 +150,9 @@ class DataStructureIdentifierListener
 
                 if (empty($newSheets)) {
                     ArrayUtility::mergeRecursiveWithOverrule(
-                        $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideFinishers'],
+                        $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.overrideSettings'],
                         [
-                            'description' => $translationFile . ':tt_content.pi_flexform.mapmagic.overrideFinishers.empty',
+                            'description' => $translationFile . ':tt_content.pi_flexform.mapmagic.overrideSettings.empty',
                             'config' => [
                                 'readOnly' => true,
                             ],
@@ -160,7 +160,7 @@ class DataStructureIdentifierListener
                     );
                 }
 
-                if ($identifier['ext-mapmagic-overrideFinishers'] === 'enabled') {
+                if ($identifier['ext-mapmagic-overrideSettings'] === 'enabled') {
                     ArrayUtility::mergeRecursiveWithOverrule(
                         $dataStructure,
                         $newSheets

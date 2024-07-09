@@ -218,7 +218,10 @@ class MapDefinition extends AbstractCompositeRenderable
     protected $renderables = [];
 
 
-    protected $dataSources = [];
+    protected array $dataSources = [];
+
+
+    protected array $properties = [];
 
     /**
      * Property Mapping Rules, indexed by element identifier
@@ -344,10 +347,16 @@ class MapDefinition extends AbstractCompositeRenderable
                 $this->setRenderingOption($key, $value);
             }
         }
+        if (isset($options['properties'])) {
+            foreach ($options['properties'] as $key => $value) {
+                $this->setProperty($key, $value);
+            }
+        }
+        DebugUtility::debug($options);
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,
-            ['rendererClassName', 'renderingOptions', 'layers', 'mapEditor', 'label', 'dataSources', 'controls', 'styles', 'plugins']
+            ['rendererClassName', 'properties', 'renderingOptions', 'layers', 'mapEditor', 'label', 'dataSources', 'controls', 'styles', 'plugins']
         );
     }
 
@@ -391,6 +400,9 @@ class MapDefinition extends AbstractCompositeRenderable
         );
 
         $this->addLayer($layer);
+
+        $layer->initializeMapElement();
+
         return $layer;
     }
 
@@ -666,4 +678,17 @@ class MapDefinition extends AbstractCompositeRenderable
     {
         return $this->rendererClassName;
     }
+
+    private function setProperty(int|string $key, mixed $value)
+    {
+        $this->properties[$key] = $value;
+    }
+
+    public function getProperties(): array
+    {
+        return $this->properties;
+    }
+
+
+
 }

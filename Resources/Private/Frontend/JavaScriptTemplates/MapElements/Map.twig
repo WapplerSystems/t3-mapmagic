@@ -1,6 +1,10 @@
 
 
-let {{ data.map.identifier }} = L.map('{{ data.map.identifier }}').setView([51.505, -0.09], 13);
+let {{ data.map.identifier }} = L.map('{{ data.map.identifier }}');
+
+{% if data.map.properties.view.lat or data.map.properties.view.lng %}
+     {{ data.map.identifier }}.setView([{{ data.map.properties.view.lat }}, {{ data.map.properties.view.lng }}], {{ data.map.properties.view.zoom }});
+{% endif %}
 
 {% for layer in data.map.layers %}
 

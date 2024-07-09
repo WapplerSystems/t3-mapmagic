@@ -3,11 +3,9 @@ prototypes:
     mapElementsDefinition:
       PolygonLayer:
         mapEditor:
-
-        #rendererClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\Layer
         properties:
         implementationClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\PolygonLayer
 
     formEditor:
       formEditorPartials:
-        MapElement-OSMLayer: Stage/SimpleTemplate
+        MapElement-PolygonLayer: Stage/SimpleTemplate

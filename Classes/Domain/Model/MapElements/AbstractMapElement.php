@@ -123,9 +123,4 @@ abstract class AbstractMapElement extends AbstractRenderable implements MapEleme
         return $this->properties;
     }
 
-
-    public function getJavaScript(): string
-    {
-        return '';
-    }
 }

@@ -1,0 +1,8 @@
+
+
+const addresses = {{ layer.properties.addresses|json_encode|raw }};
+
+addresses.forEach((address) => {
+    const marker = L.marker([address.lat, address.lng]).addTo({{ map.identifier }});
+});
+

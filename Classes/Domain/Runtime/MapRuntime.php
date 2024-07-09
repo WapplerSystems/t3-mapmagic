@@ -230,6 +230,13 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
         return $this->mapDefinition->getType();
     }
 
+
+    public function getProperties(): array
+    {
+        return $this->mapDefinition->getProperties();
+    }
+
+
     /**
      * @param string $identifier
      * @internal
@@ -414,14 +421,6 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
         return true;
     }
 
-    public function getJavaScript(): string
-    {
-        $s = 'let '.$this->getIdentifier().' = L.map(\'' . $this->getIdentifier() . '\').setView([51.505, -0.09], 13);';
-        foreach ($this->layers as $layer) {
-            $s .= $layer->getJavaScript();
-        }
-        return $s;
-    }
 
     public function getLayers(): array
     {

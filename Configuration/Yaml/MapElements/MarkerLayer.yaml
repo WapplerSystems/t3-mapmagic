@@ -9,4 +9,4 @@ prototypes:
 
     formEditor:
       formEditorPartials:
-        MapElement-OSMLayer: Stage/SimpleTemplate
+        MapElement-MarkerLayer: Stage/SimpleTemplate

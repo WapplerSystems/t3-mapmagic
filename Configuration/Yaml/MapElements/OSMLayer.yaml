@@ -3,8 +3,6 @@ prototypes:
     mapElementsDefinition:
       OSMLayer:
         mapEditor:
-
-        #rendererClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\Layer
         properties:
         implementationClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\OSMLayer
 

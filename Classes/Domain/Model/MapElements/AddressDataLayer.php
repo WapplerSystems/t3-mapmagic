@@ -2,17 +2,38 @@
 
 namespace WapplerSystems\MapMagic\Domain\Model\MapElements;
 
+use TYPO3\CMS\Core\Utility\DebugUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use WapplerSystems\Address\Domain\Repository\AddressRepository;
+
 class AddressDataLayer extends Layer {
 
 
 
-    public function getJavaScript(): string
+
+    public function initializeMapElement()
     {
 
-        return 'const '.$this->getUniqueIdentifier().' = L.tileLayer(\'https://tile.openstreetmap.org/{z}/{x}/{y}.png\', {
-		maxZoom: 19
-	    }).addTo('.$this->getRootMap()->getIdentifier().');';
+        $addressRepository = GeneralUtility::makeInstance(AddressRepository::class);
+
+        $addresses = $addressRepository->findAll();
+        //DebugUtility::debug($addresses);
+
+        $addressesOutput = [];
+
+        foreach ($addresses as $address) {
+            $addressesOutput[] = [
+                'address' => $address->getAddress() . ', ' . $address->getZip() . ' ' . $address->getCity(),
+                'lat' => $address->getLatitude(),
+                'lng' => $address->getLongitude()
+            ];
+        }
+
+        $this->properties['addresses'] = $addressesOutput;
+
+        parent::initializeMapElement();
     }
+
 
 
 

@@ -3,11 +3,8 @@ prototypes:
     mapElementsDefinition:
       AddressDataLayer:
         mapEditor:
-
-        #rendererClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\Layer
-        properties:
         implementationClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\AddressDataLayer
 
     formEditor:
       formEditorPartials:
-        MapElement-OSMLayer: Stage/SimpleTemplate
+        MapElement-AddressDataLayer: Stage/SimpleTemplate

@@ -3,11 +3,9 @@ prototypes:
     mapElementsDefinition:
       CircleLayer:
         mapEditor:
-
-        #rendererClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\Layer
         properties:
         implementationClassName: WapplerSystems\MapMagic\Domain\Model\MapElements\CircleLayer
 
     formEditor:
       formEditorPartials:
-        MapElement-OSMLayer: Stage/SimpleTemplate
+        MapElement-CircleLayer: Stage/SimpleTemplate

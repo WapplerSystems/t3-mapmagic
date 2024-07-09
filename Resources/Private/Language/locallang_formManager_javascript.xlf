@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file source-language="en" datatype="plaintext" original="EXT:map_magic/Resources/Private/Language/locallang_mapManager_javascript.xlf" date="2016-10-09T03:38:32Z" product-name="form">
+    <file source-language="en" datatype="plaintext" original="EXT:map_magic/Resources/Private/Language/locallang_mapManager_javascript.xlf" date="2016-10-09T03:38:32Z" product-name="map_magic">
         <header/>
         <body>
-            <trans-unit id="mapManager.form_name" resname="mapManager.form_name" xml:space="preserve">
+            <trans-unit id="mapManager.map_name" resname="mapManager.map_name" xml:space="preserve">
                 <source>Name</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_name_description" resname="mapManager.form_name_description" xml:space="preserve">
-                <source>Enter a meaningful and descriptive name for the form. The name is displayed only in the TYPO3 backend.</source>
+            <trans-unit id="mapManager.map_name_description" resname="mapManager.map_name_description" xml:space="preserve">
+                <source>Enter a meaningful and descriptive name for the map. The name is displayed only in the TYPO3 backend.</source>
             </trans-unit>
-            <trans-unit id="mapManager.new_form_name" resname="mapManager.new_form_name" xml:space="preserve">
-                <source>New form name</source>
+            <trans-unit id="mapManager.new_map_name" resname="mapManager.new_map_name" xml:space="preserve">
+                <source>New map name</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_save_path" resname="mapManager.form_save_path" xml:space="preserve">
+            <trans-unit id="mapManager.map_save_path" resname="mapManager.map_save_path" xml:space="preserve">
                 <source>Storage</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_save_path_description" resname="mapManager.form_save_path_description" xml:space="preserve">
-                <source>Select the storage where you want to save your form definition.</source>
+            <trans-unit id="mapManager.map_save_path_description" resname="mapManager.map_save_path_description" xml:space="preserve">
+                <source>Select the storage where you want to save your map definition.</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_prototype" resname="mapManager.form_prototype" xml:space="preserve">
+            <trans-unit id="mapManager.map_prototype" resname="mapManager.map_prototype" xml:space="preserve">
                 <source>Map prototype</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_template" resname="mapManager.form_template" xml:space="preserve">
+            <trans-unit id="mapManager.map_template" resname="mapManager.map_template" xml:space="preserve">
                 <source>Template</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_template_description" resname="mapManager.form_template_description" xml:space="preserve">
-                <source>Select a template on which you want to build your new form.</source>
+            <trans-unit id="mapManager.map_template_description" resname="mapManager.map_template_description" xml:space="preserve">
+                <source>Select a template on which you want to build your new map.</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_headline_general" resname="mapManager.form_headline_general" xml:space="preserve">
+            <trans-unit id="mapManager.map_headline_general" resname="mapManager.map_headline_general" xml:space="preserve">
                 <source>General</source>
             </trans-unit>
-            <trans-unit id="mapManager.form_copied" xml:space="preserve">
-                <source>Copied form</source>
+            <trans-unit id="mapManager.map_copied" xml:space="preserve">
+                <source>Copied map</source>
             </trans-unit>
             <trans-unit id="mapManager.cancel" resname="mapManager.cancel" xml:space="preserve">
                 <source>Cancel</source>
             </trans-unit>
-            <trans-unit id="mapManager.remove_form" resname="mapManager.remove_form" xml:space="preserve">
+            <trans-unit id="mapManager.remove_map" resname="mapManager.remove_map" xml:space="preserve">
                 <source>Remove</source>
             </trans-unit>
-            <trans-unit id="mapManager.remove_form_title" resname="mapManager.remove_form_title" xml:space="preserve">
-                <source>Remove form</source>
+            <trans-unit id="mapManager.remove_map_title" resname="mapManager.remove_map_title" xml:space="preserve">
+                <source>Remove map</source>
             </trans-unit>
-            <trans-unit id="mapManager.remove_form_message" resname="mapManager.remove_form_message" xml:space="preserve">
-                <source>Are you sure that you want to remove this form?</source>
+            <trans-unit id="mapManager.remove_map_message" resname="mapManager.remove_map_message" xml:space="preserve">
+                <source>Are you sure that you want to remove this map?</source>
             </trans-unit>
             <trans-unit id="mapManager.newMapWizard.step1.title" resname="mapManager.newMapWizard.step1.title" xml:space="preserve">
-                <source>Create new form</source>
+                <source>Create new map</source>
             </trans-unit>
             <trans-unit id="mapManager.newMapWizard.step1.progressLabel" resname="mapManager.newMapWizard.step1.progressLabel" xml:space="preserve">
                 <source>Choose</source>
             </trans-unit>
             <trans-unit id="mapManager.newMapWizard.step1.noStorages" resname="mapManager.newMapWizard.step1.noStorages" xml:space="preserve">
-                <source>No accessible form storage folders</source>
+                <source>No accessible map storage folders</source>
             </trans-unit>
             <trans-unit id="mapManager.newMapWizard.step2.title" resname="mapManager.newMapWizard.step2.title" xml:space="preserve">
                 <source>Settings</source>
@@ -73,10 +73,10 @@
                 <source>Create</source>
             </trans-unit>
             <trans-unit id="mapManager.newMapWizard.step4.errorMessage" resname="mapManager.newMapWizard.step4.errorMessage" xml:space="preserve">
-                <source>The form could not be saved</source>
+                <source>The map could not be saved</source>
             </trans-unit>
             <trans-unit id="mapManager.duplicateMapWizard.step1.title" resname="mapManager.duplicateMapWizard.step1.title" xml:space="preserve">
-                <source>Duplicate form "{0}"</source>
+                <source>Duplicate map "{0}"</source>
             </trans-unit>
             <trans-unit id="mapManager.duplicateMapWizard.step2.title" resname="mapManager.duplicateMapWizard.step2.title" xml:space="preserve">
                 <source>Ready?</source>
@@ -94,7 +94,7 @@
                 <source>Duplicate</source>
             </trans-unit>
             <trans-unit id="mapManager.duplicateMapWizard.step3.errorMessage" resname="mapManager.duplicateMapWizard.step3.errorMessage" xml:space="preserve">
-                <source>The form could not be saved</source>
+                <source>The map could not be saved</source>
             </trans-unit>
             <trans-unit id="mapManager.no_references" resname="mapManager.no_references" xml:space="preserve">
                 <source>There are no references yet</source>
@@ -112,22 +112,22 @@
                 <source>References for "{0}"</source>
             </trans-unit>
             <trans-unit id="mapManager.blankMap.label" resname="mapManager.blankMap.label" xml:space="preserve">
-                <source>Blank form</source>
+                <source>Blank map</source>
             </trans-unit>
             <trans-unit id="mapManager.blankMap.subtitle" resname="mapManager.blankMap.subtitle" xml:space="preserve">
                 <source>Start fresh</source>
             </trans-unit>
             <trans-unit id="mapManager.blankMap.description" resname="mapManager.blankMap.description" xml:space="preserve">
-                <source>Create a new form from scratch.</source>
+                <source>Create a new map from scratch.</source>
             </trans-unit>
             <trans-unit id="mapManager.predefinedMap.label" resname="mapManager.predefinedMap.label" xml:space="preserve">
-                <source>Predefined form</source>
+                <source>Predefined map</source>
             </trans-unit>
             <trans-unit id="mapManager.predefinedMap.subtitle" resname="mapManager.predefinedMap.subtitle" xml:space="preserve">
-                <source>Use a form template</source>
+                <source>Use a map template</source>
             </trans-unit>
             <trans-unit id="mapManager.predefinedMap.description" resname="mapManager.predefinedMap.description" xml:space="preserve">
-                <source>Create a new form and use an existing form template for it.</source>
+                <source>Create a new map and use an existing map template for it.</source>
             </trans-unit>
         </body>
     </file>
