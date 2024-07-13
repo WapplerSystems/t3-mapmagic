@@ -1,0 +1,3 @@
+[submodule "Resources/Public/Lib/MapMagicJs"]
+	path = Resources/Public/Lib/MapMagicJs
+	url = git@github.com:WapplerSystems/t3-mapmagic-js.git
