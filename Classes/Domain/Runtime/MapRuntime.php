@@ -435,10 +435,9 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
             'id' => $this->mapDefinition->getIdentifier(),
             'layers' => [],
 
-            'defaults' => [
-                'center' => [$properties['view']['lat'], $properties['view']['lng']],
-                'zoom' => $properties['view']['zoom'],
-            ]
+            'initialCenter' => [(float)$properties['view']['lat'], (float)$properties['view']['lng']],
+            'initialZoom' => (int)$properties['view']['zoom'],
+
         ];
 
         foreach ($this->layers as $layer) {
