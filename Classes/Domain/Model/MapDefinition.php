@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace WapplerSystems\MapMagic\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -352,7 +351,6 @@ class MapDefinition extends AbstractCompositeRenderable
                 $this->setProperty($key, $value);
             }
         }
-        DebugUtility::debug($options);
 
         ArrayUtility::assertAllArrayKeysAreValid(
             $options,

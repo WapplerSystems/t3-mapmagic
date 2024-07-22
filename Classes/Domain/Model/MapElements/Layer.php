@@ -56,5 +56,10 @@ class Layer extends AbstractMapElement
         parent::setParentRenderable($parentRenderable);
     }
 
+    public function getPublicConfiguration(): array
+    {
+        return [];
+    }
+
 
 }

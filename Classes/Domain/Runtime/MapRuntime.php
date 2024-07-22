@@ -21,7 +21,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
-use TYPO3\CMS\Extbase\Validation\ValidatorResolver;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -91,10 +90,11 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
 
 
     public function __construct(
-        protected readonly ContainerInterface $container,
+        protected readonly ContainerInterface            $container,
         protected readonly ConfigurationManagerInterface $configurationManager,
-        protected readonly HashService $hashService,
-    ) {
+        protected readonly HashService                   $hashService,
+    )
+    {
         $this->response = new Response();
     }
 
@@ -425,6 +425,28 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     public function getLayers(): array
     {
         return $this->layers;
+    }
+
+    public function getPublicConfiguration(): array
+    {
+        $properties = $this->getProperties();
+
+        $config = [
+            'id' => $this->mapDefinition->getIdentifier(),
+            'layers' => [],
+
+            'defaults' => [
+                'center' => [$properties['view']['lat'], $properties['view']['lng']],
+                'zoom' => $properties['view']['zoom'],
+            ]
+        ];
+
+        foreach ($this->layers as $layer) {
+            $config['layers'][] = $layer->getPublicConfiguration();
+        }
+
+        return $config;
+
     }
 
 }

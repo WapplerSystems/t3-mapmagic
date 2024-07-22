@@ -4,37 +4,24 @@
 
     <f:asset.script identifier="mapmagic-constants">
         const MM_ImagePath = '/_assets/d27febd9f0cfe747a82ec66dd0625559/Images/';
-    </f:asset.script>
 
-    <f:asset.css identifier="leaflet" href="EXT:map_magic/Resources/Public/Css/leaflet.css" />
-    <f:asset.script identifier="leaflet" src="EXT:map_magic/Resources/Public/JavaScript/frontend/leaflet.js" />
-
-    <f:asset.script identifier="mapmagic_leaflet_setup">
         L.Icon.Default.imagePath = MM_ImagePath;
     </f:asset.script>
 
-    <mapmagicvh:map
-            object="{map}"
-            id="{map.identifier}"
-            style="height: 400px;"
-            section="{map.identifier}"
-            additionalParams="{map.renderingOptions.additionalParams}"
-            additionalAttributes="{mapmagicvh:translateElementProperty(element: map, property: 'fluidAdditionalAttributes')}"
-    >
+    <f:asset.css identifier="leaflet" href="EXT:map_magic/Resources/Public/Css/leaflet.css" />
+    <f:asset.css identifier="mapmagic" href="EXT:map_magic/Resources/Public/Css/t3mapmagic.css" />
+    <f:asset.script identifier="leaflet" src="EXT:map_magic/Resources/Public/JavaScript/frontend/leaflet.js" />
+    <f:asset.script identifier="mapmagic" src="EXT:map_magic/Resources/Public/JavaScript/frontend/t3mapmagic.js" />
 
-        <f:asset.script identifier="map-{map.identifier}">
-            <f:cObject typoscriptObjectPath="lib.tx_mapmagic.javascript" data="{map:map}" />
-        </f:asset.script>
-
-
-        <f:comment>
-            <f:asset.script identifier="map-{map.identifier}">{map.javaScript}</f:asset.script>
-        </f:comment>
+    <div id="{map.mapDefinition.identifier}" style="height: 500px"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        T3MapMagic.install("#{map.mapDefinition.identifier}", {map.publicConfiguration -> f:format.json() -> f:format.raw()});
+      });
+    </script>
 
 
-    </mapmagicvh:map>
-
-    <f:cObject typoscriptObjectPath="lib.tx_mapmagic.javascript" data="{map:map}" />
+    {map.publicConfiguration -> f:debug()}
 
 </mapmagicvh:renderRenderable>
 </html>

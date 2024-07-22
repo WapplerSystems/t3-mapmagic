@@ -68,13 +68,6 @@ class UnknownMapElement extends AbstractRenderable implements MapElementInterfac
         return lcfirst($uniqueIdentifier);
     }
 
-    /**
-     * Get the template name of the renderable
-     */
-    public function getTemplateName(): string
-    {
-        return 'UnknownElement';
-    }
 
     /**
      * Not used in this implementation
