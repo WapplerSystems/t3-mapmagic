@@ -484,6 +484,8 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       switch (def.type) {
         case "background":
           return new MagicMapLayerBackground(def);
+        case "shapes":
+          return new MagicMapLayerShapes(def);
         case "markers":
           return new MagicMapLayerMarkers(def);
         default:
@@ -522,6 +524,25 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       const url = this.datasource.getUrlToXYZ();
       const layer = L.tileLayer(url);
       layer.addTo(mmap.map);
+      this._leafletLayer = layer;
+    }
+  }
+  class MagicMapLayerShapes extends MagicMapLayer {
+    constructor(_def) {
+      super(_def);
+      __publicField(this, "datasource");
+      this._def = _def;
+      this.datasource = MagicMapDatasourceGeojson.fromDefinition(
+        _def.datasource
+      );
+    }
+    async setupLayer(mmap) {
+      await this.datasource.setup(mmap);
+      if (this.datasource._loadError) {
+        throw this.datasource._loadError;
+      }
+      const geojsonData = this.datasource.getLoadedData();
+      const layer = L.geoJSON(geojsonData, {});
       this._leafletLayer = layer;
     }
   }
@@ -649,6 +670,8 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
           layer.layer,
           layer._def.label ?? layer._def.id
         );
+        layer.layer.addTo(this.map);
+      } else if (layer instanceof MagicMapLayerShapes) {
         layer.layer.addTo(this.map);
       } else {
         throw new Error(`Unknown layer type: ${layer}`);
@@ -7173,6 +7196,7 @@ ${end.comment}` : end.comment;
   exports2.MagicMapLayer = MagicMapLayer;
   exports2.MagicMapLayerBackground = MagicMapLayerBackground;
   exports2.MagicMapLayerMarkers = MagicMapLayerMarkers;
+  exports2.MagicMapLayerShapes = MagicMapLayerShapes;
   exports2.MapMagicDefLoader = loader;
   exports2.defineMagicMap = defineMagicMap;
   exports2.install = install;

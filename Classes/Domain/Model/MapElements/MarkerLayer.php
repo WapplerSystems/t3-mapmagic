@@ -12,6 +12,11 @@ class MarkerLayer extends Layer {
     {
         $uri = GeneralUtility::locationHeaderUrl(PathUtility::getPublicResourceWebPath('EXT:map_magic/Resources/Public/Images/marker-icon.png'));
 
+        $latlng = json_decode($this->properties['latlng'],true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $latlng = [];
+        }
+
         $geojson = [
             'type' => 'FeatureCollection',
             'features' => [
@@ -20,8 +25,7 @@ class MarkerLayer extends Layer {
                     'geometry' => [
                         'type' => 'Point',
                         'coordinates' => [
-                            $this->properties['lng'],
-                            $this->properties['lat']
+                            $latlng
                         ]
                     ],
                 ]
