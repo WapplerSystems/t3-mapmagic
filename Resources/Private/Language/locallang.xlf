@@ -113,7 +113,7 @@
                 <source>A map.</source>
             </trans-unit>
 
-            <trans-unit id="mapmagic.configuration.module.provider" resname="form.configuration.module.provider" xml:space="preserve">
+            <trans-unit id="mapmagic.configuration.module.provider" resname="mapmagic.configuration.module.provider" xml:space="preserve">
                 <source>Map Magic: YAML Configuration</source>
             </trans-unit>
         </body>
