@@ -2563,10 +2563,26 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       onHide
     };
   }
+  let toggleCounter = 0;
+  function makeCollapsible(container, body, label) {
+    const button = L$1.DomUtil.create("button", "mapmagic-toggle", container);
+    button.type = "button";
+    button.textContent = label;
+    body.id = `mapmagic-toggle-${++toggleCounter}`;
+    button.setAttribute("aria-controls", body.id);
+    button.setAttribute("aria-expanded", "false");
+    container.append(body);
+    L$1.DomEvent.on(button, "click", () => {
+      const open = !container.classList.contains("is-open");
+      container.classList.toggle("is-open", open);
+      button.setAttribute("aria-expanded", String(open));
+    });
+  }
   class LegendControl extends L$1.Control {
     constructor(messages) {
       super({ position: "bottomright" });
       __publicField(this, "container");
+      __publicField(this, "body");
       __publicField(this, "sections", /* @__PURE__ */ new Map());
       this.messages = messages;
     }
@@ -2576,6 +2592,8 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       this.container.setAttribute("aria-label", this.messages.legend);
       L$1.DomEvent.disableClickPropagation(this.container);
       L$1.DomEvent.disableScrollPropagation(this.container);
+      this.body = L$1.DomUtil.create("div", "mapmagic-legend__body");
+      makeCollapsible(this.container, this.body, this.messages.legend);
       this.render();
       return this.container;
     }
@@ -2588,9 +2606,9 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       this.render();
     }
     render() {
-      if (!this.container) return;
+      if (!this.container || !this.body) return;
       this.container.hidden = this.sections.size === 0;
-      this.container.innerHTML = [...this.sections.values()].map(
+      this.body.innerHTML = [...this.sections.values()].map(
         ({ title, rows }) => `<div class="mapmagic-legend__section"><div class="mapmagic-legend__title">${escapeHtml(title)}</div><ul>` + rows.map(
           (row) => `<li><span class="mapmagic-legend__swatch" aria-hidden="true">${row.swatchHtml}</span>${escapeHtml(row.label)}</li>`
         ).join("") + "</ul></div>"
@@ -2598,11 +2616,14 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     }
   }
   class SlotControl extends L$1.Control {
-    constructor(className, position) {
+    constructor(className, position, toggleLabel) {
       super({ position });
       __publicField(this, "container");
+      __publicField(this, "body");
       __publicField(this, "slots", /* @__PURE__ */ new Map());
       this.container = L$1.DomUtil.create("div", className);
+      this.body = L$1.DomUtil.create("div", `${className}__body`);
+      makeCollapsible(this.container, this.body, toggleLabel);
       L$1.DomEvent.disableClickPropagation(this.container);
       L$1.DomEvent.disableScrollPropagation(this.container);
     }
@@ -2612,7 +2633,7 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     slot(id) {
       let element = this.slots.get(id);
       if (!element) {
-        element = L$1.DomUtil.create("div", "mapmagic-filter leaflet-bar", this.container);
+        element = L$1.DomUtil.create("div", "mapmagic-filter leaflet-bar", this.body);
         element.dataset.layer = id;
         this.slots.set(id, element);
       }
@@ -2871,6 +2892,7 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     fullscreen: "Vollbild",
     fullscreenExit: "Vollbild beenden",
     legend: "Legende",
+    filter: "Filter",
     filterAll: "Alle",
     filterNone: "Keine",
     elevationLength: "Länge",
@@ -3123,6 +3145,7 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
   const GEO_DECIMALS = 6;
   const FALLBACK_CENTER = [51.16, 10.45];
   const FALLBACK_ZOOM = 6;
+  const COMPACT_WIDTH = 560;
   async function createMap(root, input, options = {}) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     const result = validateMapDef(input);
@@ -3156,13 +3179,18 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     });
     map.attributionControl.setPrefix(false);
     const cleanups = [];
+    const compactObserver = new ResizeObserver(([entry]) => {
+      root.classList.toggle("mapmagic--compact", ((entry == null ? void 0 : entry.contentRect.width) ?? Infinity) < COMPACT_WIDTH);
+    });
+    compactObserver.observe(root);
+    cleanups.push(() => compactObserver.disconnect());
     if (scrollMode === "ctrl") {
       cleanups.push(installCtrlScroll(map, messages));
     }
     const toLatLng = image ? (p) => L$1.latLng(imageToLatLng([p[0], p[1]], image.height)) : (p) => L$1.latLng(p[1], p[0]);
     const legend = new LegendControl(messages);
     if (((_f = def.controls) == null ? void 0 : _f.legend) ?? true) legend.addTo(map);
-    const filters = new SlotControl("mapmagic-filters", "topright");
+    const filters = new SlotControl("mapmagic-filters", "topright", messages.filter);
     filters.addTo(map);
     if (((_g = def.controls) == null ? void 0 : _g.scale) && !image) L$1.control.scale({ imperial: false }).addTo(map);
     if ((_h = def.controls) == null ? void 0 : _h.fullscreen) new FullscreenControl(root, messages).addTo(map);

@@ -23,6 +23,10 @@
                 <source>Legend</source>
                 <target>Legende</target>
             </trans-unit>
+            <trans-unit id="frontend.filter" resname="frontend.filter">
+                <source>Filter</source>
+                <target>Filter</target>
+            </trans-unit>
             <trans-unit id="frontend.filterAll" resname="frontend.filterAll">
                 <source>All</source>
                 <target>Alle</target>

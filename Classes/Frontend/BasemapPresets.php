@@ -57,7 +57,8 @@ final class BasemapPresets
     public function all(): array
     {
         $custom = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['map_magic']['basemapPresets'] ?? [];
-        return array_replace(self::DEFAULTS, is_array($custom) ? $custom : []);
+        // Recursive, so a site can change a single field (e.g. only the url of "osm").
+        return array_replace_recursive(self::DEFAULTS, is_array($custom) ? $custom : []);
     }
 
     /**

@@ -22,7 +22,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 final class RendererMessages
 {
     private const KEYS = [
-        'scrollHint', 'scrollHintMac', 'fullscreen', 'fullscreenExit', 'legend', 'filterAll', 'filterNone',
+        'scrollHint', 'scrollHintMac', 'fullscreen', 'fullscreenExit', 'legend', 'filter', 'filterAll', 'filterNone',
         'elevationLength', 'elevationAscent', 'elevationDescent', 'elevationAxis', 'layerError',
     ];
 
