@@ -6,7 +6,6 @@ services:
 
   WapplerSystems\MapMagic\:
     resource: '../Classes/*'
-    exclude: '../Classes/{Domain/Model}'
 
   WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManagerInterface:
     alias: WapplerSystems\MapMagic\Mvc\Configuration\ConfigurationManager
@@ -17,30 +16,6 @@ services:
 
   WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface:
     alias: WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManager
-    public: true
-
-  WapplerSystems\MapMagic\Service\TranslationService:
-    public: true
-    arguments:
-      $runtimeCache: '@cache.runtime'
-
-  WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory:
-    public: true
-    shared: false
-
-  WapplerSystems\MapMagic\Domain\Renderer\MapRenderer:
-    public: true
-    shared: false
-
-  WapplerSystems\MapMagic\Domain\Runtime\MapRuntime:
-    public: true
-    shared: false
-
-  WapplerSystems\MapMagic\Mvc\ProcessingRule:
-    public: true
-    shared: false
-
-  WapplerSystems\MapMagic\Mvc\Property\PropertyMappingConfiguration:
     public: true
 
   WapplerSystems\MapMagic\Slot\ResourcePublicationSlot:
@@ -89,9 +64,3 @@ services:
       - name: softreference.parser
         parserKey: mapmagicPersistenceIdentifier
 
-  WapplerSystems\MapMagic\Mvc\Property\TypeConverter\MapDefinitionArrayConverter:
-    tags:
-      - name: extbase.type_converter
-        priority: 10
-        target: WapplerSystems\MapMagic\Type\MapDefinitionArray
-        sources: string

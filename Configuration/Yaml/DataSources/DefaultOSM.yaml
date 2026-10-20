@@ -1,9 +1,0 @@
-prototypes:
-  standard:
-    dataSources:
-      DefaultOSM:
-        label: 'Default OpenStreetMap'
-        type: OSMDataSource
-        properties:
-          url: 'http://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
-

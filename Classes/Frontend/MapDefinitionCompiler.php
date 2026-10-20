@@ -52,6 +52,19 @@ final readonly class MapDefinitionCompiler
      */
     public function compile(array $definition, string $id, ServerRequestInterface $request): array
     {
+        return $this->compileWithReport($definition, $id, $request)['map'];
+    }
+
+    /**
+     * Same as compile(), plus the reasons why layers were dropped, for the
+     * editor preview.
+     *
+     * @param array<string, mixed> $definition
+     * @return array{map: array<string, mixed>, warnings: list<array{layer: string, message: string}>}
+     */
+    public function compileWithReport(array $definition, string $id, ServerRequestInterface $request): array
+    {
+        $warnings = [];
         $map = array_diff_key($definition, array_flip(self::FILE_KEYS));
         $map['version'] = self::SCHEMA_VERSION;
         $map['id'] = $id;
@@ -70,6 +83,7 @@ final readonly class MapDefinitionCompiler
                 $layer['source'] = $this->sourceResolver->resolve((array)($layer['source'] ?? []), $request);
                 $layers[] = $layer;
             } catch (\Throwable $e) {
+                $warnings[] = ['layer' => (string)($layer['id'] ?? '?'), 'message' => $e->getMessage()];
                 $this->logger->warning('Map "{map}": layer "{layer}" dropped: {message}', [
                     'map' => $definition['identifier'] ?? $id,
                     'layer' => $layer['id'] ?? '?',
@@ -79,7 +93,7 @@ final readonly class MapDefinitionCompiler
         }
         $map['layers'] = $layers;
 
-        return $map;
+        return ['map' => $map, 'warnings' => $warnings];
     }
 
     /**

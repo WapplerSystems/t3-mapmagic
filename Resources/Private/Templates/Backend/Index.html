@@ -1,0 +1,111 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <f:variable name="ll" value="LLL:EXT:map_magic/Resources/Private/Language/locallang_editor.xlf:" />
+    <h1><f:translate key="LLL:EXT:map_magic/Resources/Private/Language/module.xlf:title" /></h1>
+
+    <f:if condition="{maps}">
+        <f:then>
+            <div class="table-fit">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th><f:translate key="{ll}list.name" /></th>
+                            <th><f:translate key="{ll}list.file" /></th>
+                            <th><f:translate key="{ll}list.usage" /></th>
+                            <th class="col-control"><span class="visually-hidden"><f:translate key="{ll}list.actions" /></span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <f:for each="{maps}" as="map">
+                            <tr>
+                                <td>
+                                    <f:if condition="{map.invalid}">
+                                        <f:then>
+                                            <core:icon identifier="overlay-missing" /> {map.name}
+                                        </f:then>
+                                        <f:else>
+                                            <a href="{map.editUrl}">{map.name}</a>
+                                            <f:if condition="{map.readOnly}">
+                                                <span class="badge badge-info"><f:translate key="{ll}list.readOnly" /></span>
+                                            </f:if>
+                                        </f:else>
+                                    </f:if>
+                                </td>
+                                <td><code>{map.persistenceIdentifier}</code></td>
+                                <td>{map.references}</td>
+                                <td class="col-control">
+                                    <div class="btn-group">
+                                        <f:if condition="!{map.invalid}">
+                                            <a class="btn btn-default" href="{map.editUrl}" title="{f:translate(key: '{ll}list.edit')}">
+                                                <core:icon identifier="{f:if(condition: map.editable, then: 'actions-open', else: 'actions-eye')}" />
+                                            </a>
+                                        </f:if>
+                                        <f:if condition="{folders} && !{map.invalid}">
+                                            <button type="button" class="btn btn-default" title="{f:translate(key: '{ll}list.duplicate')}"
+                                                data-mapmagic-action="duplicate"
+                                                data-persistence-identifier="{map.persistenceIdentifier}"
+                                                data-name="{map.name}">
+                                                <core:icon identifier="actions-duplicate" />
+                                            </button>
+                                        </f:if>
+                                        <f:if condition="{map.removable}">
+                                            <button type="button" class="btn btn-default" title="{f:translate(key: '{ll}list.delete')}"
+                                                data-mapmagic-action="delete"
+                                                data-persistence-identifier="{map.persistenceIdentifier}"
+                                                data-name="{map.name}"
+                                                data-references="{map.references}">
+                                                <core:icon identifier="actions-delete" />
+                                            </button>
+                                        </f:if>
+                                    </div>
+                                </td>
+                            </tr>
+                        </f:for>
+                    </tbody>
+                </table>
+            </div>
+        </f:then>
+        <f:else>
+            <f:be.infobox title="{f:translate(key: '{ll}list.empty.title')}" state="-1">
+                <f:translate key="{ll}list.empty.message" />
+            </f:be.infobox>
+        </f:else>
+    </f:if>
+
+    <f:if condition="!{folders}">
+        <f:be.infobox title="{f:translate(key: '{ll}list.noFolder.title')}" state="1">
+            <f:translate key="{ll}list.noFolder.message" />
+        </f:be.infobox>
+    </f:if>
+
+    <f:comment>Form for "new map" and "duplicate", shown in a modal by map-list.js.</f:comment>
+    <template id="mapmagic-create-form">
+        <form class="mapmagic-create-form">
+            <div class="form-group mb-3">
+                <label class="form-label" for="mapmagic-create-label"><f:translate key="{ll}create.name" /></label>
+                <input type="text" class="form-control" id="mapmagic-create-label" name="label" required maxlength="100">
+            </div>
+            <div class="form-group mb-3" data-mapmagic-templates>
+                <label class="form-label" for="mapmagic-create-template"><f:translate key="{ll}create.template" /></label>
+                <select class="form-select" id="mapmagic-create-template" name="template">
+                    <f:for each="{templates}" as="template">
+                        <option value="{template}"><f:translate key="{ll}template.{template}" /></option>
+                    </f:for>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label class="form-label" for="mapmagic-create-folder"><f:translate key="{ll}create.folder" /></label>
+                <select class="form-select" id="mapmagic-create-folder" name="folder">
+                    <f:for each="{folders}" as="label" key="identifier">
+                        <option value="{identifier}">{label}</option>
+                    </f:for>
+                </select>
+            </div>
+        </form>
+    </template>
+</f:section>
+</html>

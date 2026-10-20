@@ -1,0 +1,116 @@
+/* MapMagic backend editor. Colors come from the backend theme (Bootstrap variables). */
+
+/* Layout follows the module's width, not the window's (page tree, sidebar). */
+mapmagic-editor {
+  display: block;
+  container-type: inline-size;
+}
+
+.mapmagic-editor__columns {
+  display: grid;
+  grid-template-columns: minmax(12rem, 16rem) minmax(0, 1fr) minmax(16rem, 22rem);
+  grid-template-areas: "structure preview inspector";
+  gap: 1rem;
+  /* Fill the module below the docheader; the preview is the working surface. */
+  height: calc(100vh - 11rem);
+  min-height: 32rem;
+}
+
+.mapmagic-editor__columns--yaml {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "yaml preview";
+}
+
+.mapmagic-editor__structure { grid-area: structure; }
+.mapmagic-editor__inspector { grid-area: inspector; }
+.mapmagic-editor__preview { grid-area: preview; }
+.mapmagic-editor__yaml { grid-area: yaml; }
+
+/* Medium widths: structure above inspector, so the preview keeps its width. */
+@container (max-width: 1300px) {
+  .mapmagic-editor__columns:not(.mapmagic-editor__columns--yaml) {
+    grid-template-columns: minmax(17rem, 22rem) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "structure preview"
+      "inspector preview";
+  }
+}
+
+.mapmagic-editor__structure,
+.mapmagic-editor__inspector,
+.mapmagic-editor__yaml {
+  overflow: auto;
+  min-height: 0;
+}
+
+.mapmagic-editor__preview {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.mapmagic-editor__preview mapmagic-preview {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.mapmagic-editor__map {
+  flex: 1 1 auto;
+  min-height: 20rem;
+  border: 1px solid var(--bs-border-color, #ccc);
+}
+
+/* The renderer puts map and panels into the container; the map takes the space. */
+.mapmagic-editor__map.mapmagic {
+  display: flex;
+  flex-direction: column;
+}
+
+.mapmagic-editor__map .mapmagic__map {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.mapmagic-editor__map .mapmagic__panels {
+  flex: 0 0 auto;
+  padding: 0 0.5rem 0.5rem;
+}
+
+.mapmagic-editor__yaml typo3-t3editor-codemirror {
+  display: block;
+  height: calc(100% - 3.5rem);
+}
+
+.mapmagic-editor__inspector fieldset > legend {
+  border-bottom: 1px solid var(--bs-border-color, #ccc);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.mapmagic-editor__feature {
+  background: var(--bs-tertiary-bg, #f5f5f5);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+@container (max-width: 760px) {
+  .mapmagic-editor__columns,
+  .mapmagic-editor__columns--yaml,
+  .mapmagic-editor__columns:not(.mapmagic-editor__columns--yaml) {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-template-areas: "structure" "preview" "inspector";
+    height: auto;
+  }
+
+  .mapmagic-editor__columns--yaml {
+    grid-template-areas: "yaml" "preview";
+  }
+
+  .mapmagic-editor__map {
+    height: 60vh;
+  }
+}

@@ -1,0 +1,29 @@
+kind: image
+basemaps:
+  - type: image
+    id: plan
+    label: Plan
+    url: 'EXT:map_magic/Resources/Public/Demo/messe-halle.svg'
+    width: 1200
+    height: 800
+controls:
+  fullscreen: true
+layers:
+  - type: areas
+    id: areas
+    label: Flächen
+    source:
+      type: geojson
+      data:
+        type: FeatureCollection
+        features: []
+    tooltip: '{name}'
+  - type: markers
+    id: points
+    label: Orte
+    source:
+      type: geojson
+      data:
+        type: FeatureCollection
+        features: []
+    tooltip: '{name}'

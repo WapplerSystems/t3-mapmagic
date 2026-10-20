@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:map_magic/Resources/Private/Language/locallang_editor.xlf" product-name="map_magic">
+        <header/>
+        <body>
+            <trans-unit id="button.cancel" resname="button.cancel">
+                <source>Cancel</source>
+            </trans-unit>
+            <trans-unit id="cluster.disableAtZoom" resname="cluster.disableAtZoom">
+                <source>No grouping from zoom level</source>
+            </trans-unit>
+            <trans-unit id="cluster.enable" resname="cluster.enable">
+                <source>Group nearby markers</source>
+            </trans-unit>
+            <trans-unit id="cluster.radius" resname="cluster.radius">
+                <source>Group radius (px)</source>
+            </trans-unit>
+            <trans-unit id="create.failed" resname="create.failed">
+                <source>The map could not be created</source>
+            </trans-unit>
+            <trans-unit id="create.folder" resname="create.folder">
+                <source>Folder</source>
+            </trans-unit>
+            <trans-unit id="create.name" resname="create.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="create.submit" resname="create.submit">
+                <source>Create map</source>
+            </trans-unit>
+            <trans-unit id="create.template" resname="create.template">
+                <source>Map type</source>
+            </trans-unit>
+            <trans-unit id="create.title" resname="create.title">
+                <source>New map</source>
+            </trans-unit>
+            <trans-unit id="delete.confirm" resname="delete.confirm">
+                <source>Delete the map “%s”? This cannot be undone.</source>
+            </trans-unit>
+            <trans-unit id="delete.failed" resname="delete.failed">
+                <source>The map could not be deleted</source>
+            </trans-unit>
+            <trans-unit id="delete.inUse" resname="delete.inUse">
+                <source>The map “%s” is used by %s content element(s). They will show nothing after deleting it. Delete anyway?</source>
+            </trans-unit>
+            <trans-unit id="delete.submit" resname="delete.submit">
+                <source>Delete</source>
+            </trans-unit>
+            <trans-unit id="delete.title" resname="delete.title">
+                <source>Delete map</source>
+            </trans-unit>
+            <trans-unit id="draw.active" resname="draw.active">
+                <source>Drawing mode: use the tools on the left of the map. Click an object to edit its properties.</source>
+            </trans-unit>
+            <trans-unit id="draw.done" resname="draw.done">
+                <source>Done</source>
+            </trans-unit>
+            <trans-unit id="duplicate.defaultName" resname="duplicate.defaultName">
+                <source>%s (copy)</source>
+            </trans-unit>
+            <trans-unit id="duplicate.failed" resname="duplicate.failed">
+                <source>The map could not be duplicated</source>
+            </trans-unit>
+            <trans-unit id="duplicate.submit" resname="duplicate.submit">
+                <source>Duplicate</source>
+            </trans-unit>
+            <trans-unit id="duplicate.title" resname="duplicate.title">
+                <source>Duplicate map</source>
+            </trans-unit>
+            <trans-unit id="editor.mode" resname="editor.mode">
+                <source>View</source>
+            </trans-unit>
+            <trans-unit id="editor.modeForm" resname="editor.modeForm">
+                <source>Form</source>
+            </trans-unit>
+            <trans-unit id="editor.readOnly" resname="editor.readOnly">
+                <source>This map is shipped with an extension and cannot be changed. Duplicate it to edit a copy.</source>
+            </trans-unit>
+            <trans-unit id="editor.redo" resname="editor.redo">
+                <source>Redo</source>
+            </trans-unit>
+            <trans-unit id="editor.save" resname="editor.save">
+                <source>Save</source>
+            </trans-unit>
+            <trans-unit id="editor.saveFailed" resname="editor.saveFailed">
+                <source>The map could not be saved</source>
+            </trans-unit>
+            <trans-unit id="editor.saved" resname="editor.saved">
+                <source>Map saved</source>
+            </trans-unit>
+            <trans-unit id="editor.title" resname="editor.title">
+                <source>Map editor</source>
+            </trans-unit>
+            <trans-unit id="editor.undo" resname="editor.undo">
+                <source>Undo</source>
+            </trans-unit>
+            <trans-unit id="editor.unsaved" resname="editor.unsaved">
+                <source>Unsaved changes</source>
+            </trans-unit>
+            <trans-unit id="error.duplicateId" resname="error.duplicateId">
+                <source>The ID “%s” is already used by another layer or basemap.</source>
+            </trans-unit>
+            <trans-unit id="feature.key" resname="feature.key">
+                <source>Property</source>
+            </trans-unit>
+            <trans-unit id="feature.title" resname="feature.title">
+                <source>Object %s</source>
+            </trans-unit>
+            <trans-unit id="feature.value" resname="feature.value">
+                <source>Value</source>
+            </trans-unit>
+            <trans-unit id="field.attribution" resname="field.attribution">
+                <source>Attribution (HTML)</source>
+            </trans-unit>
+            <trans-unit id="field.center" resname="field.center">
+                <source>Start position</source>
+            </trans-unit>
+            <trans-unit id="field.cluster" resname="field.cluster">
+                <source>Grouping</source>
+            </trans-unit>
+            <trans-unit id="field.colorBy" resname="field.colorBy">
+                <source>Fill color by data</source>
+            </trans-unit>
+            <trans-unit id="field.controlFullscreen" resname="field.controlFullscreen">
+                <source>Fullscreen button</source>
+            </trans-unit>
+            <trans-unit id="field.controlLayers" resname="field.controlLayers">
+                <source>Layer switcher</source>
+            </trans-unit>
+            <trans-unit id="field.controlLegend" resname="field.controlLegend">
+                <source>Legend</source>
+            </trans-unit>
+            <trans-unit id="field.controlScale" resname="field.controlScale">
+                <source>Scale bar</source>
+            </trans-unit>
+            <trans-unit id="field.controlZoom" resname="field.controlZoom">
+                <source>Zoom buttons</source>
+            </trans-unit>
+            <trans-unit id="field.dashArray" resname="field.dashArray">
+                <source>Dash pattern</source>
+            </trans-unit>
+            <trans-unit id="field.dragging" resname="field.dragging">
+                <source>Move map by dragging</source>
+            </trans-unit>
+            <trans-unit id="field.elevationProfile" resname="field.elevationProfile">
+                <source>Elevation profile</source>
+            </trans-unit>
+            <trans-unit id="field.endIcon" resname="field.endIcon">
+                <source>Finish marker</source>
+            </trans-unit>
+            <trans-unit id="field.fillColor" resname="field.fillColor">
+                <source>Fill color</source>
+            </trans-unit>
+            <trans-unit id="field.fillOpacity" resname="field.fillOpacity">
+                <source>Fill opacity (0–1)</source>
+            </trans-unit>
+            <trans-unit id="field.filter" resname="field.filter">
+                <source>Visitor filter</source>
+            </trans-unit>
+            <trans-unit id="field.height" resname="field.height">
+                <source>Height on the page</source>
+            </trans-unit>
+            <trans-unit id="field.hoverHighlight" resname="field.hoverHighlight">
+                <source>Highlight on hover</source>
+            </trans-unit>
+            <trans-unit id="field.icon" resname="field.icon">
+                <source>Marker</source>
+            </trans-unit>
+            <trans-unit id="field.iconBy" resname="field.iconBy">
+                <source>Marker by data</source>
+            </trans-unit>
+            <trans-unit id="field.id" resname="field.id">
+                <source>ID</source>
+            </trans-unit>
+            <trans-unit id="field.image" resname="field.image">
+                <source>Image</source>
+            </trans-unit>
+            <trans-unit id="field.imageHeight" resname="field.imageHeight">
+                <source>Image height (px)</source>
+            </trans-unit>
+            <trans-unit id="field.imageWidth" resname="field.imageWidth">
+                <source>Image width (px)</source>
+            </trans-unit>
+            <trans-unit id="field.label" resname="field.label">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="field.legend" resname="field.legend">
+                <source>Legend</source>
+            </trans-unit>
+            <trans-unit id="field.lineColor" resname="field.lineColor">
+                <source>Line color</source>
+            </trans-unit>
+            <trans-unit id="field.lineOpacity" resname="field.lineOpacity">
+                <source>Line opacity (0–1)</source>
+            </trans-unit>
+            <trans-unit id="field.lineWeight" resname="field.lineWeight">
+                <source>Line width (px)</source>
+            </trans-unit>
+            <trans-unit id="field.listed" resname="field.listed">
+                <source>Show in layer switcher</source>
+            </trans-unit>
+            <trans-unit id="field.mapLabel" resname="field.mapLabel">
+                <source>Name of the map</source>
+            </trans-unit>
+            <trans-unit id="field.maxZoom" resname="field.maxZoom">
+                <source>Maximum zoom</source>
+            </trans-unit>
+            <trans-unit id="field.minZoom" resname="field.minZoom">
+                <source>Minimum zoom</source>
+            </trans-unit>
+            <trans-unit id="field.padding" resname="field.padding">
+                <source>Margin when fitting (px)</source>
+            </trans-unit>
+            <trans-unit id="field.popup" resname="field.popup">
+                <source>Popup on click</source>
+            </trans-unit>
+            <trans-unit id="field.preset" resname="field.preset">
+                <source>Tile source</source>
+            </trans-unit>
+            <trans-unit id="field.scrollWheelZoom" resname="field.scrollWheelZoom">
+                <source>Zoom with the mouse wheel</source>
+            </trans-unit>
+            <trans-unit id="field.source" resname="field.source">
+                <source>Data</source>
+            </trans-unit>
+            <trans-unit id="field.startIcon" resname="field.startIcon">
+                <source>Start marker</source>
+            </trans-unit>
+            <trans-unit id="field.subdomains" resname="field.subdomains">
+                <source>Subdomains</source>
+            </trans-unit>
+            <trans-unit id="field.tileUrl" resname="field.tileUrl">
+                <source>Tile URL</source>
+            </trans-unit>
+            <trans-unit id="field.tooltip" resname="field.tooltip">
+                <source>Tooltip on hover</source>
+            </trans-unit>
+            <trans-unit id="field.visible" resname="field.visible">
+                <source>Visible at start</source>
+            </trans-unit>
+            <trans-unit id="field.waypoints" resname="field.waypoints">
+                <source>Waypoints</source>
+            </trans-unit>
+            <trans-unit id="field.zoom" resname="field.zoom">
+                <source>Start zoom</source>
+            </trans-unit>
+            <trans-unit id="filter.enable" resname="filter.enable">
+                <source>Let visitors filter</source>
+            </trans-unit>
+            <trans-unit id="filter.label" resname="filter.label">
+                <source>Heading of the filter</source>
+            </trans-unit>
+            <trans-unit id="group.appearance" resname="group.appearance">
+                <source>Appearance</source>
+            </trans-unit>
+            <trans-unit id="group.basemap" resname="group.basemap">
+                <source>Background</source>
+            </trans-unit>
+            <trans-unit id="group.controls" resname="group.controls">
+                <source>Controls</source>
+            </trans-unit>
+            <trans-unit id="group.filter" resname="group.filter">
+                <source>Filter</source>
+            </trans-unit>
+            <trans-unit id="group.general" resname="group.general">
+                <source>General</source>
+            </trans-unit>
+            <trans-unit id="group.info" resname="group.info">
+                <source>Texts</source>
+            </trans-unit>
+            <trans-unit id="group.source" resname="group.source">
+                <source>Data</source>
+            </trans-unit>
+            <trans-unit id="group.view" resname="group.view">
+                <source>Start view</source>
+            </trans-unit>
+            <trans-unit id="help.center" resname="help.center">
+                <source>Without a start position the map fits all visible layers.</source>
+            </trans-unit>
+            <trans-unit id="help.colorBy" resname="help.colorBy">
+                <source>Colors areas by a property of the data, e.g. a region name or a number.</source>
+            </trans-unit>
+            <trans-unit id="help.elevationProfile" resname="help.elevationProfile">
+                <source>Needs elevation values in the data (e.g. GPX with &lt;ele&gt;).</source>
+            </trans-unit>
+            <trans-unit id="help.filter" resname="help.filter">
+                <source>Shows a box with one checkbox per value of the property.</source>
+            </trans-unit>
+            <trans-unit id="help.iconBy" resname="help.iconBy">
+                <source>Different markers per value of a property, e.g. per category.</source>
+            </trans-unit>
+            <trans-unit id="help.id" resname="help.id">
+                <source>Technical name, unique within the map.</source>
+            </trans-unit>
+            <trans-unit id="help.image" resname="help.image">
+                <source>The coordinates of drawn objects are pixels of this image. Keep width and height when exchanging it.</source>
+            </trans-unit>
+            <trans-unit id="help.template" resname="help.template">
+                <source>{property} inserts a value of the object, e.g. {name}. HTML is allowed.</source>
+            </trans-unit>
+            <trans-unit id="icon.default" resname="icon.default">
+                <source>Default</source>
+            </trans-unit>
+            <trans-unit id="icon.hidden" resname="icon.hidden">
+                <source>Hidden</source>
+            </trans-unit>
+            <trans-unit id="icon.image" resname="icon.image">
+                <source>Image</source>
+            </trans-unit>
+            <trans-unit id="icon.pin" resname="icon.pin">
+                <source>Pin</source>
+            </trans-unit>
+            <trans-unit id="layer.areas" resname="layer.areas">
+                <source>Areas</source>
+            </trans-unit>
+            <trans-unit id="layer.markers" resname="layer.markers">
+                <source>Markers</source>
+            </trans-unit>
+            <trans-unit id="layer.route" resname="layer.route">
+                <source>Route</source>
+            </trans-unit>
+            <trans-unit id="legend.show" resname="legend.show">
+                <source>Show legend</source>
+            </trans-unit>
+            <trans-unit id="legend.title" resname="legend.title">
+                <source>Heading</source>
+            </trans-unit>
+            <trans-unit id="list.actions" resname="list.actions">
+                <source>Actions</source>
+            </trans-unit>
+            <trans-unit id="list.create" resname="list.create">
+                <source>New map</source>
+            </trans-unit>
+            <trans-unit id="list.delete" resname="list.delete">
+                <source>Delete</source>
+            </trans-unit>
+            <trans-unit id="list.duplicate" resname="list.duplicate">
+                <source>Duplicate</source>
+            </trans-unit>
+            <trans-unit id="list.edit" resname="list.edit">
+                <source>Edit</source>
+            </trans-unit>
+            <trans-unit id="list.empty.message" resname="list.empty.message">
+                <source>Create a map with “New map” above. It can then be placed on any page with the content element “Map”.</source>
+            </trans-unit>
+            <trans-unit id="list.empty.title" resname="list.empty.title">
+                <source>No maps yet</source>
+            </trans-unit>
+            <trans-unit id="list.file" resname="list.file">
+                <source>File</source>
+            </trans-unit>
+            <trans-unit id="list.name" resname="list.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="list.noFolder.message" resname="list.noFolder.message">
+                <source>There is no folder you may create maps in. An administrator can grant access to the folder for map definitions (default fileadmin/map_definitions/).</source>
+            </trans-unit>
+            <trans-unit id="list.noFolder.title" resname="list.noFolder.title">
+                <source>No folder for maps</source>
+            </trans-unit>
+            <trans-unit id="list.readOnly" resname="list.readOnly">
+                <source>read-only</source>
+            </trans-unit>
+            <trans-unit id="list.usage" resname="list.usage">
+                <source>Used</source>
+            </trans-unit>
+            <trans-unit id="mode.categories" resname="mode.categories">
+                <source>Categories</source>
+            </trans-unit>
+            <trans-unit id="mode.label" resname="mode.label">
+                <source>Mode</source>
+            </trans-unit>
+            <trans-unit id="mode.ranges" resname="mode.ranges">
+                <source>Number ranges</source>
+            </trans-unit>
+            <trans-unit id="option.always" resname="option.always">
+                <source>Always</source>
+            </trans-unit>
+            <trans-unit id="option.auto" resname="option.auto">
+                <source>Automatic</source>
+            </trans-unit>
+            <trans-unit id="option.never" resname="option.never">
+                <source>Never</source>
+            </trans-unit>
+            <trans-unit id="option.scrollCtrl" resname="option.scrollCtrl">
+                <source>With Ctrl key</source>
+            </trans-unit>
+            <trans-unit id="preset.custom" resname="preset.custom">
+                <source>Own tile server</source>
+            </trans-unit>
+            <trans-unit id="preview.layerDropped" resname="preview.layerDropped">
+                <source>Layer “%s” is not shown: %s</source>
+            </trans-unit>
+            <trans-unit id="source.addresses" resname="source.addresses">
+                <source>Addresses (EXT:address)</source>
+            </trans-unit>
+            <trans-unit id="source.categories" resname="source.categories">
+                <source>Only categories (IDs, optional)</source>
+            </trans-unit>
+            <trans-unit id="source.draw" resname="source.draw">
+                <source>Draw on the map</source>
+            </trans-unit>
+            <trans-unit id="source.features" resname="source.features">
+                <source>%d objects drawn on the map.</source>
+            </trans-unit>
+            <trans-unit id="source.geojson" resname="source.geojson">
+                <source>GeoJSON file</source>
+            </trans-unit>
+            <trans-unit id="source.gpx" resname="source.gpx">
+                <source>GPX file</source>
+            </trans-unit>
+            <trans-unit id="source.inline" resname="source.inline">
+                <source>Drawn on the map</source>
+            </trans-unit>
+            <trans-unit id="source.kind" resname="source.kind">
+                <source>Source</source>
+            </trans-unit>
+            <trans-unit id="source.pids" resname="source.pids">
+                <source>Storage folders (page IDs)</source>
+            </trans-unit>
+            <trans-unit id="structure.addBasemap" resname="structure.addBasemap">
+                <source>Background</source>
+            </trans-unit>
+            <trans-unit id="structure.addLayer" resname="structure.addLayer">
+                <source>Layer</source>
+            </trans-unit>
+            <trans-unit id="structure.basemap" resname="structure.basemap">
+                <source>Background</source>
+            </trans-unit>
+            <trans-unit id="structure.basemaps" resname="structure.basemaps">
+                <source>Backgrounds</source>
+            </trans-unit>
+            <trans-unit id="structure.customTiles" resname="structure.customTiles">
+                <source>Own tiles</source>
+            </trans-unit>
+            <trans-unit id="structure.down" resname="structure.down">
+                <source>Move down</source>
+            </trans-unit>
+            <trans-unit id="structure.layers" resname="structure.layers">
+                <source>Layers</source>
+            </trans-unit>
+            <trans-unit id="structure.map" resname="structure.map">
+                <source>Map</source>
+            </trans-unit>
+            <trans-unit id="structure.noLayers" resname="structure.noLayers">
+                <source>No layers yet</source>
+            </trans-unit>
+            <trans-unit id="structure.remove" resname="structure.remove">
+                <source>Remove</source>
+            </trans-unit>
+            <trans-unit id="structure.up" resname="structure.up">
+                <source>Move up</source>
+            </trans-unit>
+            <trans-unit id="template.blank" resname="template.blank">
+                <source>Empty map</source>
+            </trans-unit>
+            <trans-unit id="template.floorplan" resname="template.floorplan">
+                <source>Floor plan</source>
+            </trans-unit>
+            <trans-unit id="template.locations" resname="template.locations">
+                <source>Locations</source>
+            </trans-unit>
+            <trans-unit id="template.regions" resname="template.regions">
+                <source>Regions</source>
+            </trans-unit>
+            <trans-unit id="template.route" resname="template.route">
+                <source>Route</source>
+            </trans-unit>
+            <trans-unit id="waypoints.show" resname="waypoints.show">
+                <source>Show waypoints</source>
+            </trans-unit>
+            <trans-unit id="widget.addRow" resname="widget.addRow">
+                <source>Add row</source>
+            </trans-unit>
+            <trans-unit id="widget.captureView" resname="widget.captureView">
+                <source>Use current view</source>
+            </trans-unit>
+            <trans-unit id="widget.centerAuto" resname="widget.centerAuto">
+                <source>Fits automatically to the content.</source>
+            </trans-unit>
+            <trans-unit id="widget.clear" resname="widget.clear">
+                <source>Reset</source>
+            </trans-unit>
+            <trans-unit id="widget.color" resname="widget.color">
+                <source>Color</source>
+            </trans-unit>
+            <trans-unit id="widget.defaultColor" resname="widget.defaultColor">
+                <source>Default</source>
+            </trans-unit>
+            <trans-unit id="widget.fallback" resname="widget.fallback">
+                <source>Color for other values</source>
+            </trans-unit>
+            <trans-unit id="widget.fromData" resname="widget.fromData">
+                <source>Take values from data</source>
+            </trans-unit>
+            <trans-unit id="widget.glyph" resname="widget.glyph">
+                <source>Letter</source>
+            </trans-unit>
+            <trans-unit id="widget.height" resname="widget.height">
+                <source>Height</source>
+            </trans-unit>
+            <trans-unit id="widget.label" resname="widget.label">
+                <source>Label</source>
+            </trans-unit>
+            <trans-unit id="widget.lat" resname="widget.lat">
+                <source>Latitude</source>
+            </trans-unit>
+            <trans-unit id="widget.lng" resname="widget.lng">
+                <source>Longitude</source>
+            </trans-unit>
+            <trans-unit id="widget.max" resname="widget.max">
+                <source>to below</source>
+            </trans-unit>
+            <trans-unit id="widget.min" resname="widget.min">
+                <source>from</source>
+            </trans-unit>
+            <trans-unit id="widget.pickFile" resname="widget.pickFile">
+                <source>Choose file</source>
+            </trans-unit>
+            <trans-unit id="widget.property" resname="widget.property">
+                <source>Property</source>
+            </trans-unit>
+            <trans-unit id="widget.remove" resname="widget.remove">
+                <source>Remove</source>
+            </trans-unit>
+            <trans-unit id="widget.size" resname="widget.size">
+                <source>Size (px)</source>
+            </trans-unit>
+            <trans-unit id="widget.url" resname="widget.url">
+                <source>File or URL</source>
+            </trans-unit>
+            <trans-unit id="widget.value" resname="widget.value">
+                <source>Value</source>
+            </trans-unit>
+            <trans-unit id="widget.width" resname="widget.width">
+                <source>Width</source>
+            </trans-unit>
+            <trans-unit id="widget.x" resname="widget.x">
+                <source>X (px)</source>
+            </trans-unit>
+            <trans-unit id="widget.y" resname="widget.y">
+                <source>Y (px)</source>
+            </trans-unit>
+            <trans-unit id="yaml.apply" resname="yaml.apply">
+                <source>Apply YAML</source>
+            </trans-unit>
+            <trans-unit id="yaml.errorLine" resname="yaml.errorLine">
+                <source>Line %s:</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

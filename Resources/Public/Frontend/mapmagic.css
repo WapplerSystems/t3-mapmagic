@@ -186,6 +186,10 @@
 }
 
 .mapmagic-filter legend {
+  float: none;
+  width: auto;
+  font-size: inherit;
+  line-height: inherit;
   font-weight: 600;
   padding: 0;
   margin-bottom: 0.25rem;

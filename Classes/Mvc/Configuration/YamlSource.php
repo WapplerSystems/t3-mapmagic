@@ -32,6 +32,9 @@ use WapplerSystems\MapMagic\Slot\FilePersistenceSlot;
  */
 class YamlSource
 {
+    /** Nesting level from which arrays are written inline, see save(). */
+    public const INLINE_LEVEL = 8;
+
     /**
      * @var FilePersistenceSlot
      */
@@ -90,7 +93,11 @@ class YamlSource
             throw new FileWriteException($e->getMessage(), 1512584488, $e);
         }
 
-        $yaml = Yaml::dump($configuration, 99, 2);
+        // Inline from level 8 on: GeoJSON positions become "[x, y]" instead of
+        // one number per line, everything a person edits stays block style.
+        $yaml = Yaml::dump($configuration, self::INLINE_LEVEL, 2, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
+        // Keep the comment header of the file, without a blank first line when there is none.
+        $content = $header !== '' ? $header . LF . $yaml : $yaml;
 
         if ($fileToSave instanceof File) {
             try {
@@ -101,15 +108,15 @@ class YamlSource
                         $fileToSave->getName()
                     ),
                     $this->filePersistenceSlot->getContentSignature(
-                        $header . LF . $yaml
+                        $content
                     )
                 );
-                $fileToSave->setContents($header . LF . $yaml);
+                $fileToSave->setContents($content);
             } catch (InsufficientFileAccessPermissionsException $e) {
                 throw new FileWriteException($e->getMessage(), 1512582753, $e);
             }
         } else {
-            $byteCount = @file_put_contents($fileToSave, $header . LF . $yaml);
+            $byteCount = @file_put_contents($fileToSave, $content);
 
             if ($byteCount === false) {
                 $error = error_get_last();

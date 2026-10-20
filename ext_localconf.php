@@ -5,9 +5,7 @@ declare(strict_types=1);
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 use WapplerSystems\MapMagic\Controller\MapFrontendController;
-use WapplerSystems\MapMagic\Hooks\MapElementHooks;
 use WapplerSystems\MapMagic\Hooks\ImportExportHook;
-use WapplerSystems\MapMagic\Mvc\Property\PropertyMappingConfiguration;
 
 defined('TYPO3') or die();
 
@@ -17,7 +15,7 @@ call_user_func(static function () {
             = ImportExportHook::class . '->beforeAddSysFileRecordOnImport';
     }
 
-    // Add module configuration
+    // The persistence settings (allowed folders) are read in backend context too.
     ExtensionManagementUtility::addTypoScriptSetup(
         'module.tx_mapmagic {
     settings {
@@ -28,19 +26,6 @@ call_user_func(static function () {
 }'
     );
 
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['beforeRendering'][1489772699]
-        = MapElementHooks::class;
-
-    // FE file upload processing
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterBuildingFinished'][1489772699]
-        = PropertyMappingConfiguration::class;
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/mapmagic']['afterMapStateInitialized'][1613296803]
-        = PropertyMappingConfiguration::class;
-
-    // Register "mapmagicvh:" namespace
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['mapmagicvh'][] = 'WapplerSystems\\MapMagic\\ViewHelpers';
-
-    // Register FE plugin
     ExtensionUtility::configurePlugin(
         'MapMagic',
         'Map',

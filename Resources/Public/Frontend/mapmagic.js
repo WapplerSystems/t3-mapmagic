@@ -2001,12 +2001,12 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     }
     return result;
   }
-  function toComparisonString(value) {
-    if (value == null) return void 0;
+  function comparisonKeys(value) {
+    if (value == null) return [];
     if (Array.isArray(value)) {
-      return value.map((item) => stringifyScalar(item)).join(",");
+      return value.filter((item) => item != null).map((item) => stringifyScalar(item));
     }
-    return stringifyScalar(value);
+    return [stringifyScalar(value)];
   }
   function toFiniteNumber(value) {
     if (typeof value === "number") {
@@ -2022,8 +2022,7 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     const raw = getPath(props, colorBy.property);
     const fallbackColor = colorBy.fallback ?? fallback;
     if (colorBy.mode === "categories") {
-      const key = toComparisonString(raw);
-      if (key !== void 0) {
+      for (const key of comparisonKeys(raw)) {
         const match = colorBy.categories.find((category) => stringifyScalar(category.value) === key);
         if (match) return match.color;
       }
@@ -2069,8 +2068,7 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
   function resolveIcon(layer, props) {
     if (layer.iconBy) {
       const raw = getPath(props, layer.iconBy.property);
-      const key = toComparisonString(raw);
-      if (key !== void 0) {
+      for (const key of comparisonKeys(raw)) {
         const match = Object.hasOwn(layer.iconBy.values, key) ? layer.iconBy.values[key] : void 0;
         if (match) return match;
       }
@@ -2280,6 +2278,11 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
     const lat = imageHeight - position[1];
     const lng = position[0];
     return [lat, lng];
+  }
+  function latLngToImage(latLng, imageHeight) {
+    const x = latLng[1];
+    const y = imageHeight - latLng[0];
+    return [x, y];
   }
   function validateMapDef(input) {
     const errors = [];
@@ -3117,10 +3120,11 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       }
     };
   };
+  const GEO_DECIMALS = 6;
   const FALLBACK_CENTER = [51.16, 10.45];
   const FALLBACK_ZOOM = 6;
   async function createMap(root, input, options = {}) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     const result = validateMapDef(input);
     if (!result.ok) {
       throw new Error(`Invalid map definition:
@@ -3229,9 +3233,13 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       L$1.control.layers(def.basemaps.length > 1 ? baseLayers : {}, overlays, { collapsed: true, position: "topright" }).addTo(map);
     }
     const padding = ((_j = def.view) == null ? void 0 : _j.padding) ?? 20;
-    if ((_k = def.view) == null ? void 0 : _k.center) {
-      map.setView(toLatLng(def.view.center), def.view.zoom ?? (image ? 0 : 13));
-    } else {
+    const resetView = () => {
+      var _a2;
+      map.invalidateSize({ animate: false });
+      if ((_a2 = def.view) == null ? void 0 : _a2.center) {
+        map.setView(toLatLng(def.view.center), def.view.zoom ?? (image ? 0 : 13), { animate: false });
+        return;
+      }
       let bounds = null;
       for (const rendered of layers.values()) {
         if (!map.hasLayer(rendered.leafletLayer)) continue;
@@ -3240,21 +3248,35 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
       }
       const target = imageBounds ?? bounds;
       if (target) {
-        map.fitBounds(target, { padding: [padding, padding] });
+        map.fitBounds(target, { padding: [padding, padding], animate: false });
       } else {
-        map.setView(FALLBACK_CENTER, FALLBACK_ZOOM);
+        map.setView(FALLBACK_CENTER, FALLBACK_ZOOM, { animate: false });
       }
-    }
+    };
+    resetView();
+    const toPosition = image ? (latLng) => {
+      const [x, y] = latLngToImage([latLng.lat, latLng.lng], image.height);
+      return [Math.round(x), Math.round(y)];
+    } : (latLng) => [round(latLng.lng, GEO_DECIMALS), round(latLng.lat, GEO_DECIMALS)];
     return {
       def,
       map,
+      kind,
       layers,
+      toLatLng,
+      toPosition,
+      getView: () => ({ center: toPosition(map.getCenter()), zoom: round(map.getZoom(), 2) }),
+      resetView,
       destroy() {
         cleanups.forEach((fn) => fn());
         map.remove();
         root.replaceChildren();
       }
     };
+  }
+  function round(value, decimals) {
+    const factor = 10 ** decimals;
+    return Math.round(value * factor) / factor;
   }
   function createBasemap(def) {
     if (def.type === "image") {
@@ -3345,10 +3367,18 @@ var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "sy
   }
   exports2.SCHEMA_VERSION = SCHEMA_VERSION;
   exports2.autoInstall = autoInstall;
+  exports2.colorLegend = colorLegend;
   exports2.createMap = createMap;
   exports2.defaultMessages = defaultMessages;
+  exports2.distinctValues = distinctValues;
+  exports2.escapeHtml = escapeHtml;
+  exports2.gpxToGeoJson = gpxToGeoJson;
+  exports2.imageToLatLng = imageToLatLng;
   exports2.install = install;
+  exports2.latLngToImage = latLngToImage;
   exports2.loadSource = loadSource;
+  exports2.pinIcon = pinIcon;
+  exports2.renderTemplate = renderTemplate;
   exports2.validateMapDef = validateMapDef;
   Object.defineProperty(exports2, Symbol.toStringTag, { value: "Module" });
 });

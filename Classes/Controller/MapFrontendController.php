@@ -13,9 +13,11 @@ namespace WapplerSystems\MapMagic\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use WapplerSystems\MapMagic\Frontend\MapCacheTag;
 use WapplerSystems\MapMagic\Frontend\MapDefinitionCompiler;
+use WapplerSystems\MapMagic\Frontend\RendererMessages;
 use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**
@@ -25,11 +27,6 @@ use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
  */
 class MapFrontendController extends ActionController
 {
-    /** Keys of Messages in MapMagicJs/src/render/messages.ts, translated in locallang.xlf. */
-    private const MESSAGE_KEYS = [
-        'scrollHint', 'scrollHintMac', 'fullscreen', 'fullscreenExit', 'legend', 'filterAll', 'filterNone',
-        'elevationLength', 'elevationAscent', 'elevationDescent', 'elevationAxis', 'layerError',
-    ];
 
     public function __construct(
         private readonly MapPersistenceManagerInterface $mapPersistenceManager,
@@ -44,6 +41,9 @@ class MapFrontendController extends ActionController
             return $this->htmlResponse('');
         }
 
+        $this->request->getAttribute('frontend.cache.collector')?->addCacheTags(
+            new CacheTag(MapCacheTag::for($persistenceIdentifier))
+        );
         $contentUid = (int)($this->request->getAttribute('currentContentObject')?->data['uid'] ?? 0);
         try {
             $definition = $this->mapPersistenceManager->load($persistenceIdentifier);
@@ -64,24 +64,9 @@ class MapFrontendController extends ActionController
         $this->view->assignMultiple([
             'map' => $map,
             'mapJson' => json_encode($map, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
-            'messagesJson' => json_encode($this->messages(), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+            'messagesJson' => json_encode(RendererMessages::for($this->request), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
         ]);
         return $this->htmlResponse();
     }
 
-    /**
-     * @return array<string, string>
-     */
-    private function messages(): array
-    {
-        $messages = [];
-        foreach (self::MESSAGE_KEYS as $key) {
-            $label = LocalizationUtility::translate('frontend.' . $key, 'MapMagic', null, null, $this->request);
-            // Missing translations fall back to the renderer's built-in text.
-            if ($label !== null && $label !== '') {
-                $messages[$key] = $label;
-            }
-        }
-        return $messages;
-    }
 }

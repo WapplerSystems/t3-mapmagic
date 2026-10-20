@@ -1,0 +1,14 @@
+basemaps:
+  - preset: osm
+controls:
+  scale: true
+layers:
+  - type: route
+    id: route
+    label: Route
+    source:
+      type: geojson
+      data:
+        type: FeatureCollection
+        features: []
+    elevationProfile: true

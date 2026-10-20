@@ -1,0 +1,15 @@
+basemaps:
+  - preset: osm
+controls:
+  fullscreen: true
+layers:
+  - type: markers
+    id: locations
+    label: Standorte
+    source:
+      type: geojson
+      data:
+        type: FeatureCollection
+        features: []
+    tooltip: '{name}'
+    popup: '<strong>{name}</strong>'

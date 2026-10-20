@@ -75,7 +75,8 @@ final class AddressSourceProvider implements SourceProviderInterface
                 'geometry' => ['type' => 'Point', 'coordinates' => [$lng, $lat]],
                 'properties' => [
                     'uid' => $address->getUid(),
-                    'name' => $address->getName(),
+                    // Companies keep their name in "title"; getName() is first + last name.
+                    'name' => trim($address->getName()) !== '' ? trim($address->getName()) : $address->getTitle(),
                     'title' => $address->getTitle(),
                     'address' => $address->getAddress(),
                     'zip' => $address->getZip(),

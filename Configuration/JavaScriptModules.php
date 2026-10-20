@@ -6,6 +6,6 @@ return [
         'core',
     ],
     'imports' => [
-        '@wapplersystems/mapmagic/backend/' => 'EXT:map_magic/Resources/Public/JavaScript/backend/',
+        '@wapplersystems/mapmagic/' => 'EXT:map_magic/Resources/Public/JavaScript/',
     ],
 ];

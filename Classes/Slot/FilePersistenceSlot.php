@@ -48,7 +48,8 @@ final class FilePersistenceSlot implements SingletonInterface
 
     public function getContentSignature(string $content): string
     {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\HashService::class)->hmac($content);
+        // The additional secret is mandatory since v13; the class name scopes the signature like EXT:form does.
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\HashService::class)->hmac($content, self::class);
     }
 
     /**

@@ -1,25 +1,25 @@
 <?php
 
-use WapplerSystems\MapMagic\Controller\MapEditorController;
-use WapplerSystems\MapMagic\Controller\MapManagerController;
+use WapplerSystems\MapMagic\Controller\Backend\MapModuleController;
 
-/**
- * Definitions for modules provided by EXT:map_magic
- */
 return [
-    'web_MapMagicbuilder' => [
-        'parent' => 'web',
+    'content_mapmagic' => [
+        'parent' => 'content',
         'access' => 'user',
-        'iconIdentifier' => 'module-mapmagic',
+        'workspaces' => 'live',
+        'path' => '/module/content/mapmagic',
+        'iconIdentifier' => 'mapmagic-module',
+        'labels' => 'map_magic.module',
+        // Maps are not tied to pages; the page tree would only take space from the editor.
         'inheritNavigationComponentFromMainModule' => false,
-        'labels' => 'LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf',
-        'extensionName' => 'MapMagic',
-        'controllerActions' => [
-            MapManagerController::class => [
-                'index', 'show', 'create', 'duplicate', 'references', 'delete',
+        // The old Extbase module of the EXT:form-based prototype.
+        'aliases' => ['web_MapMagicbuilder'],
+        'routes' => [
+            '_default' => [
+                'target' => MapModuleController::class . '::indexAction',
             ],
-            MapEditorController::class => [
-                'index', 'saveMap', 'renderMapPage', 'renderRenderableOptions',
+            'edit' => [
+                'target' => MapModuleController::class . '::editAction',
             ],
         ],
     ],
