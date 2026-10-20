@@ -121,7 +121,7 @@ class DataStructureIdentifierListener
             if (!empty($identifier['ext-mapmagic-persistenceIdentifier']) && !$formIsAccessible) {
                 $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.persistenceIdentifier']['config']['items'][] = [
                     'label' => sprintf(
-                        $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.inaccessiblePersistenceIdentifier'),
+                        $this->getLanguageService()->sL('map_magic.database:tt_content.preview.inaccessiblePersistenceIdentifier'),
                         $identifier['ext-mapmagic-persistenceIdentifier']
                     ),
                     'value' => $identifier['ext-mapmagic-persistenceIdentifier'],
@@ -287,7 +287,7 @@ class DataStructureIdentifierListener
         if (!empty($persistenceIdentifier)) {
             $dataStructure['sheets']['sDEF']['ROOT']['el']['settings.persistenceIdentifier']['config']['items'][] = [
                 'label' => sprintf(
-                    $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.inaccessiblePersistenceIdentifier'),
+                    $this->getLanguageService()->sL('map_magic.database:tt_content.preview.inaccessiblePersistenceIdentifier'),
                     $persistenceIdentifier
                 ),
                 'value' => $persistenceIdentifier,
@@ -300,7 +300,7 @@ class DataStructureIdentifierListener
     protected function addInvalidFrameworkConfigurationFlashMessage(\Exception $e): void
     {
         $messageText = sprintf(
-            $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.invalidFrameworkConfiguration.text'),
+            $this->getLanguageService()->sL('map_magic.database:tt_content.preview.invalidFrameworkConfiguration.text'),
             $e->getMessage()
         );
 
@@ -310,7 +310,7 @@ class DataStructureIdentifierListener
                 GeneralUtility::makeInstance(
                     FlashMessage::class,
                     $messageText,
-                    $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:tt_content.preview.invalidFrameworkConfiguration.title'),
+                    $this->getLanguageService()->sL('map_magic.database:tt_content.preview.invalidFrameworkConfiguration.title'),
                     ContextualFeedbackSeverity::ERROR,
                     true
                 )

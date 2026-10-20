@@ -1,0 +1,19 @@
+type: MapMagic
+identifier: demo-route
+label: 'Demo: Routenkarte'
+basemaps:
+  -
+    preset: osm
+controls:
+  scale: true
+layers:
+  -
+    type: route
+    id: rundweg
+    label: Lousberg-Runde
+    source:
+      type: gpx
+      url: 'EXT:map_magic/Resources/Public/Demo/rundweg.gpx'
+    elevationProfile: true
+    tooltip: '{name}'
+    popup: '<strong>{name}</strong><br>{desc}'

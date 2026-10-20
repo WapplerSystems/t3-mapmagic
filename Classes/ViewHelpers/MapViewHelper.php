@@ -29,7 +29,6 @@ final class MapViewHelper extends AbstractTagBasedViewHelper
         $this->registerArgument('section', 'string', 'The anchor to be added to the action URI (only active if $actionUri is not set)', false, '');
         $this->registerArgument('additionalParams', 'array', 'additional action URI query parameters that won\'t be prefixed like $arguments (overrule $arguments) (only active if $actionUri is not set)', false, []);
         $this->registerArgument('objectName', 'string', 'name of the object that is bound to this form. If this argument is not specified, the name attribute of this form is used to determine the MapObjectName');
-        $this->registerUniversalTagAttributes();
     }
 
 
@@ -39,7 +38,7 @@ final class MapViewHelper extends AbstractTagBasedViewHelper
     }
 
 
-    public function render()
+    public function render(): string
     {
         $this->tag->setContent((string)$this->renderChildren());
 

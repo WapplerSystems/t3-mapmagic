@@ -1,0 +1,75 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Eingang Nord",
+    "kind": "Eingang"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     600,
+     40
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Eingang Süd",
+    "kind": "Eingang"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     600,
+     760
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Information",
+    "kind": "Service"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     1080,
+     120
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "WC",
+    "kind": "Service"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     1100,
+     650
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Café",
+    "kind": "Gastronomie"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     1080,
+     400
+    ]
+   }
+  }
+ ]
+}

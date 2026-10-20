@@ -23,7 +23,6 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;
 use WapplerSystems\MapMagic\Domain\Model\MapDefinition;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RenderableInterface;
@@ -92,7 +91,7 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
     public function __construct(
         protected readonly ContainerInterface            $container,
         protected readonly ConfigurationManagerInterface $configurationManager,
-        protected readonly HashService                   $hashService,
+        protected readonly \TYPO3\CMS\Core\Crypto\HashService                   $hashService,
     )
     {
         $this->response = new Response();
@@ -371,12 +370,9 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
         if ($this->request->getAttribute('language') instanceof SiteLanguage) {
             $this->currentSiteLanguage = $this->request->getAttribute('language');
         } else {
-            $pageId = 0;
             $languageId = (int)GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('language', 'id', 0);
 
-            if ($this->getTypoScriptFrontendController() !== null) {
-                $pageId = $this->getTypoScriptFrontendController()->id;
-            }
+            $pageId = $this->request->getAttribute('frontend.page.information')?->getId() ?? 0;
 
             $fakeSiteConfiguration = [
                 'languages' => [
@@ -398,12 +394,7 @@ class MapRuntime implements RootRenderableInterface, \ArrayAccess
 
     protected function getFrontendUser(): FrontendUserAuthentication
     {
-        return $this->getTypoScriptFrontendController()->fe_user;
-    }
-
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'] ?? null;
+        return $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.user');
     }
 
     protected function isRenderableEnabled(RenderableInterface $renderable): bool

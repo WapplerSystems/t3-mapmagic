@@ -22,9 +22,9 @@
 	},
 	"require": {
 		"psr/http-message": "^1.1 || ^2.0",
-		"symfony/expression-language": "^6.4 || ^7.0",
-		"typo3/cms-core": "12.4.*@dev",
-		"typo3/cms-frontend": "12.4.*@dev"
+		"symfony/expression-language": "^7.2 || ^8.0",
+		"typo3/cms-core": "^14.3",
+		"typo3/cms-frontend": "^14.3"
 	},
 	"suggest": {
 		"typo3/cms-filelist": "Listing of files in the directory",
@@ -36,12 +36,9 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-main": "12.4.x-dev"
+			"dev-release/v14": "14.0.x-dev"
 		},
 		"typo3/cms": {
-			"Package": {
-				"partOfFactoryDefault": true
-			},
 			"extension-key": "map_magic"
 		}
 	},

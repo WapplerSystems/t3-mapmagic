@@ -1,0 +1,74 @@
+type: MapMagic
+identifier: demo-gebiete
+label: 'Demo: Gebietskarte'
+basemaps:
+  -
+    preset: osm
+  -
+    preset: carto-light
+layers:
+  -
+    type: areas
+    id: regionen
+    label: Vertriebsregionen
+    source:
+      type: geojson
+      url: 'EXT:map_magic/Resources/Public/Demo/vertriebsgebiete.geojson'
+    style:
+      color: '#ffffff'
+      weight: 1
+      fillOpacity: 0.6
+    colorBy:
+      property: region
+      mode: categories
+      categories:
+        -
+          value: Nord
+          color: '#1f77b4'
+        -
+          value: Ost
+          color: '#ff7f0e'
+        -
+          value: West
+          color: '#2ca02c'
+        -
+          value: Mitte
+          color: '#9467bd'
+        -
+          value: Süd
+          color: '#d62728'
+    tooltip: '{name}: Region {region}'
+    popup: '<strong>{name}</strong><br>Region {region}<br>Ansprechpartner: {contact}'
+  -
+    type: areas
+    id: haendler
+    label: Händlerdichte
+    visible: false
+    source:
+      type: geojson
+      url: 'EXT:map_magic/Resources/Public/Demo/vertriebsgebiete.geojson'
+    style:
+      color: '#555'
+      weight: 1
+      fillOpacity: 0.7
+    colorBy:
+      property: dealers
+      mode: ranges
+      ranges:
+        -
+          max: 25
+          color: '#fee5d9'
+        -
+          min: 25
+          max: 50
+          color: '#fcae91'
+        -
+          min: 50
+          max: 100
+          color: '#fb6a4a'
+        -
+          min: 100
+          color: '#cb181d'
+    legend:
+      title: 'Händler je Land'
+    tooltip: '{name}: {dealers} Händler'

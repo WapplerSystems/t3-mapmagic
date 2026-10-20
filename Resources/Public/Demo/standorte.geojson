@@ -1,0 +1,770 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Aachen",
+    "kind": "Filiale",
+    "city": "Aachen",
+    "street": "Musterstraße 20",
+    "phone": "0604 95319"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.0568,
+     50.78815
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Aachen 2",
+    "kind": "Servicepunkt",
+    "city": "Aachen",
+    "street": "Musterstraße 13",
+    "phone": "0574 86387"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.05738,
+     50.7756
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Aachen 3",
+    "kind": "Abholstation",
+    "city": "Aachen",
+    "street": "Musterstraße 5",
+    "phone": "0288 66838"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.07899,
+     50.76493
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Köln",
+    "kind": "Servicepunkt",
+    "city": "Köln",
+    "street": "Musterstraße 8",
+    "phone": "0779 26226"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.98715,
+     50.94273
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Köln 2",
+    "kind": "Abholstation",
+    "city": "Köln",
+    "street": "Musterstraße 75",
+    "phone": "0263 85642"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.96543,
+     50.91948
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Köln 3",
+    "kind": "Filiale",
+    "city": "Köln",
+    "street": "Musterstraße 29",
+    "phone": "0247 82963"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.98181,
+     50.92908
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Köln 4",
+    "kind": "Servicepunkt",
+    "city": "Köln",
+    "street": "Musterstraße 19",
+    "phone": "0753 25439"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.96455,
+     50.93991
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Düsseldorf",
+    "kind": "Abholstation",
+    "city": "Düsseldorf",
+    "street": "Musterstraße 14",
+    "phone": "0795 84868"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.78183,
+     51.2226
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Düsseldorf 2",
+    "kind": "Filiale",
+    "city": "Düsseldorf",
+    "street": "Musterstraße 71",
+    "phone": "0929 18229"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.77736,
+     51.23246
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Bonn",
+    "kind": "Filiale",
+    "city": "Bonn",
+    "street": "Musterstraße 88",
+    "phone": "0744 66045"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.11483,
+     50.73602
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Bonn 2",
+    "kind": "Servicepunkt",
+    "city": "Bonn",
+    "street": "Musterstraße 119",
+    "phone": "0664 57393"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.08619,
+     50.74918
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Bonn 3",
+    "kind": "Abholstation",
+    "city": "Bonn",
+    "street": "Musterstraße 90",
+    "phone": "0998 41994"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.07311,
+     50.72941
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Bonn 4",
+    "kind": "Filiale",
+    "city": "Bonn",
+    "street": "Musterstraße 64",
+    "phone": "0551 68829"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.08548,
+     50.75661
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Dortmund",
+    "kind": "Servicepunkt",
+    "city": "Dortmund",
+    "street": "Musterstraße 66",
+    "phone": "0628 31621"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.48073,
+     51.49968
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Essen",
+    "kind": "Abholstation",
+    "city": "Essen",
+    "street": "Musterstraße 54",
+    "phone": "0240 97584"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.98626,
+     51.45792
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Essen 2",
+    "kind": "Filiale",
+    "city": "Essen",
+    "street": "Musterstraße 102",
+    "phone": "0521 54580"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.02332,
+     51.45937
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Essen 3",
+    "kind": "Servicepunkt",
+    "city": "Essen",
+    "street": "Musterstraße 75",
+    "phone": "0667 19012"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.032,
+     51.47339
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Essen 4",
+    "kind": "Abholstation",
+    "city": "Essen",
+    "street": "Musterstraße 61",
+    "phone": "0913 97051"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.9855,
+     51.46485
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Münster",
+    "kind": "Filiale",
+    "city": "Münster",
+    "street": "Musterstraße 83",
+    "phone": "0791 99291"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.64542,
+     51.95208
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Münster 2",
+    "kind": "Servicepunkt",
+    "city": "Münster",
+    "street": "Musterstraße 50",
+    "phone": "0884 55482"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.59745,
+     51.95917
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Münster 3",
+    "kind": "Abholstation",
+    "city": "Münster",
+    "street": "Musterstraße 22",
+    "phone": "0825 25347"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.62572,
+     51.94943
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Duisburg",
+    "kind": "Servicepunkt",
+    "city": "Duisburg",
+    "street": "Musterstraße 17",
+    "phone": "0956 42455"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.75617,
+     51.45107
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Duisburg 2",
+    "kind": "Abholstation",
+    "city": "Duisburg",
+    "street": "Musterstraße 64",
+    "phone": "0282 31805"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.75925,
+     51.43638
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Duisburg 3",
+    "kind": "Filiale",
+    "city": "Duisburg",
+    "street": "Musterstraße 114",
+    "phone": "0340 66429"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.78414,
+     51.42554
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Wuppertal",
+    "kind": "Abholstation",
+    "city": "Wuppertal",
+    "street": "Musterstraße 46",
+    "phone": "0899 59865"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.17746,
+     51.24224
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Wuppertal 2",
+    "kind": "Filiale",
+    "city": "Wuppertal",
+    "street": "Musterstraße 23",
+    "phone": "0354 40403"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.15951,
+     51.23668
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Wuppertal 3",
+    "kind": "Servicepunkt",
+    "city": "Wuppertal",
+    "street": "Musterstraße 107",
+    "phone": "0803 33900"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.13576,
+     51.23636
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Wuppertal 4",
+    "kind": "Abholstation",
+    "city": "Wuppertal",
+    "street": "Musterstraße 54",
+    "phone": "0747 58398"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.15659,
+     51.24894
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Bielefeld",
+    "kind": "Filiale",
+    "city": "Bielefeld",
+    "street": "Musterstraße 89",
+    "phone": "0727 90949"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     8.5418,
+     52.03979
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Bielefeld 2",
+    "kind": "Servicepunkt",
+    "city": "Bielefeld",
+    "street": "Musterstraße 59",
+    "phone": "0998 99204"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     8.55037,
+     52.0259
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Mönchengladbach",
+    "kind": "Servicepunkt",
+    "city": "Mönchengladbach",
+    "street": "Musterstraße 51",
+    "phone": "0306 73114"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.45086,
+     51.16299
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Mönchengladbach 2",
+    "kind": "Abholstation",
+    "city": "Mönchengladbach",
+    "street": "Musterstraße 9",
+    "phone": "0413 67753"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.42254,
+     51.1741
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Mönchengladbach 3",
+    "kind": "Filiale",
+    "city": "Mönchengladbach",
+    "street": "Musterstraße 7",
+    "phone": "0304 10030"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.44681,
+     51.18196
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Mönchengladbach 4",
+    "kind": "Servicepunkt",
+    "city": "Mönchengladbach",
+    "street": "Musterstraße 47",
+    "phone": "0828 13342"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.41702,
+     51.16882
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Krefeld",
+    "kind": "Abholstation",
+    "city": "Krefeld",
+    "street": "Musterstraße 20",
+    "phone": "0849 43063"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.58963,
+     51.34289
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Krefeld 2",
+    "kind": "Filiale",
+    "city": "Krefeld",
+    "street": "Musterstraße 61",
+    "phone": "0325 25119"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.58324,
+     51.35852
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Krefeld 3",
+    "kind": "Servicepunkt",
+    "city": "Krefeld",
+    "street": "Musterstraße 60",
+    "phone": "0691 73417"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.55101,
+     51.32456
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Krefeld 4",
+    "kind": "Abholstation",
+    "city": "Krefeld",
+    "street": "Musterstraße 96",
+    "phone": "0550 44702"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     6.56102,
+     51.34648
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Bochum",
+    "kind": "Filiale",
+    "city": "Bochum",
+    "street": "Musterstraße 27",
+    "phone": "0740 57415"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.195,
+     51.48353
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Gelsenkirchen",
+    "kind": "Servicepunkt",
+    "city": "Gelsenkirchen",
+    "street": "Musterstraße 98",
+    "phone": "0740 49071"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     7.11441,
+     51.53223
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Abholstation Siegen",
+    "kind": "Abholstation",
+    "city": "Siegen",
+    "street": "Musterstraße 67",
+    "phone": "0575 31894"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     8.01564,
+     50.86371
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Siegen 2",
+    "kind": "Filiale",
+    "city": "Siegen",
+    "street": "Musterstraße 70",
+    "phone": "0997 75889"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     8.01408,
+     50.86372
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Siegen 3",
+    "kind": "Servicepunkt",
+    "city": "Siegen",
+    "street": "Musterstraße 104",
+    "phone": "0976 35578"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     8.04266,
+     50.88753
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Filiale Paderborn",
+    "kind": "Filiale",
+    "city": "Paderborn",
+    "street": "Musterstraße 26",
+    "phone": "0730 74589"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     8.74883,
+     51.70006
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Servicepunkt Paderborn 2",
+    "kind": "Servicepunkt",
+    "city": "Paderborn",
+    "street": "Musterstraße 4",
+    "phone": "0486 71897"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     8.74305,
+     51.7266
+    ]
+   }
+  }
+ ]
+}

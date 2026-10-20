@@ -187,7 +187,7 @@ class MapEditorController extends AbstractBackendController
         $moduleTemplate->setModuleClass($this->request->getPluginName() . '_' . $this->request->getControllerName());
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
         $moduleTemplate->setTitle(
-            $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab'),
+            $this->getLanguageService()->sL('map_magic.module:mlang_tabs_tab'),
             $formDefinition['label']
         );
         return $moduleTemplate->renderResponse('Backend/MapEditor/Index');
@@ -394,11 +394,11 @@ class MapEditorController extends AbstractBackendController
         if (isset($getVars['action']) && $getVars['action'] === 'index') {
             $newPageButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['action' => 'formeditor-new-page', 'identifier' => 'headerNewPage'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapMagic.new_page_button'))
+                ->setTitle($this->getLanguageService()->sL('map_magic.database:mapMagic.new_page_button'))
                 ->setName('formeditor-new-page')
                 ->setValue('new-page')
                 ->setClasses('t3-mapmagic-element-new-page-button hidden')
-                ->setIcon($this->iconFactory->getIcon('actions-page-new', Icon::SIZE_SMALL));
+                ->setIcon($this->iconFactory->getIcon('actions-page-new', \TYPO3\CMS\Core\Imaging\IconSize::SMALL));
 
             $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
@@ -406,43 +406,43 @@ class MapEditorController extends AbstractBackendController
                 ->setDataAttributes(['identifier' => 'closeButton'])
                 ->setHref((string)$uriBuilder->buildUriFromRoute('web_MapMagicbuilder'))
                 ->setClasses('t3-mapmagic-element-close-form-button hidden')
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:rm.closeDoc'))
+                ->setTitle($this->getLanguageService()->sL('core.core:rm.closeDoc'))
                 ->setShowLabelText(true)
-                ->setIcon($this->iconFactory->getIcon('actions-close', Icon::SIZE_SMALL));
+                ->setIcon($this->iconFactory->getIcon('actions-close', \TYPO3\CMS\Core\Imaging\IconSize::SMALL));
 
             $saveButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'saveButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapMagic.save_button'))
+                ->setTitle($this->getLanguageService()->sL('map_magic.database:mapMagic.save_button'))
                 ->setName('formeditor-save-form')
                 ->setValue('save')
                 ->setClasses('t3-mapmagic-element-save-form-button hidden')
-                ->setIcon($this->iconFactory->getIcon('actions-document-save', Icon::SIZE_SMALL))
+                ->setIcon($this->iconFactory->getIcon('actions-document-save', \TYPO3\CMS\Core\Imaging\IconSize::SMALL))
                 ->setShowLabelText(true);
 
             $formSettingsButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'formSettingsButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapMagic.form_settings_button'))
+                ->setTitle($this->getLanguageService()->sL('map_magic.database:mapMagic.form_settings_button'))
                 ->setName('formeditor-form-settings')
                 ->setValue('settings')
                 ->setClasses('t3-mapmagic-element-form-settings-button hidden')
-                ->setIcon($this->iconFactory->getIcon('actions-system-extension-configure', Icon::SIZE_SMALL))
+                ->setIcon($this->iconFactory->getIcon('actions-system-extension-configure', \TYPO3\CMS\Core\Imaging\IconSize::SMALL))
                 ->setShowLabelText(true);
 
             $undoButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'undoButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapMagic.undo_button'))
+                ->setTitle($this->getLanguageService()->sL('map_magic.database:mapMagic.undo_button'))
                 ->setName('formeditor-undo-form')
                 ->setValue('undo')
                 ->setClasses('t3-mapmagic-element-undo-form-button hidden disabled')
-                ->setIcon($this->iconFactory->getIcon('actions-edit-undo', Icon::SIZE_SMALL));
+                ->setIcon($this->iconFactory->getIcon('actions-edit-undo', \TYPO3\CMS\Core\Imaging\IconSize::SMALL));
 
             $redoButton = $buttonBar->makeInputButton()
                 ->setDataAttributes(['identifier' => 'redoButton'])
-                ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapMagic.redo_button'))
+                ->setTitle($this->getLanguageService()->sL('map_magic.database:mapMagic.redo_button'))
                 ->setName('formeditor-redo-form')
                 ->setValue('redo')
                 ->setClasses('t3-mapmagic-element-redo-form-button hidden disabled')
-                ->setIcon($this->iconFactory->getIcon('actions-edit-redo', Icon::SIZE_SMALL));
+                ->setIcon($this->iconFactory->getIcon('actions-edit-redo', \TYPO3\CMS\Core\Imaging\IconSize::SMALL));
 
             $buttonBar->addButton($newPageButton, ButtonBar::BUTTON_POSITION_LEFT, 1);
             $buttonBar->addButton($closeButton, ButtonBar::BUTTON_POSITION_LEFT, 2);

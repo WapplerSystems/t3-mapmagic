@@ -15,7 +15,6 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Domain\Renderer;
 
-use Cvc\Typo3\CvcTwig\ContentObject\TwigTemplateContentObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use WapplerSystems\MapMagic\Domain\Exception\RenderingException;

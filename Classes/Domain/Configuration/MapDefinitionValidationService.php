@@ -217,7 +217,7 @@ class MapDefinitionValidationService implements SingletonInterface
         $this->checkHmacDataIntegrity($hmacData, $hmacContent, $sessionToken);
         $hmacContent[] = $propertyValue;
 
-        $expectedHash = GeneralUtility::hmac(serialize($hmacContent), $sessionToken);
+        $expectedHash = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\HashService::class)->hmac(serialize($hmacContent), $sessionToken);
         return hash_equals($expectedHash, $hmacData['hmac']);
     }
 
@@ -236,7 +236,7 @@ class MapDefinitionValidationService implements SingletonInterface
         }
 
         $hmacContent[] = $hmacData['value'] ?? '';
-        $expectedHash = GeneralUtility::hmac(serialize($hmacContent), $sessionToken);
+        $expectedHash = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\HashService::class)->hmac(serialize($hmacContent), $sessionToken);
 
         if (!hash_equals($expectedHash, $hmac)) {
             throw new PropertyException('Unauthorized modification of historical data. #1528538252', 1528538252);

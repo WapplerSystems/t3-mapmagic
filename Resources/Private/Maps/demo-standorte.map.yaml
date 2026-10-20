@@ -1,0 +1,43 @@
+type: MapMagic
+identifier: demo-standorte
+label: 'Demo: Standortkarte'
+basemaps:
+  -
+    preset: osm
+controls:
+  fullscreen: true
+  scale: true
+layers:
+  -
+    type: markers
+    id: standorte
+    label: Standorte
+    source:
+      type: geojson
+      url: 'EXT:map_magic/Resources/Public/Demo/standorte.geojson'
+    cluster:
+      radius: 50
+      disableAtZoom: 13
+    icon:
+      type: pin
+    iconBy:
+      property: kind
+      values:
+        Filiale:
+          type: pin
+          color: '#c0392b'
+          glyph: F
+        Servicepunkt:
+          type: pin
+          color: '#2a81cb'
+          glyph: S
+        Abholstation:
+          type: pin
+          color: '#27ae60'
+          glyph: A
+    legend: true
+    filter:
+      property: kind
+      label: 'Art des Standorts'
+    tooltip: '{name}'
+    popup: '<strong>{name}</strong><br>{street}<br>{city}<br>Tel. {phone}'

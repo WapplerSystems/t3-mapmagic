@@ -12,135 +12,76 @@ declare(strict_types=1);
 namespace WapplerSystems\MapMagic\Controller;
 
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
-use TYPO3\CMS\Core\Service\FlexFormService;
-use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Http\ForwardResponse;
+use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use WapplerSystems\MapMagic\Domain\Configuration\ConfigurationService;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use WapplerSystems\MapMagic\Frontend\MapDefinitionCompiler;
 use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
 
 /**
- * The frontend controller
- *
- * Scope: frontend
- * @internal
+ * Renders the map selected in the plugin's FlexForm. The page only gets a
+ * container with the map definition as data attribute; the renderer script
+ * picks it up, so there is no inline JavaScript (CSP).
  */
 class MapFrontendController extends ActionController
 {
-    /**
-     * @var \WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface
-     */
-    protected $formPersistenceManager;
+    /** Keys of Messages in MapMagicJs/src/render/messages.ts, translated in locallang.xlf. */
+    private const MESSAGE_KEYS = [
+        'scrollHint', 'scrollHintMac', 'fullscreen', 'fullscreenExit', 'legend', 'filterAll', 'filterNone',
+        'elevationLength', 'elevationAscent', 'elevationDescent', 'elevationAxis', 'layerError',
+    ];
 
-    /**
-     * @internal
-     */
-    public function injectMapPersistenceManager(MapPersistenceManagerInterface $formPersistenceManager)
-    {
-        $this->formPersistenceManager = $formPersistenceManager;
-    }
+    public function __construct(
+        private readonly MapPersistenceManagerInterface $mapPersistenceManager,
+        private readonly MapDefinitionCompiler $compiler,
+        private readonly LoggerInterface $logger,
+    ) {}
 
-    /**
-     * Take the form which should be rendered from the plugin settings
-     * and overlay the formDefinition with additional data from
-     * flexform and typoscript settings.
-     * This method is used directly to display the first page from the
-     * formDefinition because its cached.
-     *
-     * @internal
-     */
     public function renderAction(): ResponseInterface
     {
-        $formDefinition = [];
-        if (!empty($this->settings['persistenceIdentifier'])) {
-            $formDefinition = $this->formPersistenceManager->load($this->settings['persistenceIdentifier']);
-            $formDefinition['persistenceIdentifier'] = $this->settings['persistenceIdentifier'];
-            $formDefinition = $this->overrideByFlexFormSettings($formDefinition);
-            $formDefinition = ArrayUtility::setValueByPath($formDefinition, 'renderingOptions._originalIdentifier', $formDefinition['identifier'], '.');
-            $formDefinition['identifier'] .= '_' . ($this->request->getAttribute('currentContentObject')?->data['uid'] ?? '');
+        $persistenceIdentifier = (string)($this->settings['persistenceIdentifier'] ?? '');
+        if ($persistenceIdentifier === '') {
+            return $this->htmlResponse('');
         }
-        $this->view->assign('mapConfiguration', $formDefinition);
 
+        $contentUid = (int)($this->request->getAttribute('currentContentObject')?->data['uid'] ?? 0);
+        try {
+            $definition = $this->mapPersistenceManager->load($persistenceIdentifier);
+            if (!empty($definition['invalid'])) {
+                throw new \RuntimeException((string)($definition['label'] ?? 'invalid map definition'), 1792460010);
+            }
+            // The content uid makes the id unique when one map is placed twice on a page.
+            $map = $this->compiler->compile($definition, 'mapmagic-' . $contentUid, $this->request);
+        } catch (\Throwable $e) {
+            $this->logger->error('Map "{map}" in content element {uid} not rendered: {message}', [
+                'map' => $persistenceIdentifier,
+                'uid' => $contentUid,
+                'message' => $e->getMessage(),
+            ]);
+            return $this->htmlResponse('');
+        }
+
+        $this->view->assignMultiple([
+            'map' => $map,
+            'mapJson' => json_encode($map, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+            'messagesJson' => json_encode($this->messages(), JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
+        ]);
         return $this->htmlResponse();
     }
 
     /**
-     * This method is used to display all pages / finishers except the
-     * first page because its non cached.
-     *
-     * @internal
+     * @return array<string, string>
      */
-    public function performAction(): ResponseInterface
+    private function messages(): array
     {
-        return new ForwardResponse('render');
-    }
-
-    /**
-     * Override the formDefinition with additional data from the Flexform
-     * settings. For now, only finisher settings are overridable.
-     */
-    protected function overrideByFlexFormSettings(array $formDefinition): array
-    {
-        $flexFormData = GeneralUtility::xml2array($this->request->getAttribute('currentContentObject')?->data['pi_flexform'] ?? '');
-
-        if (!is_array($flexFormData)) {
-            return $formDefinition;
-        }
-
-        if (isset($formDefinition['finishers'])) {
-            $prototypeName = $formDefinition['prototypeName'] ?? 'standard';
-            $configurationService = GeneralUtility::makeInstance(ConfigurationService::class);
-            $prototypeConfiguration = $configurationService->getPrototypeConfiguration($prototypeName);
-
-            foreach ($formDefinition['finishers'] as $index => $formFinisherDefinition) {
-                $finisherIdentifier = $formFinisherDefinition['identifier'];
-
-                $sheetIdentifier = $this->getFlexformSheetIdentifier($formDefinition, $prototypeName, $finisherIdentifier);
-                $flexFormSheetSettings = $this->getFlexFormSettingsFromSheet($flexFormData, $sheetIdentifier);
-
+        $messages = [];
+        foreach (self::MESSAGE_KEYS as $key) {
+            $label = LocalizationUtility::translate('frontend.' . $key, 'MapMagic', null, null, $this->request);
+            // Missing translations fall back to the renderer's built-in text.
+            if ($label !== null && $label !== '') {
+                $messages[$key] = $label;
             }
         }
-        return $formDefinition;
-    }
-
-    protected function getFlexformSheetIdentifier(
-        array $formDefinition,
-        string $prototypeName,
-        string $finisherIdentifier
-    ): string {
-        return md5(
-            implode('', [
-                $formDefinition['persistenceIdentifier'],
-                $prototypeName,
-                $formDefinition['identifier'],
-                $finisherIdentifier,
-            ])
-        );
-    }
-
-    protected function getFlexFormSettingsFromSheet(
-        array $flexForm,
-        string $sheetIdentifier
-    ): array {
-        $sheetData = [];
-        $sheetData['data'] = array_filter(
-            $flexForm['data'] ?? [],
-            static function ($key) use ($sheetIdentifier) {
-                return $key === $sheetIdentifier;
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-
-        if (empty($sheetData['data'])) {
-            return [];
-        }
-
-        $flexFormService = GeneralUtility::makeInstance(FlexFormService::class);
-        $flexFormTools = GeneralUtility::makeInstance(FlexFormTools::class);
-
-        $sheetDataXml = $flexFormTools->flexArray2Xml($sheetData);
-        return $flexFormService->convertFlexFormContentToArray($sheetDataXml)['settings'] ?? [];
+        return $messages;
     }
 }

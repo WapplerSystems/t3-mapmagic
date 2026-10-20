@@ -1,0 +1,530 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A01",
+    "exhibitor": "Aussteller 1",
+    "theme": "Software"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       120,
+       140
+      ],
+      [
+       260,
+       140
+      ],
+      [
+       260,
+       260
+      ],
+      [
+       120,
+       260
+      ],
+      [
+       120,
+       140
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A02",
+    "exhibitor": "Aussteller 2",
+    "theme": "Hardware"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       300,
+       140
+      ],
+      [
+       440,
+       140
+      ],
+      [
+       440,
+       260
+      ],
+      [
+       300,
+       260
+      ],
+      [
+       300,
+       140
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A03",
+    "exhibitor": "Aussteller 3",
+    "theme": "Beratung"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       480,
+       140
+      ],
+      [
+       620,
+       140
+      ],
+      [
+       620,
+       260
+      ],
+      [
+       480,
+       260
+      ],
+      [
+       480,
+       140
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A04",
+    "exhibitor": "Aussteller 4",
+    "theme": "Software"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       660,
+       140
+      ],
+      [
+       800,
+       140
+      ],
+      [
+       800,
+       260
+      ],
+      [
+       660,
+       260
+      ],
+      [
+       660,
+       140
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A05",
+    "exhibitor": "Aussteller 5",
+    "theme": "Hardware"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       840,
+       140
+      ],
+      [
+       980,
+       140
+      ],
+      [
+       980,
+       260
+      ],
+      [
+       840,
+       260
+      ],
+      [
+       840,
+       140
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A06",
+    "exhibitor": "Aussteller 6",
+    "theme": "Hardware"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       120,
+       330
+      ],
+      [
+       260,
+       330
+      ],
+      [
+       260,
+       450
+      ],
+      [
+       120,
+       450
+      ],
+      [
+       120,
+       330
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A07",
+    "exhibitor": "Aussteller 7",
+    "theme": "Beratung"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       300,
+       330
+      ],
+      [
+       440,
+       330
+      ],
+      [
+       440,
+       450
+      ],
+      [
+       300,
+       450
+      ],
+      [
+       300,
+       330
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A08",
+    "exhibitor": "Aussteller 8",
+    "theme": "Software"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       480,
+       330
+      ],
+      [
+       620,
+       330
+      ],
+      [
+       620,
+       450
+      ],
+      [
+       480,
+       450
+      ],
+      [
+       480,
+       330
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A09",
+    "exhibitor": "Aussteller 9",
+    "theme": "Hardware"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       660,
+       330
+      ],
+      [
+       800,
+       330
+      ],
+      [
+       800,
+       450
+      ],
+      [
+       660,
+       450
+      ],
+      [
+       660,
+       330
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A10",
+    "exhibitor": "Aussteller 10",
+    "theme": "Beratung"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       840,
+       330
+      ],
+      [
+       980,
+       330
+      ],
+      [
+       980,
+       450
+      ],
+      [
+       840,
+       450
+      ],
+      [
+       840,
+       330
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A11",
+    "exhibitor": "Aussteller 11",
+    "theme": "Beratung"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       120,
+       520
+      ],
+      [
+       260,
+       520
+      ],
+      [
+       260,
+       640
+      ],
+      [
+       120,
+       640
+      ],
+      [
+       120,
+       520
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A12",
+    "exhibitor": "Aussteller 12",
+    "theme": "Software"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       300,
+       520
+      ],
+      [
+       440,
+       520
+      ],
+      [
+       440,
+       640
+      ],
+      [
+       300,
+       640
+      ],
+      [
+       300,
+       520
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A13",
+    "exhibitor": "Aussteller 13",
+    "theme": "Hardware"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       480,
+       520
+      ],
+      [
+       620,
+       520
+      ],
+      [
+       620,
+       640
+      ],
+      [
+       480,
+       640
+      ],
+      [
+       480,
+       520
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A14",
+    "exhibitor": "Aussteller 14",
+    "theme": "Beratung"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       660,
+       520
+      ],
+      [
+       800,
+       520
+      ],
+      [
+       800,
+       640
+      ],
+      [
+       660,
+       640
+      ],
+      [
+       660,
+       520
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "stand": "A15",
+    "exhibitor": "Aussteller 15",
+    "theme": "Software"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       840,
+       520
+      ],
+      [
+       980,
+       520
+      ],
+      [
+       980,
+       640
+      ],
+      [
+       840,
+       640
+      ],
+      [
+       840,
+       520
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -8,9 +8,9 @@ class PolygonLayer extends Layer {
     public function getPublicConfiguration(): array
     {
 
-        $latlngs = json_decode($this->properties['latlngs'],true);
+        $lnglats = json_decode($this->properties['lnglats'],true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            $latlngs = [];
+            $lnglats = [];
         }
 
         $geojson = [
@@ -18,7 +18,7 @@ class PolygonLayer extends Layer {
             'geometry' => [
                 'type' => 'Polygon',
                 'coordinates' => [
-                    $latlngs
+                    $lnglats
                 ]
             ],
         ];

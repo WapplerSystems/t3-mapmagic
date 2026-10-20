@@ -1,12 +1,5 @@
 plugin.tx_mapmagic {
     view {
-        # Note that this configuration only affects the EXT:Form plugin
-        # template (form/Resources/Private/Frontend/Templates/Render.html)
-        # The fluid paths for the formelements reside within the YAML settings.
-        # @see <prototypeName>.standard.mapElementsDefinition.Form.renderingOptions
-        #
-        # That means: If you want to override the formelement templates
-        # then change them within the YAML settings, not here.
         templateRootPaths.0 = EXT:map_magic/Resources/Private/Frontend/Templates/
         partialRootPaths.0 = EXT:map_magic/Resources/Private/Frontend/Partials/
         layoutRootPaths.0 = EXT:map_magic/Resources/Private/Frontend/Layouts/
@@ -20,21 +13,5 @@ plugin.tx_mapmagic {
         yamlConfigurations {
             10 = EXT:map_magic/Configuration/Yaml/MapSetup.yaml
         }
-    }
-}
-
-# Rendering of content elements
-lib.tx_mapmagic.contentElementRendering = RECORDS
-lib.tx_mapmagic.contentElementRendering {
-    tables = tt_content
-    source.current = 1
-    dontCheckPid = 1
-}
-
-lib.tx_mapmagic.javascript = TWIGTEMPLATE
-lib.tx_mapmagic.javascript {
-    templateName = MapElements/Map.twig
-    templateRootPaths {
-        10 = EXT:map_magic/Resources/Private/Frontend/JavaScriptTemplates/
     }
 }

@@ -1,0 +1,14 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:comment>
+    The renderer (Resources/Public/Frontend/mapmagic.js) builds the map from
+    data-mapmagic on DOMContentLoaded; no inline script, so it works under a
+    strict Content-Security-Policy. Leaflet is loaded first because the
+    renderer expects it as the global "L".
+</f:comment>
+<f:asset.css identifier="leaflet" href="EXT:map_magic/Resources/Public/Leaflet/leaflet.css" />
+<f:asset.css identifier="mapmagic" href="EXT:map_magic/Resources/Public/Frontend/mapmagic.css" />
+<f:asset.script identifier="leaflet" src="EXT:map_magic/Resources/Public/Leaflet/leaflet.js" defer="1" />
+<f:asset.script identifier="mapmagic" src="EXT:map_magic/Resources/Public/Frontend/mapmagic.js" defer="1" />
+
+<div id="{map.id}" class="mapmagic-container" data-mapmagic="{mapJson}" data-mapmagic-messages="{messagesJson}" style="min-height: {f:if(condition: map.height, then: map.height, else: '500px')}"></div>
+</html>

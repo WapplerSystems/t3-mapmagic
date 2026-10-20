@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Mvc\Persistence;
 
+use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 use TYPO3\CMS\Core\Cache\CacheManager;
@@ -615,9 +616,13 @@ class MapPersistenceManager implements MapPersistenceManagerInterface
      */
     protected function overrideByTypoScriptSettings(array $formDefinition): array
     {
-        if (!empty($this->typoScriptSettings['formDefinitionOverrides'][$formDefinition['identifier']] ?? null)) {
+        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
+        if ($request instanceof ServerRequestInterface
+            && $request->getAttribute('frontend.page.information') !== null
+            && !empty($this->typoScriptSettings['formDefinitionOverrides'][$formDefinition['identifier']] ?? null)
+        ) {
             $formDefinitionOverrides = GeneralUtility::makeInstance(TypoScriptService::class)
-                ->resolvePossibleTypoScriptConfiguration($this->typoScriptSettings['formDefinitionOverrides'][$formDefinition['identifier']]);
+                ->resolvePossibleTypoScriptConfiguration($this->typoScriptSettings['formDefinitionOverrides'][$formDefinition['identifier']], $request);
 
             ArrayUtility::mergeRecursiveWithOverrule(
                 $formDefinition,

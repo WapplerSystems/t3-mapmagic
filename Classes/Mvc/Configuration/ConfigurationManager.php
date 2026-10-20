@@ -121,7 +121,7 @@ class ConfigurationManager extends ExtbaseConfigurationManager implements Config
                 && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isFrontend()
             ) {
                 $yamlSettingsOverrides = GeneralUtility::makeInstance(TypoScriptService::class)
-                    ->resolvePossibleTypoScriptConfiguration($yamlSettingsOverrides);
+                    ->resolvePossibleTypoScriptConfiguration($yamlSettingsOverrides, $GLOBALS['TYPO3_REQUEST']);
             }
 
             ArrayUtility::mergeRecursiveWithOverrule(

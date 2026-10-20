@@ -44,8 +44,9 @@ call_user_func(static function () {
     ExtensionUtility::configurePlugin(
         'MapMagic',
         'Map',
-        [MapFrontendController::class => 'render, perform'],
-        [MapFrontendController::class => 'perform'],
-        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+        [MapFrontendController::class => 'render'],
+        // Cacheable: the map definition only changes when the file or the
+        // content element changes, and both clear the page cache.
+        []
     );
 });

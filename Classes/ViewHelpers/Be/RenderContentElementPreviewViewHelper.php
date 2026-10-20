@@ -19,7 +19,6 @@ use TYPO3\CMS\Backend\View\PageLayoutContext;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Used by the form editor.
@@ -30,8 +29,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 final class RenderContentElementPreviewViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * As this ViewHelper renders HTML, the output must not be escaped.
      *
@@ -44,10 +41,10 @@ final class RenderContentElementPreviewViewHelper extends AbstractViewHelper
         $this->registerArgument('contentElementUid', 'int', 'The uid of a content element');
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
+    public function render(): string
     {
         $content = '';
-        $contentElementUid = $arguments['contentElementUid'];
+        $contentElementUid = $this->arguments['contentElementUid'];
         $contentRecord = BackendUtility::getRecord('tt_content', $contentElementUid);
         if (!empty($contentRecord)) {
             $backendLayout = GeneralUtility::makeInstance(BackendLayout::class, 'dummy', 'dummy', []);

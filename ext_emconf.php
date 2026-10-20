@@ -8,18 +8,18 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'WapplerSystems',
     'author_email' => 'typo3@wappler.systems',
     'author_company' => '',
-    'version' => '12.0.0',
+    'version' => '14.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.17',
-            'frontend' => '12.4.17',
-            'cvc_twig' => '3.0.0'
+            'typo3' => '14.3.0-14.99.99',
+            'frontend' => '14.3.0-14.99.99',
         ],
         'conflicts' => [],
         'suggests' => [
-            'filelist' => '12.4.17',
-            'impexp' => '12.4.17',
-            'lowlevel' => '12.4.17',
+            'address' => '',
+            'filelist' => '14.3.0-14.99.99',
+            'impexp' => '14.3.0-14.99.99',
+            'lowlevel' => '14.3.0-14.99.99',
         ],
     ],
 ];

@@ -1,0 +1,71 @@
+type: MapMagic
+identifier: demo-lageplan
+label: 'Demo: Lageplan'
+kind: image
+height: 560px
+basemaps:
+  -
+    type: image
+    id: halle
+    label: 'Halle A'
+    url: 'EXT:map_magic/Resources/Public/Demo/messe-halle.svg'
+    width: 1200
+    height: 800
+controls:
+  fullscreen: true
+layers:
+  -
+    type: areas
+    id: staende
+    label: Stände
+    source:
+      type: geojson
+      url: 'EXT:map_magic/Resources/Public/Demo/messe-staende.geojson'
+    style:
+      color: '#3e4c59'
+      weight: 1
+      fillOpacity: 0.35
+    colorBy:
+      property: theme
+      mode: categories
+      categories:
+        -
+          value: Software
+          color: '#2a81cb'
+        -
+          value: Hardware
+          color: '#e67e22'
+        -
+          value: Beratung
+          color: '#16a085'
+    legend:
+      title: Themen
+    tooltip: '{stand} – {exhibitor}'
+    popup: '<strong>{exhibitor}</strong><br>Stand {stand}<br>Thema: {theme}'
+  -
+    type: markers
+    id: orte
+    label: Service
+    source:
+      type: geojson
+      url: 'EXT:map_magic/Resources/Public/Demo/messe-orte.geojson'
+    iconBy:
+      property: kind
+      values:
+        Eingang:
+          type: pin
+          color: '#27ae60'
+          glyph: E
+          label: Eingang
+        Service:
+          type: pin
+          color: '#2a81cb'
+          glyph: i
+          label: Service
+        Gastronomie:
+          type: pin
+          color: '#8e44ad'
+          glyph: C
+          label: Gastronomie
+    legend: true
+    tooltip: '{name}'

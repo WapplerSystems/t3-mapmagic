@@ -14,6 +14,9 @@ imports:
 persistenceManager:
   allowedFileMounts:
     10: '1:/map_definitions/'
+  # Read-only demo maps shipped with the extension (save/delete stay disabled below).
+  allowedExtensionPaths:
+    10: 'EXT:map_magic/Resources/Private/Maps/'
   allowSaveToExtensionPaths: false
   allowDeleteFromExtensionPaths: false
   sortByKeys:

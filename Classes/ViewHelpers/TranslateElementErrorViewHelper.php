@@ -15,7 +15,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 use WapplerSystems\MapMagic\Domain\Model\Renderable\RootRenderableInterface;
 use WapplerSystems\MapMagic\Domain\Runtime\MapRuntime;
 use WapplerSystems\MapMagic\Service\TranslationService;
@@ -27,24 +26,20 @@ use WapplerSystems\MapMagic\Service\TranslationService;
  */
 final class TranslateElementErrorViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     public function initializeArguments(): void
     {
         $this->registerArgument('element', RootRenderableInterface::class, 'Map Element to translate', true);
         $this->registerArgument('error', Error::class, 'Error', true);
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
+    public function render(): string
     {
-        $element = $arguments['element'];
-        $error = $arguments['error'];
-
+        $element = $this->arguments['element'];
+        $error = $this->arguments['error'];
         /** @var MapRuntime $formRuntime */
-        $formRuntime = $renderingContext
+        $formRuntime = $this->renderingContext
             ->getViewHelperVariableContainer()
             ->get(RenderRenderableViewHelper::class, 'formRuntime');
-
         return GeneralUtility::makeInstance(TranslationService::class)->translateMapElementError(
             $element,
             $error->getCode(),

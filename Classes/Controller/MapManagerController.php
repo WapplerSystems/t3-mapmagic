@@ -111,7 +111,7 @@ class MapManagerController extends AbstractBackendController
         $moduleTemplate->setModuleClass($this->request->getPluginName() . '_' . $this->request->getControllerName());
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
         $moduleTemplate->setTitle(
-            $this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/locallang_module.xlf:mlang_tabs_tab')
+            $this->getLanguageService()->sL('map_magic.module:mlang_tabs_tab')
         );
         return $moduleTemplate->renderResponse('Backend/MapManager/Index');
     }
@@ -440,7 +440,7 @@ class MapManagerController extends AbstractBackendController
             $references[] = [
                 'recordPageTitle' => is_array($pageRecord) ? $this->getRecordTitle('pages', $pageRecord) : '',
                 'recordTitle' => $this->getRecordTitle($referenceRow['tablename'], $record, true),
-                'recordIcon' => $iconFactory->getIconForRecord($referenceRow['tablename'], $record, Icon::SIZE_SMALL)->render(),
+                'recordIcon' => $iconFactory->getIconForRecord($referenceRow['tablename'], $record, \TYPO3\CMS\Core\Imaging\IconSize::SMALL)->render(),
                 'recordUid' => $referenceRow['recuid'],
                 'recordEditUrl' => $this->getModuleUrl('record_edit', $urlParameters),
             ];
@@ -492,22 +492,22 @@ class MapManagerController extends AbstractBackendController
         $addMapButton = $buttonBar->makeLinkButton()
             ->setDataAttributes(['identifier' => 'newMap'])
             ->setHref('#')
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:mapManager.create_new_form'))
+            ->setTitle($this->getLanguageService()->sL('map_magic.database:mapManager.create_new_form'))
             ->setShowLabelText(true)
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL));
+            ->setIcon($this->iconFactory->getIcon('actions-plus', \TYPO3\CMS\Core\Imaging\IconSize::SMALL));
         $buttonBar->addButton($addMapButton, ButtonBar::BUTTON_POSITION_LEFT);
 
         // Reload
         $reloadButton = $buttonBar->makeLinkButton()
             ->setHref($this->request->getAttribute('normalizedParams')->getRequestUri())
-            ->setTitle($this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.reload'))
-            ->setIcon($this->iconFactory->getIcon('actions-refresh', Icon::SIZE_SMALL));
+            ->setTitle($this->getLanguageService()->sL('core.core:labels.reload'))
+            ->setIcon($this->iconFactory->getIcon('actions-refresh', \TYPO3\CMS\Core\Imaging\IconSize::SMALL));
         $buttonBar->addButton($reloadButton, ButtonBar::BUTTON_POSITION_RIGHT);
 
         // Shortcut
         $shortcutButton = $buttonBar->makeShortcutButton()
             ->setRouteIdentifier('web_MapMagicbuilder')
-            ->setDisplayName($this->getLanguageService()->sL('LLL:EXT:map_magic/Resources/Private/Language/Database.xlf:module.shortcut_name'));
+            ->setDisplayName($this->getLanguageService()->sL('map_magic.database:module.shortcut_name'));
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
 
         return $moduleTemplate;

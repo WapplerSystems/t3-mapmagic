@@ -41,7 +41,7 @@ class MapYamlProvider implements ProviderInterface
     public function getLabel(): string
     {
         return $this->getLanguageService()->sL(
-            'LLL:EXT:map_magic/Resources/Private/Language/locallang.xlf:mapmagic.configuration.module.provider'
+            'map_magic.messages:mapmagic.configuration.module.provider'
         );
     }
 

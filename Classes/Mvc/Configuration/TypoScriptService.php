@@ -11,8 +11,10 @@ declare(strict_types=1);
 
 namespace WapplerSystems\MapMagic\Mvc\Configuration;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService as CoreTypoScriptService;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Utilities to manage and convert TypoScript
@@ -34,10 +36,13 @@ class TypoScriptService
      *
      * @internal
      */
-    public function resolvePossibleTypoScriptConfiguration(array $configuration = []): array
+    public function resolvePossibleTypoScriptConfiguration(array $configuration, ServerRequestInterface $request): array
     {
         $configuration = $this->coreTypoScriptService->convertPlainArrayToTypoScriptArray($configuration);
-        $configuration = $this->resolveTypoScriptConfiguration($configuration);
+        $contentObjectRenderer = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+        $contentObjectRenderer->setRequest($request);
+        $contentObjectRenderer->start($request->getAttribute('frontend.page.information')->getPageRecord(), 'pages');
+        $configuration = $this->resolveTypoScriptConfiguration($configuration, $contentObjectRenderer);
         $configuration = $this->coreTypoScriptService->convertTypoScriptArrayToPlainArray($configuration);
         return $configuration;
     }
@@ -55,32 +60,24 @@ class TypoScriptService
      *   ]
      * ]
      *
-     * @param array $configuration
      */
-    protected function resolveTypoScriptConfiguration(array $configuration = []): array
+    protected function resolveTypoScriptConfiguration(array $configuration, ContentObjectRenderer $contentObjectRenderer): array
     {
         foreach ($configuration as $key => $value) {
             $keyWithoutDot = rtrim((string)$key, '.');
             if (isset($configuration[$keyWithoutDot]) && isset($configuration[$keyWithoutDot . '.'])) {
-                $value = $this->getTypoScriptFrontendController()->cObj->cObjGetSingle(
+                $value = $contentObjectRenderer->cObjGetSingle(
                     $configuration[$keyWithoutDot],
                     $configuration[$keyWithoutDot . '.'],
                     $keyWithoutDot
                 );
                 $configuration[$keyWithoutDot] = $value;
             } elseif (!isset($configuration[$keyWithoutDot]) && isset($configuration[$keyWithoutDot . '.'])) {
-                $configuration[$keyWithoutDot] = $this->resolveTypoScriptConfiguration($value);
+                $configuration[$keyWithoutDot] = $this->resolveTypoScriptConfiguration($value, $contentObjectRenderer);
             }
             unset($configuration[$keyWithoutDot . '.']);
         }
         return $configuration;
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
-    {
-        return $GLOBALS['TSFE'];
-    }
 }

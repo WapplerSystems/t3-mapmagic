@@ -21,7 +21,6 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 use WapplerSystems\MapMagic\Domain\Factory\ArrayMapFactory;
 use WapplerSystems\MapMagic\Domain\Factory\MapFactoryInterface;
 use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
@@ -43,8 +42,6 @@ use WapplerSystems\MapMagic\Mvc\Persistence\MapPersistenceManagerInterface;
  */
 final class RenderViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * @var bool
      */
@@ -58,13 +55,12 @@ final class RenderViewHelper extends AbstractViewHelper
         $this->registerArgument('overrideConfiguration', 'array', 'factory specific configuration', false, []);
     }
 
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): ?string
+    public function render(): ?string
     {
-        $persistenceIdentifier = $arguments['persistenceIdentifier'];
-        $factoryClass = $arguments['factoryClass'];
-        $prototypeName = $arguments['prototypeName'];
-        $overrideConfiguration = $arguments['overrideConfiguration'];
-
+        $persistenceIdentifier = $this->arguments['persistenceIdentifier'];
+        $factoryClass = $this->arguments['factoryClass'];
+        $prototypeName = $this->arguments['prototypeName'];
+        $overrideConfiguration = $this->arguments['overrideConfiguration'];
         if (!empty($persistenceIdentifier)) {
             $mapPersistenceManager = GeneralUtility::makeInstance(MapPersistenceManagerInterface::class);
             $mapConfiguration = $mapPersistenceManager->load($persistenceIdentifier);
@@ -75,21 +71,17 @@ final class RenderViewHelper extends AbstractViewHelper
             $overrideConfiguration = $mapConfiguration;
             $overrideConfiguration['persistenceIdentifier'] = $persistenceIdentifier;
         }
-
         if (empty($prototypeName)) {
             $prototypeName = $overrideConfiguration['prototypeName'] ?? 'standard';
         }
-
         // Even though getContainer() is internal, we can't get container injected here due to static scope
         /** @var MapFactoryInterface $factory */
         $factory = GeneralUtility::getContainer()->get($factoryClass);
-
         $mapDefinition = $factory->build($overrideConfiguration, $prototypeName);
         /** @var RenderingContext $renderingContext */
         /** @var RequestInterface $request */
-        $request = $renderingContext->getRequest();
+        $request = $this->renderingContext->getRequest();
         $map = $mapDefinition->bind($request);
-
         return $map->render();
     }
 }

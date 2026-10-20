@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="EXT:map_magic/Resources/Private/Language/locallang.xlf" product-name="map_magic">
+        <header/>
+        <body>
+            <trans-unit id="frontend.scrollHint" resname="frontend.scrollHint">
+                <source>Use Ctrl + scroll to zoom the map</source>
+                <target>Zum Zoomen Strg + Mausrad verwenden</target>
+            </trans-unit>
+            <trans-unit id="frontend.scrollHintMac" resname="frontend.scrollHintMac">
+                <source>Use ⌘ + scroll to zoom the map</source>
+                <target>Zum Zoomen ⌘ + Mausrad verwenden</target>
+            </trans-unit>
+            <trans-unit id="frontend.fullscreen" resname="frontend.fullscreen">
+                <source>Fullscreen</source>
+                <target>Vollbild</target>
+            </trans-unit>
+            <trans-unit id="frontend.fullscreenExit" resname="frontend.fullscreenExit">
+                <source>Exit fullscreen</source>
+                <target>Vollbild beenden</target>
+            </trans-unit>
+            <trans-unit id="frontend.legend" resname="frontend.legend">
+                <source>Legend</source>
+                <target>Legende</target>
+            </trans-unit>
+            <trans-unit id="frontend.filterAll" resname="frontend.filterAll">
+                <source>All</source>
+                <target>Alle</target>
+            </trans-unit>
+            <trans-unit id="frontend.filterNone" resname="frontend.filterNone">
+                <source>None</source>
+                <target>Keine</target>
+            </trans-unit>
+            <trans-unit id="frontend.elevationLength" resname="frontend.elevationLength">
+                <source>Length</source>
+                <target>Länge</target>
+            </trans-unit>
+            <trans-unit id="frontend.elevationAscent" resname="frontend.elevationAscent">
+                <source>Ascent</source>
+                <target>Aufstieg</target>
+            </trans-unit>
+            <trans-unit id="frontend.elevationDescent" resname="frontend.elevationDescent">
+                <source>Descent</source>
+                <target>Abstieg</target>
+            </trans-unit>
+            <trans-unit id="frontend.elevationAxis" resname="frontend.elevationAxis">
+                <source>Elevation (m)</source>
+                <target>Höhe (m)</target>
+            </trans-unit>
+            <trans-unit id="frontend.layerError" resname="frontend.layerError">
+                <source>The layer “{label}” could not be loaded.</source>
+                <target>Die Ebene „{label}“ konnte nicht geladen werden.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
