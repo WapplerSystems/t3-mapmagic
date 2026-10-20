@@ -14,7 +14,7 @@
                     <thead>
                         <tr>
                             <th><f:translate key="{ll}list.name" /></th>
-                            <th><f:translate key="{ll}list.file" /></th>
+                            <th class="d-none d-sm-table-cell"><f:translate key="{ll}list.file" /></th>
                             <th><f:translate key="{ll}list.usage" /></th>
                             <th class="col-control"><span class="visually-hidden"><f:translate key="{ll}list.actions" /></span></th>
                         </tr>
@@ -32,10 +32,12 @@
                                             <f:if condition="{map.readOnly}">
                                                 <span class="badge badge-info"><f:translate key="{ll}list.readOnly" /></span>
                                             </f:if>
+                                            <f:comment>On phones the file column is hidden, so the actions stay in view.</f:comment>
+                                            <div class="d-sm-none small text-body-secondary text-break">{map.persistenceIdentifier}</div>
                                         </f:else>
                                     </f:if>
                                 </td>
-                                <td><code>{map.persistenceIdentifier}</code></td>
+                                <td class="d-none d-sm-table-cell"><code class="text-break">{map.persistenceIdentifier}</code></td>
                                 <td>{map.references}</td>
                                 <td class="col-control">
                                     <div class="btn-group">

@@ -609,15 +609,15 @@ export function renderField(descriptor, value, onChange, ctx, node) {
         </div>
         ${property
           ? html`
-              <table class="table table-sm">
+              <table class="table table-sm mapmagic-rows">
                 <thead>
                   <tr>
                     <th>${t('widget.value')}</th>
                     <th>${t('widget.label')}</th>
-                    <th>${t('widget.color')}</th>
-                    <th>${t('widget.glyph')}</th>
-                    <th></th>
-                    <th></th>
+                    <th class="mapmagic-rows__narrow" title=${t('widget.color')}>${t('widget.color')}</th>
+                    <th class="mapmagic-rows__narrow" title=${t('widget.glyph')}>${t('widget.glyph')}</th>
+                    <th class="mapmagic-rows__narrow"></th>
+                    <th class="mapmagic-rows__narrow"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -695,9 +695,7 @@ export function renderField(descriptor, value, onChange, ctx, node) {
                             class="btn btn-default btn-sm"
                             ?disabled=${disabled}
                             @click=${() => commitValues(rows.filter(([k]) => k !== key))}
-                          >
-                            ${t('widget.remove')}
-                          </button>
+                           title=${t('widget.remove')} aria-label=${t('widget.remove')}>×</button>
                         </td>
                       </tr>
                     `;
@@ -826,13 +824,13 @@ export function renderField(descriptor, value, onChange, ctx, node) {
 
               ${mode === 'categories'
                 ? html`
-                    <table class="table table-sm">
+                    <table class="table table-sm mapmagic-rows">
                       <thead>
                         <tr>
                           <th>${t('widget.value')}</th>
-                          <th>${t('widget.color')}</th>
+                          <th class="mapmagic-rows__narrow" title=${t('widget.color')}>${t('widget.color')}</th>
                           <th>${t('widget.label')}</th>
-                          <th></th>
+                          <th class="mapmagic-rows__narrow"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -883,9 +881,7 @@ export function renderField(descriptor, value, onChange, ctx, node) {
                                   class="btn btn-default btn-sm"
                                   ?disabled=${disabled}
                                   @click=${() => onChange({ ...value, categories: categoryRows.filter((_, i) => i !== index) })}
-                                >
-                                  ${t('widget.remove')}
-                                </button>
+                                 title=${t('widget.remove')} aria-label=${t('widget.remove')}>×</button>
                               </td>
                             </tr>
                           `;
@@ -902,14 +898,14 @@ export function renderField(descriptor, value, onChange, ctx, node) {
                     </div>
                   `
                 : html`
-                    <table class="table table-sm">
+                    <table class="table table-sm mapmagic-rows">
                       <thead>
                         <tr>
                           <th>${t('widget.min')}</th>
                           <th>${t('widget.max')}</th>
-                          <th>${t('widget.color')}</th>
+                          <th class="mapmagic-rows__narrow" title=${t('widget.color')}>${t('widget.color')}</th>
                           <th>${t('widget.label')}</th>
-                          <th></th>
+                          <th class="mapmagic-rows__narrow"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -976,9 +972,7 @@ export function renderField(descriptor, value, onChange, ctx, node) {
                                 class="btn btn-default btn-sm"
                                 ?disabled=${disabled}
                                 @click=${() => onChange({ ...value, ranges: rangeRows.filter((_, i) => i !== index) })}
-                              >
-                                ${t('widget.remove')}
-                              </button>
+                               title=${t('widget.remove')} aria-label=${t('widget.remove')}>×</button>
                             </td>
                           </tr>
                         `)}
