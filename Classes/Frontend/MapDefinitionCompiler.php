@@ -26,7 +26,7 @@ use WapplerSystems\MapMagic\Frontend\Source\SourceResolver;
  * - file header keys (`type: MapMagic`, `identifier`, …) are dropped,
  * - `version` and a page-unique `id` are set,
  * - basemaps may be given as `preset: osm` (see BasemapPresets),
- * - URLs of image basemaps and sources may be EXT:/FAL references,
+ * - URLs of image basemaps, sources and image icons may be EXT:/FAL references,
  * - sources may be TYPO3-specific (e.g. `type: addresses`).
  *
  * A layer whose source cannot be resolved is dropped and logged instead of
@@ -81,7 +81,7 @@ final readonly class MapDefinitionCompiler
             }
             try {
                 $layer['source'] = $this->sourceResolver->resolve((array)($layer['source'] ?? []), $request);
-                $layers[] = $layer;
+                $layers[] = $this->compileIcons($layer);
             } catch (\Throwable $e) {
                 $warnings[] = ['layer' => (string)($layer['id'] ?? '?'), 'message' => $e->getMessage()];
                 $this->logger->warning('Map "{map}": layer "{layer}" dropped: {message}', [
@@ -112,5 +112,44 @@ final readonly class MapDefinitionCompiler
             $basemap['url'] = $this->urlResolver->resolve((string)$basemap['url']);
         }
         return $basemap;
+    }
+
+    /**
+     * Resolves the URLs of image icons wherever a layer can carry one
+     * (markers: icon, iconBy; route: startIcon, endIcon, waypoints).
+     *
+     * @param array<string, mixed> $layer
+     * @return array<string, mixed>
+     */
+    private function compileIcons(array $layer): array
+    {
+        foreach (['icon', 'startIcon', 'endIcon'] as $key) {
+            if (is_array($layer[$key] ?? null)) {
+                $layer[$key] = $this->compileIcon($layer[$key]);
+            }
+        }
+        if (is_array($layer['iconBy']['values'] ?? null)) {
+            foreach ($layer['iconBy']['values'] as $value => $icon) {
+                if (is_array($icon)) {
+                    $layer['iconBy']['values'][$value] = $this->compileIcon($icon);
+                }
+            }
+        }
+        if (is_array($layer['waypoints']['icon'] ?? null)) {
+            $layer['waypoints']['icon'] = $this->compileIcon($layer['waypoints']['icon']);
+        }
+        return $layer;
+    }
+
+    /**
+     * @param array<string, mixed> $icon
+     * @return array<string, mixed>
+     */
+    private function compileIcon(array $icon): array
+    {
+        if (($icon['type'] ?? null) === 'image' && isset($icon['url'])) {
+            $icon['url'] = $this->urlResolver->resolve((string)$icon['url']);
+        }
+        return $icon;
     }
 }

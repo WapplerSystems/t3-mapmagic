@@ -36,7 +36,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-release/v14": "14.0.x-dev"
+			"dev-release/v14": "14.1.x-dev"
 		},
 		"typo3/cms": {
 			"extension-key": "map_magic"

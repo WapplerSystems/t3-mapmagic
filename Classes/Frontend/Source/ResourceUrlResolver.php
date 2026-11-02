@@ -22,6 +22,7 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  *
  * Accepted:
  * - `https://…`, `http://…`, `//…`, `/…`  unchanged
+ * - `data:…`                                unchanged (inline images)
  * - `EXT:ext/Resources/Public/…`           public resource of an extension
  * - `t3://file?uid=12`                      FAL file
  * - `1:/maps/plan.svg`                      FAL combined identifier
@@ -40,7 +41,7 @@ final readonly class ResourceUrlResolver
         if ($reference === '') {
             throw new \InvalidArgumentException('Empty file reference', 1792460001);
         }
-        if (preg_match('#^(https?:)?//#i', $reference) === 1 || str_starts_with($reference, '/')) {
+        if (preg_match('#^((https?:)?//|data:)#i', $reference) === 1 || str_starts_with($reference, '/')) {
             return $reference;
         }
         if (PathUtility::isExtensionPath($reference)) {
