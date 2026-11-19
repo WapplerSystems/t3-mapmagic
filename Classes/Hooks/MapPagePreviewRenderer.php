@@ -39,8 +39,9 @@ class MapPagePreviewRenderer extends StandardContentPreviewRenderer
         $row = $item->getRecord();
         $itemContent = $this->linkEditContent('<strong>' . htmlspecialchars($item->getContext()->getContentTypeLabels()['mapmagic_map']) . '</strong>', $row) . '<br />';
 
+        // v14: getRecord() returns a Record object; the raw FlexForm XML is only available via getRow()
         $flexFormData = GeneralUtility::makeInstance(FlexFormService::class)
-            ->convertFlexFormContentToArray($row['pi_flexform']);
+            ->convertFlexFormContentToArray((string)($item->getRow()['pi_flexform'] ?? ''));
 
         $persistenceIdentifier = $flexFormData['settings']['persistenceIdentifier'] ?? '';
         if (!empty($persistenceIdentifier)) {
